@@ -10,7 +10,7 @@ NoSQL aparece como una necesidad debida al creciente volumen de datos sobre usua
 
 
 <p align="center">
-  <img src="../../images/01nosql.png" alt="Motivación de NoSQL" width="100%"/>
+  <img src="./images/01nosql.png" alt="Motivación de NoSQL" width="100%"/>
 </p>
 
 
