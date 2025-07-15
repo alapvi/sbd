@@ -2,9 +2,17 @@
 
 ## Almacenamiento de datos
 
-Se identifica la **tercera plataforma** de almacenamiento, impulsada por Big Data, IoT, cloud y redes sociales. Los sistemas **relacionales** no satisfacen las necesidades modernas de **escalabilidad** ni **flexibilidad**, por ello surge NoSQL :contentReference[oaicite:2]{index=2}.
+Se puede decir que estamos en la [tercera plataforma](https://en.wikipedia.org/wiki/Third_platform) tercera plataforma del almacenamiento de datos. La primera llegó con los primeros computadores y se materializó en las bases de datos jerárquicas y en red, así como en el almacenamiento ISAM. La segunda vino de la mano de Internet y las arquitecturas cliente-servidor, lo que dio lugar a las bases de datos relacionales.
 
-La solución: desplegar aplicaciones y datos en clústeres, distribuyendo procesamiento en múltiples máquinas.
+La tercera se ve motivada por el Big Data, los dispositivos móviles, las arquitecturas cloud, las redes de IoT y las tecnologías/redes sociales. Es tal el volumen de datos que se genera que aparecen nuevos paradigmas como NoSQL, NewSQL y las plataformas de Big Data. En esta sesión nos vamos a centrar en NoSQL.
+
+NoSQL aparece como una necesidad debida al creciente volumen de datos sobre usuarios, objetos y productos que las empresas tienen que almacenar, así como la frecuencia con la que se accede a los datos. Los SGDB relacionales existentes no fueron diseñados teniendo en cuenta la escalabilidad ni la flexibilidad necesaria por las frecuentes modificaciones que necesitan las aplicaciones modernas; tampoco aprovechan que el almacenamiento a día de hoy es muy barato, ni el nivel de procesamiento que alcanzan las máquinas actuales.
+
+
+<p align="center">
+  <img src="../../images/01nosql.png" alt="Motivación de NoSQL" width="100%"/>
+</p>
+
 
 ## No Solo SQL
 
