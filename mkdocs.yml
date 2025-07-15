@@ -1,5 +1,9 @@
 site_name: Sistemas de BigData
-site_url: https://mydomain.org/mysite
+site_url: https://alapvi.github.io
+
+nav:
+  - Introducción: index.md
+  - Almacenamiento de datos. NoSQL: nosql.md
 
 theme:
   name: material
