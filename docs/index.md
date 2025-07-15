@@ -1,7 +1,7 @@
 # Introducción
 
 <div style="text-align: center;">
-  <img src="./images/logogva.png" alt="Logo GVA" width="200"/>
+  <img src="images/logogva.png" alt="Logo GVA" width="200"/>
 </div>
 
 <p align="justify">

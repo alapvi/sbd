@@ -3,7 +3,9 @@ site_url: https://alapvi.github.io
 
 nav:
   - Introducción: index.md
-  - Almacenamiento de datos. NoSQL: nosql.md
+  - Almacenamiento de datos. NoSQL: 
+    - NoSQL: nosql/nosql.md
+  - MongoDB: mongodb/mongodb.md
 
 theme:
   name: material
