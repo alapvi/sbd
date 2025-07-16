@@ -12,6 +12,8 @@ theme:
   name: material
   logo: images/logo.png
   favicon: images/logo_peq.png
+  features:
+    - content.code.copy
   palette: 
     # Palette toggle for light mode
     - scheme: default
@@ -24,6 +26,15 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
 plugins:
   - tags
   - search
@@ -35,6 +46,3 @@ plugins:
   #        remove_comments: true
   #    cache_safe: true
 
-markdown_extensions:
-  - toc:
-      permalink: true
