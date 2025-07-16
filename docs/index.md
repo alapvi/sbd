@@ -9,8 +9,11 @@ En este espacio se presentan algunos apuntes del módulo de <b>Sistemas en Big D
 </p>
 - **Elaboración**: Alberto Aparicio Vila 
 
+<div style="text-align: left;">
+  <img src="images/simarro.jpg" alt="IES Dr. LLuís Simarro" width="300"/>
+</div>
 _Dpto. Informática_  
-_I.E.S. Dr. Lluis Simarro Lacabra_  
+_I.E.S. Dr. Lluís Simarro Lacabra_  
 _Xàtiva_
 
 ---
