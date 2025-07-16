@@ -2,7 +2,7 @@
 
 ## Almacenamiento de datos
 
-Se puede decir que estamos en la [tercera plataforma](https://en.wikipedia.org/wiki/Third_platform) tercera plataforma del almacenamiento de datos. La primera llegó con los primeros computadores y se materializó en las bases de datos jerárquicas y en red, así como en el almacenamiento ISAM. La segunda vino de la mano de Internet y las arquitecturas cliente-servidor, lo que dio lugar a las bases de datos relacionales.
+Se puede decir que estamos en la [tercera plataforma](https://en.wikipedia.org/wiki/Third_platform) del almacenamiento de datos. La primera llegó con los primeros computadores y se materializó en las bases de datos jerárquicas y en red, así como en el almacenamiento ISAM. La segunda vino de la mano de Internet y las arquitecturas cliente-servidor, lo que dio lugar a las bases de datos relacionales.
 
 La tercera se ve motivada por el Big Data, los dispositivos móviles, las arquitecturas cloud, las redes de IoT y las tecnologías/redes sociales. Es tal el volumen de datos que se genera que aparecen nuevos paradigmas como NoSQL, NewSQL y las plataformas de Big Data. En esta sesión nos vamos a centrar en NoSQL.
 
@@ -67,7 +67,7 @@ Una característica adicional que comparten los sistemas NoSQL es que ofrecen un
 
 **Si la base de datos es grande, conlleva un proceso lento que implica parar el sistema durante un tiempo considerable**. Si frecuentemente cambiamos los datos que la aplicación almacena (al usar un desarrollo iterativo), también tendremos períodos frecuentes de inactividad del sistema, a no ser que utilicemos un despliegue azul/verde y tengamos redundancia de nuestro sistema de almacenamiento. Así pues, no hay un modo efectivo mediante una base de datos relacional de almacenar los datos que están desestructurados o que no se conocen de antemano.
 
-Las bases de datos NoSQL se construyen para permitir la inserción de datos sin un esquema predefinido. Esto facilita la modificación de la aplicación en tiempo real, sin preocuparse por interrupciones de servicio. Aunque no tengamos un esquema al guardar la información, sí que podemos definir esquemas de lectura (schema-on-read) para comprobar que la información almacenada tiene el formato que espera cargar cada aplicación.
+**Las bases de datos NoSQL se construyen para permitir la inserción de datos sin un esquema predefinido**. Esto facilita la modificación de la aplicación en tiempo real, sin preocuparse por interrupciones de servicio. Aunque no tengamos un esquema al guardar la información, sí que podemos definir esquemas de lectura (schema-on-read) para comprobar que la información almacenada tiene el formato que espera cargar cada aplicación.
 
 De este modo se consigue un desarrollo más rápido, integración de código más robusto y menos tiempo empleado en la administración de la base de datos.
 
@@ -75,77 +75,164 @@ Aunque lo veremos en profundidad en las siguientes sesiones, los modelos de dato
 
 ## Particionado (Sharding)
 
-- Crucial para escalar horizontalmente  
-- Tipos: **horizontal** (filas) vs **vertical** (columnas)  
-- En NoSQL, se usa especialmente en clave‑valor y documental; columnas pueden usar ambos :contentReference[oaicite:11]{index=11}
+Dado el modo en el que se estructuran *las bases de datos relacionales, normalmente escalan verticalmente*, un único servidor cada vez más potente (más RAM, mejor CPU y almacenamiento), que almacena toda la base de datos para asegurar la disponibilidad continua de los datos. Esto se traduce en costes que se incrementan rápidamente, con un límites definidos por el propio hardware, y en un pequeño número de puntos críticos de fallo dentro de la infraestructura de datos.
+
+La solución es escalar horizontalmente, añadiendo nuevos servidores en vez de concentrarse en incrementar la capacidad de un único servidor, lo que permite tratar con conjuntos de datos más grandes de lo que sería capaz cualquier máquina por sí sola. Este escalado horizontal se conoce como Sharding o Particionado.
+
+El particionado no es único de las bases de datos NoSQL. Las bases de datos relacionales también lo soportan. Si en un sistema relacional queremos particionar los datos, podemos distinguir entre particionado:
+
+- Horizontal: diferentes filas en diferentes particiones.
+- Vertical: diferentes columnas en particiones distintas.
+
+<figure style="align: center;">
+    <img src="../images/01sharding01.png" alt="Particionado de datos" width="100%">
+    <figcaption>Particionado de datos - digitalocean.com</figcaption>
+</figure>
+
+En el caso de las bases de datos NoSQL, el particionado depende del modelo de la base de datos:
+
+- Los almacenes clave-valor y las bases de datos documentales normalmente se particionan horizontalmente.
+- Las bases de datos basados en columnas se pueden particionar horizontal o verticalmente.
+Escalar horizontalmente una base de datos relacional entre muchas instancias de servidores se puede conseguir pero normalmente conlleva el uso de SANs (Storage Area Networks) y otras triquiñuelas para hacer que el hardware actúe como un único servidor.
+
+Como los sistemas SQL no ofrecen esta prestación de forma nativa, los equipos de desarrollo se las tienen que ingeniar para conseguir desplegar múltiples bases de datos relacionales en varias máquinas. Para ello:
+
+- Los datos se almacenan en cada instancia de base de datos de manera autónoma
+- El código de aplicación se desarrolla para distribuir los datos y las consultas y agregar los resultados de los datos a través de todas las instancias de bases de datos
+- Se debe desarrollar código adicional para gestionar los fallos sobre los recursos, para realizar joins entre diferentes bases de datos, balancear los datos y/o replicarlos, etc…​
+Además, muchos beneficios de las bases de datos como la integridad transaccional se ven comprometidos o incluso eliminados al emplear un escalado horizontal.
 
 ### Auto‑sharding
 
-Distribución automática transparente para la aplicación (por rango, lista, hash) :contentReference[oaicite:12]{index=12}
+Por contra, las bases de datos NoSQL normalmente soportan auto-sharding, lo que implica que de manera nativa y automáticamente se dividen los datos entre un número arbitrario de servidores, sin que la aplicación sea consciente de la composición del pool de servidores. Los datos y las consultas se balancean entre los servidores.
+
+El particionado se realiza mediante un método consistente, como puede ser:
+
+- Por **rangos** de su id: por ejemplo "los usuarios del 1 al millón están en la partición 1" o "los usuarios cuyo nombre va de la A a la L" en una partición, en otra de la M a la Q, y de la R a la Z en la tercera.
+
+<figure style="align: center;">
+    <img src="../images/01sharding03range.png" alt="Particionado por rango" width="100%">
+    <figcaption>Particionado por rango - digitalocean.com</figcaption>
+</figure>
+
+- Por **listas**: dividiendo los datos por la categoría del dato, es decir, en el caso de datos sobre libros, las novelas en una partición, las recetas de cocina en otra, etc..
+- Mediante una función **hash**, la cual devuelve un valor para un elemento que determine a qué partición pertenece.
+<figure style="align: center;">
+    <img src="../images/01sharding02hash.png" alt="Particionado por hash" width="100%">
+    <figcaption>Particionado por hash - digitalocean.com</figcaption>
+</figure>
+
+### Cuándo particionar
+El motivo para particionar los datos se debe a:
+
+- **limitaciones de almacenamiento**: los datos no caben en un único servidor, tanto a nivel de disco como de memoria RAM.
+- **rendimiento**: al balancear la carga entre particiones las escrituras serán más rápidas que al centrarlas en un único servidor.
+- **disponibilidad**: si un servidor esta ocupado, otro servidor puede devolver los datos. La carga de los servidores se reduce.
+
+>No particionaremos los datos cuando la cantidad sea pequeña, ya que el hecho de distribuir los datos conlleva unos costes que pueden no compensar con un volumen de datos insuficiente. Tampoco esperaremos a particionar cuando tengamos muchísimos datos, ya que el proceso de particionado puede provocar sobrecarga del sistema.
+
+La nube facilita de manera considerable este escalado, mediante proveedores como AWS o Azure los cuales ofrecen virtualmente una capacidad ilimitada bajo demanda, y despreocupándose de todas las tareas necesarias para la administración de la base de datos.
+
+Los desarrolladores ya no necesitamos construir plataformas complejas para nuestras aplicaciones, de modo que nos podemos centrar en escribir código de aplicación. Una granja de servidores con *commodity hardware* puede ofrecer el mismo procesamiento y capacidad de almacenamiento que un único servidor de alto rendimiento por mucho menos coste.
 
 ## Replicación
+La replicación mantiene copias idénticas de los datos en múltiples servidores, lo que facilita que las aplicaciones siempre funcionen y los datos se mantengan seguros, incluso si alguno de los servidores sufre algún problema.
 
-Copia de datos en varios nodos para **alta disponibilidad** y **tolerancia a fallos**.  
-- **Peer-to-peer**: todos escriben, posible inconsistencia temporal :contentReference[oaicite:13]{index=13}  
-- Replicación + particionado = entorno ideal :contentReference[oaicite:14]{index=14}
+La mayoría de las bases de datos NoSQL también soportan la replicación automática, lo que implica una alta disponibilidad y recuperación frente a desastres sin la necesidad de aplicaciones de terceros encargadas de ello. Desde el punto de vista del desarrollador, el entorno de almacenamiento es virtual y ajeno al código de aplicación.
 
-## Implantación
+Existen dos formas de realizar la replicación:
 
-Proceso típico:
+### Maestro-esclavo / Primario-secundario
 
-1. Prueba piloto con baja escala (gratuita, open-source)  
-2. Escalado tras análisis del crecimiento, modelo de datos, consistencia, APIs, soporte y comunidad :contentReference[oaicite:15]{index=15}
+Todas las escrituras se realizan en el nodo principal y después se replican a los nodos secundarios. El nodo primario es un SPOF (*single point of failure*).
 
-### Decisión tecnológica
+<figure style="align: center;">
+    <img src="../images/01replication-master-slave.jpg" alt="Replicación Primario-secundario" width="100%">
+    <figcaption>Replicación Primario-secundario</figcaption>
+</figure>
 
-Evaluar según:
 
-- Modelo de datos (documental, columnar, grafos, clave‑valor)  
-- Necesidades de consulta y de índices secundarios  
-- Consistencia vs disponibilidad  
-- APIs y ecosistema  
-- Comunidad y soporte :contentReference[oaicite:16]{index=16}
+### Par-a-par (peer-to-peer)
+Todos los nodos tienen el mismo nivel jerárquico, de manera que todos admiten escrituras. Al poder haber escrituras simultáneas sobre el mismo datos en diferentes nodos, pueden darse inconsistencia en los datos.
 
-## Casos de uso
+<figure style="align: center;">
+    <img src="../images/01replication-peer-to-peer.png" alt="Replicación par-a-par" width="100%">
+    <figcaption>Replicación Par-a-par</figcaption>
+</figure>
 
-- Aplicaciones web con campos personalizables → **Documental**  
-- Caché → **Clave‑Valor**  
-- Almacenamiento de metadatos binarios → Documental o Clave‑Valor  
-- Grandes volúmenes, baja consistencia → Documental o Columnar :contentReference[oaicite:17]{index=17}
+La replicación de los datos se utiliza para alcanzar:
 
-## Limitaciones
+- **escalabilidad**, incrementando el rendimiento al poder distribuir las consultas en diferentes nodos, y mejorar la redundancia al permitir que cada nodo tenga una copia de los datos.
+- **disponibilidad**, ofreciendo tolerancia a fallos de hardware o corrupción de la base de datos. Al replicar los datos vamos a poder tener una copia de la base de datos, dar soporte a un servidor de datos agregados, o tener nodos a modo de copias de seguridad que pueden tomar el control en caso de fallo.
+- **aislamiento (la i en ACID - isolation)**, entendido como la propiedad que define cuando y cómo al realizar cambios en un nodo se propagan al resto de nodos. Si replicamos los datos podemos crear copias sincronizadas para separar procesos de la base de datos de producción, pudiendo ejecutar informes, analítica de datos o copias de seguridad en nodos secundarios de modo que no tenga un impacto negativo en el nodo principal, así como ofrecer un sistema sencillo para separar el entorno de producción del de preproducción.
 
-- Ausencia de estándar único  
-- Riesgo en proyectos open‑source sin soporte comercial  
-- Interfaces gráficas limitadas  
-- Profesionales con experiencia escasa :contentReference[oaicite:18]{index=18}
 
-## Teorema de CAP
+<div class="admonition caution">
+<p class="admonition-title">Replicación vs particionado</p>
+<p align="justify">No hay que confundir la replicación (copia de los datos en varias máquinas) con el particionado (cada máquina tiene un subconjunto de los datos). El entorno más seguro y con mejor rendimiento es aquel que tiene los datos particionados y replicados (cada máquina que tiene un subconjunto de los datos está replicada en 2 o más).</p>
+<figure style="align: center;">
+    <img src="../images/01sharding-replication.png" alt="Replicación y particionado" width="500px">
+    <figcaption>Replicación y particionado - codingexplained.com</figcaption>
+</figure><p></p>
+</div>
 
-De Brewer (2000): en sistemas distribuidos solo se pueden cumplir dos de tres:  
-- **C**onsistencia  
-- **A**vailability  
-- **P**artition tolerance :contentReference[oaicite:19]{index=19}
 
-Se elige entre CP, AP o CA, pero no los tres.
+## Implantando NoSQL
 
-### Modelo BASE
+Normalmente, las empresas empezarán con una prueba de baja escalabilidad de una base de datos NoSQL, de modo que les permita comprender la tecnología asumiendo muy poco riesgo. La mayoría de las bases de datos NoSQL también son open-source, y por tanto se pueden probar sin ningún coste extra. Al tener unos ciclos de desarrollo más rápidos, las empresas pueden innovar con mayor velocidad y mejorar la experiencia de sus cliente a un menor coste.
 
-- **B**asically **A**vailable, **S**oft‑state y **E**ventual consistency  
-- Prioriza disponibilidad y tolerancia a particiones (AP) :contentReference[oaicite:20]{index=20}
+<div class="admonition question">
+<p class="admonition-title">Consideraciones</p>
+<ul>
+<li align="justify">¿Cuál es el crecimiento previsto de nuestra aplicación en un futuro próximo, por ejemplo, el número de usuarios, y cómo crecerá en 3 meses, 6 meses o un año?</li>
+<li align="justify">Para soportar el crecimiento de la base de usuarios, ¿qué funciones de nuestra aplicación requerirán más almacenamiento de datos y pueden escalarse?</li>
+<li align="justify">¿Cómo podemos distribuir lógica y físicamente nuestros datos? Por ejemplo, si nuestra aplicación requiere soporte geográfico para dar servicio a varias ciudades, ¿podemos distribuir o separar algunos datos en función de las ciudades?</li>
+<li align="justify">¿Qué impacto tendría en la empresa una caída de la base de datos? Es decir ¿Cómo de importante es la alta disponibilidad de nuestra base de datos?</li>
+<li align="justify">¿Cuál es el ratio entre las operaciones de lectura frente a las de escritura? ¿Cuál es su pico en horas punta? ¿Qué <em>payload</em> se espera por operación? ¿Cuánta CPU se necesita por operación?</li>
+<li align="justify">¿La aplicación requiere un modelo de datos fijo o flexible, el cual permita cambios en el futuro? Y si necesita cambiar el esquema de los modelos de datos existentes, ¿cuál será el impacto en términos de parada de mantenimiento, migraciones necesarias, etc...?</li>
+<li align="justify">¿Podemos reducir el tráfico de nuestra aplicación hacia las bases de datos y mejorar el rendimiento?.</li>
+</ul>
+</div>
+
+Planteadas estas preguntas, claramente elegir la base de datos correcta para nuestros proyectos es un tema importante. Se deben considerar las diferentes alternativas a las infraestructuras legacy teniendo en cuenta varios factores:
+
+- La escalabilidad o el rendimiento más allá de las capacidades del sistema existente.
+- Identificar alternativas viables respecto al software propietario.
+- Incrementar la velocidad y agilidad del proceso de desarrollo.
+
+Así pues, al elegir un base de datos hemos de tener en cuenta las siguientes dimensiones:
+
+- **Modelo de datos**: A elegir entre un modelo documental, basado en columnas, de grafos o mediante clave-valor.
+- **Modelo de consultas**: Dependiendo de la aplicación, puede ser aceptable un modelo de consultas que sólo accede a los registros por su clave primaria. En cambio, otras aplicaciones pueden necesitar consultar por diferentes valores de cada registro. Además, si la aplicación necesita modificar los registros, la base de datos necesita consultar los datos por un índice secundario.
+- **Modelo de consistencia**: Los sistemas NoSQL normalmente mantienen múltiples copias de los datos para ofrecer disponibilidad y escalabilidad al sistema, lo que define la consistencia del mismo. Los sistemas NoSQL tienden a ser consistentes o eventualmente consistentes.
+- **APIs**: No existe un estándar para interactuar con los sistemas NoSQL. Cada sistema presenta diferentes diseños y capacidades para los equipos de desarrollo. La madurez de un API puede suponer una inversión en tiempo y dinero a la hora de desarrollar y mantener el sistema NoSQL.
+- **Soporte comercial y de la comunidad**: Los usuarios deben considerar la salud de la compañía o de los proyectos al evaluar una base de datos. El producto debe evolucionar y mantenerse para introducir nuevas prestaciones y corregir fallos. Una base de datos con una comunidad fuerte de usuarios:
+    - Permite encontrar y contratar desarrolladores con destrezas en el producto
+    - Facilita encontrar información, documentación y ejemplos de código.
+    - Ayuda a las empresas a retener el talento.
+    - Favorece que otras empresas de software integren sus productos y participen en el ecosistema de la base de datos.
+### Casos de uso
+Una vez conocemos los diferentes sistemas y qué elementos puede hacer que nos decidamos por una solución u otra, conviene repasar los casos de uso más comunes:
+
+- Si vamos a crear una aplicación web cuyo campos sean personalizables, usaremos una solución documental.
+- Como una capa de caché, mediante un almacén clave-valor.
+- Para almacenar archivos binarios sin preocuparse de la gestión de permisos del sistema de archivos, y poder realizar consultas sobre sus metadatos, ya sea mediante una solución documental o un almacén clave-valor.
+- Para almacenar un enorme volumen de datos, donde la consistencia no es lo más importante, pero si la disponibilidad y su capacidad de ser distribuida, mediante una solución documental o basada en columnas.
+
+### Limitaciones
+
+Una vez que hemos conocido todas las bondades, es conviente citar las limitaciones asociadas a las soluciones NoSQL:
+
+- **Falta de estándar**: Cada base de datos NoSQL surgió de la necesidad de diferentes casos de uso, y al basarse en código abierto, ninguna base de datos NoSQL es igual a otra y no hay directrices estándar para su uso.
+- **Riesgos del código abierto**: Aunque muchas de las soluciones NoSQL han derivado en productos comerciales, puede que algunas de ellas no se mantengan de forma continua y que no haya soporte si nos encontramos con algún problema. Es por ello, que es conveniente comprobar el soporte de la comunidad y de si hay una versión enterprise que podamos contratar en caso de necesidad.
+- **Falta de interfaces gráficos para acceder a las bases de datos NoSQL**: Sólo unas pocas soluciones NoSQL soportan una forma fácil de interactuar con los datos.
+- **Perfiles escasos**: Al tratarse de una nueva tecnología, encontrar expertos NoSQL a veces es difícil y costoso.
 
 ---
-
 ## 📝 Actividades propuestas
 
 1. ¿Qué significa el prefijo “No” en NoSQL?  
 2. ¿Puede un sistema soportar replicación y particionado simultáneamente?  
-3. Asignar modelo de datos a escenarios:  
-   - Wiki de cómics  
-   - Información académica de un país  
-4. Investigar **persistencia políglota**  
-5. Clasificar: BigTable, Cassandra, CouchDB, DynamoDB, HBase, MongoDB, Redis, Riak, Voldemort según CAP  
-6. Crear presentación sobre **NewSQL**, su relación con NoSQL y ejemplos como CockroachDB o VoltDB
 
 <div class="admonition info">
 <p class="admonition-title">Fuentes utilizadas</p>

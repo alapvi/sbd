@@ -5,6 +5,7 @@ nav:
   - Introducción: index.md
   - Almacenamiento de datos. NoSQL: 
     - NoSQL: nosql/nosql.md
+    - Modelos de datos: nosql/moddatos.md
   - MongoDB: mongodb/mongodb.md
 
 theme:
