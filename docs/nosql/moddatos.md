@@ -86,17 +86,18 @@ Su funcionamiento es similar a tener una tabla relacional con dos columnas, por 
     <figcaption>Representación de un almacén clave-valor</figcaption>
 </figure>
 
-=== "Python"
-    ```python
-    print("A")
-    ```
+El cliente puede tanto obtener el valor por la clave, asignar un valor a una clave o eliminar una clave del almacén. El valor, sin embargo, es opaco al sistema, el cual no sabe que hay dentro de él, ya que los datos sólo se pueden consultar por la clave, lo cual puede ser un inconveniente. Así pues, la aplicación es responsable de saber qué hay almacenado en cada valor.
 
-=== "Javascript"
-    ```js
-    var a=4
-    ```  
+Por ejemplo, [Riak](https://riak.com/) utiliza el concepto de *bucket (cubo)* como una manera de agrupar claves, de manera similar a una tabla.
 
-=== "Comandos Redis"
+Por ejemplo, Riak permite interactuar con la base de datos mediante peticiones HTTP:
+
+```bash
+curl -v -X PUT <http://localhost:8091/riak/heroes/ace> -H "Content-Type: application/json" -d {"nombre" : "Batman", "color" : "Negro"}
+```
+Algunos almacenes clave-valor, como puede ser Redis, permiten almacenar datos con cualquier estructura, como por ejemplos listas, conjuntos, hashes, permitiendo realizar operaciones como la intersección, unión, diferencia y rango.
+
+=== "Redis"
     ```redis
     SET nombre "Bruce Wayne"      // String
     HSET heroe nombre "Batman"    // Hash – set
@@ -104,7 +105,7 @@ Su funcionamiento es similar a tener una tabla relacional con dos columnas, por 
     SADD "heroe:amigos" "Robin" "Alfred"   // Set – create/update
     ```
 
-=== "Comandos Python"
+=== "Python"
     ```python
     import redis
     r = redis.Redis()
@@ -112,6 +113,95 @@ Su funcionamiento es similar a tener una tabla relacional con dos columnas, por 
     r.get("Bahamas")
     # b'Nassau'
     ```
+
+Estas prestaciones hacen que *Redis* se extrapole a ámbitos ajenos a un almacén clave-valor. Otra característica que ofrecen algunos almacenes es que permiten crear un segundo nivel de consulta o incluso definir más de una clave para un mismo objeto.
+
+Como los almacenes clave-valor siempre utilizan accesos por clave primaria, de manera general tienen un gran rendimiento y son fácilmente escalables.
+
+Si queremos que su rendimiento sea máximo, pueden configurarse para que mantengan la información en memoria y que se serialice de manera periódica, a costa de tener una consistencia eventual de los datos.
+
+### Diferencias entre modelo Documental y Clave-Valor
+
+Los modelos de datos Documental y Clave-Valor son dos paradigmas comunes en las bases de datos *NoSQL*. Pueden parecer similares pero existen unas diferencias claras entre ellos:
+
+- **Estructura de datos**: En el modelo documental, los datos se organizan en documentos con una estructura interna, mientras que en el modelo clave-valor, los datos se almacenan como pares de clave-valor simples sin una estructura interna definida.
+
+- **Flexibilidad**: El modelo documental ofrece más flexibilidad para almacenar datos semiestructurados o no estructurados, mientras que el modelo clave-valor es más adecuado para datos simples y bien definidos.
+
+- **Consultas**: El modelo documental permite consultas más complejas y flexibles utilizando índices secundarios y lenguajes de consulta avanzados, mientras que en el modelo clave-valor, la recuperación de datos se realiza principalmente mediante búsquedas directas por clave.
+
+### Casos de uso
+Este modelo es muy **útil para representar datos desestructurados** o polimórficos, ya que no fuerzan ningún esquema más allá de los pares de clave-valor.
+
+Entre los casos de uso de estos almacenes podemos destacar el almacenaje de:
+
+- Información sobre la sesión de navegación *(sessionid)*
+- Perfiles de usuario, preferencias
+- Datos del carrito de la compra
+- Cachear datos
+
+Todas estas operaciones van a asociada a operaciones de recuperación, modificación o inserción de los datos de una sola vez, de ahí su elección.
+
+En cambio, **no conviene utilizar estos almacenes cuando queremos realizar**:
+
+- Relaciones entre datos
+- Transacciones entre varias operaciones
+- Consultas por los datos del valor
+- Operaciones con conjuntos de claves
+
+Los almacenes más empleados son:
+
+- Riak: [https://riak.com](https://riak.com)
+- Redis: [http://redis.io](http://redis.io)
+- AWS DynamoDB: [http://aws.amazon.com/dynamodb](http://aws.amazon.com/dynamodb)
+- Voldemort: [http://www.project-voldemort.com/voldemort](http://www.project-voldemort.com/voldemort) implementación open-source de Amazon DynamoDB
+
+## Basado en columnas
+Las bases de datos relacionales utilizan la fila como unidad de almacenamiento, lo que permite un buen rendimiento de escritura. Sin embargo, cuando las **escrituras son ocasionales** y es más común tener que leer unas pocas columnas de muchas filas a la vez, es mejor utilizar como unidad de almacenamiento un **grupos de columnas**. Es decir, lo que hacemos es girar el modelo 90 grados, de manera que **los registros se almacenan en columnas en vez de hacerlo por filas**.
+
+Supongamos que tenemos los siguientes datos:
+
+<figure style="align: center;">
+    <img src="../images/04formatos-tabla.png" alt="Ejemplo de una tabla" width="50%">
+    <figcaption>Ejemplo de una tabla</figcaption>
+</figure>
+
+Dependiendo del almacenamiento en filas o columnas tendríamos la siguiente representación:
+
+<figure style="align: center;">
+    <img src="../images/04formatos-filacolumna.png" alt="Comparación filas/columnas" width="100%">
+    <figcaption>Comparación filas/columnas</figcaption>
+</figure>
+
+En un formato columnar los datos del mismo tipo se agrupan, lo que permite codificarlos/comprimirlos, lo que mejora el rendimiento de acceso y reduce el tamaño:
+
+
+<figure style="align: center;">
+    <img src="../images/04formatos-column-encoding.png" alt="Comparación filas/columnas" width="100%">
+    <figcaption>Comparación filas/columnas</figcaption>
+</figure>
+
+=== "Columnar por filas"
+    ```python
+    { 
+    "Fila 1": [1, "US", "Free"],
+    "Fila 2": [2, "UK", "Paid"],
+    "Fila 3": [3, "ES", "Paid"]
+    }
+    ```
+
+=== "Columnar por columnas"
+    ```python
+    { 
+    "user_id": [1, 2, 3],
+    "country": ["US", "UK", "ES"],
+    "subscription_type": ["Free", "Paid", "Paid"]
+    }
+    ```
+
+!!! Question "Autoevaluación"
+    Si tenemos que añadir un nuevo registro ¿Qué modelo será más eficiente?
+
 
 
 ---
