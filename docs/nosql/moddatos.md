@@ -289,17 +289,124 @@ En resumen, las bases de datos basadas en columnas, almacenan los datos en famil
 
 
 ### Operaciones
+A la hora de consultar los datos, éstos se pueden obtener por la clave primaria de la familia. Así pues, podemos obtener toda una familia, o la columna de una familia:
 
+```sql
+// Mediante Cassandra
+GET Clientes['bruce-wayne'];  // familia
+GET Clientes['bruce-wayne']['lugar']; // columna
+```
 
+Algunos productos ofrecen un soporte limitado para índices secundarios, pero con restricciones. Por ejemplo, Cassandra ofrece el lenguaje CQL similar a SQL pero sin joins, ni subconsultas donde las restricciones de where son sencillas:
 
+```sql
+SELECT * FROM Clientes
+SELECT nombre,email FROM Clientes
+SELECT nombre,email FROM Clientes WHERE lugar='Gotham'
+```
+Las actualizaciones se realizan en dos pasos: primero encontrar el registro y segundo modificarlo. En estos sistemas, una modificación puede suponer una reescritura completa del registro independientemente que hayan cambiado unos pocos bytes del mismo.
+
+### Casos de uso
+
+Las bases de datos columnares se han empleado durante décadas ofreciendo beneficios a las aplicaciones de negocio modernas, como la *analítica de datos, business intelligence y data warehousing*.
+
+Son multipropósito, aunque su uso se centra en el mercado del big data, la analítica de datos, cubos multidimensionales OLAP y/o almacenar metadatos y realizar analítica en tiempo real.
+
+Además de poder comprimir los datos, los datos están auto-indexados, lo que implica que utiliza menos espacio en disco, y acelera la ejecución de consultas agregadas entre múltiples tablas que implica el uso de joins.
+
+En cambio, no se recomienda su uso en aplicaciones de procesamiento transaccional (OLTP), ya que las bases de datos relacionales gestionan mejor el procesamiento concurrente y el aislamiento de las operaciones.
+
+Los productos más destacados son:
+
+- HBase : [http://hbase.apache.org](http://hbase.apache.org), el cual se basa en [Hadoop](http://hadoop.apache.org)
+- Cassandra : [http://cassandra.apache.org](http://cassandra.apache.org)
+- Amazon Redshift: [https://aws.amazon.com/es/redshift/](https://aws.amazon.com/es/redshift)
+
+## Grafos
+Las bases de datos de grafos almacenan entidades y las relaciones entre estas entidades. Las entidades se conocen como **nodos**, los cuales tienen propiedades. Cada nodo es similar a una instancia de un objeto. Las relaciones, también conocidas como **vértices**, a su vez tienen propiedades, y su sentido es importante.
+
+<figure markdown="span">
+    !["Representación de un grafo"](../images/01grafo.png){width="70%" }
+    <figcaption>Representación de un grafo</figcaption>
+</figure>
+
+Los nodos se organizan mediante relaciones que facilitan encontrar patrones de información existente entre los nodos. Este tipo de organización permite almacenar los datos una vez e interpretar los datos de diferentes maneras dependiendo de sus relaciones.
+
+- Los nodos son entidades que tienen propiedades, tales como el nombre. Por ejemplo, en el gráfico cada nodo tiene una propiedad `name`. 
+- También podemos ver que las relaciones tienen tipos, como `label`, `since`, etc…​ 
+- Estas propiedades permiten organizar los nodos. Las relaciones pueden tener múltiples propiedades, y además tienen dirección, con lo cual si queremos incluir bidireccionalidad tenemos que añadir dos relaciones en sentidos opuestos. 
+- Tanto los nodos como las relaciones tienen un atributo `id` que los identifica.
+
+Por ejemplo, podemos comenzar a crear el grafo anterior mediante Neo4J de la siguiente manera:
+
+```java
+Node alice = graphDb.createNode();
+alice.setProperty("name", "Alice");
+Node bob = graphDb.createNode();
+bob.setProperty("name", "Bob");
+
+alice.createRelationshipTo(bob, FRIEND);
+bob.createRelationshipTo(alice, FRIEND);
+```
+Los nodos permiten tener diferentes tipos de relaciones entre ellos y así representar relaciones entre las entidades del dominio, y tener relaciones secundarias para características como categoría, camino, árboles de tiempo, listas enlazas para acceso ordenado, etc…​ Al no existir un límite en el número ni en el tipo de relaciones que puede tener un nodo, todas se pueden representar en la misma base de datos.
+
+### Traversing
+
+Una vez tenemos creado un grafo de nodos y relaciones, podemos consultar el grafo de muchas maneras; por ejemplo "obtener todos los nodos que son miembros del grupo de ajedrez y que tienen más de 20 años". Realizar una consulta se conoce como hacer un traversing (recorrido) del mismo.
+
+Un ejemplo de traversing mediante Neo4J sería:
+
+```java
+Node ajedrez = nodeIndex.get("name", "chess").getSingle();
+allRelationships = ajedrez.getRelationships(Direction.INCOMING);
+```
+
+Una ventaja a destacar de las bases de datos basadas en grafos es que podemos cambiar los requisitos de traversing sin tener que cambiar los nodos o sus relaciones.
+
+En las bases de datos de grafos, recorrer las relaciones es muy rápido, ya que no se calculan en tiempo de consulta, sino que se persisten como una relación, y por tanto no hay que hacer ningún cálculo.
+
+En cambio, en una base de datos relacional, para crear una estructura de grafo se realiza para una relación sencilla (¿Quien es mi jefe?"). Para poder añadir otras relaciones necesitamos muchos cambios en el esquema y trasladar datos entre tablas. Además, necesitamos de antemano saber qué consultas queremos realizar para modelar las tablas y las relaciones acorde a las consultas.
+
+Así pues, estos sistemas ofrecen modelos ricos de consultas donde se pueden investigar las relaciones simples y complejas entre los nodos para obtener información directa e indirecta de los datos del sistemas. Los tipos de análisis que se realizan sobre estos sistema se ciñen a los tipos de relación existente entre los datos.
+
+### Casos de uso
+
+Mientras que el modelo de grafos no es muy intuitivo y tiene una importante curva de aprendizaje, se puede usar en un gran número de aplicaciones.
+
+Su principal atractivo es que facilitan almacenar las relaciones entre entidades de una aplicación, como por ejemplo en una red social, o las intersecciones existentes entre carreteras. Es decir, se emplean para almacenar datos que se representan como nodos interconectados.
+
+Por lo tanto, los casos de uso son:
+
+- Datos conectados: redes sociales con diferentes tipos de conexiones entre los usuarios.
+- Enrutamiento, entrega o servicios basados en la posición: si las relaciones almacenan la distancia entre los nodos, podemos realizar consultas sobre lugares cercanos, trayecto más corto, etc…​
+- Motores de recomendaciones: de compras, de lugares visitados, etc…​
+En cambio, no se recomienda su uso cuando necesitemos modificar todos o un subconjunto de entidades, ya que modificar una propiedad en todos los nodos es una operación compleja.
+
+Los productos más destacados son:
+
+- Neo4j: [http://neo4j.com](http://neo4j.com)
+- ArangoDB: [https://www.arangodb.com/](https://www.arangodb.com/)
+- Apache TinkerPop: [https://tinkerpop.apache.org/](https://tinkerpop.apache.org/)
+- Amazon Neptune: [https://aws.amazon.com/es/neptune/](https://aws.amazon.com/es/neptune/)
+
+## Tabla comparativa
+| **Diferencias entre modelos** | **Documental**                                         | **Clave-Valor**              | **Basado en Columnas**     | **Grafos**                          |
+| ----------------------------- | ------------------------------------------------------ | ---------------------------- | -------------------------- | ----------------------------------- |
+| **Estructura de Datos**       | Documentos JSON/BSON/XML                               | Pares de Clave-Valor         | Columnas con familias      | Nodos y Relaciones                  |
+| **Flexibilidad**              | Flexible                                               | Variable                     | Menos flexible             | Variable                            |
+| **Consultas**                 | Complejas, con índices y lenguaje de consulta avanzado | Búsquedas directas por clave | Consultas ad-hoc limitadas | Consultas complejas de relaciones   |
+| **Escalabilidad**             | Escalabilidad Horizontal                               | Escalabilidad Horizontal     | Escalabilidad Horizontal   | Escalabilidad Horizontal y Vertical |
+| **Transacciones**             | Transacciones ACID                                     | Operaciones atómicas simples | Transacciones ACID         | Transacciones ACID                  |
+| **Ejemplos**                  | MongoDB, Couchbase                                     | Redis, DynamoDB              | Cassandra, HBase           | Neo4j, Amazon Neptune               |
 
 
 
 ---
 ## 📝 Actividades propuestas
-1. Asignar modelo de datos a escenarios:  
-    - Wiki de cómics  
-    - Información académica de un país  
-2. Investigar **persistencia políglota**  
-3. Clasificar: BigTable, Cassandra, CouchDB, DynamoDB, HBase, MongoDB, Redis, Riak, Voldemort según CAP  
+!!! Question "Actividades"
+    1. Asignar modelo de datos a escenarios:  
+        - Wiki de cómics  
+        - Información académica de un país  
+    2. Investigar **persistencia políglota**  
+    3. Clasificar: BigTable, Cassandra, CouchDB, DynamoDB, HBase, MongoDB, Redis, Riak, Voldemort.
 

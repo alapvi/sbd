@@ -6,10 +6,15 @@ nav:
   - Almacenamiento de datos. NoSQL: 
     - NoSQL: nosql/nosql.md
     - Modelos de datos: nosql/moddatos.md
-  - MongoDB: mongodb/mongodb.md
+    - Consistencia: nosql/consistencia.md
+  - MongoDB: 
+    -  Introducción a MongoDB: mongodb/intromongo.md 
+    -  MongoDB: mongodb/mongodb.md
+    -  Diseño de modelado de BD: mongodb/modelado.md
 
 theme:
   name: material
+  language: es
   logo: images/logo.png
   favicon: images/logo_peq.png
   features:
@@ -28,6 +33,9 @@ theme:
         name: Switch to light mode
 markdown_extensions:
   - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - md_in_html
   - pymdownx.blocks.caption
   - admonition                         
