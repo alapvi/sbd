@@ -202,6 +202,97 @@ En un formato columnar los datos del mismo tipo se agrupan, lo que permite codif
 !!! Question "Autoevaluación"
     Si tenemos que añadir un nuevo registro ¿Qué modelo será más eficiente?
 
+Sin embargo, a medida que se incrementa la utilización de análisis de datos en memoria, con soluciones como Spark, los beneficios relativos de la base de datos columnares comparados con los de las bases de datos orientadas a filas pueden llegar a ser menos importantes.
+
+### Representación
+
+Un modelo basado en columnas se representa como una estructura agregada de dos niveles. El primer nivel formado por un almacén clave-valor, siendo la clave el identificador de la fila, y el valor un nuevo mapa con los datos agregados de la fila (familias de columnas). Los valores de este segundo nivel son las columnas. De este modo, podemos acceder a los datos de un fila, o a una determinada columna:
+
+<figure markdown="span">
+    !["Representación de un almacén basado en columnas"](../images/01column.jpg){width="90%" }
+    <figcaption>Representación de un almacén basado en columnas</figcaption>
+</figure>
+
+!!! note "BigTable"
+    Los modelos de datos basados en columnas se basan en la implementación de Google de la tecnología BigTable [http://research.google.com/archive/bigtable.html](http://research.google.com/archive/bigtable.html), la cual consiste en columnas separadas y sin esquema, a modo de mapa de dos niveles.
+
+Así pues, los almacenes basados en columnas utilizan un mapa ordenado multi-dimensional y distribuido para almacenar los datos. Están pensados para que cada fila tenga una gran número de columnas (del orden del millón), almacenando las diferentes versiones que tenga una fila (pudiendo almacenar del orden de miles de millones de filas).
+
+### Familias de columnas
+
+Una columna consiste en un pareja `name-value`, donde el nombre hace de clave. Además, contiene un atributo timestamp para poder expirar datos y resolver conflictos de escritura.
+
+
+Un ejemplo de columna podría ser:
+```python
+{
+  name: "nombre",
+  value: "Bruce",
+  timestamp: 12345667890
+}
+```
+Una fila es una colección de columnas agrupadas a una clave.
+```python
+{
+    {         
+        name: "nombre",         
+        value: "Bruce",         
+        timestamp: 12345667890     
+    },     
+    {         
+        name: "nombre",         
+        value: "Clark",         
+        timestamp: 12345667891     
+    },     
+    {         
+        name: "nombre",         
+        value: "Barbara",         
+        timestamp: 12345667892     
+    } 
+}
+```
+Si agrupamos filas similares tendremos una **familia de columnas** (similar al concepto de tabla):
+```python
+// familia de columnas
+{
+  // fila
+  "tim-gordon" : {
+    nombre: "Tim",
+    apellido: "Gordon",
+    ultimaVisita: "2015/12/12"
+  }
+  // fila
+  "bruce-wayne" : {
+    nombre: "Bruce",
+    apellido: "Wayne",
+    lugar: "Gotham"
+  }
+}
+```
+Con este ejemplo, podemos ver como las diferentes filas de la misma tabla (familia de columnas) no tienen por que compartir el mismo conjunto de columnas.
+Además, las columnas se pueden anidar dentro de otras formando **super-columnas**, donde el valor es un nuevo mapa de columnas.
+
+```python
+{
+    name: "libro:978-84-16152-08-7",   
+    value: 
+    {     
+        autor: "Grant Morrison",     
+        titulo: "Batman - Asilo Arkham",     
+        isbn: "978-84-16152-08-7"   
+    } 
+}
+```
+Cuando se utilizan super columnas para crear familias de columnas tendremos una familia de super columnas.
+
+En resumen, las bases de datos basadas en columnas, almacenan los datos en familias de columnas como filas, las cuales tienen muchas columnas asociadas al identificador de una fila. Las familias de columnas son grupos de datos relacionados, a las cuales normalmente se accede de manera conjunta.
+
+
+### Operaciones
+
+
+
+
 
 
 ---
