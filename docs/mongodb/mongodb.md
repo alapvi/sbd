@@ -47,15 +47,15 @@ Hay una serie de conceptos que conviene conocer antes de entrar en detalle:
 - Cada **documento** contiene 0 o más **atributos**, compuestos de **parejas clave/valor**. Cada uno de estos documentos no sigue ningún esquema, por lo que dos documentos de una misma colección pueden contener todos los atributos diferentes entre sí.
 
 <figure markdown="span">
-    !["Elementos de MongoDB"](../images/02mongodbitems.png){width="70%" }
+    !["Elementos de MongoDB"](images/02mongodbitems.png){width="70%" }
     <figcaption>Elementos de MongoDB</figcaption>
 </figure>
 
 Así pues, tenemos que una base de datos va a contener varias colecciones, donde cada colección contendrá un conjunto de documentos. Podemos hacer una correspondencia rápida entre bases de datos Relacionales y NoSQL:
 
 <figure markdown="span">
-!["Estructura"](../images/MongoDB02.jpeg){width="50%" } 
-!["Estructura"](../images/MongoDB17.png){width="50%" }
+    !["Estructura"](images/MongoDB02.jpeg){width="50%" } 
+    !["Estructura"](images/MongoDB17.png){width="50%" }
 </figure>
 
 Además, **MongoDB soporta índices**, igual que cualquier RDMS, para acelerar la búsqueda de datos. Al realizar cualquier consulta, se devuelve un cursor, con el cual podemos hacer cosas tales como contar, ordenar, limitar o saltar documentos
@@ -75,7 +75,7 @@ Repasemos el concepto de JSON: JavaScript Object Notation:
 
 
 <figure markdown="span">
-    !["Documento en MongoDB"](../images/MongoDB03.png){width="100%" }
+    !["Documento en MongoDB"](images/MongoDB03.png){width="100%" }
     <figcaption>Documento en MongoDB</figcaption>
 </figure>
 

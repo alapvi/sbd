@@ -209,7 +209,7 @@ Sin embargo, a medida que se incrementa la utilización de análisis de datos en
 Un modelo basado en columnas se representa como una estructura agregada de dos niveles. El primer nivel formado por un almacén clave-valor, siendo la clave el identificador de la fila, y el valor un nuevo mapa con los datos agregados de la fila (familias de columnas). Los valores de este segundo nivel son las columnas. De este modo, podemos acceder a los datos de un fila, o a una determinada columna:
 
 <figure markdown="span">
-    !["Representación de un almacén basado en columnas"](../images/01column.jpg){width="90%" }
+    !["Representación de un almacén basado en columnas"](images/01column.jpg){width="90%" }
     <figcaption>Representación de un almacén basado en columnas</figcaption>
 </figure>
 
@@ -326,7 +326,7 @@ Los productos más destacados son:
 Las bases de datos de grafos almacenan entidades y las relaciones entre estas entidades. Las entidades se conocen como **nodos**, los cuales tienen propiedades. Cada nodo es similar a una instancia de un objeto. Las relaciones, también conocidas como **vértices**, a su vez tienen propiedades, y su sentido es importante.
 
 <figure markdown="span">
-    !["Representación de un grafo"](../images/01grafo.png){width="70%" }
+    !["Representación de un grafo"](images/01grafo.png){width="70%" }
     <figcaption>Representación de un grafo</figcaption>
 </figure>
 

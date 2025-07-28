@@ -6,7 +6,7 @@ En un sistema consistente, las escrituras de una aplicación son visibles en sig
 Por ejemplo, en un sistema de control de stock, si el sistema es consistente, cada consulta obtendrá el estado real del inventario, mientras que si tiene consistencia eventual, puede que no sea el estado real en un momento concreto pero terminará siéndolo en breve.
 
 <figure markdown="span">
-    !["Consistencia"](../images/NoSQL17.jpg){width="70%" }
+    !["Consistencia"](images/NoSQL17.jpg){width="70%" }
     <figcaption>Tipos de consistencia</figcaption>
 </figure>
 
@@ -42,7 +42,7 @@ Propuesto por Eric Brewer en el año 2000, prueba que podemos crear una base de 
 En otras palabras, podemos crear un sistema de base de datos que sea consistente y tolerante a particiones (CP), un sistema que sea disponible y tolerante a particiones (AP), o un sistema que sea consistente y disponible (CA). Pero no es posible crear una base de datos distribuida que sea consistente, disponible y tolerante a particiones al mismo tiempo.
 
 <figure markdown="span">
-    !["Teorema CAP"](../images/01teorema.png){width="100%" }
+    !["Teorema CAP"](images/01teorema.png){width="100%" }
     <figcaption>Teorema CAP</figcaption>
 </figure>
 
@@ -56,7 +56,7 @@ Algunas bases de datos tolerantes a particiones se pueden ajustar para ser más 
 El siguiente gráfico muestra cómo dependiendo de estos atributos podemos clasificar los sistemas NoSQL:
 
 <figure markdown="span">
-    !["Clasificación según CAP"](../images/01teoremaCAPam.png){width="70%" }
+    !["Clasificación según CAP"](images/01teoremaCAPam.png){width="70%" }
     <figcaption>Clasificación según CAP</figcaption>
 </figure>
 
