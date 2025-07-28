@@ -12,6 +12,7 @@ nav:
     -  MongoDB: mongodb/mongodb.md
     -  Diseño de modelado de BD: mongodb/modelado.md
     -  Instalación: mongodb/instalacion.md
+    -  Primeros pasos: mongodb/basicsmongo.md
 
 theme:
   name: material
