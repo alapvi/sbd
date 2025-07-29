@@ -13,6 +13,8 @@ nav:
     -  Diseño de modelado de BD: mongodb/modelado.md
     -  Instalación: mongodb/instalacion.md
     -  Primeros pasos: mongodb/basicsmongo.md
+    -  Operaciones con datos CRUD: mongodb/mongodbcrud.md
+    -  Consulta de datos: mongodb/mongodbdatos.md
 
 theme:
   name: material
