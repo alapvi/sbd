@@ -281,5 +281,204 @@ Obtiene los valores diferentes de un campo de una colección:
 db.movies.distinct( 'genres' );
 ```
 
+```js
+db.movies.distinct( 'type' );
+```
 
+Estos dos ejemplos obtienen los diferentes valores de los atributos indicados.
+
+### Método `.count()`
+
+Cuenta la cantidad de documentos que cumplen una condición.
+
+```js
+db.movies.find({
+    year: { $lt: 2000 },
+    genres: "Short"
+}).count()
+```
+
+Obtenemos la cantidad de cortos de la colección, posterior al año 2000
+
+- Buscar la cantidad películas que tengan en su sinopsis (fullplot) la palabra "fire", sean anteriores al 1980 y que sean del genero "Shorts"
+
+```js
+db.movies.find({
+    fullplot: { $regex: /fire/i },
+    year: { $lt: 1900 },
+    genres: "Short"
+}).count()
+```
+
+### Método `.limit()`
+
+Muestra una cantidad de documentos indicada que cumplan una condición.
+
+```js
+db.movies.find({
+    year: { $lt: 2000 },
+    genres: "Short"
+}).limit(5)
+```
+
+Obtenemos 5 documentos de cortos de la colección, posterior al año 2000
+
+### Método `.sort()`
+
+Ordena los documentos devueltos por una consulta.
+
+La sintaxis básica es la siguiente:
+
+```js
+db.collection.find().sort({ campo: orden })
+```
+
+- `campo`: El nombre del campo por el cual deseas ordenar.
+- `orden`: Puede ser `1` para orden *ascendente* o `-1` para orden *descendente*.
+
+Por ejemplo, para ordenar por año de lanzamiento de forma ascendente:
+
+```js
+db.movies.find().sort({ year: 1 })
+```
+
+Si deseas ordenarlas de forma descendente:
+
+```js
+db.movies.find().sort({ year: -1 })
+```
+
+También podemos ordenar por más de un campo. Por ejemplo, para ordenar primero por genre y luego por rating:
+
+```js
+db.movies.find().sort({ genre: 1, rating: -1 })
+```
+
+También podemos encadenar estas funciones:
+
+- Listado de las 5 mejores películas según la puntuación "imdb"
+
+```js
+db.movies.find({}, {
+    title: 1,
+    imdb: 1
+}).sort({ imdb: 1 }).limit(5)
+```
+
+Mejoramos el resultado anterior y le quitamos los valores vacios en la puntuación:
+
+```js
+db.movies.find({ "imdb.rating": {"$ne": ""}}, {
+    title: 1,
+    imdb: 1
+}).sort({ imdb: -1 }).limit(5)
+```
+
+## Cursores
+
+Al hacer una consulta en el shell se devuelve un cursor. Este cursor lo podemos guardar en un variable, y partir de ahí trabajar con él, como haríamos mediante cualquier lenguaje de programación. Si `cur` es la variable que referencia al cursor, podremos utilizar los siguientes métodos:
+
+| Método             | Uso                                                            | Lugar de ejecución |
+|--------------------|----------------------------------------------------------------|---------------------|
+| `cur.hasNext()`    | `true/false` para saber si quedan elementos                    | Cliente             |
+| `cur.next()`       | Pasa al siguiente documento                                     | Cliente             |
+| `cur.limit(cantidad)` | Restringe el número de resultados a `cantidad`              | Servidor            |
+| `cur.sort({campo:1})` | Ordena los datos por campo: `1` ascendente o `-1` descendente | Servidor            |
+| `cur.skip(cantidad)`  | Permite saltar `cantidad` elementos con el cursor           | Servidor            |
+| `cur.count()`      | Obtiene la cantidad de documentos                              | Servidor            |
+
+Como tras realizar una consulta con find realmente se devuelve un cursor, un uso muy habitual es encadenar una operación de `find` con `sort` y/o `limit` y/o `count` para ordenar el resultado por uno o más campos y posteriormente limitar el número de documentos a devolver o simplemente contar.
+
+Estos cursores se utilizan cuando accedemos a consulta desde script en javascript u otros lenguajes.
+
+Por ejemplo, a continuacion tenemos código en javascript que imprime por consola todos los documentos obtenidos tras una consulta
+
+=== "javscript"
+    ```javascript
+    // necesario node.js
+    // Conectar a la base de datos test
+    // const db = connect("mongodb://user:pass@localhost:27017/test?authSource=admin");
+    const db = connect("mongodb://localhost:27017/test");
+
+    // Realizar una consulta para encontrar todas (5) las películas
+    var cursor = db.movies.find().limit( 5);
+
+    // Iterar sobre los resultados usando un cursor
+    while (cursor.hasNext()) {
+        printjson(cursor.next());
+    }
+    ```
+=== "Python"
+    ```python
+    # necesaria librería pymongo: 
+    from pymongo import MongoClient
+
+    # Conectar a la base de datos
+    # client = MongoClient("mongodb://user:pass@localhost:27017/test?authSource=admin")
+    client = MongoClient("mongodb://localhost:27017/")
+    # Utilizamos la base de datos "text"
+    db = client.test
+
+    # Realizar una consulta para encontrar todas (5) las películas
+    cursor = db.movies.find().limit(5)
+
+    # Iterar sobre los resultados usando un cursor
+    for document in cursor:
+        print(document)
+    ```
+
+Se puede también usar métodos como `limit` y `skip` para controlar la cantidad de resultados:
+
+- Ejemplo: obtenemos 5 registros de una colecccón
+
+=== "javscript"
+    ```javascript
+    // necesario node.js
+    // Conectar a la base de datos test
+    // const db = connect("mongodb://user:pass@localhost:27017/test?authSource=admin");
+    const db = connect("mongodb://localhost:27017/test");
+
+    // Obtener las primeras 5 películas
+    var limitedCursor = db.movies.find().limit(5);
+
+    // Iterar sobre los resultados limitados
+    while (limitedCursor.hasNext()) {
+        printjson(limitedCursor.next());
+    }
+
+    // Saltar las primeras 2 películas y obtener las siguientes 3
+    var paginatedCursor = db.movies.find().skip(2).limit(3);
+
+    while (paginatedCursor.hasNext()) {
+        printjson(paginatedCursor.next());
+    }
+    ```
+=== "Python"
+    ```python
+    # necesaria librería pymongo: 
+    from pymongo import MongoClient
+
+    # Conectar a la base de datos
+    # client = MongoClient("mongodb://user:pass@localhost:27017/test?authSource=admin")
+    client = MongoClient("mongodb://localhost:27017/")
+    # Utilizamos la base de datos "text"
+    db = client.test
+
+    # Obtener las primeras 5 películas
+    limited_cursor = db.movies.find().limit(5)
+
+    # Iterar sobre los resultados limitados
+    for document in limited_cursor:
+        print(document)
+
+    # Saltar las primeras 2 películas y obtener las siguientes 3
+    paginated_cursor = db.movies.find().skip(2).limit(3)
+
+    # Iterar sobre los resultados paginados
+    for document in paginated_cursor:
+        print(document)
+
+    ```
+
+En todo caso, estos ejemplos quedan fuera del alcance de nuestro objetivo para este curso. Para más información [MongoDB Documentation → MongoDB Drivers → Node.js](https://www.mongodb.com/docs/drivers/node/v3.6/fundamentals/connection/connect/)
 
