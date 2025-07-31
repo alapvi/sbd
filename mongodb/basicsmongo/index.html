@@ -1,0 +1,1163 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://alapvi.github.io/mongodb/basicsmongo/">
+      
+      
+        <link rel="prev" href="../instalacion/">
+      
+      
+        <link rel="next" href="../mongodbcrud/">
+      
+      
+      <link rel="icon" href="../../images/logo_peq.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>Primeros pasos - Sistemas de BigData</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#primeros-pasos" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Sistemas de BigData" class="md-header__button md-logo" aria-label="Sistemas de BigData" data-md-component="logo">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sistemas de BigData
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Primeros pasos
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sistemas de BigData" class="md-nav__button md-logo" aria-label="Sistemas de BigData" data-md-component="logo">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    Sistemas de BigData
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introducción
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Almacenamiento de datos. NoSQL
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Almacenamiento de datos. NoSQL
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nosql/nosql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    NoSQL
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nosql/moddatos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Modelos de datos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nosql/consistencia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Consistencia
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    MongoDB
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            MongoDB
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intromongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introducción a MongoDB
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mongodb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MongoDB
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modelado/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Diseño de modelado de BD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../instalacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Instalación
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Primeros pasos
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Primeros pasos
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#trabajando-con-mongodb-desde-la-consola" class="md-nav__link">
+    <span class="md-ellipsis">
+      Trabajando con MongoDB desde la consola
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Trabajando con MongoDB desde la consola">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#activar-autenticacion-para-mongodb" class="md-nav__link">
+    <span class="md-ellipsis">
+      Activar autenticación para MongoDB
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aumentar-los-mapeos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aumentar los mapeos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swappiness" class="md-nav__link">
+    <span class="md-ellipsis">
+      Swappiness
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operaciones-basicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operaciones básicas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creacion-y-gestion-de-bases-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creación y gestión de Bases de Datos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creación y gestión de Bases de Datos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creacion-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creación: use
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eliminacion-dbdropdatabase" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eliminación: db.dropDatabase()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mongodb-database-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      MongoDB Database Tools
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos de datos
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mongodbcrud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Operaciones con datos CRUD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mongodbdatos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Consulta de datos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#trabajando-con-mongodb-desde-la-consola" class="md-nav__link">
+    <span class="md-ellipsis">
+      Trabajando con MongoDB desde la consola
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Trabajando con MongoDB desde la consola">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#activar-autenticacion-para-mongodb" class="md-nav__link">
+    <span class="md-ellipsis">
+      Activar autenticación para MongoDB
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aumentar-los-mapeos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aumentar los mapeos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swappiness" class="md-nav__link">
+    <span class="md-ellipsis">
+      Swappiness
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operaciones-basicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operaciones básicas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creacion-y-gestion-de-bases-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creación y gestión de Bases de Datos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creación y gestión de Bases de Datos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creacion-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creación: use
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eliminacion-dbdropdatabase" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eliminación: db.dropDatabase()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mongodb-database-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      MongoDB Database Tools
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos de datos
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="primeros-pasos">Primeros pasos</h1>
+<p>Una vez instalada la base de datos, vamos a interactuar desde su propia consola.</p>
+<h2 id="trabajando-con-mongodb-desde-la-consola">Trabajando con MongoDB desde la consola</h2>
+<p>En la máquina donde tenemos instalada la base de datos, podemos acceder a la consola de MongoDB escribimos:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>mongosh
+</span></code></pre></div>
+<figure>
+    <img alt="&quot;Acceso a través de la consola&quot;" src="../images/MongoDBInst12.png" width="100%" />
+    <figcaption>Acceso a través de la consola</figcaption>
+</figure>
+<p>Vemos que cuando accedemos a través de la consola, nos aparece una serie de recomendaciones que debemos realizar antes de comenzar a trabajar con MongoDB:</p>
+<ul>
+<li>Sistema de archivos XFS recomendado</li>
+<li>No hay control de acceso habilitado</li>
+<li>Aumentar la cantidad de mapeos de memoria virtual</li>
+<li>Swappiness</li>
+</ul>
+<h3 id="activar-autenticacion-para-mongodb">Activar autenticación para MongoDB</h3>
+<ol>
+<li>Creamos el usuario a través de la consola de MongoDB:
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">use</span> <span class="n">admin</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">db</span><span class="o">.</span><span class="n">createUser</span><span class="p">({</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  <span class="n">user</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  <span class="n">pwd</span><span class="p">:</span> <span class="s2">&quot;password_fuerte&quot;</span><span class="p">,</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  <span class="n">roles</span><span class="p">:</span> <span class="p">[</span> <span class="p">{</span> <span class="n">role</span><span class="p">:</span> <span class="s2">&quot;root&quot;</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span> <span class="p">}</span> <span class="p">]</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">})</span>
+</span></code></pre></div></li>
+<li>Editamos el archivo de configuración <code>/etc/mongod.conf</code> y agregamos:
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">security</span><span class="p">:</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">authorization</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enabled</span>
+</span></code></pre></div></li>
+<li>Reiniciamos el servicio
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>mongod
+</span></code></pre></div></li>
+</ol>
+<h3 id="aumentar-los-mapeos">Aumentar los mapeos</h3>
+<ol>
+<li>Consultamos los mapeos que tenemos actualmente:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>cat<span class="w"> </span>/proc/sys/vm/max_map_count
+</span></code></pre></div></li>
+<li>Cambiamos el valor temporalmente
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>vm.max_map_count<span class="o">=</span><span class="m">1048575</span>
+</span></code></pre></div></li>
+<li>Para hacerlo permanentemente:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;vm.max_map_count=1048575&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/sysctl.conf
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>-p
+</span></code></pre></div></li>
+</ol>
+<h3 id="swappiness">Swappiness</h3>
+<ol>
+<li>Consultamos el valor actual:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>cat<span class="w"> </span>/proc/sys/vm/swappiness
+</span></code></pre></div></li>
+<li>Cambiamos el valor temporalmente:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>vm.swappiness<span class="o">=</span><span class="m">1</span>
+</span></code></pre></div></li>
+<li>Para hacerlo temporalmente:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;vm.swappiness=1&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/sysctl.conf
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>-p
+</span></code></pre></div></li>
+</ol>
+<h3 id="operaciones-basicas">Operaciones básicas</h3>
+<p>Conectamos desde la consola con un usuario:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>mongosh<span class="w"> </span>-u<span class="w"> </span>admin<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;PasswordSegura&#39;</span><span class="w"> </span>--authenticationDatabase<span class="w"> </span>admin
+</span></code></pre></div></p>
+<p>Algunas de las operaciones básicas que podemos realizar son :</p>
+<ul>
+<li>Salir de la consola (<code>quit()</code> o pulsando <code>Ctrl+C</code>)</li>
+<li>Limpiar la consola (<code>Ctrl+L</code>)</li>
+<li>Listar las bases de datos (<code>show dbs</code>)</li>
+<li>Cambiarse de base de datos (<code>use &lt;dbname&gt;</code>)</li>
+<li>Listar las colecciones de una base de datos (<code>show collections</code> / <code>show tables</code>)</li>
+<li>Mostrar el nombre de la base de datos (<code>db.getName()</code> o <code>db</code>)</li>
+<li>Listar metadata sobre una base de datos (<code>db.stats()</code>)</li>
+<li>Solicitar ayuda sobre comandos (<code>db.help()</code>)</li>
+<li>Mostrar fecha y hora del sistema (<code>Date()</code>)</li>
+<li>Dar formato JSON (<code>db.&lt;collectionName&gt;.find().pretty()</code>)</li>
+<li>Mostrar información sobre el servidor (<code>db.hostInfo()</code>)</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p><strong>db.hostInfo</strong>: Este es un <em>atributo</em> que hace referencia a la información del sistema, pero no ejecuta la función. Al usarlo de esta manera, no se obtienen datos directamente; simplemente se esta accediendo a una propiedad.</p>
+<p><strong>db.hostInfo()</strong>: Este es un <em>método</em> que, al ser llamado con paréntesis, ejecuta la función y devuelve un documento con información detallada sobre el sistema subyacente en el que se está ejecutando el servidor MongoDB. En este caso se incluyen datos como el nombre del host, la arquitectura de la CPU, la memoria disponible, entre <a href="https://www.mongodb.com/docs/manual/reference/method/db.hostInfo/">otros</a></p>
+</div>
+<h2 id="creacion-y-gestion-de-bases-de-datos">Creación y gestión de Bases de Datos</h2>
+<h3 id="creacion-use">Creación: <code>use</code></h3>
+<p>El comando para crear una base de datos es el mismo que visto anteriormente para cambiar de base de datos: <code>use</code></p>
+<p>Así pues si intentamos entrar/acceder en una base de datos que no existe, hasta que no se inserte al menos un documento en una de sus colecciones, no estará disponible. Esto lo podemos hacer en el siguiente ejemplo:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">use</span> <span class="n">prueba</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">show</span> <span class="n">dbs</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">db</span><span class="o">.</span><span class="n">primeraColeccion</span><span class="o">.</span><span class="n">insertOne</span><span class="p">({</span> <span class="nb">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nombre</span><span class="p">:</span> <span class="s1">&#39;Alberto&#39;</span><span class="p">})</span>
+</span></code></pre></div>
+<figure>
+    <img alt="&quot;mongosh&quot;" src="../images/MongoDBInst13.png" width="80%" />
+</figure>
+<p>Todo esto es debido a que <em>MongoDB</em> planifica la existencia de una base de datos, pero hasta que no tenga su primer dato, no va a designar ningún tipo de recursos a la misma. En la captura anterior, se ve que ya le ha asignado 8 KiB a nuestra primera base de datos porque ya tiene algún dato.</p>
+<p>Por otra parte, para la creación de una colección e inclusión de un documento en concreto, observar que simplemente al insertar el documento, si la colección no existe, la crea directamente, de la misma forma que ha hecho con la base de datos.</p>
+<p>Más adelante ya veremos con más detenimiento las diferentes forma de insertar registro en un tabla (colección), de momento hemos usando el comando:
+<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">db</span><span class="o">.</span><span class="n">primeraColeccion</span><span class="o">.</span><span class="n">insertOne</span><span class="p">({</span> <span class="nb">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nombre</span><span class="p">:</span> <span class="s1">&#39;Alberto&#39;</span><span class="p">})</span>
+</span></code></pre></div></p>
+<h3 id="eliminacion-dbdropdatabase">Eliminación: <code>db.dropDatabase()</code></h3>
+<p>Para eliminar una base de datos, en primer lugar debemos estar ubicados dentro de la propia base de datos a eliminar y ahí ejecutamos el comando:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">db</span><span class="o">.</span><span class="n">dropDatabase</span><span class="p">()</span>
+</span></code></pre></div>
+<p>Podemos hacer uso de los comandos use y db para pasar ubicarnos en una base de datos y comprobar que efectivamente lo estamos, aunque en el prompt de la propia shell de MongoDB directamente ya nos dice que estamos ahí:</p>
+<figure>
+    <img alt="&quot;mongosh&quot;" src="../images/MongoDBBasics01.png" width="70%" />
+</figure>
+<h3 id="mongodb-database-tools">MongoDB Database Tools</h3>
+<p>Además del propio servidor de MongoDB y el cliente para conectarse a él, MongoDB ofrece un conjunto de herramientas para interactuar con las bases de datos, permitiendo crear y restaurar copias de seguridad.</p>
+<p>Si estamos interesados en introducir o exportar una colección de datos mediante JSON, podemos emplear los comandos <code>mongoimport</code> y <code>mongoexport</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>mongoimport<span class="w"> </span>-d<span class="w"> </span>nombreBaseDatos<span class="w"> </span>-c<span class="w"> </span>coleccion<span class="w"> </span>–-file<span class="w"> </span>nombreFichero.json
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>mongoexport<span class="w"> </span>-d<span class="w"> </span>nombreBaseDatos<span class="w"> </span>-c<span class="w"> </span>coleccion<span class="w"> </span>nombreFichero.json
+</span></code></pre></div>
+<p>Estas herramientas interactúan con datos JSON y no sobre toda la base de datos.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Estos comandos se ejecutan desde la shell donde tenemos instalados MongoDB, no desde la propia shell de MongoDB</p>
+</div>
+<p>Un caso particular y muy común es importar datos que se encuentran en formato CSV/TSV. Para ello, emplearemos el parámetro <code>--type csv</code>. Por ejemplo, podemos descargar el fichero <a href="../files/personas.csv">personas.csv</a> e importarlo en la bd test:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>mongoimport<span class="w"> </span>--username<span class="w"> </span>admin<span class="w"> </span>--password<span class="w"> </span><span class="s2">&quot;simarro2025.&quot;</span><span class="w"> </span>--authenticationDatabase<span class="w"> </span>admin<span class="w"> </span>--type<span class="w"> </span>csv<span class="w"> </span>--db<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--collection<span class="w"> </span>personas<span class="w"> </span>--headerline<span class="w"> </span>--file<span class="w"> </span>personas.csv
+</span></code></pre></div>
+<p>Donde
+- <code>--type</code> : indica el tipo de fichero; csv o tsv
+- <code>-d</code> o <code>--db</code>: indica la base de datos
+- <code>-c</code> o <code>--collection</code> : indica la colección
+- <code>--headerline</code>: en un csv o tsv indica que la primera línea contiene los nombres de los campos</p>
+<p>Mas información en el <a href="https://www.mongodb.com/docs/database-tools/mongoimport/">Manual de MongoDB: mongoimport</a></p>
+<p>En lugar de realizar un <em>export</em>, es más conveniente realizar un backup en binario mediante <code>mongodump</code>, el cual genera ficheros <em>BSON</em>. Estos archivos posteriormente se restauran mediante <code>mongorestore</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>mongodump<span class="w"> </span>-d<span class="w"> </span>nombreBaseDatos<span class="w"> </span>nombreFichero.bson
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>mongorestore<span class="w"> </span>-d<span class="w"> </span>nombreBaseDatos<span class="w"> </span>nombreFichero.bson
+</span></code></pre></div>
+<p>Si necesitamos transformar un fichero <em>BSON</em> a <em>JSON</em> (de binario a texto), tenemos el comando <code>bsondump</code>:</p>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>bsondump<span class="w"> </span>file.bson<span class="w"> </span>&gt;<span class="w"> </span>file.json
+</span></code></pre></div>
+Más información sobre copias de seguridad en la documentación oficial de <a href="https://www.mongodb.com/docs/manual/core/backups/">MongoDB: MongoDB Backup Methods</a>.</p>
+<p>Para poder trabajar con MongoDB desde cualquier aplicación necesitamos un driver. MongoDB ofrece drivers oficiales para casi todos los lenguajes de programación actuales. En una sesión posterior trabajaremos con <code>pyMongo</code>.</p>
+<p>En cuanto a la <strong>monitorización</strong>, tanto <code>mongostat</code> como <code>mongotop</code> permiten visualizar el estado del servidor <em>MongoDB</em>, así como algunas estadísticas sobre su rendimiento. Si trabajamos con MongoAtlas estas herramientas están integradas en las diferentes herramientas de monitorización de la plataforma.</p>
+<h2 id="tipos-de-datos">Tipos de datos</h2>
+<p>Aquí tienes una lista de algunos tipos de datos comunes en MongoDB, junto con ejemplos de cómo se representan en formato de tabla:</p>
+<table>
+<thead>
+<tr>
+<th>Tipo de Datos</th>
+<th>Descripción</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>String</td>
+<td>Cadena de texto</td>
+<td>"Hello World"</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>Número</td>
+<td>42</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>Valor booleano (true/false)</td>
+<td>true</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>Fecha y hora</td>
+<td>ISODate("2024-03-01T12:00:00.000Z")</td>
+</tr>
+<tr>
+<td>Array</td>
+<td>Array de valores</td>
+<td>[1, 2, 3]</td>
+</tr>
+<tr>
+<td>Object</td>
+<td>Objeto o documento anidado</td>
+<td>{"nombre": "Juan", "edad": 30}</td>
+</tr>
+<tr>
+<td>ObjectId</td>
+<td>Identificador único de documento</td>
+<td>ObjectId("61e4c3055b17967d02a9c3d7")</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>Valor nulo</td>
+<td>null</td>
+</tr>
+<tr>
+<td>BinData</td>
+<td>Datos binarios</td>
+<td>BinData(0, "ABC123==")</td>
+</tr>
+<tr>
+<td>Regular Expressions</td>
+<td>Expresiones regulares</td>
+<td>/pattern/g</td>
+</tr>
+</tbody>
+</table>
+<p>Recuerda que <em>MongoDB</em> es una base de datos NoSQL orientada a documentos, por lo que no tiene una estructura de tabla como las bases de datos relacionales. En MongoDB, los datos se almacenan en documentos <em>BSON</em> (Binary <em>JSON</em>), que pueden contener campos con diferentes tipos de datos, incluidos los mencionados anteriormente.</p>
+<p>Es importante destacar que en <em>MongoDB</em>, los datos binarios y las expresiones regulares se representan de manera especial. Los datos binarios se representan mediante el tipo <code>BinData</code>, que incluye un tipo y una cadena de datos codificados en <code>base64</code>.</p>
+<p>Las expresiones regulares se representan utilizando el formato <code>/pattern/flags</code>, donde <code>pattern</code> es el patrón de la expresión regular y <code>flags</code> son los modificadores de la expresión regular, como <code>i</code> para ignorar mayúsculas y minúsculas o <code>g</code> para realizar una búsqueda global.</p>
+<div class="admonition tip">
+<p class="admonition-title">El formato <code>/pattern/flags</code></p>
+<p>se utiliza comúnmente en expresiones regulares (regex) en varios lenguajes de programación, incluyendo JavaScript y MongoDB. Aquí te explico cada parte:</p>
+<p><code>/pattern/</code>: Esta parte define el patrón que deseas buscar. El patrón puede incluir caracteres literales, metacaracteres y secuencias de escape. Por ejemplo, /abc/ buscaría la secuencia “abc”.</p>
+<p><code>flags</code>: Los flags son modificadores que alteran el comportamiento de la búsqueda. Algunos de los flags más comunes son:</p>
+<ul>
+<li><code>i</code>: Ignora mayúsculas y minúsculas (case insensitive).        </li>
+<li><code>g</code>: Realiza una búsqueda global, es decir, encuentra todas las coincidencias en lugar de detenerse en la primera.</li>
+<li><code>m</code>: Permite que el carácter ^ y $ coincidan con el inicio y el final de cada línea, no solo del texto completo.</li>
+</ul>
+<p>Ejemplo:</p>
+<ul>
+<li>Si quisieras buscar la palabra <code>“hola”</code> sin importar si está en mayúsculas o minúsculas en un texto, usarías <code>/hola/i</code>.</li>
+</ul>
+<p>Mas info en <a href="https://www.mongodb.com/docs/manual/reference/operator/query/regex/">MongoDb docs $regex</a></p>
+</div>
+<p>Aquí tienes un ejemplo de cómo se podría representar un documento en <em>MongoDB</em> utilizando algunos de estos tipos de datos:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="p">{</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>  <span class="s2">&quot;_id&quot;</span><span class="p">:</span> <span class="n">ObjectId</span><span class="p">(</span><span class="s2">&quot;61e4c3055b17967d02a9c3d7&quot;</span><span class="p">),</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>  <span class="s2">&quot;nombre&quot;</span><span class="p">:</span> <span class="s2">&quot;Juan&quot;</span><span class="p">,</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>  <span class="s2">&quot;edad&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>  <span class="s2">&quot;activo&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>  <span class="s2">&quot;intereses&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;programación&quot;</span><span class="p">,</span> <span class="s2">&quot;música&quot;</span><span class="p">,</span> <span class="s2">&quot;viajes&quot;</span><span class="p">],</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>  <span class="s2">&quot;ubicacion&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>    <span class="s2">&quot;ciudad&quot;</span><span class="p">:</span> <span class="s2">&quot;Barcelona&quot;</span><span class="p">,</span>
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>    <span class="s2">&quot;pais&quot;</span><span class="p">:</span> <span class="s2">&quot;España&quot;</span>
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>  <span class="p">},</span>
+</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>  <span class="s2">&quot;fechaRegistro&quot;</span><span class="p">:</span> <span class="n">ISODate</span><span class="p">(</span><span class="s2">&quot;2025-03-01T12:00:00.000Z&quot;</span><span class="p">),</span>
+</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>  <span class="s2">&quot;comentarios&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>    <span class="p">{</span>
+</span><span id="__span-18-14"><a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>      <span class="s2">&quot;usuario&quot;</span><span class="p">:</span> <span class="s2">&quot;Ana&quot;</span><span class="p">,</span>
+</span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>      <span class="s2">&quot;texto&quot;</span><span class="p">:</span> <span class="s2">&quot;¡Hola Juan!&quot;</span>
+</span><span id="__span-18-16"><a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a>    <span class="p">},</span>
+</span><span id="__span-18-17"><a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a>    <span class="p">{</span>
+</span><span id="__span-18-18"><a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>      <span class="s2">&quot;usuario&quot;</span><span class="p">:</span> <span class="s2">&quot;Carlos&quot;</span><span class="p">,</span>
+</span><span id="__span-18-19"><a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a>      <span class="s2">&quot;texto&quot;</span><span class="p">:</span> <span class="s2">&quot;Saludos desde Xàtiva.&quot;</span>
+</span><span id="__span-18-20"><a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a>    <span class="p">}</span>
+</span><span id="__span-18-21"><a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a>  <span class="p">]</span>
+</span><span id="__span-18-22"><a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a><span class="p">}</span>
+</span></code></pre></div>
+<figure>
+    <img alt="&quot;Tipos de datos en MongoDB&quot;" src="../images/MongoDBBasics02.png" width="100%" />
+    <figcaption>Tipos de datos en MongoDB</figcaption>
+</figure>
+<p>En este ejemplo, que ya hemos visto previamente para ilustrar qué es un <em>BSON</em>, el documento representa un usuario con campos como nombre, edad, activo, intereses, ubicación, fecha de registro y comentarios. Cada campo tiene un tipo de datos diferente, como string, number, boolean, array, object, date, etc.</p>
+<p>Más información sobre tipos de datos en <a href="https://www.tutorialspoint.com/mongodb/mongodb_datatype.htm">MongoDB - Datatypes</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.50899def.min.js"></script>
+      
+    
+  </body>
+</html>
