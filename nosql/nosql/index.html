@@ -1,0 +1,1238 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://alapvi.github.io/nosql/nosql/">
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../moddatos/">
+      
+      
+      <link rel="icon" href="../../images/logo_peq.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>NoSQL - Sistemas de BigData</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#almacenamiento-de-datos-nosql" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Sistemas de BigData" class="md-header__button md-logo" aria-label="Sistemas de BigData" data-md-component="logo">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sistemas de BigData
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              NoSQL
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sistemas de BigData" class="md-nav__button md-logo" aria-label="Sistemas de BigData" data-md-component="logo">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    Sistemas de BigData
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introducción
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Almacenamiento de datos. NoSQL
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Almacenamiento de datos. NoSQL
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    NoSQL
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    NoSQL
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#almacenamiento-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Almacenamiento de datos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#no-solo-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      No Solo SQL
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="No Solo SQL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definicion-nosql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definición NoSQL
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caracteristicas-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      Características principales
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esquemas-dinamicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Esquemas dinámicos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#particionado-sharding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Particionado (Sharding)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Particionado (Sharding)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#autosharding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Auto‑sharding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuando-particionar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuándo particionar
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#replicacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Replicación
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Replicación">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#maestro-esclavo-primario-secundario" class="md-nav__link">
+    <span class="md-ellipsis">
+      Maestro-esclavo / Primario-secundario
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#par-a-par-peer-to-peer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Par-a-par (peer-to-peer)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implantando-nosql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implantando NoSQL
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implantando NoSQL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#casos-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      Casos de uso
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limitaciones
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actividades-propuestas" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 Actividades propuestas
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moddatos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Modelos de datos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../consistencia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Consistencia
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    MongoDB
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            MongoDB
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/intromongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introducción a MongoDB
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/mongodb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MongoDB
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/modelado/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Diseño de modelado de BD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/instalacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Instalación
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/basicsmongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Primeros pasos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/mongodbcrud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Operaciones con datos CRUD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/mongodbdatos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Consulta de datos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#almacenamiento-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Almacenamiento de datos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#no-solo-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      No Solo SQL
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="No Solo SQL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definicion-nosql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definición NoSQL
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caracteristicas-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      Características principales
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esquemas-dinamicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Esquemas dinámicos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#particionado-sharding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Particionado (Sharding)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Particionado (Sharding)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#autosharding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Auto‑sharding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuando-particionar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuándo particionar
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#replicacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Replicación
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Replicación">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#maestro-esclavo-primario-secundario" class="md-nav__link">
+    <span class="md-ellipsis">
+      Maestro-esclavo / Primario-secundario
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#par-a-par-peer-to-peer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Par-a-par (peer-to-peer)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implantando-nosql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implantando NoSQL
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implantando NoSQL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#casos-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      Casos de uso
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limitaciones
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actividades-propuestas" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 Actividades propuestas
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="almacenamiento-de-datos-nosql">Almacenamiento de datos. NoSQL</h1>
+<h2 id="almacenamiento-de-datos">Almacenamiento de datos</h2>
+<p>Se puede decir que estamos en la <a href="https://en.wikipedia.org/wiki/Third_platform">tercera plataforma</a> del almacenamiento de datos. La primera llegó con los primeros computadores y se materializó en las bases de datos jerárquicas y en red, así como en el almacenamiento ISAM. La segunda vino de la mano de Internet y las arquitecturas cliente-servidor, lo que dio lugar a las bases de datos relacionales.</p>
+<p>La tercera se ve motivada por el Big Data, los dispositivos móviles, las arquitecturas cloud, las redes de IoT y las tecnologías/redes sociales. Es tal el volumen de datos que se genera que aparecen nuevos paradigmas como NoSQL, NewSQL y las plataformas de Big Data. En esta sesión nos vamos a centrar en NoSQL.</p>
+<p>NoSQL aparece como una necesidad debida al creciente volumen de datos sobre usuarios, objetos y productos que las empresas tienen que almacenar, así como la frecuencia con la que se accede a los datos. Los SGDB relacionales existentes no fueron diseñados teniendo en cuenta la escalabilidad ni la flexibilidad necesaria por las frecuentes modificaciones que necesitan las aplicaciones modernas; tampoco aprovechan que el almacenamiento a día de hoy es muy barato, ni el nivel de procesamiento que alcanzan las máquinas actuales.</p>
+<div style="text-align: center;">
+  <img src="../images/nosql.png" alt="Motivación NoSQL" width="100%"/>
+</div>
+
+<p>La solución es el <strong>despliegue de las aplicaciones y sus datos en clústeres de servidores, distribuyendo el procesamiento en múltiples máquinas.</strong></p>
+<h2 id="no-solo-sql">No Solo SQL</h2>
+<h3 id="definicion-nosql">Definición NoSQL</h3>
+<p>Si definimos <strong>NoSQL</strong> formalmente, podemos decir que se trata de un <strong>conjunto de tecnologías</strong> que permiten el procesamiento rápido y eficiente de conjuntos de datos dando la mayor importancia al rendimiento, la fiabilidad y la agilidad.</p>
+<p>Si nos basamos en el acrónimo, el término da la sensación que se refiere a cualquier almacén de datos que no sigue un modelo relacional, los datos no son relacionales y por tanto no utilizan SQL como lenguaje de consulta. Realmente implica que el <strong>No</strong> hace referencia a <strong>not only</strong>, es decir, <em>que los sistemas NoSQL se centran en sistemas complementarios a los SGBD relacionales</em>, que fijan sus <strong>prioridades en la escalabilidad y la disponibilidad en contra de la atomicidad y consistencia de los datos.</strong></p>
+<p>Es decir, más que sustitutos de los sistemas relacionales, las soluciones NoSQL se plantean como alternativas y complementarias a los sistemas gestores de bases de datos relacionales.</p>
+<div class="admonition info">
+<p class="admonition-title">ACID</p>
+<p>Las bases de datos relacionales cumplen las características ACID para ofrecer transaccionalidad sobre los datos:</p>
+<ul>
+<li><strong>A</strong>tomicidad: las transacciones implican que se realizan todas las operaciones o no se realiza ninguna.</li>
+<li><strong>C</strong>onsistencia: la base de datos asegura que los datos pasan de un estado válido o otro también.</li>
+<li><strong>I</strong>solation (Aislamiento): Una transacción no afecta a otras transacciones, de manera que la modificación de un registro / documento no es visible por otras lecturas hasta que ha finalizado la transacción. Esto implica que ninguna transacción obtiene una versión intermedia de los datos.</li>
+<li><strong>D</strong>urabilidad: La escritura de los datos asegura que una vez finalizada una operación, los datos no se perderán.</li>
+</ul>
+</div>
+
+<p>Los diferentes tipos de bases de datos NoSQL existentes se pueden agrupar en cuatro categorías:</p>
+<ul>
+<li>
+<p><strong>Clave-Valor</strong>: Los almacenes clave-valor son las bases de datos NoSQL más simples. Cada elemento de la base de datos se almacena con un nombre de atributo (o clave) junto a su valor, a modo de diccionario. Los almacenes más conocidos son <a href="https://redis.io">Redis</a>, <a href="https://riak.com">Riak</a> y <a href="https://aws.amazon.com/es/dynamodb/">AWS DynamoDB</a>. Algunos almacenes, como es el caso de Redis, permiten que cada valor tenga un tipo (por ejemplo, integer) lo cual añade funcionalidad extra.</p>
+</li>
+<li>
+<p><strong>Documentales</strong>: Cada clave se asocia a una estructura compleja que se conoce como documento. Este puede contener diferentes pares clave-valor, o pares de clave-array o incluso documentos anidados, como en un documento JSON. Los ejemplos más conocidos son <a href="https://www.mongodb.com/">MongoDB</a>, <a href="https://couchdb.apache.org/">CouchDB</a> o <a href="https://www.elastic.co/es/">Elastic Search</a>.</p>
+</li>
+<li>
+<p><strong>Grafos</strong>: Los almacenes de grafos se usan para almacenar información sobre redes, como pueden ser conexiones sociales. Los ejemplos más conocidos son <a href="https://neo4j.com/">Neo4j</a>, <a href="https://aws.amazon.com/es/neptune/">Amazon Neptune</a> y <a href="https://arangodb.com/">ArangoDB</a>.</p>
+</li>
+<li>
+<p><strong>Basados en columnas</strong>: Los almacenes basados en columnas como <a href="https://hypertable.com/">Hypertabla de Google</a>, <a href="https://cassandra.apache.org/_/index.html">Apache Cassandra</a> y <a href="https://hbase.apache.org/">Apache HBase</a> están optimizados para consultas sobre grandes conjuntos de datos, y almacenan los datos como columnas en vez de como filas.</p>
+</li>
+</ul>
+<div style="text-align: center;">
+  <img src="../images/01nosql-databases.jpg" alt="Categorías NoSQL" width="50%"/>
+</div>
+
+<h2 id="caracteristicas-principales">Características principales</h2>
+<p>Si nos centramos en sus beneficios y los comparamos con las base de datos relacionales, las bases de datos NoSQL son más escalables, ofrecen un rendimiento mayor y sus modelos de datos resuelven varios problemas que no se plantearon al definir el modelo relacional:</p>
+<ul>
+<li><strong>Grandes volúmenes de datos estructurados, semi-estructurados y sin estructurar</strong>. Casi todas las implementaciones NoSQL ofrecen algún tipo de representación para datos sin esquema, lo que permite comenzar con una estructura y con el paso del tiempo, añadir nuevos campos, ya sean sencillos o anidados a datos ya existentes.</li>
+<li><strong>Sprints ágiles</strong>, iteraciones rápidas y frecuentes commits/pushes de código, al emplear una sintaxis sencilla para la realización de consultas y la posibilidad de tener un modelo que vaya creciendo al mismo ritmo que el desarrollo.</li>
+<li><strong>Arquitectura eficiente y escalable diseñada para trabajar con clusters</strong> en vez de una arquitectura monolítica y costosa. Las soluciones NoSQL soportan la escalabilidad de un modo transparente para el desarrollador y ofrecen una solución cloud.</li>
+</ul>
+<p>Una característica adicional que comparten los sistemas NoSQL es que ofrecen un mecanismo de caché de datos integrado (en los sistemas relacionales se pueden configurar de manera externa), pudiendo configurar los sistemas para que los datos se mantengan en memoria y se persistan de manera periódica. El uso de una caché conlleva que la consistencia de los datos no sea completa y podamos tener una consistencia eventual.</p>
+<h2 id="esquemas-dinamicos">Esquemas dinámicos</h2>
+<p><strong>Las bases de datos relacionales requieren definir los esquemas antes de añadir los datos</strong>. Una base de datos SQL necesita saber de antemano los datos que vamos a almacenar; por ejemplo, si nos centramos en los datos de un cliente, serían el nombre, apellidos, número de teléfono, etc…​</p>
+<p><strong>Esto casa bastante mal con los enfoques de desarrollo ágil</strong>, ya que cada vez que añadimos nuevas funcionalidades, el esquema de la base de datos suele cambiar. De modo que si a mitad de desarrollo decidimos almacenar los productos favoritos de un cliente del cual guardábamos su dirección y números de teléfono, tendríamos que añadir una nueva columna a la base de datos y migrar la base de datos entera a un nuevo esquema.</p>
+<p><strong>Si la base de datos es grande, conlleva un proceso lento que implica parar el sistema durante un tiempo considerable</strong>. Si frecuentemente cambiamos los datos que la aplicación almacena (al usar un desarrollo iterativo), también tendremos períodos frecuentes de inactividad del sistema, a no ser que utilicemos un despliegue azul/verde y tengamos redundancia de nuestro sistema de almacenamiento. Así pues, no hay un modo efectivo mediante una base de datos relacional de almacenar los datos que están desestructurados o que no se conocen de antemano.</p>
+<p><strong>Las bases de datos NoSQL se construyen para permitir la inserción de datos sin un esquema predefinido</strong>. Esto facilita la modificación de la aplicación en tiempo real, sin preocuparse por interrupciones de servicio. Aunque no tengamos un esquema al guardar la información, sí que podemos definir esquemas de lectura (schema-on-read) para comprobar que la información almacenada tiene el formato que espera cargar cada aplicación.</p>
+<p>De este modo se consigue un desarrollo más rápido, integración de código más robusto y menos tiempo empleado en la administración de la base de datos.</p>
+<p>Aunque lo veremos en profundidad en las siguientes sesiones, los modelos de datos NoSQL priman la redundancia de los datos, denormalizando los datos para evitar el uso de joins. Por ello, es importante que la definición de los esquemas sea flexible para poder añadir campos conforme la aplicación evolucione.</p>
+<h2 id="particionado-sharding">Particionado (Sharding)</h2>
+<p>Dado el modo en el que se estructuran <em>las bases de datos relacionales, normalmente escalan verticalmente</em>, un único servidor cada vez más potente (más RAM, mejor CPU y almacenamiento), que almacena toda la base de datos para asegurar la disponibilidad continua de los datos. Esto se traduce en costes que se incrementan rápidamente, con un límites definidos por el propio hardware, y en un pequeño número de puntos críticos de fallo dentro de la infraestructura de datos.</p>
+<p>La solución es escalar horizontalmente, añadiendo nuevos servidores en vez de concentrarse en incrementar la capacidad de un único servidor, lo que permite tratar con conjuntos de datos más grandes de lo que sería capaz cualquier máquina por sí sola. Este escalado horizontal se conoce como Sharding o Particionado.</p>
+<p>El particionado no es único de las bases de datos NoSQL. Las bases de datos relacionales también lo soportan. Si en un sistema relacional queremos particionar los datos, podemos distinguir entre particionado:</p>
+<ul>
+<li>Horizontal: diferentes filas en diferentes particiones.</li>
+<li>Vertical: diferentes columnas en particiones distintas.</li>
+</ul>
+<figure style="align: center;">
+    <img src="../images/01sharding01.png" alt="Particionado de datos" width="100%">
+    <figcaption>Particionado de datos - digitalocean.com</figcaption>
+</figure>
+
+<p>En el caso de las bases de datos NoSQL, el particionado depende del modelo de la base de datos:</p>
+<ul>
+<li>Los almacenes clave-valor y las bases de datos documentales normalmente se particionan horizontalmente.</li>
+<li>Las bases de datos basados en columnas se pueden particionar horizontal o verticalmente.
+Escalar horizontalmente una base de datos relacional entre muchas instancias de servidores se puede conseguir pero normalmente conlleva el uso de SANs (Storage Area Networks) y otras triquiñuelas para hacer que el hardware actúe como un único servidor.</li>
+</ul>
+<p>Como los sistemas SQL no ofrecen esta prestación de forma nativa, los equipos de desarrollo se las tienen que ingeniar para conseguir desplegar múltiples bases de datos relacionales en varias máquinas. Para ello:</p>
+<ul>
+<li>Los datos se almacenan en cada instancia de base de datos de manera autónoma</li>
+<li>El código de aplicación se desarrolla para distribuir los datos y las consultas y agregar los resultados de los datos a través de todas las instancias de bases de datos</li>
+<li>Se debe desarrollar código adicional para gestionar los fallos sobre los recursos, para realizar joins entre diferentes bases de datos, balancear los datos y/o replicarlos, etc…​
+Además, muchos beneficios de las bases de datos como la integridad transaccional se ven comprometidos o incluso eliminados al emplear un escalado horizontal.</li>
+</ul>
+<h3 id="autosharding">Auto‑sharding</h3>
+<p>Por contra, las bases de datos NoSQL normalmente soportan auto-sharding, lo que implica que de manera nativa y automáticamente se dividen los datos entre un número arbitrario de servidores, sin que la aplicación sea consciente de la composición del pool de servidores. Los datos y las consultas se balancean entre los servidores.</p>
+<p>El particionado se realiza mediante un método consistente, como puede ser:</p>
+<ul>
+<li>Por <strong>rangos</strong> de su id: por ejemplo "los usuarios del 1 al millón están en la partición 1" o "los usuarios cuyo nombre va de la A a la L" en una partición, en otra de la M a la Q, y de la R a la Z en la tercera.</li>
+</ul>
+<figure style="align: center;">
+    <img src="../images/01sharding03range.png" alt="Particionado por rango" width="100%">
+    <figcaption>Particionado por rango - digitalocean.com</figcaption>
+</figure>
+
+<ul>
+<li>Por <strong>listas</strong>: dividiendo los datos por la categoría del dato, es decir, en el caso de datos sobre libros, las novelas en una partición, las recetas de cocina en otra, etc..</li>
+<li>Mediante una función <strong>hash</strong>, la cual devuelve un valor para un elemento que determine a qué partición pertenece.</li>
+</ul>
+<figure style="align: center;">
+    <img src="../images/01sharding02hash.png" alt="Particionado por hash" width="100%">
+    <figcaption>Particionado por hash - digitalocean.com</figcaption>
+</figure>
+
+<h3 id="cuando-particionar">Cuándo particionar</h3>
+<p>El motivo para particionar los datos se debe a:</p>
+<ul>
+<li><strong>limitaciones de almacenamiento</strong>: los datos no caben en un único servidor, tanto a nivel de disco como de memoria RAM.</li>
+<li><strong>rendimiento</strong>: al balancear la carga entre particiones las escrituras serán más rápidas que al centrarlas en un único servidor.</li>
+<li><strong>disponibilidad</strong>: si un servidor esta ocupado, otro servidor puede devolver los datos. La carga de los servidores se reduce.</li>
+</ul>
+<blockquote>
+<p>No particionaremos los datos cuando la cantidad sea pequeña, ya que el hecho de distribuir los datos conlleva unos costes que pueden no compensar con un volumen de datos insuficiente. Tampoco esperaremos a particionar cuando tengamos muchísimos datos, ya que el proceso de particionado puede provocar sobrecarga del sistema.</p>
+</blockquote>
+<p>La nube facilita de manera considerable este escalado, mediante proveedores como AWS o Azure los cuales ofrecen virtualmente una capacidad ilimitada bajo demanda, y despreocupándose de todas las tareas necesarias para la administración de la base de datos.</p>
+<p>Los desarrolladores ya no necesitamos construir plataformas complejas para nuestras aplicaciones, de modo que nos podemos centrar en escribir código de aplicación. Una granja de servidores con <em>commodity hardware</em> puede ofrecer el mismo procesamiento y capacidad de almacenamiento que un único servidor de alto rendimiento por mucho menos coste.</p>
+<h2 id="replicacion">Replicación</h2>
+<p>La replicación mantiene copias idénticas de los datos en múltiples servidores, lo que facilita que las aplicaciones siempre funcionen y los datos se mantengan seguros, incluso si alguno de los servidores sufre algún problema.</p>
+<p>La mayoría de las bases de datos NoSQL también soportan la replicación automática, lo que implica una alta disponibilidad y recuperación frente a desastres sin la necesidad de aplicaciones de terceros encargadas de ello. Desde el punto de vista del desarrollador, el entorno de almacenamiento es virtual y ajeno al código de aplicación.</p>
+<p>Existen dos formas de realizar la replicación:</p>
+<h3 id="maestro-esclavo-primario-secundario">Maestro-esclavo / Primario-secundario</h3>
+<p>Todas las escrituras se realizan en el nodo principal y después se replican a los nodos secundarios. El nodo primario es un SPOF (<em>single point of failure</em>).</p>
+<figure style="align: center;">
+    <img src="../images/01replication-master-slave.jpg" alt="Replicación Primario-secundario" width="100%">
+    <figcaption>Replicación Primario-secundario</figcaption>
+</figure>
+
+<h3 id="par-a-par-peer-to-peer">Par-a-par (peer-to-peer)</h3>
+<p>Todos los nodos tienen el mismo nivel jerárquico, de manera que todos admiten escrituras. Al poder haber escrituras simultáneas sobre el mismo datos en diferentes nodos, pueden darse inconsistencia en los datos.</p>
+<figure style="align: center;">
+    <img src="../images/01replication-peer-to-peer.png" alt="Replicación par-a-par" width="100%">
+    <figcaption>Replicación Par-a-par</figcaption>
+</figure>
+
+<p>La replicación de los datos se utiliza para alcanzar:</p>
+<ul>
+<li><strong>escalabilidad</strong>, incrementando el rendimiento al poder distribuir las consultas en diferentes nodos, y mejorar la redundancia al permitir que cada nodo tenga una copia de los datos.</li>
+<li><strong>disponibilidad</strong>, ofreciendo tolerancia a fallos de hardware o corrupción de la base de datos. Al replicar los datos vamos a poder tener una copia de la base de datos, dar soporte a un servidor de datos agregados, o tener nodos a modo de copias de seguridad que pueden tomar el control en caso de fallo.</li>
+<li><strong>aislamiento (la i en ACID - isolation)</strong>, entendido como la propiedad que define cuando y cómo al realizar cambios en un nodo se propagan al resto de nodos. Si replicamos los datos podemos crear copias sincronizadas para separar procesos de la base de datos de producción, pudiendo ejecutar informes, analítica de datos o copias de seguridad en nodos secundarios de modo que no tenga un impacto negativo en el nodo principal, así como ofrecer un sistema sencillo para separar el entorno de producción del de preproducción.</li>
+</ul>
+<div class="admonition caution">
+<p class="admonition-title">Replicación vs particionado</p>
+<p align="justify">No hay que confundir la replicación (copia de los datos en varias máquinas) con el particionado (cada máquina tiene un subconjunto de los datos). El entorno más seguro y con mejor rendimiento es aquel que tiene los datos particionados y replicados (cada máquina que tiene un subconjunto de los datos está replicada en 2 o más).</p>
+<figure style="align: center;">
+    <img src="../images/01sharding-replication.png" alt="Replicación y particionado" width="500px">
+    <figcaption>Replicación y particionado - codingexplained.com</figcaption>
+</figure><p></p>
+</div>
+
+<h2 id="implantando-nosql">Implantando NoSQL</h2>
+<p>Normalmente, las empresas empezarán con una prueba de baja escalabilidad de una base de datos NoSQL, de modo que les permita comprender la tecnología asumiendo muy poco riesgo. La mayoría de las bases de datos NoSQL también son open-source, y por tanto se pueden probar sin ningún coste extra. Al tener unos ciclos de desarrollo más rápidos, las empresas pueden innovar con mayor velocidad y mejorar la experiencia de sus cliente a un menor coste.</p>
+<div class="admonition question">
+<p class="admonition-title">Consideraciones</p>
+<ul>
+<li align="justify">¿Cuál es el crecimiento previsto de nuestra aplicación en un futuro próximo, por ejemplo, el número de usuarios, y cómo crecerá en 3 meses, 6 meses o un año?</li>
+<li align="justify">Para soportar el crecimiento de la base de usuarios, ¿qué funciones de nuestra aplicación requerirán más almacenamiento de datos y pueden escalarse?</li>
+<li align="justify">¿Cómo podemos distribuir lógica y físicamente nuestros datos? Por ejemplo, si nuestra aplicación requiere soporte geográfico para dar servicio a varias ciudades, ¿podemos distribuir o separar algunos datos en función de las ciudades?</li>
+<li align="justify">¿Qué impacto tendría en la empresa una caída de la base de datos? Es decir ¿Cómo de importante es la alta disponibilidad de nuestra base de datos?</li>
+<li align="justify">¿Cuál es el ratio entre las operaciones de lectura frente a las de escritura? ¿Cuál es su pico en horas punta? ¿Qué <em>payload</em> se espera por operación? ¿Cuánta CPU se necesita por operación?</li>
+<li align="justify">¿La aplicación requiere un modelo de datos fijo o flexible, el cual permita cambios en el futuro? Y si necesita cambiar el esquema de los modelos de datos existentes, ¿cuál será el impacto en términos de parada de mantenimiento, migraciones necesarias, etc...?</li>
+<li align="justify">¿Podemos reducir el tráfico de nuestra aplicación hacia las bases de datos y mejorar el rendimiento?.</li>
+</ul>
+</div>
+
+<p>Planteadas estas preguntas, claramente elegir la base de datos correcta para nuestros proyectos es un tema importante. Se deben considerar las diferentes alternativas a las infraestructuras legacy teniendo en cuenta varios factores:</p>
+<ul>
+<li>La escalabilidad o el rendimiento más allá de las capacidades del sistema existente.</li>
+<li>Identificar alternativas viables respecto al software propietario.</li>
+<li>Incrementar la velocidad y agilidad del proceso de desarrollo.</li>
+</ul>
+<p>Así pues, al elegir un base de datos hemos de tener en cuenta las siguientes dimensiones:</p>
+<ul>
+<li><strong>Modelo de datos</strong>: A elegir entre un modelo documental, basado en columnas, de grafos o mediante clave-valor.</li>
+<li><strong>Modelo de consultas</strong>: Dependiendo de la aplicación, puede ser aceptable un modelo de consultas que sólo accede a los registros por su clave primaria. En cambio, otras aplicaciones pueden necesitar consultar por diferentes valores de cada registro. Además, si la aplicación necesita modificar los registros, la base de datos necesita consultar los datos por un índice secundario.</li>
+<li><strong>Modelo de consistencia</strong>: Los sistemas NoSQL normalmente mantienen múltiples copias de los datos para ofrecer disponibilidad y escalabilidad al sistema, lo que define la consistencia del mismo. Los sistemas NoSQL tienden a ser consistentes o eventualmente consistentes.</li>
+<li><strong>APIs</strong>: No existe un estándar para interactuar con los sistemas NoSQL. Cada sistema presenta diferentes diseños y capacidades para los equipos de desarrollo. La madurez de un API puede suponer una inversión en tiempo y dinero a la hora de desarrollar y mantener el sistema NoSQL.</li>
+<li><strong>Soporte comercial y de la comunidad</strong>: Los usuarios deben considerar la salud de la compañía o de los proyectos al evaluar una base de datos. El producto debe evolucionar y mantenerse para introducir nuevas prestaciones y corregir fallos. Una base de datos con una comunidad fuerte de usuarios:<ul>
+<li>Permite encontrar y contratar desarrolladores con destrezas en el producto</li>
+<li>Facilita encontrar información, documentación y ejemplos de código.</li>
+<li>Ayuda a las empresas a retener el talento.</li>
+<li>Favorece que otras empresas de software integren sus productos y participen en el ecosistema de la base de datos.</li>
+</ul>
+</li>
+</ul>
+<h3 id="casos-de-uso">Casos de uso</h3>
+<p>Una vez conocemos los diferentes sistemas y qué elementos puede hacer que nos decidamos por una solución u otra, conviene repasar los casos de uso más comunes:</p>
+<ul>
+<li>Si vamos a crear una aplicación web cuyo campos sean personalizables, usaremos una solución documental.</li>
+<li>Como una capa de caché, mediante un almacén clave-valor.</li>
+<li>Para almacenar archivos binarios sin preocuparse de la gestión de permisos del sistema de archivos, y poder realizar consultas sobre sus metadatos, ya sea mediante una solución documental o un almacén clave-valor.</li>
+<li>Para almacenar un enorme volumen de datos, donde la consistencia no es lo más importante, pero si la disponibilidad y su capacidad de ser distribuida, mediante una solución documental o basada en columnas.</li>
+</ul>
+<h3 id="limitaciones">Limitaciones</h3>
+<p>Una vez que hemos conocido todas las bondades, es conviente citar las limitaciones asociadas a las soluciones NoSQL:</p>
+<ul>
+<li><strong>Falta de estándar</strong>: Cada base de datos NoSQL surgió de la necesidad de diferentes casos de uso, y al basarse en código abierto, ninguna base de datos NoSQL es igual a otra y no hay directrices estándar para su uso.</li>
+<li><strong>Riesgos del código abierto</strong>: Aunque muchas de las soluciones NoSQL han derivado en productos comerciales, puede que algunas de ellas no se mantengan de forma continua y que no haya soporte si nos encontramos con algún problema. Es por ello, que es conveniente comprobar el soporte de la comunidad y de si hay una versión enterprise que podamos contratar en caso de necesidad.</li>
+<li><strong>Falta de interfaces gráficos para acceder a las bases de datos NoSQL</strong>: Sólo unas pocas soluciones NoSQL soportan una forma fácil de interactuar con los datos.</li>
+<li><strong>Perfiles escasos</strong>: Al tratarse de una nueva tecnología, encontrar expertos NoSQL a veces es difícil y costoso.</li>
+</ul>
+<hr />
+<h2 id="actividades-propuestas">📝 Actividades propuestas</h2>
+<div class="admonition question">
+<p class="admonition-title">Actividades</p>
+<ol>
+<li>¿Qué significa el prefijo “No” en NoSQL?  </li>
+<li>¿Puede un sistema soportar replicación y particionado simultáneamente?  </li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.50899def.min.js"></script>
+      
+    
+  </body>
+</html>
