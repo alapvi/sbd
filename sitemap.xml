@@ -2,46 +2,70 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://alapvi.github.io/</loc>
-         <lastmod>2025-09-23</lastmod>
+         <lastmod>2026-02-19</lastmod>
+    </url>
+    <url>
+         <loc>https://alapvi.github.io/elastic/ampliacion/</loc>
+         <lastmod>2026-02-19</lastmod>
+    </url>
+    <url>
+         <loc>https://alapvi.github.io/elastic/caso_uso/</loc>
+         <lastmod>2026-02-19</lastmod>
+    </url>
+    <url>
+         <loc>https://alapvi.github.io/elastic/dashboards/</loc>
+         <lastmod>2026-02-19</lastmod>
+    </url>
+    <url>
+         <loc>https://alapvi.github.io/elastic/elastic_intro/</loc>
+         <lastmod>2026-02-19</lastmod>
+    </url>
+    <url>
+         <loc>https://alapvi.github.io/elastic/elastic_ops/</loc>
+         <lastmod>2026-02-19</lastmod>
+    </url>
+    <url>
+         <loc>https://alapvi.github.io/elastic/kibana/</loc>
+         <lastmod>2026-02-19</lastmod>
     </url>
     <url>
          <loc>https://alapvi.github.io/mongodb/basicsmongo/</loc>
-         <lastmod>2025-09-23</lastmod>
+         <lastmod>2026-02-19</lastmod>
     </url>
     <url>
          <loc>https://alapvi.github.io/mongodb/instalacion/</loc>
-         <lastmod>2025-09-23</lastmod>
+         <lastmod>2026-02-19</lastmod>
     </url>
     <url>
          <loc>https://alapvi.github.io/mongodb/intromongo/</loc>
-         <lastmod>2025-09-23</lastmod>
+         <lastmod>2026-02-19</lastmod>
     </url>
     <url>
          <loc>https://alapvi.github.io/mongodb/modelado/</loc>
-         <lastmod>2025-09-23</lastmod>
+         <lastmod>2026-02-19</lastmod>
     </url>
     <url>
          <loc>https://alapvi.github.io/mongodb/mongodb/</loc>
-         <lastmod>2025-09-23</lastmod>
+         <lastmod>2026-02-19</lastmod>
     </url>
     <url>
          <loc>https://alapvi.github.io/mongodb/mongodbcrud/</loc>
-         <lastmod>2025-09-23</lastmod>
+         <lastmod>2026-02-19</lastmod>
     </url>
     <url>
          <loc>https://alapvi.github.io/mongodb/mongodbdatos/</loc>
-         <lastmod>2025-09-23</lastmod>
+         <lastmod>2026-02-19</lastmod>
     </url>
     <url>
          <loc>https://alapvi.github.io/nosql/consistencia/</loc>
-         <lastmod>2025-09-23</lastmod>
+         <lastmod>2026-02-19</lastmod>
     </url>
     <url>
          <loc>https://alapvi.github.io/nosql/moddatos/</loc>
-         <lastmod>2025-09-23</lastmod>
+         <lastmod>2026-02-19</lastmod>
     </url>
     <url>
          <loc>https://alapvi.github.io/nosql/nosql/</loc>
-         <lastmod>2025-09-23</lastmod>
+         <lastmod>2026-02-19</lastmod>
     </url>
 </urlset>

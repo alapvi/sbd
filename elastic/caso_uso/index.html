@@ -1,0 +1,2219 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://alapvi.github.io/elastic/caso_uso/">
+      
+      
+        <link rel="prev" href="../kibana/">
+      
+      
+        <link rel="next" href="../dashboards/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/logo_peq.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>Caso de uso - Sistemas de BigData</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#objetivo-de-la-practica" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Sistemas de BigData" class="md-header__button md-logo" aria-label="Sistemas de BigData" data-md-component="logo">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sistemas de BigData
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Caso de uso
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sistemas de BigData" class="md-nav__button md-logo" aria-label="Sistemas de BigData" data-md-component="logo">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    Sistemas de BigData
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Almacenamiento de datos. NoSQL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Almacenamiento de datos. NoSQL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nosql/nosql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NoSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nosql/moddatos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelos de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nosql/consistencia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consistencia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MongoDB
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MongoDB
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/intromongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción a MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/mongodb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/modelado/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Diseño de modelado de BD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/instalacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/basicsmongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primeros pasos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/mongodbcrud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operaciones con datos CRUD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/mongodbdatos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consulta de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elastic Stack
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Elastic Stack
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../elastic_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../elastic_ops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kibana/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kibana
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso de uso
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso de uso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo-de-la-practica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo de la práctica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#importacion-de-csv-y-creacion-de-indices-raw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Importación de CSV y creación de índices RAW
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Importación de CSV y creación de índices RAW">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#importacion-con-data-visualizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Importación con Data Visualizer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verificacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verificación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ver-un-documento-de-muestra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ver un documento de muestra
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crear-indices-ref-limpios-para-enrich" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear índices REF (limpios) para enrich
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Crear índices REF (limpios) para enrich">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#por-que-ref" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Por qué REF?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#construccion-de-prov_ref" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Construcción de prov_ref
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Construcción de prov_ref">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crear-indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear índice
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pipeline-prov_ref_pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pipeline prov_ref_pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reindex-prov_raw-prov_ref" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reindex prov_raw → prov_ref
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#construccion-de-trams_ref" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Construcción de trams_ref
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Construcción de trams_ref">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crear-indice_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear índice
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pipeline-trams_ref_pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pipeline trams_ref_pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reindex-trams_raw-trams_ref" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reindex trams_raw → trams_ref
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validacion_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crear-y-ejecutar-enrich-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear y ejecutar Enrich Policies
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Crear y ejecutar Enrich Policies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#provincias-por-provincia_code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Provincias (por provincia_code)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tramos-por-cod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tramos (por cod)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crear-el-indice-final-covid_enriched" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear el índice final covid_enriched
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pipeline-final-covid_pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pipeline final covid_pipeline
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pipeline final covid_pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitorización
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#control-de-calidad-del-indice-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Control de calidad del índice final
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Control de calidad del índice final">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docs-sin-timestamp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docs sin @timestamp
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docs-con-ingest_error" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docs con ingest_error
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#histograma-por-mes-detecta-meses-a-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Histograma por mes (detecta meses a 0)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualizacion-en-kibana-lens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visualización en Kibana (Lens)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Visualización en Kibana (Lens)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crear-data-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear Data View
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graficos-recomendados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gráficos recomendados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dashboards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboards Covid
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo-de-la-practica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo de la práctica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#importacion-de-csv-y-creacion-de-indices-raw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Importación de CSV y creación de índices RAW
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Importación de CSV y creación de índices RAW">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#importacion-con-data-visualizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Importación con Data Visualizer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verificacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verificación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ver-un-documento-de-muestra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ver un documento de muestra
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crear-indices-ref-limpios-para-enrich" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear índices REF (limpios) para enrich
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Crear índices REF (limpios) para enrich">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#por-que-ref" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Por qué REF?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#construccion-de-prov_ref" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Construcción de prov_ref
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Construcción de prov_ref">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crear-indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear índice
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pipeline-prov_ref_pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pipeline prov_ref_pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reindex-prov_raw-prov_ref" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reindex prov_raw → prov_ref
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#construccion-de-trams_ref" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Construcción de trams_ref
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Construcción de trams_ref">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crear-indice_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear índice
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pipeline-trams_ref_pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pipeline trams_ref_pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reindex-trams_raw-trams_ref" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reindex trams_raw → trams_ref
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validacion_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crear-y-ejecutar-enrich-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear y ejecutar Enrich Policies
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Crear y ejecutar Enrich Policies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#provincias-por-provincia_code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Provincias (por provincia_code)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tramos-por-cod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tramos (por cod)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crear-el-indice-final-covid_enriched" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear el índice final covid_enriched
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pipeline-final-covid_pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pipeline final covid_pipeline
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pipeline final covid_pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitorización
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#control-de-calidad-del-indice-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Control de calidad del índice final
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Control de calidad del índice final">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docs-sin-timestamp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docs sin @timestamp
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docs-con-ingest_error" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docs con ingest_error
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#histograma-por-mes-detecta-meses-a-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Histograma por mes (detecta meses a 0)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualizacion-en-kibana-lens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visualización en Kibana (Lens)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Visualización en Kibana (Lens)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crear-data-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear Data View
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graficos-recomendados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gráficos recomendados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Caso de uso</h1>
+
+<h2 id="objetivo-de-la-practica">Objetivo de la práctica</h2>
+<p>Cargar <strong>CSV directamente en Elasticsearch</strong> desde Kibana y hacer <strong>todas las transformaciones dentro del stack Elastic</strong> hasta obtener un índice final listo para análisis:</p>
+<ul>
+<li>Índices <strong>RAW</strong> (CSV “tal cual”):</li>
+<li><code>covid_raw</code></li>
+<li><code>prov_raw</code></li>
+<li><code>trams_raw</code></li>
+<li>Índices <strong>REF</strong> (limpios para enrich):</li>
+<li><code>prov_ref</code></li>
+<li><code>trams_ref</code></li>
+<li>Índice final (curado):</li>
+<li><code>covid_enriched</code></li>
+</ul>
+<p>El índice final <code>covid_enriched</code> debe incluir:</p>
+<ul>
+<li><code>@timestamp</code> (date)</li>
+<li><code>provincia.*</code> enriquecido (nombre, CCAA, ISO3166-2)</li>
+<li><code>alarma.cod</code> (integer) y <code>alarma.desc</code></li>
+<li>métricas <code>num_*</code> como integers</li>
+<li>trazabilidad opcional: <code>fecha_raw</code>, <code>ingest_error</code></li>
+</ul>
+<hr />
+<h2 id="importacion-de-csv-y-creacion-de-indices-raw">Importación de CSV y creación de índices RAW</h2>
+<h3 id="importacion-con-data-visualizer">Importación con Data Visualizer</h3>
+<p>Kibana:
+- <strong>Machine Learning → Data Visualizer → Upload file</strong>
+- Subir cada CSV y asignar:</p>
+<table>
+<thead>
+<tr>
+<th>CSV</th>
+<th>Índice RAW</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Serie COVID</td>
+<td><code>covid_raw</code></td>
+</tr>
+<tr>
+<td>Provincias</td>
+<td><code>prov_raw</code></td>
+</tr>
+<tr>
+<td>Tramos alarma</td>
+<td><code>trams_raw</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Si Kibana muestra timeout, comprueba igualmente en Index Management: la importación puede haber terminado.</p>
+</blockquote>
+<h3 id="verificacion">Verificación</h3>
+<div class="language-http highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="err">GET _cat/indices/covid_raw,prov_raw,trams_raw?v</span>
+</span></code></pre></div>
+<h3 id="ver-un-documento-de-muestra">Ver un documento de muestra</h3>
+<div class="language-http highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="err">GET covid_raw/_search?size=1</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="err">GET prov_raw/_search?size=1</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="err">GET trams_raw/_search?size=1</span>
+</span></code></pre></div>
+<hr />
+<h2 id="crear-indices-ref-limpios-para-enrich">Crear índices REF (limpios) para enrich</h2>
+<h3 id="por-que-ref">¿Por qué REF?</h3>
+<ul>
+<li>Evita depender de nombres de columnas con espacios/acentos (p.ej. “Código 3166-2”).</li>
+<li>Tipos claros (<code>keyword</code>, <code>integer</code>) para enrich.</li>
+<li>Proceso reproducible: RAW intactos + REF limpios.</li>
+</ul>
+<hr />
+<h2 id="construccion-de-prov_ref">Construcción de <code>prov_ref</code></h2>
+<h3 id="crear-indice">Crear índice</h3>
+<div class="language-http highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="err">DELETE prov_ref</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="err">PUT prov_ref</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="err">{</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="err">  &quot;mappings&quot;: {</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="err">    &quot;dynamic&quot;: &quot;strict&quot;,</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="err">    &quot;properties&quot;: {</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="err">      &quot;provincia_code&quot;: { &quot;type&quot;: &quot;keyword&quot; },</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="err">      &quot;iso3166_2&quot;:      { &quot;type&quot;: &quot;keyword&quot; },</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="err">      &quot;nombre&quot;:         { &quot;type&quot;: &quot;keyword&quot; },</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="err">      &quot;ccaa&quot;:           { &quot;type&quot;: &quot;keyword&quot; }</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="err">    }</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="err">  }</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="err">}</span>
+</span></code></pre></div>
+<h3 id="pipeline-prov_ref_pipeline">Pipeline <code>prov_ref_pipeline</code></h3>
+<div class="language-http highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="err">PUT _ingest/pipeline/prov_ref_pipeline</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="err">{</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="err">  &quot;processors&quot;: [</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="err">    {</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="err">      &quot;script&quot;: {</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="err">        &quot;lang&quot;: &quot;painless&quot;,</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="err">        &quot;source&quot;: &quot;&quot;&quot;</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="err">          def iso = ctx[&#39;Código 3166-2&#39;];</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="err">          def nombre = ctx[&#39;Nombre de la subdivisión&#39;];</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="err">          def ccaa = ctx[&#39;Subdivisión superior&#39;];</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="err">          String isoStr = iso == null ? null : iso.toString();</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="err">          String code = null;</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="err">          if (isoStr != null) {</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="err">            if (isoStr.startsWith(&#39;ES-&#39;) &amp;&amp; isoStr.length() &gt; 3) code = isoStr.substring(3);</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="err">            else code = isoStr;</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="err">          }</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="err">          if (code != null) ctx.provincia_code = code;</span>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="err">          if (isoStr != null) ctx.iso3166_2 = isoStr;</span>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="err">          if (nombre != null) ctx.nombre = nombre.toString();</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="err">          if (ccaa != null) ctx.ccaa = ccaa.toString();</span>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="err">        &quot;&quot;&quot;</span>
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="err">      }</span>
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="err">    },</span>
+</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="err">    {</span>
+</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="err">      &quot;remove&quot;: {</span>
+</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="err">        &quot;field&quot;: [</span>
+</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="err">          &quot;Código 3166-2&quot;,</span>
+</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="err">          &quot;Categoría de la subdivisión&quot;,</span>
+</span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="err">          &quot;Nombre de la subdivisión&quot;,</span>
+</span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="err">          &quot;Código del idioma&quot;,</span>
+</span><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="err">          &quot;Subdivisión superior&quot;</span>
+</span><span id="__span-3-35"><a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a><span class="err">        ],</span>
+</span><span id="__span-3-36"><a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a><span class="err">        &quot;ignore_missing&quot;: true</span>
+</span><span id="__span-3-37"><a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a><span class="err">      }</span>
+</span><span id="__span-3-38"><a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a><span class="err">    }</span>
+</span><span id="__span-3-39"><a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a><span class="err">  ]</span>
+</span><span id="__span-3-40"><a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a><span class="err">}</span>
+</span></code></pre></div>
+<h3 id="reindex-prov_raw-prov_ref">Reindex <code>prov_raw</code> → <code>prov_ref</code></h3>
+<div class="language-http highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="err">POST _reindex</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="err">{</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="err">  &quot;source&quot;: { &quot;index&quot;: &quot;prov_raw&quot; },</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="err">  &quot;dest&quot;:   { &quot;index&quot;: &quot;prov_ref&quot;, &quot;pipeline&quot;: &quot;prov_ref_pipeline&quot; },</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="err">  &quot;conflicts&quot;: &quot;proceed&quot;</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="err">}</span>
+</span></code></pre></div>
+<h3 id="validacion">Validación</h3>
+<div class="language-http highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="err">GET prov_ref/_search?size=5</span>
+</span></code></pre></div>
+<hr />
+<h2 id="construccion-de-trams_ref">Construcción de <code>trams_ref</code></h2>
+<h3 id="crear-indice_1">Crear índice</h3>
+<div class="language-http highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="err">DELETE trams_ref</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="err">PUT trams_ref</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="err">{</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="err">  &quot;mappings&quot;: {</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="err">    &quot;dynamic&quot;: &quot;strict&quot;,</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="err">    &quot;properties&quot;: {</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="err">      &quot;cod&quot;:  { &quot;type&quot;: &quot;integer&quot; },</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="err">      &quot;desc&quot;: { &quot;type&quot;: &quot;keyword&quot; }</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="err">    }</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="err">  }</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="err">}</span>
+</span></code></pre></div>
+<h3 id="pipeline-trams_ref_pipeline">Pipeline <code>trams_ref_pipeline</code></h3>
+<div class="language-http highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="err">PUT _ingest/pipeline/trams_ref_pipeline</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="err">{</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="err">  &quot;processors&quot;: [</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="err">    {</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="err">      &quot;script&quot;: {</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="err">        &quot;lang&quot;: &quot;painless&quot;,</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="err">        &quot;source&quot;: &quot;&quot;&quot;</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="err">          if (ctx.containsKey(&#39;cod&#39;) &amp;&amp; ctx.cod != null) {</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="err">            def c = ctx.cod;</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="err">            if (c instanceof Number) {</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="err">              ctx.cod = ((Number)c).intValue();</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="err">            } else {</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="err">              ctx.cod = Integer.parseInt(c.toString().trim());</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="err">            }</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="err">          }</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="err">          if (ctx.containsKey(&#39;desc&#39;) &amp;&amp; ctx.desc != null) {</span>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="err">            ctx.desc = ctx.desc.toString();</span>
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="err">          }</span>
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="err">        &quot;&quot;&quot;</span>
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="err">      }</span>
+</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="err">    }</span>
+</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="err">  ]</span>
+</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a><span class="err">}</span>
+</span></code></pre></div>
+<h3 id="reindex-trams_raw-trams_ref">Reindex <code>trams_raw</code> → <code>trams_ref</code></h3>
+<div class="language-http highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="err">POST _reindex</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="err">{</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="err">  &quot;source&quot;: { &quot;index&quot;: &quot;trams_raw&quot; },</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="err">  &quot;dest&quot;:   { &quot;index&quot;: &quot;trams_ref&quot;, &quot;pipeline&quot;: &quot;trams_ref_pipeline&quot; },</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="err">  &quot;conflicts&quot;: &quot;proceed&quot;</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="err">}</span>
+</span></code></pre></div>
+<h3 id="validacion_1">Validación</h3>
+<div class="language-http highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="err">GET trams_ref/_search?size=20&amp;sort=cod:asc</span>
+</span></code></pre></div>
+<hr />
+<h2 id="crear-y-ejecutar-enrich-policies">Crear y ejecutar Enrich Policies</h2>
+<h3 id="provincias-por-provincia_code">Provincias (por <code>provincia_code</code>)</h3>
+<div class="language-http highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="err">PUT /_enrich/policy/prov_by_code</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="err">{</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="err">  &quot;match&quot;: {</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="err">    &quot;indices&quot;: &quot;prov_ref&quot;,</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="err">    &quot;match_field&quot;: &quot;provincia_code&quot;,</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="err">    &quot;enrich_fields&quot;: [&quot;iso3166_2&quot;, &quot;nombre&quot;, &quot;ccaa&quot;]</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="err">  }</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="err">}</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="err">POST /_enrich/policy/prov_by_code/_execute</span>
+</span></code></pre></div>
+<h3 id="tramos-por-cod">Tramos (por <code>cod</code>)</h3>
+<div class="language-http highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="err">PUT /_enrich/policy/tram_by_cod</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="err">{</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="err">  &quot;match&quot;: {</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="err">    &quot;indices&quot;: &quot;trams_ref&quot;,</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="err">    &quot;match_field&quot;: &quot;cod&quot;,</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="err">    &quot;enrich_fields&quot;: [&quot;desc&quot;]</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="err">  }</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="err">}</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="err">POST /_enrich/policy/tram_by_cod/_execute</span>
+</span></code></pre></div>
+<hr />
+<h2 id="crear-el-indice-final-covid_enriched">Crear el índice final <code>covid_enriched</code></h2>
+<div class="language-http highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="err">DELETE covid_enriched</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="err">PUT covid_enriched</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="err">{</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="err">  &quot;mappings&quot;: {</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="err">    &quot;properties&quot;: {</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="err">      &quot;@timestamp&quot;: { &quot;type&quot;: &quot;date&quot; },</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="err">      &quot;provincia&quot;: {</span>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="err">        &quot;properties&quot;: {</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="err">          &quot;code&quot;:      { &quot;type&quot;: &quot;keyword&quot; },</span>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="err">          &quot;iso3166_2&quot;: { &quot;type&quot;: &quot;keyword&quot; },</span>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="err">          &quot;nombre&quot;:    { &quot;type&quot;: &quot;keyword&quot; },</span>
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="err">          &quot;ccaa&quot;:      { &quot;type&quot;: &quot;keyword&quot; }</span>
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="err">        }</span>
+</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="err">      },</span>
+</span><span id="__span-12-17"><a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>
+</span><span id="__span-12-18"><a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="err">      &quot;sexo&quot;: { &quot;type&quot;: &quot;keyword&quot; },</span>
+</span><span id="__span-12-19"><a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="err">      &quot;grupo_edad&quot;: { &quot;type&quot;: &quot;keyword&quot; },</span>
+</span><span id="__span-12-20"><a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a><span class="err">      &quot;grupo_edad_orden&quot;: { &quot;type&quot;: &quot;integer&quot; },</span>
+</span><span id="__span-12-21"><a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a>
+</span><span id="__span-12-22"><a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a><span class="err">      &quot;alarma&quot;: {</span>
+</span><span id="__span-12-23"><a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a><span class="err">        &quot;properties&quot;: {</span>
+</span><span id="__span-12-24"><a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a><span class="err">          &quot;cod&quot;:  { &quot;type&quot;: &quot;integer&quot; },</span>
+</span><span id="__span-12-25"><a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a><span class="err">          &quot;desc&quot;: { &quot;type&quot;: &quot;keyword&quot; }</span>
+</span><span id="__span-12-26"><a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a><span class="err">        }</span>
+</span><span id="__span-12-27"><a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a><span class="err">      },</span>
+</span><span id="__span-12-28"><a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a>
+</span><span id="__span-12-29"><a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a><span class="err">      &quot;num_casos&quot;: { &quot;type&quot;: &quot;integer&quot; },</span>
+</span><span id="__span-12-30"><a id="__codelineno-12-30" name="__codelineno-12-30" href="#__codelineno-12-30"></a><span class="err">      &quot;num_hosp&quot;:  { &quot;type&quot;: &quot;integer&quot; },</span>
+</span><span id="__span-12-31"><a id="__codelineno-12-31" name="__codelineno-12-31" href="#__codelineno-12-31"></a><span class="err">      &quot;num_uci&quot;:   { &quot;type&quot;: &quot;integer&quot; },</span>
+</span><span id="__span-12-32"><a id="__codelineno-12-32" name="__codelineno-12-32" href="#__codelineno-12-32"></a><span class="err">      &quot;num_def&quot;:   { &quot;type&quot;: &quot;integer&quot; },</span>
+</span><span id="__span-12-33"><a id="__codelineno-12-33" name="__codelineno-12-33" href="#__codelineno-12-33"></a>
+</span><span id="__span-12-34"><a id="__codelineno-12-34" name="__codelineno-12-34" href="#__codelineno-12-34"></a><span class="err">      &quot;fecha_raw&quot;:   { &quot;type&quot;: &quot;keyword&quot; },</span>
+</span><span id="__span-12-35"><a id="__codelineno-12-35" name="__codelineno-12-35" href="#__codelineno-12-35"></a><span class="err">      &quot;ingest_error&quot;:{ &quot;type&quot;: &quot;keyword&quot; }</span>
+</span><span id="__span-12-36"><a id="__codelineno-12-36" name="__codelineno-12-36" href="#__codelineno-12-36"></a><span class="err">    }</span>
+</span><span id="__span-12-37"><a id="__codelineno-12-37" name="__codelineno-12-37" href="#__codelineno-12-37"></a><span class="err">  }</span>
+</span><span id="__span-12-38"><a id="__codelineno-12-38" name="__codelineno-12-38" href="#__codelineno-12-38"></a><span class="err">}</span>
+</span></code></pre></div>
+<hr />
+<h2 id="pipeline-final-covid_pipeline">Pipeline final <code>covid_pipeline</code></h2>
+<h3 id="creacion">Creación</h3>
+<div class="language-http highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="err">DELETE _ingest/pipeline/covid_pipeline</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="err">PUT _ingest/pipeline/covid_pipeline</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="err">{</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="err">  &quot;description&quot;: &quot;COVID raw -&gt; enriched (timestamp + enrich provincias + tramo alarma + tipos int)&quot;,</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="err">  &quot;processors&quot;: [</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="err">    {</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="err">      &quot;script&quot;: {</span>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="err">        &quot;lang&quot;: &quot;painless&quot;,</span>
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="err">        &quot;source&quot;: &quot;&quot;&quot;</span>
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="err">          // Guarda la fecha original por trazabilidad</span>
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="err">          if (ctx.containsKey(&#39;fecha&#39;) &amp;&amp; ctx.fecha != null) {</span>
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="err">            ctx.fecha_raw = ctx.fecha.toString();</span>
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="err">            ctx.fecha = ctx.fecha.toString().trim();</span>
+</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="err">          }</span>
+</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>
+</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="err">          // Normaliza provincia</span>
+</span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a><span class="err">          if (ctx.containsKey(&#39;provincia_iso&#39;) &amp;&amp; ctx.provincia_iso != null) {</span>
+</span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a><span class="err">            ctx.provincia_iso = ctx.provincia_iso.toString().trim().toUpperCase();</span>
+</span><span id="__span-13-20"><a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a><span class="err">          }</span>
+</span><span id="__span-13-21"><a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>
+</span><span id="__span-13-22"><a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a><span class="err">          // Métricas -&gt; int (acepta Number, string, string vacío)</span>
+</span><span id="__span-13-23"><a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a><span class="err">          def nums = [&#39;num_casos&#39;,&#39;num_hosp&#39;,&#39;num_uci&#39;,&#39;num_def&#39;];</span>
+</span><span id="__span-13-24"><a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a><span class="err">          for (def f : nums) {</span>
+</span><span id="__span-13-25"><a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a><span class="err">            if (!ctx.containsKey(f) || ctx[f] == null) continue;</span>
+</span><span id="__span-13-26"><a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a><span class="err">            def v = ctx[f];</span>
+</span><span id="__span-13-27"><a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a><span class="err">            try {</span>
+</span><span id="__span-13-28"><a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a><span class="err">              if (v instanceof Number) ctx[f] = ((Number)v).intValue();</span>
+</span><span id="__span-13-29"><a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a><span class="err">              else {</span>
+</span><span id="__span-13-30"><a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a><span class="err">                def s = v.toString().trim();</span>
+</span><span id="__span-13-31"><a id="__codelineno-13-31" name="__codelineno-13-31" href="#__codelineno-13-31"></a><span class="err">                ctx[f] = (s.length() == 0) ? 0 : Integer.parseInt(s);</span>
+</span><span id="__span-13-32"><a id="__codelineno-13-32" name="__codelineno-13-32" href="#__codelineno-13-32"></a><span class="err">              }</span>
+</span><span id="__span-13-33"><a id="__codelineno-13-33" name="__codelineno-13-33" href="#__codelineno-13-33"></a><span class="err">            } catch (Exception e) {</span>
+</span><span id="__span-13-34"><a id="__codelineno-13-34" name="__codelineno-13-34" href="#__codelineno-13-34"></a><span class="err">              ctx[f] = 0;</span>
+</span><span id="__span-13-35"><a id="__codelineno-13-35" name="__codelineno-13-35" href="#__codelineno-13-35"></a><span class="err">              ctx.ingest_error = &#39;metric_parse_failed&#39;;</span>
+</span><span id="__span-13-36"><a id="__codelineno-13-36" name="__codelineno-13-36" href="#__codelineno-13-36"></a><span class="err">            }</span>
+</span><span id="__span-13-37"><a id="__codelineno-13-37" name="__codelineno-13-37" href="#__codelineno-13-37"></a><span class="err">          }</span>
+</span><span id="__span-13-38"><a id="__codelineno-13-38" name="__codelineno-13-38" href="#__codelineno-13-38"></a>
+</span><span id="__span-13-39"><a id="__codelineno-13-39" name="__codelineno-13-39" href="#__codelineno-13-39"></a><span class="err">          // @timestamp desde fecha: primeros 10 chars y valida con LocalDate.parse()</span>
+</span><span id="__span-13-40"><a id="__codelineno-13-40" name="__codelineno-13-40" href="#__codelineno-13-40"></a><span class="err">          if (ctx.containsKey(&#39;fecha&#39;) &amp;&amp; ctx.fecha != null) {</span>
+</span><span id="__span-13-41"><a id="__codelineno-13-41" name="__codelineno-13-41" href="#__codelineno-13-41"></a><span class="err">            String s = ctx.fecha.toString().trim();</span>
+</span><span id="__span-13-42"><a id="__codelineno-13-42" name="__codelineno-13-42" href="#__codelineno-13-42"></a><span class="err">            String d = (s.length() &gt;= 10) ? s.substring(0,10) : s;</span>
+</span><span id="__span-13-43"><a id="__codelineno-13-43" name="__codelineno-13-43" href="#__codelineno-13-43"></a>
+</span><span id="__span-13-44"><a id="__codelineno-13-44" name="__codelineno-13-44" href="#__codelineno-13-44"></a><span class="err">            try {</span>
+</span><span id="__span-13-45"><a id="__codelineno-13-45" name="__codelineno-13-45" href="#__codelineno-13-45"></a><span class="err">              java.time.LocalDate.parse(d);</span>
+</span><span id="__span-13-46"><a id="__codelineno-13-46" name="__codelineno-13-46" href="#__codelineno-13-46"></a><span class="err">              ctx[&#39;@timestamp&#39;] = d + &#39;T00:00:00.000Z&#39;;</span>
+</span><span id="__span-13-47"><a id="__codelineno-13-47" name="__codelineno-13-47" href="#__codelineno-13-47"></a><span class="err">            } catch (Exception e) {</span>
+</span><span id="__span-13-48"><a id="__codelineno-13-48" name="__codelineno-13-48" href="#__codelineno-13-48"></a><span class="err">              ctx.ingest_error = &#39;date_parse_failed&#39;;</span>
+</span><span id="__span-13-49"><a id="__codelineno-13-49" name="__codelineno-13-49" href="#__codelineno-13-49"></a><span class="err">            }</span>
+</span><span id="__span-13-50"><a id="__codelineno-13-50" name="__codelineno-13-50" href="#__codelineno-13-50"></a><span class="err">          } else {</span>
+</span><span id="__span-13-51"><a id="__codelineno-13-51" name="__codelineno-13-51" href="#__codelineno-13-51"></a><span class="err">            ctx.ingest_error = &#39;missing_fecha&#39;;</span>
+</span><span id="__span-13-52"><a id="__codelineno-13-52" name="__codelineno-13-52" href="#__codelineno-13-52"></a><span class="err">          }</span>
+</span><span id="__span-13-53"><a id="__codelineno-13-53" name="__codelineno-13-53" href="#__codelineno-13-53"></a>
+</span><span id="__span-13-54"><a id="__codelineno-13-54" name="__codelineno-13-54" href="#__codelineno-13-54"></a><span class="err">          ctx.remove(&#39;fecha&#39;);</span>
+</span><span id="__span-13-55"><a id="__codelineno-13-55" name="__codelineno-13-55" href="#__codelineno-13-55"></a><span class="err">        &quot;&quot;&quot;</span>
+</span><span id="__span-13-56"><a id="__codelineno-13-56" name="__codelineno-13-56" href="#__codelineno-13-56"></a><span class="err">      }</span>
+</span><span id="__span-13-57"><a id="__codelineno-13-57" name="__codelineno-13-57" href="#__codelineno-13-57"></a><span class="err">    },</span>
+</span><span id="__span-13-58"><a id="__codelineno-13-58" name="__codelineno-13-58" href="#__codelineno-13-58"></a>
+</span><span id="__span-13-59"><a id="__codelineno-13-59" name="__codelineno-13-59" href="#__codelineno-13-59"></a><span class="err">    { &quot;rename&quot;: { &quot;field&quot;: &quot;provincia_iso&quot;, &quot;target_field&quot;: &quot;provincia_code&quot;, &quot;ignore_missing&quot;: true } },</span>
+</span><span id="__span-13-60"><a id="__codelineno-13-60" name="__codelineno-13-60" href="#__codelineno-13-60"></a>
+</span><span id="__span-13-61"><a id="__codelineno-13-61" name="__codelineno-13-61" href="#__codelineno-13-61"></a><span class="err">    {</span>
+</span><span id="__span-13-62"><a id="__codelineno-13-62" name="__codelineno-13-62" href="#__codelineno-13-62"></a><span class="err">      &quot;script&quot;: {</span>
+</span><span id="__span-13-63"><a id="__codelineno-13-63" name="__codelineno-13-63" href="#__codelineno-13-63"></a><span class="err">        &quot;lang&quot;: &quot;painless&quot;,</span>
+</span><span id="__span-13-64"><a id="__codelineno-13-64" name="__codelineno-13-64" href="#__codelineno-13-64"></a><span class="err">        &quot;source&quot;: &quot;&quot;&quot;</span>
+</span><span id="__span-13-65"><a id="__codelineno-13-65" name="__codelineno-13-65" href="#__codelineno-13-65"></a><span class="err">          if (ctx.containsKey(&#39;provincia_code&#39;) &amp;&amp; ctx.provincia_code != null) {</span>
+</span><span id="__span-13-66"><a id="__codelineno-13-66" name="__codelineno-13-66" href="#__codelineno-13-66"></a><span class="err">            ctx.provincia_code = ctx.provincia_code.toString().trim().toUpperCase();</span>
+</span><span id="__span-13-67"><a id="__codelineno-13-67" name="__codelineno-13-67" href="#__codelineno-13-67"></a><span class="err">          }</span>
+</span><span id="__span-13-68"><a id="__codelineno-13-68" name="__codelineno-13-68" href="#__codelineno-13-68"></a><span class="err">        &quot;&quot;&quot;</span>
+</span><span id="__span-13-69"><a id="__codelineno-13-69" name="__codelineno-13-69" href="#__codelineno-13-69"></a><span class="err">      }</span>
+</span><span id="__span-13-70"><a id="__codelineno-13-70" name="__codelineno-13-70" href="#__codelineno-13-70"></a><span class="err">    },</span>
+</span><span id="__span-13-71"><a id="__codelineno-13-71" name="__codelineno-13-71" href="#__codelineno-13-71"></a>
+</span><span id="__span-13-72"><a id="__codelineno-13-72" name="__codelineno-13-72" href="#__codelineno-13-72"></a><span class="err">    { &quot;enrich&quot;: { &quot;policy_name&quot;: &quot;prov_by_code&quot;, &quot;field&quot;: &quot;provincia_code&quot;, &quot;target_field&quot;: &quot;provincia&quot; } },</span>
+</span><span id="__span-13-73"><a id="__codelineno-13-73" name="__codelineno-13-73" href="#__codelineno-13-73"></a>
+</span><span id="__span-13-74"><a id="__codelineno-13-74" name="__codelineno-13-74" href="#__codelineno-13-74"></a><span class="err">    {</span>
+</span><span id="__span-13-75"><a id="__codelineno-13-75" name="__codelineno-13-75" href="#__codelineno-13-75"></a><span class="err">      &quot;script&quot;: {</span>
+</span><span id="__span-13-76"><a id="__codelineno-13-76" name="__codelineno-13-76" href="#__codelineno-13-76"></a><span class="err">        &quot;lang&quot;: &quot;painless&quot;,</span>
+</span><span id="__span-13-77"><a id="__codelineno-13-77" name="__codelineno-13-77" href="#__codelineno-13-77"></a><span class="err">        &quot;source&quot;: &quot;&quot;&quot;</span>
+</span><span id="__span-13-78"><a id="__codelineno-13-78" name="__codelineno-13-78" href="#__codelineno-13-78"></a><span class="err">          if (ctx.provincia == null) ctx.provincia = new HashMap();</span>
+</span><span id="__span-13-79"><a id="__codelineno-13-79" name="__codelineno-13-79" href="#__codelineno-13-79"></a><span class="err">          if (ctx.containsKey(&#39;provincia_code&#39;) &amp;&amp; ctx.provincia_code != null) {</span>
+</span><span id="__span-13-80"><a id="__codelineno-13-80" name="__codelineno-13-80" href="#__codelineno-13-80"></a><span class="err">            ctx.provincia.put(&#39;code&#39;, ctx.provincia_code.toString());</span>
+</span><span id="__span-13-81"><a id="__codelineno-13-81" name="__codelineno-13-81" href="#__codelineno-13-81"></a><span class="err">          }</span>
+</span><span id="__span-13-82"><a id="__codelineno-13-82" name="__codelineno-13-82" href="#__codelineno-13-82"></a><span class="err">          ctx.remove(&#39;provincia_code&#39;);</span>
+</span><span id="__span-13-83"><a id="__codelineno-13-83" name="__codelineno-13-83" href="#__codelineno-13-83"></a>
+</span><span id="__span-13-84"><a id="__codelineno-13-84" name="__codelineno-13-84" href="#__codelineno-13-84"></a><span class="err">          // grupo_edad_orden</span>
+</span><span id="__span-13-85"><a id="__codelineno-13-85" name="__codelineno-13-85" href="#__codelineno-13-85"></a><span class="err">          if (ctx.grupo_edad != null) {</span>
+</span><span id="__span-13-86"><a id="__codelineno-13-86" name="__codelineno-13-86" href="#__codelineno-13-86"></a><span class="err">            def m = /^(\\d+)/.matcher(ctx.grupo_edad.toString());</span>
+</span><span id="__span-13-87"><a id="__codelineno-13-87" name="__codelineno-13-87" href="#__codelineno-13-87"></a><span class="err">            if (m.find()) ctx.grupo_edad_orden = Integer.parseInt(m.group(1));</span>
+</span><span id="__span-13-88"><a id="__codelineno-13-88" name="__codelineno-13-88" href="#__codelineno-13-88"></a><span class="err">          }</span>
+</span><span id="__span-13-89"><a id="__codelineno-13-89" name="__codelineno-13-89" href="#__codelineno-13-89"></a>
+</span><span id="__span-13-90"><a id="__codelineno-13-90" name="__codelineno-13-90" href="#__codelineno-13-90"></a><span class="err">          // alarma_cod (ENTERO)</span>
+</span><span id="__span-13-91"><a id="__codelineno-13-91" name="__codelineno-13-91" href="#__codelineno-13-91"></a><span class="err">          int cod = 99;</span>
+</span><span id="__span-13-92"><a id="__codelineno-13-92" name="__codelineno-13-92" href="#__codelineno-13-92"></a><span class="err">          if (ctx.containsKey(&#39;@timestamp&#39;) &amp;&amp; ctx[&#39;@timestamp&#39;] != null) {</span>
+</span><span id="__span-13-93"><a id="__codelineno-13-93" name="__codelineno-13-93" href="#__codelineno-13-93"></a><span class="err">            String ts = ctx[&#39;@timestamp&#39;].toString();</span>
+</span><span id="__span-13-94"><a id="__codelineno-13-94" name="__codelineno-13-94" href="#__codelineno-13-94"></a><span class="err">            String dp = ts.substring(0,10);</span>
+</span><span id="__span-13-95"><a id="__codelineno-13-95" name="__codelineno-13-95" href="#__codelineno-13-95"></a><span class="err">            def date = java.time.LocalDate.parse(dp);</span>
+</span><span id="__span-13-96"><a id="__codelineno-13-96" name="__codelineno-13-96" href="#__codelineno-13-96"></a>
+</span><span id="__span-13-97"><a id="__codelineno-13-97" name="__codelineno-13-97" href="#__codelineno-13-97"></a><span class="err">            def d1  = java.time.LocalDate.parse(&#39;2020-03-14&#39;);</span>
+</span><span id="__span-13-98"><a id="__codelineno-13-98" name="__codelineno-13-98" href="#__codelineno-13-98"></a><span class="err">            def d2  = java.time.LocalDate.parse(&#39;2020-03-27&#39;);</span>
+</span><span id="__span-13-99"><a id="__codelineno-13-99" name="__codelineno-13-99" href="#__codelineno-13-99"></a><span class="err">            def d3  = java.time.LocalDate.parse(&#39;2020-04-10&#39;);</span>
+</span><span id="__span-13-100"><a id="__codelineno-13-100" name="__codelineno-13-100" href="#__codelineno-13-100"></a><span class="err">            def d4  = java.time.LocalDate.parse(&#39;2020-04-24&#39;);</span>
+</span><span id="__span-13-101"><a id="__codelineno-13-101" name="__codelineno-13-101" href="#__codelineno-13-101"></a><span class="err">            def d5  = java.time.LocalDate.parse(&#39;2020-05-08&#39;);</span>
+</span><span id="__span-13-102"><a id="__codelineno-13-102" name="__codelineno-13-102" href="#__codelineno-13-102"></a><span class="err">            def d6  = java.time.LocalDate.parse(&#39;2020-05-22&#39;);</span>
+</span><span id="__span-13-103"><a id="__codelineno-13-103" name="__codelineno-13-103" href="#__codelineno-13-103"></a><span class="err">            def d7  = java.time.LocalDate.parse(&#39;2020-06-05&#39;);</span>
+</span><span id="__span-13-104"><a id="__codelineno-13-104" name="__codelineno-13-104" href="#__codelineno-13-104"></a><span class="err">            def end = java.time.LocalDate.parse(&#39;2020-06-21&#39;);</span>
+</span><span id="__span-13-105"><a id="__codelineno-13-105" name="__codelineno-13-105" href="#__codelineno-13-105"></a>
+</span><span id="__span-13-106"><a id="__codelineno-13-106" name="__codelineno-13-106" href="#__codelineno-13-106"></a><span class="err">            if (date.isBefore(d1) || date.isAfter(end)) cod = 99;</span>
+</span><span id="__span-13-107"><a id="__codelineno-13-107" name="__codelineno-13-107" href="#__codelineno-13-107"></a><span class="err">            else if (!date.isBefore(d7)) cod = 7;</span>
+</span><span id="__span-13-108"><a id="__codelineno-13-108" name="__codelineno-13-108" href="#__codelineno-13-108"></a><span class="err">            else if (!date.isBefore(d6)) cod = 6;</span>
+</span><span id="__span-13-109"><a id="__codelineno-13-109" name="__codelineno-13-109" href="#__codelineno-13-109"></a><span class="err">            else if (!date.isBefore(d5)) cod = 5;</span>
+</span><span id="__span-13-110"><a id="__codelineno-13-110" name="__codelineno-13-110" href="#__codelineno-13-110"></a><span class="err">            else if (!date.isBefore(d4)) cod = 4;</span>
+</span><span id="__span-13-111"><a id="__codelineno-13-111" name="__codelineno-13-111" href="#__codelineno-13-111"></a><span class="err">            else if (!date.isBefore(d3)) cod = 3;</span>
+</span><span id="__span-13-112"><a id="__codelineno-13-112" name="__codelineno-13-112" href="#__codelineno-13-112"></a><span class="err">            else if (!date.isBefore(d2)) cod = 2;</span>
+</span><span id="__span-13-113"><a id="__codelineno-13-113" name="__codelineno-13-113" href="#__codelineno-13-113"></a><span class="err">            else cod = 1;</span>
+</span><span id="__span-13-114"><a id="__codelineno-13-114" name="__codelineno-13-114" href="#__codelineno-13-114"></a><span class="err">          }</span>
+</span><span id="__span-13-115"><a id="__codelineno-13-115" name="__codelineno-13-115" href="#__codelineno-13-115"></a><span class="err">          ctx.alarma_cod = cod;</span>
+</span><span id="__span-13-116"><a id="__codelineno-13-116" name="__codelineno-13-116" href="#__codelineno-13-116"></a><span class="err">        &quot;&quot;&quot;</span>
+</span><span id="__span-13-117"><a id="__codelineno-13-117" name="__codelineno-13-117" href="#__codelineno-13-117"></a><span class="err">      }</span>
+</span><span id="__span-13-118"><a id="__codelineno-13-118" name="__codelineno-13-118" href="#__codelineno-13-118"></a><span class="err">    },</span>
+</span><span id="__span-13-119"><a id="__codelineno-13-119" name="__codelineno-13-119" href="#__codelineno-13-119"></a>
+</span><span id="__span-13-120"><a id="__codelineno-13-120" name="__codelineno-13-120" href="#__codelineno-13-120"></a><span class="err">    { &quot;enrich&quot;: { &quot;policy_name&quot;: &quot;tram_by_cod&quot;, &quot;field&quot;: &quot;alarma_cod&quot;, &quot;target_field&quot;: &quot;alarma_meta&quot; } },</span>
+</span><span id="__span-13-121"><a id="__codelineno-13-121" name="__codelineno-13-121" href="#__codelineno-13-121"></a>
+</span><span id="__span-13-122"><a id="__codelineno-13-122" name="__codelineno-13-122" href="#__codelineno-13-122"></a><span class="err">    {</span>
+</span><span id="__span-13-123"><a id="__codelineno-13-123" name="__codelineno-13-123" href="#__codelineno-13-123"></a><span class="err">      &quot;script&quot;: {</span>
+</span><span id="__span-13-124"><a id="__codelineno-13-124" name="__codelineno-13-124" href="#__codelineno-13-124"></a><span class="err">        &quot;lang&quot;: &quot;painless&quot;,</span>
+</span><span id="__span-13-125"><a id="__codelineno-13-125" name="__codelineno-13-125" href="#__codelineno-13-125"></a><span class="err">        &quot;source&quot;: &quot;&quot;&quot;</span>
+</span><span id="__span-13-126"><a id="__codelineno-13-126" name="__codelineno-13-126" href="#__codelineno-13-126"></a><span class="err">          if (ctx.alarma == null) ctx.alarma = new HashMap();</span>
+</span><span id="__span-13-127"><a id="__codelineno-13-127" name="__codelineno-13-127" href="#__codelineno-13-127"></a>
+</span><span id="__span-13-128"><a id="__codelineno-13-128" name="__codelineno-13-128" href="#__codelineno-13-128"></a><span class="err">          int cod = (ctx.alarma_cod instanceof Number)</span>
+</span><span id="__span-13-129"><a id="__codelineno-13-129" name="__codelineno-13-129" href="#__codelineno-13-129"></a><span class="err">            ? ((Number)ctx.alarma_cod).intValue()</span>
+</span><span id="__span-13-130"><a id="__codelineno-13-130" name="__codelineno-13-130" href="#__codelineno-13-130"></a><span class="err">            : Integer.parseInt(ctx.alarma_cod.toString().trim());</span>
+</span><span id="__span-13-131"><a id="__codelineno-13-131" name="__codelineno-13-131" href="#__codelineno-13-131"></a>
+</span><span id="__span-13-132"><a id="__codelineno-13-132" name="__codelineno-13-132" href="#__codelineno-13-132"></a><span class="err">          ctx.alarma.put(&#39;cod&#39;, cod);</span>
+</span><span id="__span-13-133"><a id="__codelineno-13-133" name="__codelineno-13-133" href="#__codelineno-13-133"></a>
+</span><span id="__span-13-134"><a id="__codelineno-13-134" name="__codelineno-13-134" href="#__codelineno-13-134"></a><span class="err">          if (ctx.alarma_meta != null &amp;&amp; ctx.alarma_meta.desc != null) {</span>
+</span><span id="__span-13-135"><a id="__codelineno-13-135" name="__codelineno-13-135" href="#__codelineno-13-135"></a><span class="err">            ctx.alarma.put(&#39;desc&#39;, ctx.alarma_meta.desc.toString());</span>
+</span><span id="__span-13-136"><a id="__codelineno-13-136" name="__codelineno-13-136" href="#__codelineno-13-136"></a><span class="err">          }</span>
+</span><span id="__span-13-137"><a id="__codelineno-13-137" name="__codelineno-13-137" href="#__codelineno-13-137"></a>
+</span><span id="__span-13-138"><a id="__codelineno-13-138" name="__codelineno-13-138" href="#__codelineno-13-138"></a><span class="err">          ctx.remove(&#39;alarma_cod&#39;);</span>
+</span><span id="__span-13-139"><a id="__codelineno-13-139" name="__codelineno-13-139" href="#__codelineno-13-139"></a><span class="err">          ctx.remove(&#39;alarma_meta&#39;);</span>
+</span><span id="__span-13-140"><a id="__codelineno-13-140" name="__codelineno-13-140" href="#__codelineno-13-140"></a><span class="err">        &quot;&quot;&quot;</span>
+</span><span id="__span-13-141"><a id="__codelineno-13-141" name="__codelineno-13-141" href="#__codelineno-13-141"></a><span class="err">      }</span>
+</span><span id="__span-13-142"><a id="__codelineno-13-142" name="__codelineno-13-142" href="#__codelineno-13-142"></a><span class="err">    }</span>
+</span><span id="__span-13-143"><a id="__codelineno-13-143" name="__codelineno-13-143" href="#__codelineno-13-143"></a><span class="err">  ]</span>
+</span><span id="__span-13-144"><a id="__codelineno-13-144" name="__codelineno-13-144" href="#__codelineno-13-144"></a><span class="err">}</span>
+</span></code></pre></div>
+<h3 id="monitorizacion">Monitorización</h3>
+<div class="language-http highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="err">GET _tasks?actions=*reindex&amp;detailed=true</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="err">GET covid_raw/_count</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="err">GET covid_enriched/_count</span>
+</span></code></pre></div>
+<p>Criterio de éxito: <code>covid_enriched/_count</code> ≈ <code>covid_raw/_count</code>.</p>
+<hr />
+<h2 id="control-de-calidad-del-indice-final">Control de calidad del índice final</h2>
+<h3 id="docs-sin-timestamp">Docs sin <code>@timestamp</code></h3>
+<div class="language-http highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="err">GET covid_enriched/_count</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="err">{</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="err">  &quot;query&quot;: { &quot;bool&quot;: { &quot;must_not&quot;: [ { &quot;exists&quot;: { &quot;field&quot;: &quot;@timestamp&quot; } } ] } }</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="err">}</span>
+</span></code></pre></div>
+<h3 id="docs-con-ingest_error">Docs con <code>ingest_error</code></h3>
+<div class="language-http highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="err">GET covid_enriched/_count</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="err">{</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="err">  &quot;query&quot;: { &quot;exists&quot;: { &quot;field&quot;: &quot;ingest_error&quot; } }</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="err">}</span>
+</span></code></pre></div>
+<h3 id="histograma-por-mes-detecta-meses-a-0">Histograma por mes (detecta meses a 0)</h3>
+<div class="language-http highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="err">GET covid_enriched/_search</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="err">{</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="err">  &quot;size&quot;: 0,</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="err">  &quot;aggs&quot;: {</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="err">    &quot;by_month&quot;: {</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="err">      &quot;date_histogram&quot;: {</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="err">        &quot;field&quot;: &quot;@timestamp&quot;,</span>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="err">        &quot;calendar_interval&quot;: &quot;month&quot;,</span>
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="err">        &quot;min_doc_count&quot;: 0</span>
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="err">      }</span>
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="err">    }</span>
+</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="err">  }</span>
+</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="err">}</span>
+</span></code></pre></div>
+<hr />
+<h2 id="visualizacion-en-kibana-lens">Visualización en Kibana (Lens)</h2>
+<h3 id="crear-data-view">Crear Data View</h3>
+<p>Kibana:
+- <strong>Stack Management → Data Views → Create data view</strong>
+  - Pattern: <code>covid_enriched</code>
+  - Time field: <code>@timestamp</code></p>
+<h3 id="graficos-recomendados">Gráficos recomendados</h3>
+<p>1) Serie temporal de casos:
+- X: <code>@timestamp</code>
+- Y: <code>Sum(num_casos)</code></p>
+<p>2) Top provincias:
+- Breakdown: <code>Top values provincia.nombre</code> (poner Top 60)
+- activar <strong>Other bucket</strong> y <strong>Missing bucket</strong> (evita huecos visuales)</p>
+<p>3) Por grupo de edad:
+- Breakdown: <code>grupo_edad</code> (ordenar con <code>grupo_edad_orden</code>)</p>
+<p>4) Por tramo alarma:
+- Breakdown: <code>alarma.desc</code> o <code>alarma.cod</code></p>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "content.code.select", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

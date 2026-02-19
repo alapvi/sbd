@@ -1,0 +1,1756 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://alapvi.github.io/elastic/dashboards/">
+      
+      
+        <link rel="prev" href="../caso_uso/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/logo_peq.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>Dashboards Covid - Sistemas de BigData</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dashboard-covid" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Sistemas de BigData" class="md-header__button md-logo" aria-label="Sistemas de BigData" data-md-component="logo">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sistemas de BigData
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Dashboards Covid
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sistemas de BigData" class="md-nav__button md-logo" aria-label="Sistemas de BigData" data-md-component="logo">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    Sistemas de BigData
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Almacenamiento de datos. NoSQL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Almacenamiento de datos. NoSQL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nosql/nosql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NoSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nosql/moddatos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelos de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nosql/consistencia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consistencia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MongoDB
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MongoDB
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/intromongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción a MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/mongodb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/modelado/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Diseño de modelado de BD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/instalacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/basicsmongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primeros pasos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/mongodbcrud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operaciones con datos CRUD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/mongodbdatos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consulta de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elastic Stack
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Elastic Stack
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../elastic_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../elastic_ops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kibana/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kibana
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../caso_uso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso de uso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboards Covid
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboards Covid
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#requisitos-previos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisitos previos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crear-el-data-view-covid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear el Data View Covid
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crear-el-dashboard-numero-de-casos-covid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear el Dashboard Numero de casos Covid
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crear-cada-panelvisualizacion-y-anadirla-al-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear cada panel/visualización y añadirla al dashboard
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Crear cada panel/visualización y añadirla al dashboard">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#panel-1-lens-xy-incidencia-semanal-por-provincia-y-linea-adicional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Panel 1 (Lens XY): Incidencia semanal por provincia (y línea adicional)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Panel 1 (Lens XY): Incidencia semanal por provincia (y línea adicional)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pasos-en-kibana-lens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pasos en Kibana (Lens)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capa-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Capa 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#panel-2-lens-xy-defunciones-semanales-por-grupo-de-edad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Panel 2 (Lens XY): Defunciones semanales por grupo de edad
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Panel 2 (Lens XY): Defunciones semanales por grupo de edad">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pasos-en-kibana-lens_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pasos en Kibana (Lens)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capa-1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Capa 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#panel-3-lens-xy-incidencia-covid-por-100k-por-grupo-de-edad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Panel 3 (Lens XY): Incidencia Covid (por 100k) por grupo de edad
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Panel 3 (Lens XY): Incidencia Covid (por 100k) por grupo de edad">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pasos-en-kibana-lens_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pasos en Kibana (Lens)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capa-1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Capa 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mapa-covid-maps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mapa Covid (Maps)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mapa Covid (Maps)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-representa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qué representa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pasos-en-kibana-maps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pasos en Kibana (Maps)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#panel-5-lens-data-table-ranking-de-provincias-y-metricas-derivadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Panel 5 (Lens Data table): Ranking de provincias y métricas derivadas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Panel 5 (Lens Data table): Ranking de provincias y métricas derivadas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuracion-de-la-tabla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración de la tabla
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pasos-en-kibana-lens_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pasos en Kibana (Lens)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#requisitos-previos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisitos previos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crear-el-data-view-covid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear el Data View Covid
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crear-el-dashboard-numero-de-casos-covid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear el Dashboard Numero de casos Covid
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crear-cada-panelvisualizacion-y-anadirla-al-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear cada panel/visualización y añadirla al dashboard
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Crear cada panel/visualización y añadirla al dashboard">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#panel-1-lens-xy-incidencia-semanal-por-provincia-y-linea-adicional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Panel 1 (Lens XY): Incidencia semanal por provincia (y línea adicional)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Panel 1 (Lens XY): Incidencia semanal por provincia (y línea adicional)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pasos-en-kibana-lens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pasos en Kibana (Lens)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capa-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Capa 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#panel-2-lens-xy-defunciones-semanales-por-grupo-de-edad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Panel 2 (Lens XY): Defunciones semanales por grupo de edad
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Panel 2 (Lens XY): Defunciones semanales por grupo de edad">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pasos-en-kibana-lens_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pasos en Kibana (Lens)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capa-1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Capa 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#panel-3-lens-xy-incidencia-covid-por-100k-por-grupo-de-edad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Panel 3 (Lens XY): Incidencia Covid (por 100k) por grupo de edad
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Panel 3 (Lens XY): Incidencia Covid (por 100k) por grupo de edad">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pasos-en-kibana-lens_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pasos en Kibana (Lens)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capa-1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Capa 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mapa-covid-maps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mapa Covid (Maps)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mapa Covid (Maps)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-representa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qué representa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pasos-en-kibana-maps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pasos en Kibana (Maps)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#panel-5-lens-data-table-ranking-de-provincias-y-metricas-derivadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Panel 5 (Lens Data table): Ranking de provincias y métricas derivadas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Panel 5 (Lens Data table): Ranking de provincias y métricas derivadas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuracion-de-la-tabla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración de la tabla
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pasos-en-kibana-lens_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pasos en Kibana (Lens)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dashboard-covid">Dashboard Covid</h1>
+<p>Este documento explica cómo <strong>crear</strong> en Kibana diferentes Dashboards del caso de uso Covid</p>
+<h2 id="requisitos-previos">Requisitos previos</h2>
+<ol>
+<li>Debe existir el índice (o alias) <strong><code>covid_enriched</code></strong> en Elasticsearch.</li>
+<li>Debe existir el campo temporal <strong><code>@timestamp</code></strong> con tipo <strong><code>date</code></strong>.</li>
+<li>Kibana debe tener acceso al servicio EMS (Elastic Maps Service) para cargar la capa de provincias.</li>
+</ol>
+<p>Comprobaciones rápidas (Dev Tools):
+<div class="language-http highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="err">GET _cat/indices/covid_enriched?v</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="err">GET covid_enriched/_mapping</span>
+</span></code></pre></div></p>
+<h2 id="crear-el-data-view-covid">Crear el Data View <code>Covid</code></h2>
+<ol>
+<li>Kibana → <strong>Stack Management → Data Views</strong>.</li>
+<li><strong>Create data view</strong>.</li>
+<li>
+<p>Rellena:</p>
+<ul>
+<li><strong>Name</strong>: <code>Covid</code>  </li>
+<li><strong>Index pattern</strong>: <code>covid_enriched</code></li>
+<li><strong>Timestamp field</strong>: <code>@timestamp</code></li>
+</ul>
+</li>
+<li>
+<p>Guarda y pulsa <strong>Refresh field list</strong>.</p>
+</li>
+</ol>
+<h2 id="crear-el-dashboard-numero-de-casos-covid">Crear el Dashboard <code>Numero de casos Covid</code></h2>
+<ol>
+<li>Kibana → <strong>Dashboard → Create dashboard</strong>.</li>
+<li>Título: <strong>Numero de casos Covid</strong></li>
+<li>Descripción: <strong>Casos por provincias y media de hospitalizados</strong></li>
+</ol>
+<h2 id="crear-cada-panelvisualizacion-y-anadirla-al-dashboard">Crear cada panel/visualización y añadirla al dashboard</h2>
+<p>Repite: <strong>Create visualization → configurar → Save (opcional) → Add to dashboard</strong>.</p>
+<figure>
+    <img alt="&quot;Dashboards&quot;" src="../images/panel1.png" width="70%" />
+    <figcaption>Panel1</figcaption>
+</figure>
+<h3 id="panel-1-lens-xy-incidencia-semanal-por-provincia-y-linea-adicional">Panel 1 (Lens XY): Incidencia semanal por provincia (y línea adicional)</h3>
+<ul>
+<li><strong>Tipo</strong>: Lens (XY)</li>
+<li><strong>Data view</strong>: <code>Covid</code> → <code>covid_enriched</code></li>
+<li><strong>Leyenda</strong>: visible, posición <strong>derecha</strong></li>
+<li><strong>Tipo preferido</strong> (Lens): <code>bar_stacked</code></li>
+</ul>
+<h4 id="pasos-en-kibana-lens">Pasos en Kibana (Lens)</h4>
+<ol>
+<li>Ve a <strong>Visualize Library → Create visualization → Lens</strong>.</li>
+<li>Selecciona el <strong>Data view</strong>: <strong>Covid</strong>.</li>
+<li>En el panel de configuración, elige <strong>XY</strong> (gráfico).</li>
+</ol>
+<h4 id="capa-1">Capa 1</h4>
+<ul>
+<li>
+<p><strong>Series type</strong>: <code>bar_stacked</code></p>
+</li>
+<li>
+<p><strong>Eje X</strong>: <code>@timestamp</code> → <em>Date histogram</em> con intervalo <strong>1w</strong></p>
+<ul>
+<li>
+<p>Include empty rows: <strong>True</strong></p>
+</li>
+<li>
+<p>Drop partial buckets: <strong>False</strong></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Métrica (Y)</strong>: <em>Formula</em> <code>sum(num_casos) /100000</code>  </p>
+<ul>
+<li>Etiqueta: <strong>Total de casos por 100000hab</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>Desglose (Break down by)</strong>: <em>Top values</em> de <code>provincia.nombre</code></p>
+<ul>
+<li>Tamaño (size): <strong>20</strong></li>
+<li>Orden: <strong>alphabetical</strong> (asc)</li>
+<li>Other bucket: <strong>False</strong></li>
+</ul>
+</li>
+</ul>
+<p><strong>En Lens (UI):</strong>
+- Arrastra <code>@timestamp</code> al eje X (o selecciona <em>Horizontal axis</em>) y pon el intervalo.
+- Añade la métrica con <strong>Formula</strong> (si aplica) y pon el label.
+- Añade el <em>Break down</em> con <code>provincia.nombre</code> y ajusta size/orden.</p>
+<figure>
+    <img alt="&quot;Dashboards&quot;" src="../images/Panel2.png" width="70%" />
+    <figcaption>Panel2</figcaption>
+</figure>
+<h3 id="panel-2-lens-xy-defunciones-semanales-por-grupo-de-edad">Panel 2 (Lens XY): Defunciones semanales por grupo de edad</h3>
+<ul>
+<li><strong>Tipo</strong>: Lens (XY)</li>
+<li><strong>Data view</strong>: <code>Covid</code> → <code>covid_enriched</code></li>
+<li><strong>Leyenda</strong>: visible, posición <strong>derecha</strong></li>
+<li><strong>Tipo preferido</strong> (Lens): <code>bar_percentage_stacked</code></li>
+</ul>
+<h4 id="pasos-en-kibana-lens_1">Pasos en Kibana (Lens)</h4>
+<ol>
+<li>Ve a <strong>Visualize Library → Create visualization → Lens</strong>.</li>
+<li>Selecciona el <strong>Data view</strong>: <strong>Covid</strong>.</li>
+<li>En el panel de configuración, elige <strong>XY</strong> (gráfico).</li>
+</ol>
+<h4 id="capa-1_1">Capa 1</h4>
+<ul>
+<li><strong>Series type</strong>: <code>bar_stacked</code></li>
+<li>
+<p><strong>Eje X</strong>: <code>@timestamp</code> → <em>Date histogram</em> con intervalo <strong>1w</strong></p>
+<ul>
+<li>Include empty rows: <strong>True</strong></li>
+<li>Drop partial buckets: <strong>False</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>Métrica (Y)</strong>: <em>Formula</em> <code>sum(num_def)</code>  </p>
+<ul>
+<li>Etiqueta: <strong>Total defunciones</strong></li>
+</ul>
+</li>
+<li><strong>Desglose (Break down by)</strong>: <em>Top values</em> de <code>grupo_edad</code><ul>
+<li>Tamaño (size): <strong>10</strong></li>
+<li>Orden: <strong>alphabetical</strong> (asc)</li>
+<li>Other bucket: <strong>True</strong></li>
+</ul>
+</li>
+</ul>
+<p><strong>En Lens (UI):</strong></p>
+<ul>
+<li>Arrastra <code>@timestamp</code> al eje X (o selecciona <em>Horizontal axis</em>) y pon el intervalo.</li>
+<li>Añade la métrica con <strong>Formula</strong> (si aplica) y pon el label.</li>
+<li>Añade el <em>Break down</em> con <code>grupo_edad</code> y ajusta size/orden.</li>
+</ul>
+<figure>
+    <img alt="&quot;Dashboards&quot;" src="../images/Panel3.png" width="100%" />
+    <figcaption>Panel3</figcaption>
+</figure>
+<h3 id="panel-3-lens-xy-incidencia-covid-por-100k-por-grupo-de-edad">Panel 3 (Lens XY): Incidencia Covid (por 100k) por grupo de edad</h3>
+<ul>
+<li><strong>Tipo</strong>: Lens (XY)</li>
+<li><strong>Data view</strong>: <code>Covid</code> → <code>covid_enriched</code></li>
+<li><strong>Leyenda</strong>: visible, posición <strong>derecha</strong></li>
+<li><strong>Tipo preferido</strong> (Lens): <code>line</code></li>
+</ul>
+<h4 id="pasos-en-kibana-lens_2">Pasos en Kibana (Lens)</h4>
+<ol>
+<li>Ve a <strong>Visualize Library → Create visualization → Lens</strong>.</li>
+<li>Selecciona el <strong>Data view</strong>: <strong>Covid</strong>.</li>
+<li>En el panel de configuración, elige <strong>XY</strong> (gráfico).</li>
+</ol>
+<h4 id="capa-1_2">Capa 1</h4>
+<ul>
+<li><strong>Series type</strong>: <code>line</code></li>
+<li>
+<p><strong>Eje X</strong>: <code>@timestamp</code> → <em>Date histogram</em> con intervalo <strong>1w</strong></p>
+<ul>
+<li>Include empty rows: <strong>True</strong></li>
+<li>Drop partial buckets: <strong>False</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>Métrica (Y)</strong>: <em>Formula</em> <code>sum(num_casos) / 100000</code>  </p>
+<ul>
+<li>Etiqueta: <strong>Incidencia Covid</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>Desglose (Break down by)</strong>: <em>Top values</em> de <code>grupo_edad</code></p>
+<ul>
+<li>Tamaño (size): <strong>10</strong></li>
+<li>Orden: <strong>alphabetical</strong> (asc)</li>
+<li>Other bucket: <strong>True</strong></li>
+</ul>
+</li>
+</ul>
+<p><strong>En Lens (UI):</strong></p>
+<ul>
+<li>Arrastra <code>@timestamp</code> al eje X (o selecciona <em>Horizontal axis</em>) y pon el intervalo.</li>
+<li>Añade la métrica con <strong>Formula</strong> (si aplica) y pon el label.</li>
+<li>Añade el <em>Break down</em> con <code>grupo_edad</code> y ajusta size/orden.</li>
+</ul>
+<figure>
+    <img alt="&quot;Dashboards&quot;" src="../images/Panel4.png" width="100%" />
+    <figcaption>Panel4</figcaption>
+</figure>
+<h3 id="mapa-covid-maps">Mapa Covid (Maps)</h3>
+<ul>
+<li><strong>Tipo</strong>: Kibana Maps</li>
+<li><strong>Data view</strong>: <code>Covid</code> → <code>covid_enriched</code></li>
+</ul>
+<h4 id="que-representa">Qué representa</h4>
+<ul>
+<li>Provincias de España coloreadas por la métrica <strong>suma de casos</strong>.</li>
+<li>Join: <code>iso_3166_2</code> (capa provincias EMS) ↔ <code>provincia.iso3166_2</code> (campo del índice)</li>
+<li>Métrica usada en el join: <code>sum</code>(<code>num_casos</code>) → <strong>Incidencia Covid</strong></li>
+</ul>
+<h4 id="pasos-en-kibana-maps">Pasos en Kibana (Maps)</h4>
+<ol>
+<li>Ve a <strong>Maps → Create map</strong>.</li>
+<li><strong>Capa base</strong> (Base layer): elige un mapa EMS (equivalente a <em>road map desaturated</em>). En la práctica, vale el mapa base por defecto.</li>
+<li>
+<p>Añade una capa: <strong>Add layer → EMS Boundaries (o Administrative boundaries)</strong>.</p>
+<ul>
+<li>Dataset: <strong>Spain provinces</strong> (id EMS: <code>spain_provinces</code>).</li>
+<li>Campo clave disponible en esa capa: <code>iso_3166_2</code>.</li>
+</ul>
+</li>
+<li>
+<p>Configura el <strong>Join</strong> de la capa de provincias:</p>
+<ul>
+<li>Left field (EMS): <code>iso_3166_2</code></li>
+<li>Right source: Elasticsearch (Term join)</li>
+<li>Data view: <strong>Covid</strong></li>
+<li>Term field (ES): <code>provincia.iso3166_2</code></li>
+<li>Métrica: <strong>Sum</strong> sobre <code>num_casos</code> con etiqueta <strong>Incidencia Covid</strong></li>
+<li>Asegura: <strong>Apply global time</strong> y <strong>Apply global query</strong> activados.</li>
+</ul>
+</li>
+<li>
+<p>Estilo (Style) de la capa de provincias:</p>
+<ul>
+<li><strong>Fill color</strong>: dinámico en función de la métrica del join (paleta tipo <em>Greens</em>).</li>
+<li>(Opcional) <strong>Label text</strong>: mostrar el valor de la métrica del join en el centro.</li>
+</ul>
+</li>
+<li>
+<p>Vista del mapa (aprox.):</p>
+<ul>
+<li>Center: lon <strong>-1.20844</strong>, lat <strong>39.73375</strong></li>
+<li>Zoom: <strong>4.92</strong></li>
+</ul>
+</li>
+<li>
+<p>(Recomendado para que “cuadre” con el dataset) Ajusta el selector temporal global a:</p>
+<ul>
+<li>From: <strong>2020-01-01T15:19:57.503Z</strong></li>
+<li>To: <strong>2022-04-30T14:20:01.110Z</strong></li>
+</ul>
+</li>
+<li>
+<p>Guarda el mapa con título <strong>Mapa Covid</strong> y añádelo al dashboard.</p>
+</li>
+</ol>
+<figure>
+    <img alt="&quot;Dashboards&quot;" src="../images/Panel5.png" width="100%" />
+    <figcaption>Panel5</figcaption>
+</figure>
+<h3 id="panel-5-lens-data-table-ranking-de-provincias-y-metricas-derivadas">Panel 5 (Lens Data table): Ranking de provincias y métricas derivadas</h3>
+<ul>
+<li><strong>Tipo</strong>: Lens (Data table)</li>
+<li><strong>Data view</strong>: <code>Covid</code> → <code>covid_enriched</code></li>
+</ul>
+<h4 id="configuracion-de-la-tabla">Configuración de la tabla</h4>
+<ul>
+<li>
+<p><strong>Filas (Rows)</strong>: <em>Top values</em> de <code>provincia.nombre</code></p>
+<ul>
+<li>size: <strong>20</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>Columnas métricas</strong> (en orden):</p>
+<ul>
+<li><strong>Incidencia Acumulada</strong> → sum(<code>num_casos</code>)</li>
+<li><strong>Defunciones</strong> → sum(<code>num_def</code>)</li>
+<li><strong>Hospitalizaciones</strong> → sum(<code>num_hosp</code>)</li>
+<li><strong>Hosp. UCI</strong> → Formula <code>sum(num_uci)</code></li>
+<li><strong>Tasa Hosp.</strong> → Formula <code>sum(num_hosp) / sum(num_casos)</code> (formato: porcentaje, 2 decimales)</li>
+<li><strong>Tasa UCI</strong> → Formula <code>sum(num_uci) / sum(num_hosp)</code> (formato: porcentaje, 2 decimales)</li>
+<li><strong>T. Letalidad</strong> → Formula <code>sum(num_def) / sum(num_casos)</code> (formato: porcentaje, 2 decimales)</li>
+<li><strong>Gravedad</strong> → Formula <code>(sum(num_hosp) + (2*sum(num_uci)) + (3 * sum(num_def)))/sum(num_casos)</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="pasos-en-kibana-lens_3">Pasos en Kibana (Lens)</h4>
+<ol>
+<li><strong>Visualize Library → Create visualization → Lens</strong>.</li>
+<li>Selecciona el <strong>Data view</strong>: <strong>Covid</strong>.</li>
+<li>Cambia el tipo a <strong>Data table</strong>.</li>
+<li>En <strong>Rows</strong>, configura <em>Top values</em> de <code>provincia.nombre</code> con size 20 y ordena por <strong>Incidencia Acumulada</strong> (desc).</li>
+<li>Añade las métricas en el mismo orden (sumas y fórmulas) y aplica el formato porcentaje donde corresponda.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "content.code.select", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
