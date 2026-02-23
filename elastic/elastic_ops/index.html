@@ -1775,7 +1775,7 @@ Esta solicitud devuelve el mapping de un índice específico, que describe la es
 <h3 id="consultas-dsl">Consultas DSL</h3>
 <p>Elasticsearch posibilita usar JSON para definir consulta DSL (Lenguaje de Dominio Específico).</p>
 <p>Vamos a ver cómo podemos lanzar diferentes tipos de Query para obtener los <em>hits</em> que mas relevancia tienen para nosotros, para ello vamos a utilizar el índice que obtendremos de la ingesta del fichero <a href="../files/restaurantes_es.json">restaurantes_es.json</a> </p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>curl<span class="w"> </span>--cacert<span class="w"> </span>http_ca.crt<span class="w"> </span>-u<span class="w"> </span>elastic:<span class="nv">$ELASTIC_PASSWORD</span><span class="w"> </span>https://localhost:9200/_bulk<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Content-type: application/json&quot;</span><span class="w"> </span>--data-binary<span class="w"> </span>@restaurantes_es.json<span class="w"> </span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>-u<span class="w"> </span>elastic:<span class="nv">$ELASTIC_PASSWORD</span><span class="w"> </span>http://localhost:9200/_bulk<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Content-type: application/json&quot;</span><span class="w"> </span>--data-binary<span class="w"> </span>@restaurantes_es.json<span class="w"> </span>
 </span></code></pre></div>
 <p>Una vez introducidos los datos, verificamos y revisamos su estructura:</p>
 <div class="language-js highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="nx">GET</span><span class="w"> </span><span class="nx">restaurantes</span><span class="o">/</span><span class="nx">_search</span>
@@ -2096,10 +2096,12 @@ Como se puede observar, la consulta ha tenido éxito, ha obtenido un total de 17
 <h3 id="mappings">Mappings</h3>
 <p>El <strong>mapping</strong> es la definición de cómo se estructuran los datos dentro de un índice. Especifica qué campos existen en los documentos, el tipo de datos de cada campo y cómo se indexan y almacenan los datos. </p>
 <p>Cuando creamos un índice sin especificar nada, elastic crea automáticamente el <strong>mapping</strong> en función de los datos introducidos en los documentos, pero si queremos optimizar, entonces podría ser adecuado definir nosotros los <strong>mappings</strong> para después obtener mejor resultado de nuestras consultas.</p>
-<p>Así pues, en el mapping definimos 
-- Nombre de los campos
-- Tipos de datos de los campos
-- Como los campos tienen que guardar los datos.</p>
+<p>Así pues, en el mapping definimos </p>
+<ul>
+<li>Nombre de los campos</li>
+<li>Tipos de datos de los campos</li>
+<li>Como los campos tienen que guardar los datos.</li>
+</ul>
 <p>Aquí tienes una descripción general de los conceptos relacionados con el mapping en Elasticsearch:</p>
 <p><strong>Campos:</strong>
 Los campos son los componentes individuales de un documento en Elasticsearch. Cada documento está compuesto por múltiples campos que representan diferentes atributos o propiedades de los datos.</p>
