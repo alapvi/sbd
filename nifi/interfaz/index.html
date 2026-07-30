@@ -1161,10 +1161,9 @@ construir el primer pipeline.</p>
 <h1 id="31-el-canvas">3.1 El Canvas</h1>
 <p>Cuando Apache NiFi se inicia, el usuario accede al <strong>Canvas</strong>, el
 espacio de trabajo donde se diseñan y administran los flujos de datos.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>flowchart LR
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    A[Processor] --&gt; B[Processor]
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    B --&gt; C[Processor]
-</span></code></pre></div>
+<pre class="mermaid"><code>flowchart LR
+    A[Processor] --&gt; B[Processor]
+    B --&gt; C[Processor]</code></pre>
 <h2 id="caracteristicas">Características</h2>
 <ul>
 <li>Espacio de trabajo ilimitado.</li>
@@ -1235,10 +1234,9 @@ facilitar la lectura de los flujos.</p>
 <h1 id="37-process-groups">3.7 Process Groups</h1>
 <p>Los Process Groups permiten dividir un flujo complejo en módulos
 reutilizables.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>flowchart LR
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    A[Entrada] --&gt; B[Transformación]
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    B --&gt; C[Salida]
-</span></code></pre></div>
+<pre class="mermaid"><code>flowchart LR
+    A[Entrada] --&gt; B[Transformación]
+    B --&gt; C[Salida]</code></pre>
 <p>!!! warning "Error frecuente" Evita colocar todos los Processors en el
 Process Group raíz.</p>
 <hr />
@@ -1285,9 +1283,8 @@ Process Group raíz.</p>
 <hr />
 <h1 id="laboratorio-2">Laboratorio 2</h1>
 <p>Construye el siguiente diseño sin ejecutarlo.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>flowchart LR
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    A[GenerateFlowFile] --&gt; B[LogAttribute]
-</span></code></pre></div>
+<pre class="mermaid"><code>flowchart LR
+    A[GenerateFlowFile] --&gt; B[LogAttribute]</code></pre>
 <p>Comprueba:</p>
 <ul>
 <li>cómo crear componentes;</li>
