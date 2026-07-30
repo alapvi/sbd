@@ -1,0 +1,2313 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://alapvi.github.io/nifi/flowfiles/">
+      
+      
+        <link rel="prev" href="../primerflujo/">
+      
+      
+        <link rel="next" href="../../elastic/elastic_intro/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/logo_peq.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Flowfiles - Sistemas de BigData</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#capitulo-6-flowfiles-el-nucleo-de-apache-nifi-2x" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Sistemas de BigData" class="md-header__button md-logo" aria-label="Sistemas de BigData" data-md-component="logo">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sistemas de BigData
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Flowfiles
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sistemas de BigData" class="md-nav__button md-logo" aria-label="Sistemas de BigData" data-md-component="logo">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    Sistemas de BigData
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Almacenamiento de datos. NoSQL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Almacenamiento de datos. NoSQL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nosql/nosql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NoSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nosql/moddatos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelos de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nosql/consistencia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consistencia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MongoDB
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MongoDB
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/intromongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción a MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/mongodb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/modelado/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Diseño de modelado de BD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/instalacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/basicsmongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primeros pasos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/mongodbcrud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operaciones con datos CRUD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/mongodbdatos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consulta de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nifi
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Nifi
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduccion_nifi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arquitectura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitectura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interfaz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interfaz gráfica de NiFi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../instalacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalación y despliegue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../primerflujo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primer flujo de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowfiles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elastic Stack
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Elastic Stack
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../elastic/elastic_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../elastic/elastic_ops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../elastic/kibana/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kibana
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../elastic/caso_uso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso de uso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../elastic/dashboards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboards Covid
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../elastic/ampliacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ampliación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="capitulo-6-flowfiles-el-nucleo-de-apache-nifi-2x">Capítulo 6. FlowFiles: el núcleo de Apache NiFi 2.x</h1>
+<blockquote>
+<p><em>"Si los Processors representan las operaciones de un flujo de datos, los FlowFiles representan los propios datos que circulan por él. Comprender qué es un FlowFile y cómo evoluciona durante su recorrido es esencial para diseñar, mantener y depurar cualquier DataFlow en Apache NiFi."</em></p>
+</blockquote>
+<hr />
+<h1 id="objetivos">Objetivos</h1>
+<p>Al finalizar este capítulo serás capaz de:</p>
+<ul>
+<li>Comprender qué es un FlowFile.</li>
+<li>Diferenciar claramente entre contenido y atributos.</li>
+<li>Entender el ciclo de vida completo de un FlowFile.</li>
+<li>Conocer cómo Apache NiFi almacena la información internamente.</li>
+<li>Interpretar la relación entre los distintos repositorios.</li>
+<li>Comprender por qué NiFi puede mover grandes volúmenes de información de forma eficiente.</li>
+</ul>
+<hr />
+<h1 id="61-que-es-un-flowfile">6.1 ¿Qué es un FlowFile?</h1>
+<p>El <strong>FlowFile</strong> constituye la unidad fundamental de procesamiento en Apache NiFi.</p>
+<p>Cada vez que un dato entra en un flujo, NiFi lo encapsula dentro de un FlowFile. A partir de ese momento, todos los Processors trabajan sobre él hasta que el flujo finaliza.</p>
+<p>Un FlowFile puede representar prácticamente cualquier tipo de información:</p>
+<ul>
+<li>un fichero CSV;</li>
+<li>un documento JSON;</li>
+<li>un XML;</li>
+<li>una imagen;</li>
+<li>un vídeo;</li>
+<li>un mensaje MQTT;</li>
+<li>un mensaje Kafka;</li>
+<li>una respuesta de una API REST;</li>
+<li>un correo electrónico;</li>
+<li>cualquier secuencia de bytes.</li>
+</ul>
+<p>Es importante comprender que <strong>los Processors no intercambian directamente archivos ni mensajes</strong>, sino FlowFiles.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[Origen de datos] --&gt; B[FlowFile]
+    B --&gt; C[Processor]
+    C --&gt; D[Processor]
+    D --&gt; E[Destino]</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Idea clave</p>
+<p>Todo lo que circula por Apache NiFi es un FlowFile.</p>
+</div>
+<hr />
+<h1 id="62-que-contiene-un-flowfile">6.2 ¿Qué contiene un FlowFile?</h1>
+<p>Una de las dudas más habituales cuando se comienza a trabajar con Apache NiFi consiste en pensar que un FlowFile es simplemente un archivo.</p>
+<p>Sin embargo, un FlowFile está formado por dos elementos completamente independientes:</p>
+<ul>
+<li><strong>Contenido (Content)</strong></li>
+<li><strong>Atributos (Attributes)</strong></li>
+</ul>
+<pre class="mermaid"><code>flowchart TB
+
+    A[FlowFile]
+
+    A --&gt; B[Content]
+
+    A --&gt; C[Attributes]</code></pre>
+<p>Esta separación constituye una de las características más importantes del diseño interno de Apache NiFi.</p>
+<hr />
+<h2 id="el-contenido-content">El contenido (Content)</h2>
+<p>El contenido representa la información que realmente queremos transportar.</p>
+<p>Por ejemplo:</p>
+<ul>
+<li>un documento PDF;</li>
+<li>un fichero CSV;</li>
+<li>un JSON;</li>
+<li>una imagen JPG;</li>
+<li>un archivo ZIP.</li>
+</ul>
+<p>Si el FlowFile transporta un fichero CSV, el contenido será exactamente ese CSV.</p>
+<p>Si transporta una imagen, el contenido será la imagen.</p>
+<p>Si transporta un mensaje JSON, el contenido será dicho JSON.</p>
+<p>Ejemplo:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">&quot;sensor&quot;</span><span class="p">:</span><span class="s2">&quot;temperatura&quot;</span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">&quot;valor&quot;</span><span class="p">:</span><span class="mf">22.7</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Ese JSON forma parte del <strong>Content</strong>.</p>
+<hr />
+<h2 id="los-atributos-attributes">Los atributos (Attributes)</h2>
+<p>Los atributos representan los metadatos asociados al contenido.</p>
+<p>Por ejemplo:</p>
+<table>
+<thead>
+<tr>
+<th>Atributo</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>filename</td>
+<td>datos.csv</td>
+</tr>
+<tr>
+<td>path</td>
+<td>/entrada</td>
+</tr>
+<tr>
+<td>uuid</td>
+<td>0f8c...</td>
+</tr>
+<tr>
+<td>mime.type</td>
+<td>application/json</td>
+</tr>
+<tr>
+<td>fileSize</td>
+<td>2048</td>
+</tr>
+</tbody>
+</table>
+<p>Los atributos permiten que los Processors tomen decisiones sin necesidad de leer completamente el contenido.</p>
+<p>Por ejemplo:</p>
+<ul>
+<li>mover únicamente los PDF;</li>
+<li>enviar solamente imágenes;</li>
+<li>seleccionar archivos superiores a 100 MB;</li>
+<li>cambiar nombres;</li>
+<li>clasificar documentos.</li>
+</ul>
+<pre class="mermaid"><code>flowchart LR
+
+A[FlowFile]
+
+A --&gt; B[Contenido]
+
+A --&gt; C[Atributos]
+
+C --&gt; D[filename]
+
+C --&gt; E[path]
+
+C --&gt; F[mime.type]
+
+C --&gt; G[uuid]</code></pre>
+<hr />
+<h1 id="63-donde-esta-realmente-el-contenido">6.3 ¿Dónde está realmente el contenido?</h1>
+<p>Aquí aparece uno de los conceptos más importantes de Apache NiFi.</p>
+<p>Muchos usuarios piensan que el contenido se almacena dentro del propio FlowFile.</p>
+<p>No es así.</p>
+<p>El FlowFile únicamente mantiene una <strong>referencia</strong> al contenido.</p>
+<pre class="mermaid"><code>flowchart LR
+
+FlowFile --&gt; ContentRepository</code></pre>
+<p>El contenido se encuentra almacenado dentro del <strong>Content Repository</strong>.</p>
+<p>El FlowFile únicamente conoce dónde localizarlo.</p>
+<p>Gracias a este diseño:</p>
+<ul>
+<li>no es necesario copiar continuamente grandes archivos;</li>
+<li>el consumo de memoria es reducido;</li>
+<li>las operaciones son mucho más rápidas.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Diseño eficiente</p>
+<p>Apache NiFi evita mover físicamente el contenido siempre que es posible. En muchas operaciones únicamente cambia la referencia al contenido almacenado en el repositorio.</p>
+</div>
+<hr />
+<h1 id="64-anatomia-interna-de-un-flowfile">6.4 Anatomía interna de un FlowFile</h1>
+<p>De forma simplificada, un FlowFile puede representarse mediante el siguiente esquema.</p>
+<pre class="mermaid"><code>classDiagram
+
+class FlowFile{
+
+UUID
+
+Content Claim
+
+Size
+
+Attributes
+
+Entry Date
+
+Lineage
+
+}</code></pre>
+<p>Los elementos más importantes son:</p>
+<ul>
+<li><strong>UUID</strong>, identificador único.</li>
+<li><strong>Content Claim</strong>, referencia al contenido.</li>
+<li><strong>Size</strong>, tamaño.</li>
+<li><strong>Attributes</strong>, metadatos.</li>
+<li><strong>Entry Date</strong>, fecha de entrada.</li>
+<li><strong>Lineage</strong>, información utilizada para la trazabilidad.</li>
+</ul>
+<p>No todos estos elementos son visibles desde la interfaz gráfica, pero forman parte del modelo interno de Apache NiFi.</p>
+<hr />
+<h1 id="65-el-uuid">6.5 El UUID</h1>
+<p>Cada FlowFile posee un identificador único denominado <strong>UUID</strong> (<em>Universally Unique Identifier</em>).</p>
+<p>Ejemplo:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>5dc81498-a0d5-4b9b-a833-cfd0cfaa57d8
+</span></code></pre></div>
+<p>Nunca existirán dos FlowFiles con el mismo UUID.</p>
+<p>Este identificador permite:</p>
+<ul>
+<li>seguir el recorrido completo;</li>
+<li>localizar un FlowFile concreto;</li>
+<li>consultar Data Provenance;</li>
+<li>relacionar eventos.</li>
+</ul>
+<p>Durante las tareas de depuración, el UUID constituye la referencia principal.</p>
+<pre class="mermaid"><code>flowchart LR
+
+UUID --&gt; Provenance
+
+UUID --&gt; Processor1
+
+UUID --&gt; Processor2
+
+UUID --&gt; Processor3</code></pre>
+<hr />
+<h1 id="66-el-ciclo-de-vida-de-un-flowfile">6.6 El ciclo de vida de un FlowFile</h1>
+<p>Todo FlowFile sigue un ciclo de vida similar.</p>
+<pre class="mermaid"><code>flowchart LR
+
+A[Creación]
+
+--&gt;
+
+B[Queue]
+
+--&gt;
+
+C[Processor]
+
+--&gt;
+
+D[Queue]
+
+--&gt;
+
+E[Processor]
+
+--&gt;
+
+F[Destino]</code></pre>
+<p>En función del flujo diseñado, un FlowFile puede:</p>
+<ul>
+<li>ser creado;</li>
+<li>modificarse;</li>
+<li>dividirse;</li>
+<li>fusionarse;</li>
+<li>duplicarse;</li>
+<li>eliminarse.</li>
+</ul>
+<p>Cada una de estas operaciones queda registrada por Apache NiFi mediante Data Provenance.</p>
+<div class="admonition note">
+<p class="admonition-title">Observación</p>
+<p>Un mismo FlowFile puede atravesar decenas o incluso cientos de Processors antes de finalizar su recorrido.</p>
+</div>
+<hr />
+<h1 id="67-los-repositorios-internos-de-apache-nifi">6.7 Los repositorios internos de Apache NiFi</h1>
+<p>Una de las características que distingue a Apache NiFi de otras herramientas ETL es la forma en que almacena la información.</p>
+<p>Cuando un FlowFile circula por un flujo de datos, Apache NiFi <strong>no guarda toda la información en un único lugar</strong>. En su lugar, distribuye la información entre varios repositorios especializados.</p>
+<p>Esta arquitectura aporta importantes ventajas:</p>
+<ul>
+<li>mejora el rendimiento;</li>
+<li>reduce las operaciones de copia de datos;</li>
+<li>facilita la recuperación ante fallos;</li>
+<li>permite realizar auditorías completas del procesamiento.</li>
+</ul>
+<p>Los tres repositorios principales son:</p>
+<ul>
+<li><strong>FlowFile Repository</strong></li>
+<li><strong>Content Repository</strong></li>
+<li><strong>Provenance Repository</strong></li>
+</ul>
+<pre class="mermaid"><code>flowchart TB
+
+    FF[FlowFile]
+
+    FF --&gt; FFR[FlowFile Repository]
+
+    FF --&gt; CR[Content Repository]
+
+    FF --&gt; PR[Provenance Repository]</code></pre>
+<p>Cada uno de ellos almacena un tipo de información diferente.</p>
+<hr />
+<h1 id="68-flowfile-repository">6.8 FlowFile Repository</h1>
+<p>El <strong>FlowFile Repository</strong> almacena la información necesaria para que Apache NiFi conozca el estado de cada FlowFile.</p>
+<p>No contiene el contenido del fichero.</p>
+<p>Contiene únicamente información de control.</p>
+<p>Entre otros datos almacena:</p>
+<ul>
+<li>UUID</li>
+<li>atributos</li>
+<li>tamaño</li>
+<li>referencia al contenido</li>
+<li>estado actual</li>
+<li>posición dentro del flujo</li>
+</ul>
+<p>Puede imaginarse como un índice.</p>
+<pre class="mermaid"><code>flowchart LR
+
+A[FlowFile]
+
+--&gt;
+
+B[FlowFile Repository]
+
+B --&gt; UUID
+
+B --&gt; Attributes
+
+B --&gt; ContentClaim
+
+B --&gt; Queue</code></pre>
+<p>Gracias a este repositorio, si Apache NiFi se detiene inesperadamente, al reiniciarse puede reconstruir el estado del flujo.</p>
+<div class="admonition note">
+<p class="admonition-title">Persistencia</p>
+<p>El FlowFile Repository permite que NiFi continúe procesando los FlowFiles pendientes después de un reinicio inesperado.</p>
+</div>
+<hr />
+<h1 id="69-content-repository">6.9 Content Repository</h1>
+<p>El <strong>Content Repository</strong> almacena el contenido real de los FlowFiles.</p>
+<p>Aquí es donde se encuentran:</p>
+<ul>
+<li>CSV</li>
+<li>JSON</li>
+<li>XML</li>
+<li>imágenes</li>
+<li>vídeos</li>
+<li>documentos PDF</li>
+<li>archivos ZIP</li>
+<li>cualquier otro dato binario.</li>
+</ul>
+<p>Es importante entender que <strong>el FlowFile no contiene directamente estos datos</strong>.</p>
+<p>Únicamente mantiene una referencia al lugar donde están almacenados.</p>
+<pre class="mermaid"><code>flowchart LR
+
+FlowFile
+
+--&gt;
+
+ContentClaim
+
+--&gt;
+
+ContentRepository
+
+--&gt;
+
+Archivo</code></pre>
+<p>Este diseño evita copiar continuamente grandes volúmenes de información.</p>
+<p>Supongamos un fichero de 5 GB.</p>
+<p>Si varios Processors necesitan trabajar sobre él, NiFi intentará reutilizar el mismo contenido siempre que sea posible.</p>
+<p>No se copiarán 5 GB en cada operación.</p>
+<p>Simplemente cambiarán las referencias.</p>
+<hr />
+<h2 id="content-claim">Content Claim</h2>
+<p>La referencia utilizada por Apache NiFi para localizar el contenido recibe el nombre de <strong>Content Claim</strong>.</p>
+<p>Puede entenderse como un puntero.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>FlowFile
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>│
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>├── UUID
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>├── filename
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>├── path
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>└── Content Claim
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        │
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        ▼
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>Content Repository
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>        │
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        ▼
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>archivo.csv
+</span></code></pre></div>
+<p>Gracias al Content Claim:</p>
+<ul>
+<li>varios FlowFiles pueden compartir temporalmente el mismo contenido;</li>
+<li>las modificaciones son muy eficientes;</li>
+<li>se reduce el uso del disco.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Diseño Copy-on-Write</p>
+<p>Cuando un Processor modifica el contenido de un FlowFile, Apache NiFi no sobrescribe el archivo existente. En su lugar, crea un nuevo Content Claim y el FlowFile pasa a apuntar a ese nuevo contenido.</p>
+</div>
+<hr />
+<h1 id="610-que-ocurre-cuando-cambia-el-contenido">6.10 ¿Qué ocurre cuando cambia el contenido?</h1>
+<p>Supongamos el siguiente flujo.</p>
+<pre class="mermaid"><code>flowchart LR
+
+A[GenerateFlowFile]
+
+--&gt;
+
+B[ReplaceText]
+
+--&gt;
+
+C[PutFile]</code></pre>
+<p>Inicialmente:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>FlowFile
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>↓
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>Content Claim 1
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>↓
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>Contenido original
+</span></code></pre></div>
+<p>Después de ejecutar <strong>ReplaceText</strong>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>FlowFile
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>↓
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>Content Claim 2
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>↓
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>Nuevo contenido
+</span></code></pre></div>
+<p>El contenido original permanece disponible hasta que Apache NiFi determina que ya no existe ningún FlowFile que lo utilice.</p>
+<p>Posteriormente será eliminado por las tareas internas de limpieza.</p>
+<p>Este comportamiento mejora la seguridad y evita inconsistencias.</p>
+<hr />
+<h1 id="611-provenance-repository">6.11 Provenance Repository</h1>
+<p>El tercer repositorio fundamental es el <strong>Provenance Repository</strong>.</p>
+<p>Su misión consiste en almacenar el historial de cada FlowFile.</p>
+<p>Cada vez que ocurre un evento importante, Apache NiFi registra información como:</p>
+<ul>
+<li>creación;</li>
+<li>recepción;</li>
+<li>envío;</li>
+<li>modificación;</li>
+<li>bifurcación;</li>
+<li>unión;</li>
+<li>eliminación.</li>
+</ul>
+<pre class="mermaid"><code>flowchart LR
+
+CREATE
+
+--&gt;
+
+ROUTE
+
+--&gt;
+
+MODIFY
+
+--&gt;
+
+SEND
+
+--&gt;
+
+DROP</code></pre>
+<p>Cada uno de estos eventos queda asociado al UUID del FlowFile.</p>
+<p>Gracias a ello es posible reconstruir completamente su recorrido.</p>
+<hr />
+<h2 id="informacion-almacenada">Información almacenada</h2>
+<p>Un evento de Provenance puede contener información como:</p>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Event ID</td>
+<td>Identificador del evento</td>
+</tr>
+<tr>
+<td>Event Type</td>
+<td>Tipo de operación</td>
+</tr>
+<tr>
+<td>Component</td>
+<td>Processor implicado</td>
+</tr>
+<tr>
+<td>UUID</td>
+<td>FlowFile</td>
+</tr>
+<tr>
+<td>Timestamp</td>
+<td>Fecha y hora</td>
+</tr>
+<tr>
+<td>Duration</td>
+<td>Tiempo empleado</td>
+</tr>
+<tr>
+<td>Attributes</td>
+<td>Antes y después del cambio</td>
+</tr>
+</tbody>
+</table>
+<p>Dependiendo de la configuración, también puede conservar una copia temporal del contenido.</p>
+<hr />
+<h1 id="612-relacion-entre-los-tres-repositorios">6.12 Relación entre los tres repositorios</h1>
+<p>Los tres repositorios trabajan conjuntamente.</p>
+<pre class="mermaid"><code>flowchart TB
+
+FlowFile
+
+--&gt;
+
+FlowFileRepository
+
+FlowFile
+
+--&gt;
+
+ContentRepository
+
+FlowFile
+
+--&gt;
+
+ProvenanceRepository
+
+FlowFileRepository --&gt; Estado
+
+ContentRepository --&gt; Datos
+
+ProvenanceRepository --&gt; Historial</code></pre>
+<p>Puede resumirse de la siguiente forma:</p>
+<table>
+<thead>
+<tr>
+<th>Repositorio</th>
+<th>Almacena</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FlowFile Repository</td>
+<td>Estado del FlowFile</td>
+</tr>
+<tr>
+<td>Content Repository</td>
+<td>Contenido real</td>
+</tr>
+<tr>
+<td>Provenance Repository</td>
+<td>Historial del procesamiento</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="613-por-que-esta-arquitectura-es-tan-eficiente">6.13 ¿Por qué esta arquitectura es tan eficiente?</h1>
+<p>Esta separación aporta numerosas ventajas.</p>
+<h2 id="evita-copias-innecesarias">Evita copias innecesarias</h2>
+<p>Si un archivo de 10 GB pasa por diez Processors, Apache NiFi no crea diez copias del archivo.</p>
+<p>Los distintos FlowFiles reutilizan el mismo Content Claim mientras el contenido no cambie.</p>
+<hr />
+<h2 id="reduce-el-uso-de-memoria">Reduce el uso de memoria</h2>
+<p>Los Processors trabajan principalmente con referencias y atributos.</p>
+<p>No necesitan cargar continuamente grandes ficheros en memoria.</p>
+<hr />
+<h2 id="facilita-la-recuperacion">Facilita la recuperación</h2>
+<p>Ante un fallo eléctrico o un reinicio inesperado, Apache NiFi puede reconstruir el estado del flujo utilizando el FlowFile Repository.</p>
+<hr />
+<h2 id="permite-auditoria-completa">Permite auditoría completa</h2>
+<p>Gracias al Provenance Repository es posible conocer:</p>
+<ul>
+<li>quién creó un FlowFile;</li>
+<li>qué Processors lo modificaron;</li>
+<li>cuándo ocurrió cada cambio;</li>
+<li>cuál fue su contenido;</li>
+<li>dónde terminó.</li>
+</ul>
+<p>Esta característica convierte a Apache NiFi en una herramienta especialmente adecuada para entornos donde la trazabilidad es un requisito fundamental.</p>
+<hr />
+<h1 id="614-ejemplo-completo">6.14 Ejemplo completo</h1>
+<p>Supongamos el siguiente flujo.</p>
+<pre class="mermaid"><code>flowchart LR
+
+A[GetFile]
+
+--&gt;
+
+B[UpdateAttribute]
+
+--&gt;
+
+C[ReplaceText]
+
+--&gt;
+
+D[PutFile]</code></pre>
+<p>Durante el recorrido ocurre lo siguiente.</p>
+<h2 id="paso-1">Paso 1</h2>
+<p>GetFile crea un nuevo FlowFile.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>FlowFile Repository
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>↓
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>Nuevo UUID
+</span></code></pre></div>
+<hr />
+<h2 id="paso-2">Paso 2</h2>
+<p>El contenido del archivo se almacena.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Content Repository
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>↓
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>archivo.csv
+</span></code></pre></div>
+<hr />
+<h2 id="paso-3">Paso 3</h2>
+<p>UpdateAttribute modifica únicamente atributos.</p>
+<p>No cambia el contenido.</p>
+<p>Por tanto:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Content Claim
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>↓
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>No cambia
+</span></code></pre></div>
+<hr />
+<h2 id="paso-4">Paso 4</h2>
+<p>ReplaceText modifica el contenido.</p>
+<p>Entonces:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Nuevo Content Claim
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>↓
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>Nuevo contenido
+</span></code></pre></div>
+<hr />
+<h2 id="paso-5">Paso 5</h2>
+<p>Todos los cambios quedan registrados.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Provenance Repository
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>↓
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>CREATE
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>↓
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>ATTRIBUTES MODIFIED
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>↓
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>CONTENT MODIFIED
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>↓
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>SEND
+</span></code></pre></div>
+<p>Este ejemplo resume perfectamente la colaboración entre los tres repositorios.</p>
+<hr />
+<h1 id="ideas-clave">Ideas clave</h1>
+<p>Antes de continuar con el siguiente apartado conviene recordar cinco conceptos fundamentales:</p>
+<ol>
+<li>Un FlowFile <strong>no almacena directamente el contenido</strong>.</li>
+<li>El contenido reside en el <strong>Content Repository</strong>.</li>
+<li>El estado del FlowFile se almacena en el <strong>FlowFile Repository</strong>.</li>
+<li>El historial se registra en el <strong>Provenance Repository</strong>.</li>
+<li>Los <strong>Content Claims</strong> permiten reutilizar el contenido sin copiarlo continuamente.</li>
+</ol>
+<p>Estos conceptos serán esenciales para comprender el funcionamiento de los Processors que modifican atributos, transforman contenido o realizan operaciones de enrutamiento.</p>
+<hr />
+<h1 id="615-gestion-de-las-colas-queues">6.15 Gestión de las colas (Queues)</h1>
+<p>Hasta ahora hemos visto que un FlowFile pasa de un Processor a otro a través de una <strong>Connection</strong>.</p>
+<p>Sin embargo, una Connection no es únicamente una línea que une dos componentes.</p>
+<p>Cada Connection incorpora una <strong>Queue</strong>, es decir, una cola donde permanecen temporalmente los FlowFiles hasta que el siguiente Processor pueda procesarlos.</p>
+<pre class="mermaid"><code>flowchart LR
+
+A[Processor A]
+
+--&gt;
+
+Q[(Queue)]
+
+--&gt;
+
+B[Processor B]</code></pre>
+<p>La Queue actúa como un mecanismo de desacoplamiento entre Processors.</p>
+<p>Esto significa que un Processor puede continuar generando FlowFiles aunque el siguiente Processor procese los datos a una velocidad inferior, siempre que no se alcance el límite configurado.</p>
+<div class="admonition note">
+<p class="admonition-title">Idea clave</p>
+<p>Las colas permiten que cada Processor trabaje a su propio ritmo sin depender directamente de la velocidad del resto de componentes.</p>
+</div>
+<hr />
+<h1 id="616-que-informacion-almacena-una-queue">6.16 ¿Qué información almacena una Queue?</h1>
+<p>Cada Queue mantiene información sobre los FlowFiles que contiene.</p>
+<p>Entre otros datos, pueden consultarse:</p>
+<ul>
+<li>número de FlowFiles;</li>
+<li>tamaño total ocupado;</li>
+<li>tiempo medio de permanencia;</li>
+<li>prioridad;</li>
+<li>porcentaje de utilización;</li>
+<li>estado de Back Pressure.</li>
+</ul>
+<p>En la interfaz de NiFi esta información aparece sobre la propia Connection.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Queue
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>FlowFiles : 12
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>Size : 2.3 MB
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>Queued : 15 s
+</span></code></pre></div>
+<hr />
+<h1 id="617-back-pressure">6.17 Back Pressure</h1>
+<p>Uno de los mecanismos más importantes de Apache NiFi es el <strong>Back Pressure</strong>.</p>
+<p>Su finalidad consiste en impedir que un Processor produzca FlowFiles indefinidamente cuando el siguiente Processor no puede procesarlos.</p>
+<p>Supongamos el siguiente escenario.</p>
+<pre class="mermaid"><code>flowchart LR
+
+A[GenerateFlowFile]
+
+--&gt;
+
+Q[(Queue)]
+
+--&gt;
+
+B[PutDatabaseRecord]</code></pre>
+<p>Si la base de datos deja de responder, la Queue comenzará a crecer.</p>
+<p>Cuando se alcance el límite configurado, Apache NiFi detendrá automáticamente el Processor de origen.</p>
+<pre class="mermaid"><code>flowchart LR
+
+A[GenerateFlowFile]
+
+-- Flujo detenido --&gt;
+
+Q[(Queue llena)]
+
+-.-&gt;
+
+B[Processor lento]</code></pre>
+<p>Esto evita:</p>
+<ul>
+<li>consumir toda la memoria;</li>
+<li>llenar completamente el disco;</li>
+<li>provocar una sobrecarga del sistema.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Protección automática</p>
+<p>El Back Pressure protege el sistema frente a productores mucho más rápidos que los consumidores.</p>
+</div>
+<hr />
+<h2 id="configuracion-del-back-pressure">Configuración del Back Pressure</h2>
+<p>Cada Connection dispone de dos límites independientes.</p>
+<table>
+<thead>
+<tr>
+<th>Parámetro</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Back Pressure Object Threshold</td>
+<td>Número máximo de FlowFiles</td>
+</tr>
+<tr>
+<td>Back Pressure Data Size Threshold</td>
+<td>Tamaño máximo permitido</td>
+</tr>
+</tbody>
+</table>
+<p>Cuando cualquiera de estos límites se supera, NiFi deja de transferir nuevos FlowFiles hacia la Queue.</p>
+<hr />
+<h1 id="618-priorizacion-de-flowfiles">6.18 Priorización de FlowFiles</h1>
+<p>No siempre interesa procesar los FlowFiles en el orden en que llegaron.</p>
+<p>Apache NiFi permite modificar ese comportamiento mediante <strong>Prioritizers</strong>.</p>
+<p>Sin priorizador:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>1
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>2
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>3
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>4
+</span></code></pre></div>
+<p>Con priorizador:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>4
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>1
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>2
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>3
+</span></code></pre></div>
+<p>Existen distintos tipos de priorización.</p>
+<p>Por ejemplo:</p>
+<ul>
+<li>First In First Out (FIFO)</li>
+<li>Last In First Out (LIFO)</li>
+<li>Prioridad por tamaño</li>
+<li>Prioridad por atributo</li>
+<li>Prioridad personalizada</li>
+</ul>
+<pre class="mermaid"><code>flowchart LR
+
+Queue
+
+--&gt;
+
+Prioritizer
+
+--&gt;
+
+Processor</code></pre>
+<p>Los Prioritizers resultan especialmente útiles cuando algunos FlowFiles deben procesarse antes que otros.</p>
+<hr />
+<h1 id="619-penalizacion-penalization">6.19 Penalización (Penalization)</h1>
+<p>En determinadas situaciones un Processor puede indicar que un FlowFile no debe volver a procesarse inmediatamente.</p>
+<p>En ese caso el FlowFile queda <strong>penalizado</strong> durante un tiempo.</p>
+<pre class="mermaid"><code>flowchart LR
+
+Processor
+
+--&gt;
+
+Penalized FlowFile
+
+--&gt;
+
+Espera
+
+--&gt;
+
+Queue</code></pre>
+<p>Mientras permanece penalizado, el FlowFile continúa en la Queue pero no será seleccionado para su procesamiento.</p>
+<p>Esto evita intentos repetitivos que probablemente volverían a fallar.</p>
+<hr />
+<h1 id="620-expiracion-de-flowfiles">6.20 Expiración de FlowFiles</h1>
+<p>También es posible definir un tiempo máximo de permanencia en una Queue.</p>
+<p>Cuando dicho tiempo se supera, el FlowFile expira.</p>
+<p>Ejemplo:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>FlowFile Expiration
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>30 min
+</span></code></pre></div>
+<p>Una vez expirado, Apache NiFi puede:</p>
+<ul>
+<li>descartarlo;</li>
+<li>dirigirlo hacia otra Relationship;</li>
+<li>registrar el evento en Provenance.</li>
+</ul>
+<p>La expiración resulta útil cuando los datos dejan de tener valor pasado un determinado tiempo.</p>
+<hr />
+<h1 id="621-flowfile-swap">6.21 FlowFile Swap</h1>
+<p>Cuando el número de FlowFiles pendientes es muy elevado, mantenerlos todos en memoria resultaría ineficiente.</p>
+<p>Apache NiFi utiliza entonces un mecanismo denominado <strong>FlowFile Swap</strong>.</p>
+<pre class="mermaid"><code>flowchart LR
+
+RAM
+
+--&gt;
+
+Swap
+
+--&gt;
+
+RAM</code></pre>
+<p>Los FlowFiles menos utilizados se trasladan temporalmente al disco.</p>
+<p>Cuando vuelven a ser necesarios, NiFi los recupera automáticamente.</p>
+<p>Este proceso es completamente transparente para el usuario.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>El FlowFile Swap no modifica el contenido del FlowFile; únicamente cambia dónde se mantiene temporalmente su información de estado.</p>
+</div>
+<hr />
+<h1 id="622-relacion-entre-queue-swap-y-back-pressure">6.22 Relación entre Queue, Swap y Back Pressure</h1>
+<p>Estos tres mecanismos trabajan conjuntamente.</p>
+<pre class="mermaid"><code>flowchart LR
+
+Processor
+
+--&gt;
+
+Queue
+
+--&gt;
+
+BackPressure
+
+--&gt;
+
+Swap
+
+--&gt;
+
+Processor</code></pre>
+<p>Cada uno tiene una finalidad distinta.</p>
+<table>
+<thead>
+<tr>
+<th>Mecanismo</th>
+<th>Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Queue</td>
+<td>Almacenar temporalmente FlowFiles</td>
+</tr>
+<tr>
+<td>Back Pressure</td>
+<td>Limitar el crecimiento de la cola</td>
+</tr>
+<tr>
+<td>Swap</td>
+<td>Reducir el consumo de memoria</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="623-buenas-practicas">6.23 Buenas prácticas</h1>
+<p>A medida que los flujos aumentan de tamaño, conviene adoptar una serie de recomendaciones.</p>
+<h2 id="mantener-colas-pequenas">Mantener colas pequeñas</h2>
+<p>Las colas muy grandes suelen indicar que existe un cuello de botella.</p>
+<hr />
+<h2 id="supervisar-el-back-pressure">Supervisar el Back Pressure</h2>
+<p>Si una Connection permanece constantemente en Back Pressure, probablemente exista un problema en el Processor de destino.</p>
+<hr />
+<h2 id="utilizar-prioritizers-unicamente-cuando-aporten-valor">Utilizar Prioritizers únicamente cuando aporten valor</h2>
+<p>La priorización añade complejidad al flujo.</p>
+<p>No conviene utilizarla si todos los FlowFiles pueden procesarse indistintamente.</p>
+<hr />
+<h2 id="evitar-queue-infinitas">Evitar Queue infinitas</h2>
+<p>Permitir un crecimiento ilimitado de las colas puede provocar un consumo excesivo de disco.</p>
+<hr />
+<h2 id="revisar-periodicamente-data-provenance">Revisar periódicamente Data Provenance</h2>
+<p>Permite detectar rápidamente:</p>
+<ul>
+<li>cuellos de botella;</li>
+<li>Processors lentos;</li>
+<li>FlowFiles retenidos;</li>
+<li>errores de configuración.</li>
+</ul>
+<hr />
+<h1 id="624-errores-frecuentes">6.24 Errores frecuentes</h1>
+<h2 id="pensar-que-una-connection-es-unicamente-una-flecha">Pensar que una Connection es únicamente una flecha</h2>
+<p>No lo es.</p>
+<p>Cada Connection incorpora una Queue.</p>
+<hr />
+<h2 id="configurar-un-back-pressure-demasiado-elevado">Configurar un Back Pressure demasiado elevado</h2>
+<p>Puede retrasar la detección de problemas y aumentar innecesariamente el consumo de recursos.</p>
+<hr />
+<h2 id="ignorar-las-colas">Ignorar las colas</h2>
+<p>Una Queue creciendo continuamente suele indicar un problema de rendimiento.</p>
+<hr />
+<h2 id="utilizar-prioritizers-innecesarios">Utilizar Prioritizers innecesarios</h2>
+<p>No todos los flujos requieren procesamiento prioritario.</p>
+<hr />
+<h2 id="no-supervisar-el-tiempo-de-permanencia">No supervisar el tiempo de permanencia</h2>
+<p>Un FlowFile retenido durante horas suele indicar una incidencia en el flujo.</p>
+<hr />
+<h1 id="laboratorio-1-observando-una-queue">Laboratorio 1. Observando una Queue</h1>
+<h2 id="objetivo">Objetivo</h2>
+<p>Comprender el funcionamiento de las colas.</p>
+<h3 id="pasos">Pasos</h3>
+<ol>
+<li>Crear el flujo:</li>
+</ol>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>GenerateFlowFile
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>↓
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>LogAttribute
+</span></code></pre></div>
+<ol>
+<li>
+<p>Iniciar ambos Processors.</p>
+</li>
+<li>
+<p>Detener únicamente <strong>LogAttribute</strong>.</p>
+</li>
+<li>
+<p>Esperar unos segundos.</p>
+</li>
+<li>
+<p>Observar el crecimiento de la Queue.</p>
+</li>
+<li>
+<p>Abrir <strong>List Queue</strong>.</p>
+</li>
+<li>
+<p>Examinar varios FlowFiles.</p>
+</li>
+<li>
+<p>Reiniciar LogAttribute.</p>
+</li>
+<li>
+<p>Observar cómo la Queue vuelve a quedar vacía.</p>
+</li>
+</ol>
+<hr />
+<h1 id="laboratorio-2-modificando-atributos">Laboratorio 2. Modificando atributos</h1>
+<p>Construir el siguiente flujo.</p>
+<pre class="mermaid"><code>flowchart LR
+
+GenerateFlowFile
+
+--&gt;
+
+UpdateAttribute
+
+--&gt;
+
+LogAttribute</code></pre>
+<p>Añadir mediante <strong>UpdateAttribute</strong>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>curso = Sistemas Big Data
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>autor = Alumno
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>modulo = Apache NiFi
+</span></code></pre></div>
+<p>Después:</p>
+<ul>
+<li>visualizar los atributos;</li>
+<li>comprobar que el contenido no cambia;</li>
+<li>consultar Provenance.</li>
+</ul>
+<hr />
+<h1 id="laboratorio-3-modificando-el-contenido">Laboratorio 3. Modificando el contenido</h1>
+<p>Crear el siguiente flujo.</p>
+<pre class="mermaid"><code>flowchart LR
+
+GenerateFlowFile
+
+--&gt;
+
+ReplaceText
+
+--&gt;
+
+LogAttribute</code></pre>
+<p>Introducir inicialmente:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="p">{</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w"> </span><span class="nt">&quot;temperatura&quot;</span><span class="p">:</span><span class="mi">21</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Posteriormente reemplazar el contenido por:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="p">{</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w"> </span><span class="nt">&quot;temperatura&quot;</span><span class="p">:</span><span class="mi">25</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Comprobar:</p>
+<ul>
+<li>el cambio del contenido;</li>
+<li>la creación de un nuevo Content Claim;</li>
+<li>el registro del evento en Data Provenance.</li>
+</ul>
+<hr />
+<h1 id="resumen-del-capitulo">Resumen del capítulo</h1>
+<p>En este capítulo hemos estudiado el elemento central de Apache NiFi: el <strong>FlowFile</strong>.</p>
+<p>Hemos aprendido que:</p>
+<ul>
+<li>un FlowFile representa la unidad básica de procesamiento;</li>
+<li>está formado por contenido y atributos;</li>
+<li>el contenido reside en el <strong>Content Repository</strong>;</li>
+<li>el estado se almacena en el <strong>FlowFile Repository</strong>;</li>
+<li>el historial se registra en el <strong>Provenance Repository</strong>;</li>
+<li>las Connections incorporan una Queue;</li>
+<li>el Back Pressure protege el sistema;</li>
+<li>los Prioritizers modifican el orden de procesamiento;</li>
+<li>los FlowFiles pueden penalizarse, expirar o intercambiarse mediante Swap;</li>
+<li>Data Provenance permite reconstruir el recorrido completo de cada FlowFile.</li>
+</ul>
+<p>Comprender estos conceptos resulta imprescindible para interpretar correctamente el funcionamiento interno de Apache NiFi y sacar el máximo partido a los Processors que se estudiarán en el siguiente capítulo.</p>
+<hr />
+<h1 id="autoevaluacion">Autoevaluación</h1>
+<h2 id="preguntas-de-desarrollo">Preguntas de desarrollo</h2>
+<ol>
+<li>¿Qué diferencia existe entre el contenido y los atributos de un FlowFile?</li>
+<li>¿Qué información almacena el FlowFile Repository?</li>
+<li>¿Cuál es la finalidad del Content Claim?</li>
+<li>¿Qué función desempeña el Provenance Repository?</li>
+<li>¿Qué ocurre cuando un Processor modifica el contenido de un FlowFile?</li>
+<li>¿Qué diferencia existe entre Back Pressure y FlowFile Swap?</li>
+<li>¿Qué ventajas ofrece la separación entre contenido y atributos?</li>
+<li>¿Qué información puede consultarse mediante Data Provenance?</li>
+</ol>
+<hr />
+<h1 id="test-de-autoevaluacion">Test de autoevaluación</h1>
+<h3 id="1-donde-se-almacena-el-contenido-real-de-un-flowfile">1. ¿Dónde se almacena el contenido real de un FlowFile?</h3>
+<ul>
+<li>[ ] FlowFile Repository</li>
+<li>[x] Content Repository</li>
+<li>[ ] Provenance Repository</li>
+<li>[ ] Queue</li>
+</ul>
+<hr />
+<h3 id="2-que-repositorio-registra-el-historial-del-procesamiento">2. ¿Qué repositorio registra el historial del procesamiento?</h3>
+<ul>
+<li>[ ] Content Repository</li>
+<li>[x] Provenance Repository</li>
+<li>[ ] Swap Manager</li>
+<li>[ ] Queue Repository</li>
+</ul>
+<hr />
+<h3 id="3-que-mecanismo-impide-que-una-queue-crezca-indefinidamente">3. ¿Qué mecanismo impide que una Queue crezca indefinidamente?</h3>
+<ul>
+<li>[ ] Prioritizer</li>
+<li>[ ] Penalization</li>
+<li>[x] Back Pressure</li>
+<li>[ ] Swap</li>
+</ul>
+<hr />
+<h3 id="4-que-sucede-cuando-un-processor-modifica-el-contenido-de-un-flowfile">4. ¿Qué sucede cuando un Processor modifica el contenido de un FlowFile?</h3>
+<ul>
+<li>[ ] Se sobrescribe el contenido existente.</li>
+<li>[ ] Se modifica el UUID.</li>
+<li>[x] Se crea un nuevo Content Claim.</li>
+<li>[ ] Se elimina el FlowFile anterior.</li>
+</ul>
+<hr />
+<h3 id="5-que-elemento-desacopla-dos-processors">5. ¿Qué elemento desacopla dos Processors?</h3>
+<ul>
+<li>[ ] Relationship</li>
+<li>[ ] UUID</li>
+<li>[x] Queue</li>
+<li>[ ] Content Claim</li>
+</ul>
+<hr />
+<h1 id="referencias">Referencias</h1>
+<ul>
+<li>Apache NiFi User Guide.</li>
+<li>Apache NiFi Developer Guide.</li>
+<li>Apache NiFi Administration Guide.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "content.code.select", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
