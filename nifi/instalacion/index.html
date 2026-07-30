@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://alapvi.github.io/nifi/interfaz/">
+        <link rel="canonical" href="https://alapvi.github.io/nifi/instalacion/">
       
       
-        <link rel="prev" href="../arquitectura/">
+        <link rel="prev" href="../interfaz/">
       
       
-        <link rel="next" href="../instalacion/">
+        <link rel="next" href="../../elastic/elastic_intro/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>Interfaz gráfica de NiFi - Sistemas de BigData</title>
+        <title>Instalación y despliegue - Sistemas de BigData</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#capitulo-3-la-interfaz-grafica-de-apache-nifi-2x" class="md-skip">
+        <a href="#capitulo-4-instalacion-y-despliegue-de-apache-nifi-2x-con-docker" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Interfaz gráfica de NiFi
+              Instalación y despliegue
             
           </span>
         </div>
@@ -749,6 +749,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../interfaz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interfaz gráfica de NiFi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -768,7 +796,7 @@
   <span class="md-ellipsis">
     
   
-    Interfaz gráfica de NiFi
+    Instalación y despliegue
   
 
     
@@ -786,7 +814,7 @@
   <span class="md-ellipsis">
     
   
-    Interfaz gráfica de NiFi
+    Instalación y despliegue
   
 
     
@@ -826,34 +854,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../instalacion/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Instalación y despliegue
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -1142,184 +1142,185 @@
 
 
 
-<h1 id="capitulo-3-la-interfaz-grafica-de-apache-nifi-2x">Capítulo 3. La interfaz gráfica de Apache NiFi 2.x</h1>
+<h1 id="capitulo-4-instalacion-y-despliegue-de-apache-nifi-2x-con-docker">Capítulo 4. Instalación y despliegue de Apache NiFi 2.x con Docker</h1>
 <blockquote>
-<p><strong>Objetivo del capítulo:</strong> conocer el entorno de trabajo de Apache
-NiFi y aprender a organizar flujos de forma profesional antes de
-construir el primer pipeline.</p>
+<p><strong>Objetivo del capítulo:</strong> desplegar Apache NiFi 2.x utilizando Docker
+Compose y comprender la estructura básica de una instalación lista
+para desarrollo.</p>
 </blockquote>
 <h2 id="objetivos-de-aprendizaje">Objetivos de aprendizaje</h2>
 <p>Al finalizar este capítulo serás capaz de:</p>
 <ul>
-<li>Identificar todas las zonas de la interfaz.</li>
-<li>Comprender la función de cada componente gráfico.</li>
-<li>Navegar por el Canvas.</li>
-<li>Organizar flujos mediante Process Groups.</li>
-<li>Aplicar buenas prácticas de diseño.</li>
+<li>Comprender las ventajas de ejecutar NiFi mediante contenedores.</li>
+<li>Desplegar Apache NiFi utilizando Docker Compose.</li>
+<li>Identificar los directorios persistentes.</li>
+<li>Acceder a la interfaz web.</li>
+<li>Verificar el correcto funcionamiento de la instalación.</li>
+<li>Resolver los problemas más habituales.</li>
 </ul>
 <hr />
-<h1 id="31-el-canvas">3.1 El Canvas</h1>
-<p>Cuando Apache NiFi se inicia, el usuario accede al <strong>Canvas</strong>, el
-espacio de trabajo donde se diseñan y administran los flujos de datos.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>flowchart LR
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    A[Processor] --&gt; B[Processor]
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    B --&gt; C[Processor]
-</span></code></pre></div>
-<h2 id="caracteristicas">Características</h2>
+<h1 id="41-por-que-utilizar-docker">4.1 ¿Por qué utilizar Docker?</h1>
+<p>Docker permite ejecutar Apache NiFi de forma aislada, reproducible y
+sencilla.</p>
+<h2 id="ventajas">Ventajas</h2>
 <ul>
-<li>Espacio de trabajo ilimitado.</li>
-<li>Zoom y desplazamiento.</li>
-<li>Edición visual.</li>
-<li>Modificación de flujos en ejecución.</li>
-<li>Organización mediante Process Groups.</li>
+<li>Instalación rápida.</li>
+<li>Sin dependencias locales.</li>
+<li>Fácil actualización.</li>
+<li>Entornos reproducibles.</li>
+<li>Eliminación sencilla.</li>
 </ul>
-<p>!!! note "Nota" El Canvas representa visualmente el flujo, pero quien
-realmente ejecuta el procesamiento es el motor interno de Apache NiFi.</p>
+<p>!!! tip "Buena práctica" Utiliza Docker durante el desarrollo y
+aprendizaje. Para producción pueden emplearse Docker, Kubernetes o
+despliegues tradicionales.</p>
 <hr />
-<h1 id="32-anatomia-de-la-interfaz">3.2 Anatomía de la interfaz</h1>
+<h1 id="42-requisitos">4.2 Requisitos</h1>
+<ul>
+<li>Docker Engine 24 o superior.</li>
+<li>Docker Compose v2.</li>
+<li>4 GB de memoria RAM (mínimo recomendado).</li>
+<li>Puerto TCP 8443 disponible.</li>
+</ul>
+<p>Comprueba la instalación:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>--version
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>version
+</span></code></pre></div>
+<hr />
+<h1 id="43-estructura-del-proyecto">4.3 Estructura del proyecto</h1>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>nifi-lab/
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── docker-compose.yml
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>├── conf/
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>├── state/
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>├── content_repository/
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>├── flowfile_repository/
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>├── provenance_repository/
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>└── logs/
+</span></code></pre></div>
+<p>Cada directorio almacenará información persistente del contenedor.</p>
+<hr />
+<h1 id="44-docker-compose">4.4 Docker Compose</h1>
+<p>Crea el archivo <code>docker-compose.yml</code>.</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">services</span><span class="p">:</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">nifi</span><span class="p">:</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apache/nifi:2.10.0</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nifi</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8443:8443&quot;</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">      </span><span class="nt">SINGLE_USER_CREDENTIALS_USERNAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admin</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">      </span><span class="nt">SINGLE_USER_CREDENTIALS_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ChangeMe123!</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./conf:/opt/nifi/nifi-current/conf</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./logs:/opt/nifi/nifi-current/logs</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./flowfile_repository:/opt/nifi/nifi-current/flowfile_repository</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./content_repository:/opt/nifi/nifi-current/content_repository</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./provenance_repository:/opt/nifi/nifi-current/provenance_repository</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./state:/opt/nifi/nifi-current/state</span>
+</span></code></pre></div>
+<p>!!! warning "Contraseña" Cambia la contraseña por una más segura antes
+de utilizar este entorno fuera de un laboratorio.</p>
+<hr />
+<h1 id="45-puesta-en-marcha">4.5 Puesta en marcha</h1>
+<p>Inicia el servicio:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</span></code></pre></div>
+<p>Comprobar el estado:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>ps
+</span></code></pre></div>
+<p>Visualizar el registro:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>nifi
+</span></code></pre></div>
+<p>Detener el entorno:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>down
+</span></code></pre></div>
+<hr />
+<h1 id="46-primer-acceso">4.6 Primer acceso</h1>
+<p>Abre el navegador:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>https://localhost:8443/nifi
+</span></code></pre></div>
+<p>Inicia sesión con las credenciales configuradas.</p>
 <blockquote>
-<p><strong>Figura 3.1:</strong> Captura de pantalla de Apache NiFi 2.10 <em>(pendiente de
-insertar)</em></p>
+<p><strong>Figura 4.1:</strong> Pantalla de inicio de sesión de Apache NiFi 2.10
+<em>(pendiente de insertar).</em></p>
 </blockquote>
-<p>Zona         Función</p>
 <hr />
-<p>Toolbar      Añadir componentes
-  Canvas       Diseñar flujos
-  Navigation   Navegar por el lienzo
-  Search       Buscar componentes
-  Status Bar   Estado del sistema</p>
+<h1 id="47-directorios-persistentes">4.7 Directorios persistentes</h1>
+<p>Directorio              Finalidad</p>
 <hr />
-<h1 id="33-la-barra-de-componentes">3.3 La barra de componentes</h1>
-<p>Componente             Descripción</p>
+<p>conf                    Configuración
+  logs                    Registros
+  flowfile_repository     Estado de FlowFiles
+  content_repository      Contenido
+  provenance_repository   Historial
+  state                   Estado interno de componentes</p>
 <hr />
-<p>Processor              Ejecuta operaciones sobre FlowFiles
-  Input Port             Punto de entrada
-  Output Port            Punto de salida
-  Process Group          Organiza el flujo
-  Remote Process Group   Comunicación con otros NiFi
-  Connection             Une componentes y actúa como cola
-  Funnel                 Agrupa conexiones
-  Label                  Documenta el flujo</p>
-<hr />
-<h1 id="34-navegacion-por-el-canvas">3.4 Navegación por el Canvas</h1>
-<p>NiFi permite:</p>
+<h1 id="48-verificacion">4.8 Verificación</h1>
+<p>Comprueba:</p>
 <ul>
-<li>Zoom.</li>
-<li>Desplazamiento (pan).</li>
-<li>Selección múltiple.</li>
-<li>Alineación de componentes.</li>
-<li>Organización mediante grupos.</li>
+<li>La interfaz carga correctamente.</li>
+<li>Es posible iniciar sesión.</li>
+<li>El Canvas aparece vacío.</li>
+<li>No existen errores críticos en los logs.</li>
 </ul>
-<p>!!! tip "Buena práctica" Mantén una orientación izquierda → derecha para
-facilitar la lectura de los flujos.</p>
 <hr />
-<h1 id="35-estados-de-los-componentes">3.5 Estados de los componentes</h1>
-<p>Estado     Significado</p>
-<hr />
-<p>Running    Ejecutándose
-  Stopped    Detenido
-  Invalid    Configuración incompleta
-  Disabled   Deshabilitado</p>
-<hr />
-<h1 id="36-configuracion-de-un-componente">3.6 Configuración de un componente</h1>
-<p>La mayoría de componentes disponen de:</p>
-<ul>
-<li>Settings</li>
-<li>Scheduling</li>
-<li>Properties</li>
-<li>Relationships</li>
-<li>Comments</li>
-</ul>
-<p>Estas pestañas aparecen al editar cualquier Processor.</p>
-<hr />
-<h1 id="37-process-groups">3.7 Process Groups</h1>
-<p>Los Process Groups permiten dividir un flujo complejo en módulos
-reutilizables.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>flowchart LR
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    A[Entrada] --&gt; B[Transformación]
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    B --&gt; C[Salida]
+<h1 id="49-problemas-habituales">4.9 Problemas habituales</h1>
+<h2 id="el-puerto-esta-ocupado">El puerto está ocupado</h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>lsof<span class="w"> </span>-i<span class="w"> </span>:8443
 </span></code></pre></div>
-<p>!!! warning "Error frecuente" Evita colocar todos los Processors en el
-Process Group raíz.</p>
-<hr />
-<h1 id="38-labels-y-documentacion">3.8 Labels y documentación</h1>
-<p>Los Labels ayudan a documentar el flujo.</p>
-<p>Se recomienda:</p>
+<h2 id="el-contenedor-no-inicia">El contenedor no inicia</h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>nifi
+</span></code></pre></div>
+<h2 id="no-puedo-acceder-desde-el-navegador">No puedo acceder desde el navegador</h2>
 <ul>
-<li>describir la finalidad de cada bloque;</li>
-<li>indicar el origen y destino de los datos;</li>
-<li>añadir comentarios relevantes.</li>
+<li>Comprueba el puerto publicado.</li>
+<li>Verifica que Docker esté en ejecución.</li>
+<li>Revisa el firewall.</li>
 </ul>
+<div class="admonition note durante el primer arranque nifi puede tardar varios minutos en">
+<p class="admonition-title">Note</p>
+</div>
+<p>estar disponible.</p>
 <hr />
-<h1 id="39-buenas-practicas-de-diseno">3.9 Buenas prácticas de diseño</h1>
-<h2 id="recomendaciones">Recomendaciones</h2>
+<h1 id="410-buenas-practicas">4.10 Buenas prácticas</h1>
 <ul>
-<li>Diseñar de izquierda a derecha.</li>
-<li>Evitar líneas cruzadas.</li>
-<li>Utilizar nombres descriptivos.</li>
-<li>Agrupar por funcionalidad.</li>
-<li>Documentar mediante Labels.</li>
-<li>Preparar el uso de Parameter Contexts.</li>
-</ul>
-<hr />
-<h1 id="310-errores-frecuentes">3.10 Errores frecuentes</h1>
-<ul>
-<li>Canvas desordenado.</li>
-<li>Processors sin renombrar.</li>
-<li>Conexiones cruzadas.</li>
-<li>Ausencia de documentación.</li>
-<li>Un único Process Group para todo el flujo.</li>
+<li>Utiliza siempre volúmenes persistentes.</li>
+<li>Versiona únicamente los archivos de configuración.</li>
+<li>No almacenes contraseñas reales en el repositorio.</li>
+<li>Mantén actualizado el contenedor.</li>
+<li>Documenta cualquier cambio de configuración.</li>
 </ul>
 <hr />
 <h1 id="laboratorio-guiado">Laboratorio guiado</h1>
-<h2 id="objetivo">Objetivo</h2>
-<p>Familiarizarse con la interfaz.</p>
-<h3 id="actividad-1">Actividad 1</h3>
-<p>Crear un Processor.</p>
-<h3 id="actividad-2">Actividad 2</h3>
-<p>Cambiar su nombre.</p>
-<h3 id="actividad-3">Actividad 3</h3>
-<p>Moverlo por el Canvas.</p>
-<h3 id="actividad-4">Actividad 4</h3>
-<p>Eliminarlo.</p>
-<hr />
-<h1 id="laboratorio-2">Laboratorio 2</h1>
-<p>Construye el siguiente diseño sin ejecutarlo.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>flowchart LR
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    A[GenerateFlowFile] --&gt; B[LogAttribute]
-</span></code></pre></div>
-<p>Comprueba:</p>
-<ul>
-<li>cómo crear componentes;</li>
-<li>cómo conectarlos;</li>
-<li>cómo moverlos;</li>
-<li>cómo documentarlos.</li>
-</ul>
+<ol>
+<li>Crear la estructura del proyecto.</li>
+<li>Crear el archivo <code>docker-compose.yml</code>.</li>
+<li>Iniciar NiFi.</li>
+<li>Acceder a la interfaz web.</li>
+<li>Verificar los logs.</li>
+<li>Detener el contenedor.</li>
+<li>Reiniciarlo comprobando que la configuración se mantiene.</li>
+</ol>
 <hr />
 <h1 id="resumen">Resumen</h1>
-<p>En este capítulo hemos aprendido:</p>
-<ul>
-<li>Qué es el Canvas.</li>
-<li>Cómo navegar por la interfaz.</li>
-<li>Qué componentes forman la Toolbar.</li>
-<li>Cómo organizar flujos mediante Process Groups.</li>
-<li>Buenas prácticas para diseñar pipelines mantenibles.</li>
-</ul>
+<p>En este capítulo has aprendido a desplegar Apache NiFi 2.x mediante
+Docker Compose, identificar sus directorios principales y verificar que
+la instalación funciona correctamente. Este entorno será la base para
+construir los primeros flujos de datos en el siguiente capítulo.</p>
 <hr />
 <h1 id="autoevaluacion">Autoevaluación</h1>
 <ol>
-<li>¿Qué función desempeña el Canvas?</li>
-<li>¿Qué diferencia existe entre un Processor y un Process Group?</li>
-<li>¿Qué finalidad tiene una Connection?</li>
-<li>¿Cuándo conviene utilizar un Funnel?</li>
-<li>¿Por qué es recomendable utilizar Labels?</li>
+<li>¿Qué ventajas ofrece Docker frente a una instalación manual?</li>
+<li>¿Qué directorio almacena el contenido de los FlowFiles?</li>
+<li>¿Qué comando permite visualizar los registros del contenedor?</li>
+<li>¿Qué puerto utiliza NiFi por defecto en HTTPS?</li>
+<li>¿Por qué son importantes los volúmenes persistentes?</li>
 </ol>
 <hr />
 <h1 id="lecturas-recomendadas">Lecturas recomendadas</h1>
 <ul>
 <li>Documentación oficial de Apache NiFi.</li>
-<li>Guía de interfaz de usuario.</li>
-<li>Buenas prácticas para el diseño de DataFlows.</li>
+<li>Docker Compose Specification.</li>
+<li>Guía de despliegue de Apache NiFi.</li>
 </ul>
 
 
