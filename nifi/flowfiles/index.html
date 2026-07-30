@@ -1938,21 +1938,14 @@ Processor</code></pre>
 <h1 id="619-penalizacion-penalization">6.19 Penalización (Penalization)</h1>
 <p>En determinadas situaciones un Processor puede indicar que un FlowFile no debe volver a procesarse inmediatamente.</p>
 <p>En ese caso el FlowFile queda <strong>penalizado</strong> durante un tiempo.</p>
-<pre class="mermaid"><code>flowchart LR
-
-Processor
-
---&gt;
-
-Penalized FlowFile
-
---&gt;
-
-Espera
-
---&gt;
-
-Queue</code></pre>
+<pre class="mermaid"><code>    flowchart LR
+    Processor
+    --&gt;
+    Penalized FlowFile
+    --&gt;
+    Espera
+    --&gt;
+    Queue</code></pre>
 <p>Mientras permanece penalizado, el FlowFile continúa en la Queue pero no será seleccionado para su procesamiento.</p>
 <p>Esto evita intentos repetitivos que probablemente volverían a fallar.</p>
 <hr />
