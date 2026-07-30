@@ -1298,13 +1298,13 @@ class FlowFile{
 
 UUID
 
-Content Claim
+ContentClaim
 
 Size
 
 Attributes
 
-Entry Date
+EntryDate
 
 Lineage
 
@@ -1350,25 +1350,7 @@ UUID --&gt; Processor3</code></pre>
 
 A[Creación]
 
---&gt;
-
-B[Queue]
-
---&gt;
-
-C[Processor]
-
---&gt;
-
-D[Queue]
-
---&gt;
-
-E[Processor]
-
---&gt;
-
-F[Destino]</code></pre>
+A[Creación] --&gt; B[Queue] --&gt; C[Processor] --&gt; D[Queue] --&gt; E[Processor] --&gt; F[Destino]</code></pre>
 <p>En función del flujo diseñado, un FlowFile puede:</p>
 <ul>
 <li>ser creado;</li>
@@ -1427,11 +1409,7 @@ F[Destino]</code></pre>
 <p>Puede imaginarse como un índice.</p>
 <pre class="mermaid"><code>flowchart LR
 
-A[FlowFile]
-
---&gt;
-
-B[FlowFile Repository]
+A[FlowFile] --&gt; B[FlowFile Repository]
 
 B --&gt; UUID
 
@@ -1463,19 +1441,7 @@ B --&gt; Queue</code></pre>
 <p>Únicamente mantiene una referencia al lugar donde están almacenados.</p>
 <pre class="mermaid"><code>flowchart LR
 
-FlowFile
-
---&gt;
-
-ContentClaim
-
---&gt;
-
-ContentRepository
-
---&gt;
-
-Archivo</code></pre>
+A[FlowFile] --&gt; B[ContentClaim] --&gt; C[ContentRepository] --&gt; D[Archivo]</code></pre>
 <p>Este diseño evita copiar continuamente grandes volúmenes de información.</p>
 <p>Supongamos un fichero de 5 GB.</p>
 <p>Si varios Processors necesitan trabajar sobre él, NiFi intentará reutilizar el mismo contenido siempre que sea posible.</p>
@@ -1515,13 +1481,7 @@ Archivo</code></pre>
 
 A[GenerateFlowFile]
 
---&gt;
-
-B[ReplaceText]
-
---&gt;
-
-C[PutFile]</code></pre>
+A[GenerateFlowFile] --&gt; B[ReplaceText] --&gt; C[PutFile]</code></pre>
 <p>Inicialmente:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>FlowFile
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>↓
@@ -1561,23 +1521,7 @@ C[PutFile]</code></pre>
 </ul>
 <pre class="mermaid"><code>flowchart LR
 
-CREATE
-
---&gt;
-
-ROUTE
-
---&gt;
-
-MODIFY
-
---&gt;
-
-SEND
-
---&gt;
-
-DROP</code></pre>
+CREATE --&gt; ROUTE --&gt; MODIFY --&gt; SEND --&gt; DROP</code></pre>
 <p>Cada uno de estos eventos queda asociado al UUID del FlowFile.</p>
 <p>Gracias a ello es posible reconstruir completamente su recorrido.</p>
 <hr />
@@ -1627,23 +1571,11 @@ DROP</code></pre>
 <p>Los tres repositorios trabajan conjuntamente.</p>
 <pre class="mermaid"><code>flowchart TB
 
-FlowFile
+FlowFile --&gt; FlowFileRepository
 
---&gt;
+FlowFile --&gt; ContentRepository
 
-FlowFileRepository
-
-FlowFile
-
---&gt;
-
-ContentRepository
-
-FlowFile
-
---&gt;
-
-ProvenanceRepository
+FlowFile --&gt; ProvenanceRepository
 
 FlowFileRepository --&gt; Estado
 
@@ -1704,17 +1636,7 @@ ProvenanceRepository --&gt; Historial</code></pre>
 
 A[GetFile]
 
---&gt;
-
-B[UpdateAttribute]
-
---&gt;
-
-C[ReplaceText]
-
---&gt;
-
-D[PutFile]</code></pre>
+A[GetFile] --&gt; B[UpdateAttribute] --&gt; C[ReplaceText] --&gt; D[PutFile]</code></pre>
 <p>Durante el recorrido ocurre lo siguiente.</p>
 <h2 id="paso-1">Paso 1</h2>
 <p>GetFile crea un nuevo FlowFile.</p>
@@ -1796,13 +1718,7 @@ D[PutFile]</code></pre>
 
 A[Processor A]
 
---&gt;
-
-Q[(Queue)]
-
---&gt;
-
-B[Processor B]</code></pre>
+A[Processor A] --&gt; Q[(Queue)] --&gt; B[Processor B]</code></pre>
 <p>La Queue actúa como un mecanismo de desacoplamiento entre Processors.</p>
 <p>Esto significa que un Processor puede continuar generando FlowFiles aunque el siguiente Processor procese los datos a una velocidad inferior, siempre que no se alcance el límite configurado.</p>
 <div class="admonition note">
@@ -1839,26 +1755,16 @@ B[Processor B]</code></pre>
 
 A[GenerateFlowFile]
 
---&gt;
-
-Q[(Queue)]
-
---&gt;
-
-B[PutDatabaseRecord]</code></pre>
+A[GenerateFlowFile] --&gt; Q[(Queue)] --&gt; B[PutDatabaseRecord]</code></pre>
 <p>Si la base de datos deja de responder, la Queue comenzará a crecer.</p>
 <p>Cuando se alcance el límite configurado, Apache NiFi detendrá automáticamente el Processor de origen.</p>
 <pre class="mermaid"><code>flowchart LR
 
 A[GenerateFlowFile]
 
--- Flujo detenido --&gt;
+A[GenerateFlowFile] -- Flujo detenido --&gt; Q[(Queue llena)]
 
-Q[(Queue llena)]
-
--.-&gt;
-
-B[Processor lento]</code></pre>
+Q -.-&gt; B[Processor lento]</code></pre>
 <p>Esto evita:</p>
 <ul>
 <li>consumir toda la memoria;</li>
@@ -1924,30 +1830,15 @@ B[Processor lento]</code></pre>
 </ul>
 <pre class="mermaid"><code>flowchart LR
 
-Queue
-
---&gt;
-
-Prioritizer
-
---&gt;
-
-Processor</code></pre>
+Queue --&gt; Prioritizer --&gt; Processor</code></pre>
 <p>Los Prioritizers resultan especialmente útiles cuando algunos FlowFiles deben procesarse antes que otros.</p>
 <hr />
 <h1 id="619-penalizacion-penalization">6.19 Penalización (Penalization)</h1>
 <p>En determinadas situaciones un Processor puede indicar que un FlowFile no debe volver a procesarse inmediatamente.</p>
 <p>En ese caso el FlowFile queda <strong>penalizado</strong> durante un tiempo.</p>
-<pre class="mermaid"><code>
-    flowchart LR
+<pre class="mermaid"><code>flowchart LR
 
-    Processor
-    --&gt;
-    Penalized FlowFile
-    --&gt;
-    Espera
-    --&gt;
-    Queue</code></pre>
+Processor --&gt; PenalizedFlowFile[Penalized FlowFile] --&gt; Espera --&gt; Queue</code></pre>
 <p>Mientras permanece penalizado, el FlowFile continúa en la Queue pero no será seleccionado para su procesamiento.</p>
 <p>Esto evita intentos repetitivos que probablemente volverían a fallar.</p>
 <hr />
@@ -1972,15 +1863,7 @@ Processor</code></pre>
 <p>Apache NiFi utiliza entonces un mecanismo denominado <strong>FlowFile Swap</strong>.</p>
 <pre class="mermaid"><code>flowchart LR
 
-RAM
-
---&gt;
-
-Swap
-
---&gt;
-
-RAM</code></pre>
+RAM --&gt; Swap --&gt; RAM</code></pre>
 <p>Los FlowFiles menos utilizados se trasladan temporalmente al disco.</p>
 <p>Cuando vuelven a ser necesarios, NiFi los recupera automáticamente.</p>
 <p>Este proceso es completamente transparente para el usuario.</p>
@@ -1993,23 +1876,7 @@ RAM</code></pre>
 <p>Estos tres mecanismos trabajan conjuntamente.</p>
 <pre class="mermaid"><code>flowchart LR
 
-Processor
-
---&gt;
-
-Queue
-
---&gt;
-
-BackPressure
-
---&gt;
-
-Swap
-
---&gt;
-
-Processor</code></pre>
+Processor --&gt; Queue --&gt; BackPressure --&gt; Swap --&gt; Processor</code></pre>
 <p>Cada uno tiene una finalidad distinta.</p>
 <table>
 <thead>
@@ -2117,12 +1984,8 @@ Processor</code></pre>
 <hr />
 <h1 id="laboratorio-2-modificando-atributos">Laboratorio 2. Modificando atributos</h1>
 <p>Construir el siguiente flujo.</p>
-<p><pre class="mermaid"><code>    flowchart LR
-    GenerateFlowFile
-    --&gt;
-    UpdateAttribute
-    --&gt;
-    LogAttribute</code></pre>
+<p><pre class="mermaid"><code>flowchart LR
+    GenerateFlowFile --&gt; UpdateAttribute --&gt; LogAttribute</code></pre>
 Añadir mediante <strong>UpdateAttribute</strong>:
 <div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>    curso = Sistemas Big Data
 </span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>    autor = Alumno
@@ -2137,12 +2000,8 @@ Añadir mediante <strong>UpdateAttribute</strong>:
 <hr />
 <h1 id="laboratorio-3-modificando-el-contenido">Laboratorio 3. Modificando el contenido</h1>
 <p>Crear el siguiente flujo.</p>
-<pre class="mermaid"><code>    flowchart LR
-    GenerateFlowFile
-    --&gt;
-    ReplaceText
-    --&gt;
-    LogAttribute</code></pre>
+<pre class="mermaid"><code>flowchart LR
+    GenerateFlowFile --&gt; ReplaceText --&gt; LogAttribute</code></pre>
 <p>Introducir inicialmente:</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="w">    </span><span class="p">{</span>
 </span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">    </span><span class="nt">&quot;temperatura&quot;</span><span class="p">:</span><span class="mi">21</span>
