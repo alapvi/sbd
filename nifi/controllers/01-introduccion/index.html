@@ -2247,8 +2247,7 @@
 <p>Un Controller Service es visible dentro del Process Group en el que se define y en sus grupos descendientes, pero no en sus grupos ascendentes ni en otros grupos paralelos.</p>
 </blockquote>
 <p>El siguiente diagrama muestra una jerarquía básica.</p>
-<p>```mermaid id="controller-service-scope-basic"
-flowchart TD
+<pre class="mermaid"><code>flowchart TD
     ROOT["Process Group raíz"]
     ING["Ingesta"]
     TRA["Transformación"]
@@ -2256,44 +2255,39 @@ flowchart TD
     API["APIs"]
     FILES["Archivos"]
     CLEAN["Limpieza"]
-    ENRICH["Enriquecimiento"]</p>
-<div class="language-text highlight"><pre><span></span><code>ROOT --&gt; ING
-ROOT --&gt; TRA
-ROOT --&gt; EXP
+    ENRICH["Enriquecimiento"]
 
-ING --&gt; API
-ING --&gt; FILES
+    ROOT --&gt; ING
+    ROOT --&gt; TRA
+    ROOT --&gt; EXP
 
-TRA --&gt; CLEAN
-TRA --&gt; ENRICH
-</code></pre></div>
-<p><code>``
+    ING --&gt; API
+    ING --&gt; FILES
 
-Si un Controller Service se crea en el Process Group raíz, podrá ser utilizado por los componentes situados en:
-
-* Ingesta.
-* Transformación.
-* Exportación.
-* APIs.
-* Archivos.
-* Limpieza.
-* Enriquecimiento.
-
-En cambio, si se crea dentro de</code>Ingesta<code>, únicamente estará disponible para:
-
-* Los componentes del propio grupo</code>Ingesta<code>.
-* Los componentes de</code>APIs<code>.
-* Los componentes de</code>Archivos<code>.
-
-No será visible desde</code>Transformación<code>ni desde</code>Exportación`.</p>
+    TRA --&gt; CLEAN
+    TRA --&gt; ENRICH</code></pre>
+<p>Si un Controller Service se crea en el Process Group raíz, podrá ser utilizado por los componentes situados en:</p>
+<ul>
+<li>Ingesta.</li>
+<li>Transformación.</li>
+<li>Exportación.</li>
+<li>APIs.</li>
+<li>Archivos.</li>
+<li>Limpieza.</li>
+<li>Enriquecimiento.</li>
+</ul>
+<p>En cambio, si se crea dentro de <code>Ingesta</code>, únicamente estará disponible para:</p>
+<ul>
+<li>Los componentes del propio grupo <code>Ingesta</code>.</li>
+<li>Los componentes de <code>APIs</code>.</li>
+<li>Los componentes de <code>Archivos</code>.</li>
+</ul>
+<p>No será visible desde <code>Transformación</code> ni desde <code>Exportación</code>.</p>
 <hr />
 <h2 id="herencia-descendente">Herencia descendente</h2>
-<p>La herencia de los Controller Services sigue una dirección descendente.
-
-Esto significa que los Process Groups hijos pueden utilizar los servicios definidos en sus grupos padres.
-
-<code>mermaid id="controller-service-downward-inheritance"
-flowchart TD
+<p>La herencia de los Controller Services sigue una dirección descendente.</p>
+<p>Esto significa que los Process Groups hijos pueden utilizar los servicios definidos en sus grupos padres.</p>
+<pre class="mermaid"><code>flowchart TD
     ROOT["Raíz&lt;br/&gt;DBCP-Global"]
     PG1["Process Group A"]
     PG2["Process Group B"]
@@ -2311,7 +2305,7 @@ flowchart TD
     ROOT -. "Visible" .-&gt; PG2
     ROOT -. "Visible" .-&gt; PG11
     ROOT -. "Visible" .-&gt; PG12
-    ROOT -. "Visible" .-&gt; PG21</code></p>
+    ROOT -. "Visible" .-&gt; PG21</code></pre>
 <p>En este ejemplo, <code>DBCP-Global</code> se ha creado en el nivel raíz.</p>
 <p>Por tanto, todos los Process Groups descendientes pueden utilizarlo.</p>
 <p>Este modelo resulta especialmente útil cuando muchos flujos deben acceder al mismo recurso corporativo, como:</p>
@@ -2327,28 +2321,22 @@ flowchart TD
 <h2 id="ausencia-de-herencia-ascendente">Ausencia de herencia ascendente</h2>
 <p>La herencia no funciona en sentido ascendente.</p>
 <p>Un Controller Service creado dentro de un Process Group hijo no puede ser utilizado por su grupo padre.</p>
-<p>```mermaid id="controller-service-no-upward-inheritance"
-flowchart BT
-    CHILD["Process Group hijo<br/>SSLContextService"]
+<pre class="mermaid"><code>flowchart BT
+    CHILD["Process Group hijo&lt;br/&gt;SSLContextService"]
     PARENT["Process Group padre"]
-    ROOT["Process Group raíz"]</p>
-<div class="language-text highlight"><pre><span></span><code>CHILD --&gt; PARENT
-PARENT --&gt; ROOT
+    ROOT["Process Group raíz"]
 
-CHILD -. &quot;No visible&quot; .-&gt; PARENT
-CHILD -. &quot;No visible&quot; .-&gt; ROOT
-</code></pre></div>
-<p>```
+    CHILD --&gt; PARENT
+    PARENT --&gt; ROOT
 
-Esto significa que un servicio local permanece encapsulado dentro de su propia rama del flujo.
-
-Esta limitación no es un inconveniente, sino un mecanismo de aislamiento. Evita que los recursos internos de un flujo sean utilizados accidentalmente por otros componentes.</p>
+    CHILD -. "No visible" .-&gt; PARENT
+    CHILD -. "No visible" .-&gt; ROOT</code></pre>
+<p>Esto significa que un servicio local permanece encapsulado dentro de su propia rama del flujo.</p>
+<p>Esta limitación no es un inconveniente, sino un mecanismo de aislamiento. Evita que los recursos internos de un flujo sean utilizados accidentalmente por otros componentes.</p>
 <hr />
 <h2 id="ausencia-de-herencia-lateral">Ausencia de herencia lateral</h2>
-<p>Los Process Groups hermanos tampoco comparten automáticamente sus Controller Services.
-
-<code>mermaid id="controller-service-no-sibling-visibility"
-flowchart LR
+<p>Los Process Groups hermanos tampoco comparten automáticamente sus Controller Services.</p>
+<pre class="mermaid"><code>flowchart LR
     ROOT["Process Group raíz"]
     SALES["Ventas&lt;br/&gt;DBCP-Ventas"]
     HR["Recursos Humanos"]
@@ -2359,7 +2347,7 @@ flowchart LR
     ROOT --&gt; LOG
 
     SALES -. "No visible" .-&gt; HR
-    SALES -. "No visible" .-&gt; LOG</code></p>
+    SALES -. "No visible" .-&gt; LOG</code></pre>
 <p>En este ejemplo, <code>DBCP-Ventas</code> solo podrá ser utilizado dentro del Process Group <code>Ventas</code> y en sus descendientes.</p>
 <p>No será visible desde:</p>
 <ul>
@@ -2386,37 +2374,32 @@ flowchart LR
 <li>Schema Registry compartido.</li>
 <li>Acceso al clúster Kafka principal.</li>
 </ul>
-<p>```mermaid id="controller-service-global-scope"
-flowchart TD
-    ROOT["Raíz<br/>SSL-Corporativo"]
+<pre class="mermaid"><code>flowchart TD
+    ROOT["Raíz&lt;br/&gt;SSL-Corporativo"]
     A["Ingesta"]
     B["Procesamiento"]
     C["Publicación"]
-    D["Monitorización"]</p>
-<div class="language-text highlight"><pre><span></span><code>ROOT --&gt; A
-ROOT --&gt; B
-ROOT --&gt; C
-ROOT --&gt; D
+    D["Monitorización"]
 
-ROOT -. &quot;Servicio compartido&quot; .-&gt; A
-ROOT -. &quot;Servicio compartido&quot; .-&gt; B
-ROOT -. &quot;Servicio compartido&quot; .-&gt; C
-ROOT -. &quot;Servicio compartido&quot; .-&gt; D
-</code></pre></div>
-<p>```
-</p>
+    ROOT --&gt; A
+    ROOT --&gt; B
+    ROOT --&gt; C
+    ROOT --&gt; D
+
+    ROOT -. "Servicio compartido" .-&gt; A
+    ROOT -. "Servicio compartido" .-&gt; B
+    ROOT -. "Servicio compartido" .-&gt; C
+    ROOT -. "Servicio compartido" .-&gt; D</code></pre>
 <h3 id="servicio-departamental">Servicio departamental</h3>
-<p>Debe crearse en un Process Group intermedio cuando únicamente lo utiliza una rama concreta.
-
-Ejemplos:
-
-* Base de datos del departamento financiero.
-* Certificado de una API interna.
-* Reader específico para los archivos de un proveedor.
-* Lookup Service utilizado por una sola aplicación.
-
-<code>mermaid id="controller-service-department-scope"
-flowchart TD
+<p>Debe crearse en un Process Group intermedio cuando únicamente lo utiliza una rama concreta.</p>
+<p>Ejemplos:</p>
+<ul>
+<li>Base de datos del departamento financiero.</li>
+<li>Certificado de una API interna.</li>
+<li>Reader específico para los archivos de un proveedor.</li>
+<li>Lookup Service utilizado por una sola aplicación.</li>
+</ul>
+<pre class="mermaid"><code>flowchart TD
     ROOT["Raíz"]
     FIN["Finanzas&lt;br/&gt;DBCP-Finanzas"]
     OPS["Operaciones"]
@@ -2432,7 +2415,7 @@ flowchart TD
     OPS --&gt; STOCK
 
     FIN -. "Visible" .-&gt; BILL
-    FIN -. "Visible" .-&gt; ACCOUNT</code></p>
+    FIN -. "Visible" .-&gt; ACCOUNT</code></pre>
 <h3 id="servicio-local">Servicio local</h3>
 <p>Debe crearse dentro de un Process Group concreto cuando su uso está limitado a un único flujo.</p>
 <p>Ejemplos:</p>
@@ -2449,75 +2432,68 @@ flowchart TD
 <p>Según este principio, un Controller Service debe situarse en el nivel más bajo de la jerarquía que permita cubrir todos sus consumidores.</p>
 <p>No debe crearse en el nivel raíz simplemente por comodidad.</p>
 <p>Por ejemplo, si un servicio solo lo utilizan dos Process Groups situados dentro de la rama <code>Finanzas</code>, debería crearse en <code>Finanzas</code>, no en el grupo raíz.</p>
-<p>```mermaid id="controller-service-minimum-scope"
-flowchart TD
+<pre class="mermaid"><code>flowchart TD
     ROOT["Raíz"]
-    FIN["Finanzas<br/>Nivel recomendado"]
+    FIN["Finanzas&lt;br/&gt;Nivel recomendado"]
     HR["Recursos Humanos"]
     INV["Facturación"]
-    ACC["Contabilidad"]</p>
-<div class="language-text highlight"><pre><span></span><code>ROOT --&gt; FIN
-ROOT --&gt; HR
-FIN --&gt; INV
-FIN --&gt; ACC
+    ACC["Contabilidad"]
 
-SERVICE[&quot;DBCP-Finanzas&quot;]
-FIN --- SERVICE
-SERVICE -. &quot;Utilizado por&quot; .-&gt; INV
-SERVICE -. &quot;Utilizado por&quot; .-&gt; ACC
-</code></pre></div>
-<p>```
+    ROOT --&gt; FIN
+    ROOT --&gt; HR
+    FIN --&gt; INV
+    FIN --&gt; ACC
 
-Este enfoque aporta varias ventajas:
-
-* Reduce la visibilidad innecesaria.
-* Evita selecciones accidentales.
-* Mejora el aislamiento.
-* Simplifica la administración.
-* Facilita la aplicación de permisos.
-* Reduce el impacto de los cambios.</p>
+    SERVICE["DBCP-Finanzas"]
+    FIN --- SERVICE
+    SERVICE -. "Utilizado por" .-&gt; INV
+    SERVICE -. "Utilizado por" .-&gt; ACC</code></pre>
+<p>Este enfoque aporta varias ventajas:</p>
+<ul>
+<li>Reduce la visibilidad innecesaria.</li>
+<li>Evita selecciones accidentales.</li>
+<li>Mejora el aislamiento.</li>
+<li>Simplifica la administración.</li>
+<li>Facilita la aplicación de permisos.</li>
+<li>Reduce el impacto de los cambios.</li>
+</ul>
 <hr />
 <h2 id="ambito-y-seguridad">Ámbito y seguridad</h2>
-<p>El ámbito también tiene implicaciones de seguridad.
-
-Un Controller Service puede contener información sensible, como:
-
-* Usuarios.
-* Contraseñas.
-* Tokens.
-* Certificados.
-* Claves privadas.
-* URLs internas.
-* Rutas de almacenamiento.
-* Configuración de servicios críticos.
-
-Situar estos servicios en un nivel demasiado alto puede hacer que estén disponibles para más componentes de los necesarios.
-
-Aunque Apache NiFi dispone de políticas de autorización, una jerarquía bien diseñada añade una capa adicional de protección.
-
-La combinación recomendada es:
-
-1. Crear el servicio en el ámbito mínimo necesario.
-2. Utilizar parámetros sensibles para las credenciales.
-3. Aplicar políticas de acceso.
-4. Documentar sus consumidores.
-5. Revisar periódicamente las referencias.</p>
+<p>El ámbito también tiene implicaciones de seguridad.</p>
+<p>Un Controller Service puede contener información sensible, como:</p>
+<ul>
+<li>Usuarios.</li>
+<li>Contraseñas.</li>
+<li>Tokens.</li>
+<li>Certificados.</li>
+<li>Claves privadas.</li>
+<li>URLs internas.</li>
+<li>Rutas de almacenamiento.</li>
+<li>Configuración de servicios críticos.</li>
+</ul>
+<p>Situar estos servicios en un nivel demasiado alto puede hacer que estén disponibles para más componentes de los necesarios.</p>
+<p>Aunque Apache NiFi dispone de políticas de autorización, una jerarquía bien diseñada añade una capa adicional de protección.</p>
+<p>La combinación recomendada es:</p>
+<ol>
+<li>Crear el servicio en el ámbito mínimo necesario.</li>
+<li>Utilizar parámetros sensibles para las credenciales.</li>
+<li>Aplicar políticas de acceso.</li>
+<li>Documentar sus consumidores.</li>
+<li>Revisar periódicamente las referencias.</li>
+</ol>
 <hr />
 <h2 id="ambito-y-process-groups-reutilizables">Ámbito y Process Groups reutilizables</h2>
-<p>Los Process Groups se utilizan con frecuencia como unidades modulares y reutilizables.
-
-Por ejemplo, una organización puede disponer de un Process Group encargado de:
-
-* Validar registros.
-* Publicar mensajes en Kafka.
-* Normalizar archivos CSV.
-* Enviar datos a una API.
-* Registrar auditorías.
-
-Cuando un Process Group depende de un Controller Service definido fuera de él, aparece una dependencia externa.
-
-<code>mermaid id="controller-service-external-dependency"
-flowchart LR
+<p>Los Process Groups se utilizan con frecuencia como unidades modulares y reutilizables.</p>
+<p>Por ejemplo, una organización puede disponer de un Process Group encargado de:</p>
+<ul>
+<li>Validar registros.</li>
+<li>Publicar mensajes en Kafka.</li>
+<li>Normalizar archivos CSV.</li>
+<li>Enviar datos a una API.</li>
+<li>Registrar auditorías.</li>
+</ul>
+<p>Cuando un Process Group depende de un Controller Service definido fuera de él, aparece una dependencia externa.</p>
+<pre class="mermaid"><code>flowchart LR
     PARENT["Process Group padre&lt;br/&gt;JsonTreeReader"]
     CHILD["Process Group reutilizable"]
     PROC1["ConvertRecord"]
@@ -2528,7 +2504,7 @@ flowchart LR
     CHILD --&gt; PROC2
 
     PARENT -. "Dependencia heredada" .-&gt; PROC1
-    PARENT -. "Dependencia heredada" .-&gt; PROC2</code></p>
+    PARENT -. "Dependencia heredada" .-&gt; PROC2</code></pre>
 <p>Esta situación puede ser válida, pero debe documentarse correctamente.</p>
 <p>Cuando el Process Group se exporta o se despliega en otro entorno, el Controller Service externo puede no existir.</p>
 <p>Por este motivo, los módulos reutilizables deben diseñarse cuidadosamente.</p>
@@ -2575,25 +2551,23 @@ flowchart LR
 <li><code>DBCP-DataWarehouse</code>.</li>
 </ul>
 <p>Todos pueden ser instancias de <code>DBCPConnectionPool</code>, pero conectarse a bases de datos diferentes.</p>
-<p>```mermaid id="multiple-controller-services-same-type"
-flowchart TD
+<pre class="mermaid"><code>flowchart TD
     PROC["PutDatabaseRecord"]
     C1["DBCP-Clientes"]
     C2["DBCP-Facturación"]
-    C3["DBCP-Auditoría"]</p>
-<div class="language-text highlight"><pre><span></span><code>PROC -. &quot;Selecciona uno&quot; .-&gt; C1
-PROC -. &quot;Selecciona uno&quot; .-&gt; C2
-PROC -. &quot;Selecciona uno&quot; .-&gt; C3
-</code></pre></div>
-<p><code>Por este motivo, es esencial utilizar nombres descriptivos.
+    C3["DBCP-Auditoría"]
 
-Un nombre como `DBCPConnectionPool` apenas aporta información. En cambio, nombres como los siguientes permiten identificar rápidamente su función:</code>text
-DBCP-PostgreSQL-Clientes-PRO
-DBCP-Oracle-Facturacion-PRE
-SSL-API-Pagos
-CSVReader-Proveedor-A
-JsonWriter-Eventos-Kafka
-```</p>
+    PROC -. "Selecciona uno" .-&gt; C1
+    PROC -. "Selecciona uno" .-&gt; C2
+    PROC -. "Selecciona uno" .-&gt; C3</code></pre>
+<p>Por este motivo, es esencial utilizar nombres descriptivos.</p>
+<p>Un nombre como <code>DBCPConnectionPool</code> apenas aporta información. En cambio, nombres como los siguientes permiten identificar rápidamente su función:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>DBCP-PostgreSQL-Clientes-PRO
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>DBCP-Oracle-Facturacion-PRE
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>SSL-API-Pagos
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>CSVReader-Proveedor-A
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>JsonWriter-Eventos-Kafka
+</span></code></pre></div>
 <hr />
 <h2 id="referencias-y-componentes-consumidores">Referencias y componentes consumidores</h2>
 <p>Apache NiFi permite consultar qué componentes utilizan un Controller Service mediante la opción de componentes referenciados, normalmente identificada como <strong>Referencing Components</strong>.</p>
@@ -2606,37 +2580,32 @@ JsonWriter-Eventos-Kafka
 <li>Qué componentes están detenidos.</li>
 <li>Qué referencias impiden modificar o deshabilitar el servicio.</li>
 </ul>
-<p>```mermaid id="controller-service-reference-tree"
-flowchart TD
+<pre class="mermaid"><code>flowchart TD
     SERVICE["DBCP-PostgreSQL"]
     SQL["ExecuteSQL"]
     PUT["PutDatabaseRecord"]
     QUERY["QueryDatabaseTableRecord"]
-    LOOKUP["DatabaseRecordLookup"]</p>
-<div class="language-text highlight"><pre><span></span><code>SERVICE --&gt; SQL
-SERVICE --&gt; PUT
-SERVICE --&gt; QUERY
-SERVICE --&gt; LOOKUP
-</code></pre></div>
-<p>```
+    LOOKUP["DatabaseRecordLookup"]
 
-Esta funcionalidad resulta especialmente útil antes de:
-
-* Deshabilitar un servicio.
-* Cambiar sus credenciales.
-* Modificar una URL.
-* Actualizar un certificado.
-* Eliminar el componente.
-* Migrar un flujo.
-* Analizar el impacto de una incidencia.</p>
+    SERVICE --&gt; SQL
+    SERVICE --&gt; PUT
+    SERVICE --&gt; QUERY
+    SERVICE --&gt; LOOKUP</code></pre>
+<p>Esta funcionalidad resulta especialmente útil antes de:</p>
+<ul>
+<li>Deshabilitar un servicio.</li>
+<li>Cambiar sus credenciales.</li>
+<li>Modificar una URL.</li>
+<li>Actualizar un certificado.</li>
+<li>Eliminar el componente.</li>
+<li>Migrar un flujo.</li>
+<li>Analizar el impacto de una incidencia.</li>
+</ul>
 <hr />
 <h2 id="dependencias-entre-controller-services">Dependencias entre Controller Services</h2>
-<p>Un Controller Service también puede depender de otro Controller Service.
-
-Por ejemplo, un servicio de conexión puede necesitar un <code>SSLContextService</code> para establecer una comunicación cifrada.
-
-<code>mermaid id="controller-service-chained-dependencies"
-flowchart LR
+<p>Un Controller Service también puede depender de otro Controller Service.</p>
+<p>Por ejemplo, un servicio de conexión puede necesitar un <code>SSLContextService</code> para establecer una comunicación cifrada.</p>
+<pre class="mermaid"><code>flowchart LR
     PROCESSOR["Processor"]
     CLIENT["Cliente de servicio"]
     SSL["SSLContextService"]
@@ -2644,42 +2613,38 @@ flowchart LR
 
     PROCESSOR --&gt; CLIENT
     CLIENT --&gt; SSL
-    SSL --&gt; CERT</code></p>
+    SSL --&gt; CERT</code></pre>
 <p>Esta arquitectura genera una cadena de dependencias.</p>
 <p>Si el servicio situado en la base de la cadena no está habilitado, los componentes dependientes pueden quedar inválidos.</p>
-<p>```mermaid id="controller-service-dependency-chain"
-flowchart TD
-    SSL["SSLContextService<br/>Disabled"]
-    CLIENT["Servicio cliente<br/>Invalid"]
-    PROC["Processor<br/>Invalid"]</p>
-<div class="language-text highlight"><pre><span></span><code>SSL --&gt; CLIENT
-CLIENT --&gt; PROC
-</code></pre></div>
-<p>```
+<pre class="mermaid"><code>flowchart TD
+    SSL["SSLContextService&lt;br/&gt;Disabled"]
+    CLIENT["Servicio cliente&lt;br/&gt;Invalid"]
+    PROC["Processor&lt;br/&gt;Invalid"]
 
-Por tanto, el orden de habilitación suele ser:
-
-1. Servicios base.
-2. Servicios dependientes.
-3. Processors consumidores.
-
-El orden de deshabilitación se realiza en sentido contrario:
-
-1. Detener Processors.
-2. Deshabilitar servicios dependientes.
-3. Deshabilitar servicios base.</p>
+    SSL --&gt; CLIENT
+    CLIENT --&gt; PROC</code></pre>
+<p>Por tanto, el orden de habilitación suele ser:</p>
+<ol>
+<li>Servicios base.</li>
+<li>Servicios dependientes.</li>
+<li>Processors consumidores.</li>
+</ol>
+<p>El orden de deshabilitación se realiza en sentido contrario:</p>
+<ol>
+<li>Detener Processors.</li>
+<li>Deshabilitar servicios dependientes.</li>
+<li>Deshabilitar servicios base.</li>
+</ol>
 <hr />
 <h2 id="ejemplo-completo-de-jerarquia">Ejemplo completo de jerarquía</h2>
-<p>Supongamos una plataforma NiFi organizada en tres dominios:
-
-* Ingesta.
-* Procesamiento.
-* Explotación.
-
-Cada dominio contiene distintos Process Groups.
-
-<code>mermaid id="controller-service-complete-hierarchy"
-flowchart TD
+<p>Supongamos una plataforma NiFi organizada en tres dominios:</p>
+<ul>
+<li>Ingesta.</li>
+<li>Procesamiento.</li>
+<li>Explotación.</li>
+</ul>
+<p>Cada dominio contiene distintos Process Groups.</p>
+<pre class="mermaid"><code>flowchart TD
     ROOT["Plataforma NiFi&lt;br/&gt;SSL-Corporativo"]
 
     ING["Ingesta&lt;br/&gt;KafkaService-Ingesta"]
@@ -2704,7 +2669,7 @@ flowchart TD
     PROC --&gt; ENRICH
 
     EXP --&gt; BI
-    EXP --&gt; REPORTS</code></p>
+    EXP --&gt; REPORTS</code></pre>
 <p>En esta arquitectura:</p>
 <ul>
 <li><code>SSL-Corporativo</code> está disponible para toda la plataforma.</li>
@@ -2749,93 +2714,78 @@ flowchart TD
 <h3 id="organizacion-hibrida">Organización híbrida</h3>
 <p>Combina servicios globales, departamentales y locales.</p>
 <p>Normalmente es la estrategia más adecuada para entornos empresariales.</p>
-<p>```mermaid id="controller-service-hybrid-strategy"
-flowchart TD
-    ROOT["Servicios globales<br/>TLS · LDAP · Kafka corporativo"]
-    DOMAIN["Servicios de dominio<br/>DBCP · Schema Registry"]
-    LOCAL["Servicios locales<br/>Readers · Writers · Lookups"]
-    PROCESSORS["Processors"]</p>
-<div class="language-text highlight"><pre><span></span><code>ROOT --&gt; DOMAIN
-DOMAIN --&gt; LOCAL
-LOCAL --&gt; PROCESSORS
-</code></pre></div>
-<p>```
+<pre class="mermaid"><code>flowchart TD
+    ROOT["Servicios globales&lt;br/&gt;TLS · LDAP · Kafka corporativo"]
+    DOMAIN["Servicios de dominio&lt;br/&gt;DBCP · Schema Registry"]
+    LOCAL["Servicios locales&lt;br/&gt;Readers · Writers · Lookups"]
+    PROCESSORS["Processors"]
 
-La estrategia híbrida permite:
-
-* Reutilizar los recursos corporativos.
-* Aislar los recursos departamentales.
-* Mantener configuraciones específicas cerca de sus consumidores.
-* Evitar una jerarquía completamente plana.</p>
+    ROOT --&gt; DOMAIN
+    DOMAIN --&gt; LOCAL
+    LOCAL --&gt; PROCESSORS</code></pre>
+<p>La estrategia híbrida permite:</p>
+<ul>
+<li>Reutilizar los recursos corporativos.</li>
+<li>Aislar los recursos departamentales.</li>
+<li>Mantener configuraciones específicas cerca de sus consumidores.</li>
+<li>Evitar una jerarquía completamente plana.</li>
+</ul>
 <hr />
 <h2 id="buenas-practicas_3">Buenas prácticas</h2>
-<p>Al diseñar el ámbito de los Controller Services, conviene aplicar las siguientes recomendaciones:
-
-* Crear cada servicio en el nivel común más bajo posible.
-* Evitar situar todos los servicios en el grupo raíz.
-* Utilizar nombres descriptivos y homogéneos.
-* Separar servicios por entorno: desarrollo, preproducción y producción.
-* Documentar los Process Groups consumidores.
-* Revisar las referencias antes de modificar un servicio.
-* Evitar duplicar servicios que representan el mismo recurso.
-* Mantener los servicios sensibles en ámbitos restringidos.
-* Diseñar Process Groups reutilizables teniendo en cuenta sus dependencias externas.
-* Utilizar Parameter Contexts para separar configuración y arquitectura.</p>
+<p>Al diseñar el ámbito de los Controller Services, conviene aplicar las siguientes recomendaciones:</p>
+<ul>
+<li>Crear cada servicio en el nivel común más bajo posible.</li>
+<li>Evitar situar todos los servicios en el grupo raíz.</li>
+<li>Utilizar nombres descriptivos y homogéneos.</li>
+<li>Separar servicios por entorno: desarrollo, preproducción y producción.</li>
+<li>Documentar los Process Groups consumidores.</li>
+<li>Revisar las referencias antes de modificar un servicio.</li>
+<li>Evitar duplicar servicios que representan el mismo recurso.</li>
+<li>Mantener los servicios sensibles en ámbitos restringidos.</li>
+<li>Diseñar Process Groups reutilizables teniendo en cuenta sus dependencias externas.</li>
+<li>Utilizar Parameter Contexts para separar configuración y arquitectura.</li>
+</ul>
 <hr />
 <h2 id="errores-frecuentes_3">Errores frecuentes</h2>
 <h3 id="crear-todos-los-servicios-en-el-nivel-raiz">Crear todos los servicios en el nivel raíz</h3>
-<p>Aunque resulta cómodo, genera una lista excesiva de servicios visibles desde cualquier punto del flujo.
-
-Esto dificulta la selección y aumenta el riesgo de utilizar una conexión incorrecta.
-</p>
+<p>Aunque resulta cómodo, genera una lista excesiva de servicios visibles desde cualquier punto del flujo.</p>
+<p>Esto dificulta la selección y aumenta el riesgo de utilizar una conexión incorrecta.</p>
 <h3 id="crear-el-servicio-demasiado-abajo">Crear el servicio demasiado abajo</h3>
-<p>Si varios Process Groups hermanos necesitan el mismo servicio y este se crea dentro de uno de ellos, los demás no podrán utilizarlo.
-
-La solución consiste en mover o recrear el servicio en el ancestro común.
-</p>
+<p>Si varios Process Groups hermanos necesitan el mismo servicio y este se crea dentro de uno de ellos, los demás no podrán utilizarlo.</p>
+<p>La solución consiste en mover o recrear el servicio en el ancestro común.</p>
 <h3 id="confundir-herencia-con-copia">Confundir herencia con copia</h3>
-<p>Los Process Groups hijos no reciben una copia independiente del Controller Service.
-
-Todos utilizan la misma instancia heredada.
-
-Por tanto, cualquier modificación afecta a todos los consumidores.
-</p>
+<p>Los Process Groups hijos no reciben una copia independiente del Controller Service.</p>
+<p>Todos utilizan la misma instancia heredada.</p>
+<p>Por tanto, cualquier modificación afecta a todos los consumidores.</p>
 <h3 id="duplicar-servicios-innecesariamente">Duplicar servicios innecesariamente</h3>
-<p>Crear múltiples servicios idénticos puede provocar:
-
-* Más conexiones abiertas.
-* Mayor consumo de memoria.
-* Configuraciones divergentes.
-* Más trabajo de mantenimiento.
-</p>
+<p>Crear múltiples servicios idénticos puede provocar:</p>
+<ul>
+<li>Más conexiones abiertas.</li>
+<li>Mayor consumo de memoria.</li>
+<li>Configuraciones divergentes.</li>
+<li>Más trabajo de mantenimiento.</li>
+</ul>
 <h3 id="ignorar-las-dependencias-al-exportar">Ignorar las dependencias al exportar</h3>
-<p>Un Process Group exportado puede depender de un servicio definido en su grupo padre.
-
-Al importarlo en otro entorno, esa referencia deberá resolverse.</p>
+<p>Un Process Group exportado puede depender de un servicio definido en su grupo padre.</p>
+<p>Al importarlo en otro entorno, esa referencia deberá resolverse.</p>
 <hr />
 <h2 id="ideas-clave_3">Ideas clave</h2>
-<p>El ámbito y la herencia determinan qué componentes pueden utilizar un Controller Service.
-
-Los principios fundamentales son:
-
-* Un servicio es visible en el grupo donde se define.
-* Los grupos descendientes pueden heredarlo.
-* Los grupos ascendentes no pueden utilizarlo.
-* Los grupos hermanos no comparten servicios entre sí.
-* El servicio debe crearse en el ancestro común más bajo de todos sus consumidores.
-* Un ámbito correcto mejora la reutilización, la seguridad y la mantenibilidad.
-
-Una jerarquía bien diseñada evita tanto la duplicación excesiva como la exposición innecesaria de recursos compartidos. Por este motivo, la ubicación de los Controller Services debe considerarse una decisión arquitectónica y no una simple cuestión organizativa.
-</p>
+<p>El ámbito y la herencia determinan qué componentes pueden utilizar un Controller Service.</p>
+<p>Los principios fundamentales son:</p>
+<ul>
+<li>Un servicio es visible en el grupo donde se define.</li>
+<li>Los grupos descendientes pueden heredarlo.</li>
+<li>Los grupos ascendentes no pueden utilizarlo.</li>
+<li>Los grupos hermanos no comparten servicios entre sí.</li>
+<li>El servicio debe crearse en el ancestro común más bajo de todos sus consumidores.</li>
+<li>Un ámbito correcto mejora la reutilización, la seguridad y la mantenibilidad.</li>
+</ul>
+<p>Una jerarquía bien diseñada evita tanto la duplicación excesiva como la exposición innecesaria de recursos compartidos. Por este motivo, la ubicación de los Controller Services debe considerarse una decisión arquitectónica y no una simple cuestión organizativa.</p>
 <h1 id="resumen">Resumen</h1>
-<p>Los <strong>Controller Services</strong> constituyen uno de los componentes más importantes de la arquitectura de Apache NiFi. Su función principal consiste en proporcionar recursos compartidos a los Processors y a otros componentes del flujo, evitando la duplicación de configuraciones y facilitando la reutilización.
-
-A diferencia de los Processors, los Controller Services no reciben, generan ni modifican FlowFiles. Tampoco participan directamente en el recorrido de los datos. Su responsabilidad consiste en encapsular recursos como conexiones JDBC, configuraciones TLS, lectores y escritores de registros, clientes externos, servicios de búsqueda o repositorios de esquemas.
-
-Esta separación responde a uno de los principios fundamentales del diseño de Apache NiFi: la <strong>separación de responsabilidades</strong>.
-
-<code>mermaid id="controller-services-summary-responsibilities"
-flowchart LR
+<p>Los <strong>Controller Services</strong> constituyen uno de los componentes más importantes de la arquitectura de Apache NiFi. Su función principal consiste en proporcionar recursos compartidos a los Processors y a otros componentes del flujo, evitando la duplicación de configuraciones y facilitando la reutilización.</p>
+<p>A diferencia de los Processors, los Controller Services no reciben, generan ni modifican FlowFiles. Tampoco participan directamente en el recorrido de los datos. Su responsabilidad consiste en encapsular recursos como conexiones JDBC, configuraciones TLS, lectores y escritores de registros, clientes externos, servicios de búsqueda o repositorios de esquemas.</p>
+<p>Esta separación responde a uno de los principios fundamentales del diseño de Apache NiFi: la <strong>separación de responsabilidades</strong>.</p>
+<pre class="mermaid"><code>flowchart LR
     FLOWFILE["FlowFiles"]
     PROCESSOR["Processor&lt;br/&gt;Procesa los datos"]
     SERVICE["Controller Service&lt;br/&gt;Proporciona recursos"]
@@ -2844,7 +2794,7 @@ flowchart LR
     FLOWFILE --&gt; PROCESSOR
     PROCESSOR --&gt; FLOWFILE
     PROCESSOR -. "Solicita el recurso" .-&gt; SERVICE
-    SERVICE --&gt; EXTERNAL</code></p>
+    SERVICE --&gt; EXTERNAL</code></pre>
 <p>Gracias a este modelo, los Processors pueden concentrarse exclusivamente en la lógica del flujo, mientras que los Controller Services gestionan la infraestructura necesaria para ejecutarla.</p>
 <h2 id="conceptos-fundamentales">Conceptos fundamentales</h2>
 <p>A lo largo de este documento se han estudiado los siguientes conceptos:</p>
@@ -2900,67 +2850,57 @@ flowchart LR
 </table>
 <h2 id="processor-y-controller-service">Processor y Controller Service</h2>
 <p>Los Processors y los Controller Services desempeñan funciones complementarias.</p>
-<p>```mermaid id="controller-services-summary-comparison"
-flowchart TD
-    NIFI["Apache NiFi"]</p>
-<div class="language-text highlight"><pre><span></span><code>PROCESSORS[&quot;Processors&quot;]
-SERVICES[&quot;Controller Services&quot;]
+<pre class="mermaid"><code>flowchart TD
+    NIFI["Apache NiFi"]
 
-DATA[&quot;Procesan FlowFiles&quot;]
-ROUTING[&quot;Transforman y enrutan&quot;]
-CONNECTIONS[&quot;Utilizan Connections&quot;]
+    PROCESSORS["Processors"]
+    SERVICES["Controller Services"]
 
-RESOURCES[&quot;Proporcionan recursos&quot;]
-SHARED[&quot;Centralizan configuración&quot;]
-REUSE[&quot;Favorecen la reutilización&quot;]
+    DATA["Procesan FlowFiles"]
+    ROUTING["Transforman y enrutan"]
+    CONNECTIONS["Utilizan Connections"]
 
-NIFI --&gt; PROCESSORS
-NIFI --&gt; SERVICES
+    RESOURCES["Proporcionan recursos"]
+    SHARED["Centralizan configuración"]
+    REUSE["Favorecen la reutilización"]
 
-PROCESSORS --&gt; DATA
-PROCESSORS --&gt; ROUTING
-PROCESSORS --&gt; CONNECTIONS
+    NIFI --&gt; PROCESSORS
+    NIFI --&gt; SERVICES
 
-SERVICES --&gt; RESOURCES
-SERVICES --&gt; SHARED
-SERVICES --&gt; REUSE
-</code></pre></div>
-<p>```
+    PROCESSORS --&gt; DATA
+    PROCESSORS --&gt; ROUTING
+    PROCESSORS --&gt; CONNECTIONS
 
-La diferencia esencial puede resumirse en una frase:
-</p>
+    SERVICES --&gt; RESOURCES
+    SERVICES --&gt; SHARED
+    SERVICES --&gt; REUSE</code></pre>
+<p>La diferencia esencial puede resumirse en una frase:</p>
 <blockquote>
 <p>Los Processors procesan los datos; los Controller Services proporcionan los recursos necesarios para procesarlos.</p>
+</blockquote>
 <p>Un Processor puede utilizar uno o varios Controller Services. Por ejemplo, <code>PutDatabaseRecord</code> puede necesitar simultáneamente:</p>
 <ul>
 <li>Un <code>Record Reader</code> para interpretar el contenido del FlowFile.</li>
 <li>Un <code>DBCPConnectionPool</code> para acceder a la base de datos.</li>
 </ul>
-<p>Esta composición permite crear flujos modulares, reutilizables y fáciles de mantener.
-</p>
-</blockquote>
+<p>Esta composición permite crear flujos modulares, reutilizables y fáciles de mantener.</p>
 <h2 id="beneficios-principales">Beneficios principales</h2>
-<p>El uso correcto de Controller Services aporta importantes ventajas.
-</p>
+<p>El uso correcto de Controller Services aporta importantes ventajas.</p>
 <h3 id="configuracion-centralizada">Configuración centralizada</h3>
-<p>La configuración se define una sola vez y puede ser utilizada por numerosos componentes.
-
-Esto evita repetir:
-
-* URLs de conexión.
-* Usuarios y contraseñas.
-* Rutas de drivers.
-* Certificados.
-* Esquemas.
-* Parámetros de clientes externos.
-</p>
+<p>La configuración se define una sola vez y puede ser utilizada por numerosos componentes.</p>
+<p>Esto evita repetir:</p>
+<ul>
+<li>URLs de conexión.</li>
+<li>Usuarios y contraseñas.</li>
+<li>Rutas de drivers.</li>
+<li>Certificados.</li>
+<li>Esquemas.</li>
+<li>Parámetros de clientes externos.</li>
+</ul>
 <h3 id="reutilizacion-de-recursos">Reutilización de recursos</h3>
-<p>Un único servicio puede ser compartido por decenas o cientos de Processors.
-
-Por ejemplo, varios componentes pueden utilizar el mismo pool de conexiones JDBC.
-
-<code>mermaid id="controller-services-summary-reuse"
-flowchart TD
+<p>Un único servicio puede ser compartido por decenas o cientos de Processors.</p>
+<p>Por ejemplo, varios componentes pueden utilizar el mismo pool de conexiones JDBC.</p>
+<pre class="mermaid"><code>flowchart TD
     SERVICE["DBCPConnectionPool"]
     P1["ExecuteSQL"]
     P2["PutDatabaseRecord"]
@@ -2970,7 +2910,7 @@ flowchart TD
     SERVICE --&gt; P1
     SERVICE --&gt; P2
     SERVICE --&gt; P3
-    SERVICE --&gt; P4</code></p>
+    SERVICE --&gt; P4</code></pre>
 <h3 id="mayor-rendimiento">Mayor rendimiento</h3>
 <p>Los recursos costosos pueden inicializarse una sola vez y mantenerse disponibles mientras el servicio permanezca habilitado.</p>
 <p>Esto resulta especialmente importante para:</p>
@@ -3000,9 +2940,8 @@ flowchart TD
 <p>Todos los componentes consumidores utilizan la misma configuración, lo que reduce errores y diferencias accidentales entre Processors.</p>
 <h2 id="ciclo-de-vida_1">Ciclo de vida</h2>
 <p>Los Controller Services disponen de un ciclo de vida controlado.</p>
-<p>```mermaid id="controller-services-summary-lifecycle"
-stateDiagram-v2
-    [<em>] --&gt; Creado
+<pre class="mermaid"><code>stateDiagram-v2
+    [*] --&gt; Creado
     Creado --&gt; Invalido: Configuración incompleta
     Creado --&gt; Deshabilitado: Configuración válida
     Invalido --&gt; Deshabilitado: Corregir propiedades
@@ -3012,90 +2951,77 @@ stateDiagram-v2
     Habilitado --&gt; Deshabilitando: Disable
     Deshabilitando --&gt; Deshabilitado: Liberar recursos
     Deshabilitado --&gt; Eliminado: Sin referencias
-    Eliminado --&gt; [</em>]
-<div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>Las fases principales son:
-</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>
-</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>1. Creación del servicio.
-</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>2. Configuración de sus propiedades.
-</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>3. Validación.
-</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>4. Habilitación.
-</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>5. Inicialización de recursos.
-</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>6. Utilización por los componentes consumidores.
-</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>7. Deshabilitación.
-</span><span id="__span-22-10"><a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>8. Liberación de recursos.
-</span><span id="__span-22-11"><a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>9. Modificación o eliminación.
-</span><span id="__span-22-12"><a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>
-</span><span id="__span-22-13"><a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a>Apache NiFi controla automáticamente las dependencias y evita determinadas operaciones cuando podrían dejar el flujo en un estado inconsistente.
-</span><span id="__span-22-14"><a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a>
-</span><span id="__span-22-15"><a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a>Por ejemplo, normalmente no será posible deshabilitar un Controller Service mientras existan Processors en ejecución que dependan de él.
-</span><span id="__span-22-16"><a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a>
-</span><span id="__span-22-17"><a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a>## Ámbito y herencia
-</span><span id="__span-22-18"><a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a>
-</span><span id="__span-22-19"><a id="__codelineno-22-19" name="__codelineno-22-19" href="#__codelineno-22-19"></a>La visibilidad de un Controller Service depende del Process Group en el que haya sido creado.
-</span><span id="__span-22-20"><a id="__codelineno-22-20" name="__codelineno-22-20" href="#__codelineno-22-20"></a>
-</span><span id="__span-22-21"><a id="__codelineno-22-21" name="__codelineno-22-21" href="#__codelineno-22-21"></a>La regla fundamental es la siguiente:
-</span><span id="__span-22-22"><a id="__codelineno-22-22" name="__codelineno-22-22" href="#__codelineno-22-22"></a>
-</span><span id="__span-22-23"><a id="__codelineno-22-23" name="__codelineno-22-23" href="#__codelineno-22-23"></a>&gt; Un Controller Service puede utilizarse en el Process Group donde se define y en sus grupos descendientes.
-</span><span id="__span-22-24"><a id="__codelineno-22-24" name="__codelineno-22-24" href="#__codelineno-22-24"></a>
-</span><span id="__span-22-25"><a id="__codelineno-22-25" name="__codelineno-22-25" href="#__codelineno-22-25"></a>La herencia funciona de forma descendente, pero no ascendente ni lateral.
-</span><span id="__span-22-26"><a id="__codelineno-22-26" name="__codelineno-22-26" href="#__codelineno-22-26"></a>
-</span><span id="__span-22-27"><a id="__codelineno-22-27" name="__codelineno-22-27" href="#__codelineno-22-27"></a>```mermaid id=&quot;controller-services-summary-scope&quot;
-</span><span id="__span-22-28"><a id="__codelineno-22-28" name="__codelineno-22-28" href="#__codelineno-22-28"></a>flowchart TD
-</span><span id="__span-22-29"><a id="__codelineno-22-29" name="__codelineno-22-29" href="#__codelineno-22-29"></a>    ROOT[&quot;Grupo raíz&lt;br/&gt;Servicio global&quot;]
-</span><span id="__span-22-30"><a id="__codelineno-22-30" name="__codelineno-22-30" href="#__codelineno-22-30"></a>    A[&quot;Process Group A&quot;]
-</span><span id="__span-22-31"><a id="__codelineno-22-31" name="__codelineno-22-31" href="#__codelineno-22-31"></a>    B[&quot;Process Group B&quot;]
-</span><span id="__span-22-32"><a id="__codelineno-22-32" name="__codelineno-22-32" href="#__codelineno-22-32"></a>    A1[&quot;Process Group A.1&quot;]
-</span><span id="__span-22-33"><a id="__codelineno-22-33" name="__codelineno-22-33" href="#__codelineno-22-33"></a>    A2[&quot;Process Group A.2&quot;]
-</span><span id="__span-22-34"><a id="__codelineno-22-34" name="__codelineno-22-34" href="#__codelineno-22-34"></a>    B1[&quot;Process Group B.1&quot;]
-</span><span id="__span-22-35"><a id="__codelineno-22-35" name="__codelineno-22-35" href="#__codelineno-22-35"></a>
-</span><span id="__span-22-36"><a id="__codelineno-22-36" name="__codelineno-22-36" href="#__codelineno-22-36"></a>    ROOT --&gt; A
-</span><span id="__span-22-37"><a id="__codelineno-22-37" name="__codelineno-22-37" href="#__codelineno-22-37"></a>    ROOT --&gt; B
-</span><span id="__span-22-38"><a id="__codelineno-22-38" name="__codelineno-22-38" href="#__codelineno-22-38"></a>    A --&gt; A1
-</span><span id="__span-22-39"><a id="__codelineno-22-39" name="__codelineno-22-39" href="#__codelineno-22-39"></a>    A --&gt; A2
-</span><span id="__span-22-40"><a id="__codelineno-22-40" name="__codelineno-22-40" href="#__codelineno-22-40"></a>    B --&gt; B1
-</span><span id="__span-22-41"><a id="__codelineno-22-41" name="__codelineno-22-41" href="#__codelineno-22-41"></a>
-</span><span id="__span-22-42"><a id="__codelineno-22-42" name="__codelineno-22-42" href="#__codelineno-22-42"></a>    ROOT -. &quot;Visible&quot; .-&gt; A
-</span><span id="__span-22-43"><a id="__codelineno-22-43" name="__codelineno-22-43" href="#__codelineno-22-43"></a>    ROOT -. &quot;Visible&quot; .-&gt; B
-</span><span id="__span-22-44"><a id="__codelineno-22-44" name="__codelineno-22-44" href="#__codelineno-22-44"></a>    ROOT -. &quot;Visible&quot; .-&gt; A1
-</span><span id="__span-22-45"><a id="__codelineno-22-45" name="__codelineno-22-45" href="#__codelineno-22-45"></a>    ROOT -. &quot;Visible&quot; .-&gt; A2
-</span><span id="__span-22-46"><a id="__codelineno-22-46" name="__codelineno-22-46" href="#__codelineno-22-46"></a>    ROOT -. &quot;Visible&quot; .-&gt; B1
-</span></code></pre></div></p>
+    Eliminado --&gt; [*]</code></pre>
+<p>Las fases principales son:</p>
+<ol>
+<li>Creación del servicio.</li>
+<li>Configuración de sus propiedades.</li>
+<li>Validación.</li>
+<li>Habilitación.</li>
+<li>Inicialización de recursos.</li>
+<li>Utilización por los componentes consumidores.</li>
+<li>Deshabilitación.</li>
+<li>Liberación de recursos.</li>
+<li>Modificación o eliminación.</li>
+</ol>
+<p>Apache NiFi controla automáticamente las dependencias y evita determinadas operaciones cuando podrían dejar el flujo en un estado inconsistente.</p>
+<p>Por ejemplo, normalmente no será posible deshabilitar un Controller Service mientras existan Processors en ejecución que dependan de él.</p>
+<h2 id="ambito-y-herencia_1">Ámbito y herencia</h2>
+<p>La visibilidad de un Controller Service depende del Process Group en el que haya sido creado.</p>
+<p>La regla fundamental es la siguiente:</p>
+<blockquote>
+<p>Un Controller Service puede utilizarse en el Process Group donde se define y en sus grupos descendientes.</p>
+</blockquote>
+<p>La herencia funciona de forma descendente, pero no ascendente ni lateral.</p>
+<pre class="mermaid"><code>flowchart TD
+    ROOT["Grupo raíz&lt;br/&gt;Servicio global"]
+    A["Process Group A"]
+    B["Process Group B"]
+    A1["Process Group A.1"]
+    A2["Process Group A.2"]
+    B1["Process Group B.1"]
+
+    ROOT --&gt; A
+    ROOT --&gt; B
+    A --&gt; A1
+    A --&gt; A2
+    B --&gt; B1
+
+    ROOT -. "Visible" .-&gt; A
+    ROOT -. "Visible" .-&gt; B
+    ROOT -. "Visible" .-&gt; A1
+    ROOT -. "Visible" .-&gt; A2
+    ROOT -. "Visible" .-&gt; B1</code></pre>
 <p>Un servicio creado dentro de <code>Process Group A</code> podrá utilizarse desde <code>A</code>, <code>A.1</code> y <code>A.2</code>, pero no desde <code>B</code>, <code>B.1</code> ni desde el grupo raíz.</p>
 <h2 id="principio-de-minimo-ambito_1">Principio de mínimo ámbito</h2>
 <p>Los Controller Services deben crearse en el nivel común más bajo que permita atender a todos sus consumidores.</p>
-<p>```mermaid id="controller-services-summary-minimum-scope"
-flowchart TD
+<pre class="mermaid"><code>flowchart TD
     ROOT["Raíz"]
-    FIN["Finanzas<br/>DBCP-Finanzas"]
+    FIN["Finanzas&lt;br/&gt;DBCP-Finanzas"]
     HR["Recursos Humanos"]
     BILL["Facturación"]
-    ACC["Contabilidad"]</p>
-<div class="language-text highlight"><pre><span></span><code>ROOT --&gt; FIN
-ROOT --&gt; HR
-FIN --&gt; BILL
-FIN --&gt; ACC
+    ACC["Contabilidad"]
 
-FIN -. &quot;Servicio heredado&quot; .-&gt; BILL
-FIN -. &quot;Servicio heredado&quot; .-&gt; ACC
-</code></pre></div>
-<p><code>``
+    ROOT --&gt; FIN
+    ROOT --&gt; HR
+    FIN --&gt; BILL
+    FIN --&gt; ACC
 
-En este ejemplo, si solo</code>Facturación<code>y</code>Contabilidad<code>necesitan utilizar la conexión, el servicio debe crearse en</code>Finanzas`, no en el grupo raíz.
-
-Este enfoque mejora:
-
-* El aislamiento.
-* La seguridad.
-* La claridad.
-* La administración.
-* La selección correcta de servicios.
-* El análisis de impacto.
-</p>
+    FIN -. "Servicio heredado" .-&gt; BILL
+    FIN -. "Servicio heredado" .-&gt; ACC</code></pre>
+<p>En este ejemplo, si solo <code>Facturación</code> y <code>Contabilidad</code> necesitan utilizar la conexión, el servicio debe crearse en <code>Finanzas</code>, no en el grupo raíz.</p>
+<p>Este enfoque mejora:</p>
+<ul>
+<li>El aislamiento.</li>
+<li>La seguridad.</li>
+<li>La claridad.</li>
+<li>La administración.</li>
+<li>La selección correcta de servicios.</li>
+<li>El análisis de impacto.</li>
+</ul>
 <h2 id="estrategia-recomendada">Estrategia recomendada</h2>
-<p>En entornos empresariales suele resultar adecuada una organización híbrida.
-
-<code>mermaid id="controller-services-summary-hybrid"
-flowchart TD
+<p>En entornos empresariales suele resultar adecuada una organización híbrida.</p>
+<pre class="mermaid"><code>flowchart TD
     GLOBAL["Servicios globales&lt;br/&gt;TLS · LDAP · Kafka corporativo"]
     DOMAIN["Servicios de dominio&lt;br/&gt;Bases de datos · Esquemas"]
     LOCAL["Servicios locales&lt;br/&gt;Readers · Writers · Lookups"]
@@ -3103,7 +3029,7 @@ flowchart TD
 
     GLOBAL --&gt; DOMAIN
     DOMAIN --&gt; LOCAL
-    LOCAL --&gt; PROC</code></p>
+    LOCAL --&gt; PROC</code></pre>
 <p>Los servicios globales se ubican en niveles altos, mientras que los servicios específicos se mantienen cerca de los componentes que los consumen.</p>
 <h2 id="buenas-practicas_4">Buenas prácticas</h2>
 <p>Al trabajar con Controller Services conviene aplicar las siguientes recomendaciones:</p>
@@ -3125,14 +3051,14 @@ flowchart TD
 <p>Una posible convención sería:</p>
 <p>```text id="controller-services-summary-naming"
 TIPO-SISTEMA-FINALIDAD-ENTORNO
-<div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>Ejemplos:
-</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>
-</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>```text id=&quot;controller-services-summary-naming-examples&quot;
-</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>DBCP-POSTGRESQL-CLIENTES-PRO
-</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>DBCP-ORACLE-FACTURACION-PRE
-</span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>SSL-API-PAGOS-PRO
-</span><span id="__span-24-7"><a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>CSVREADER-PROVEEDOR-A
-</span><span id="__span-24-8"><a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a>JSONWRITER-KAFKA-EVENTOS
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Ejemplos:
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>```text id=&quot;controller-services-summary-naming-examples&quot;
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>DBCP-POSTGRESQL-CLIENTES-PRO
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>DBCP-ORACLE-FACTURACION-PRE
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>SSL-API-PAGOS-PRO
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>CSVREADER-PROVEEDOR-A
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>JSONWRITER-KAFKA-EVENTOS
 </span></code></pre></div></p>
 <h2 id="errores-frecuentes_4">Errores frecuentes</h2>
 <p>Los errores más habituales son:</p>
@@ -3186,34 +3112,45 @@ TIPO-SISTEMA-FINALIDAD-ENTORNO
 <li>La herencia funciona de forma descendente.</li>
 <li>Su ubicación constituye una decisión arquitectónica.</li>
 </ol>
-<p><code>mermaid id="controller-services-summary-final-map"
-mindmap
-  root((Controller Services))
-    Reutilización
-      Conexiones
-      Certificados
-      Readers
-      Writers
-      Lookups
-    Arquitectura
-      Separación de responsabilidades
-      Desacoplamiento
-      Centralización
-    Ciclo de vida
-      Configuración
-      Validación
-      Habilitación
-      Deshabilitación
-    Ámbito
-      Grupo actual
-      Descendientes
-      Sin herencia ascendente
-      Sin herencia lateral
-    Beneficios
-      Rendimiento
-      Mantenimiento
-      Consistencia
-      Escalabilidad</code></p>
+<pre class="mermaid"><code>flowchart TD
+        CS["Controller Services"]
+
+        R["Reutilización"]
+        A["Arquitectura"]
+        CV["Ciclo de vida"]
+        AMB["Ámbito"]
+        B["Beneficios"]
+
+        CS --&gt; R
+        CS --&gt; A
+        CS --&gt; CV
+        CS --&gt; AMB
+        CS --&gt; B
+
+        R --&gt; R1["Conexiones"]
+        R --&gt; R2["Certificados"]
+        R --&gt; R3["Readers"]
+        R --&gt; R4["Writers"]
+        R --&gt; R5["Lookups"]
+
+        A --&gt; A1["Separación de responsabilidades"]
+        A --&gt; A2["Desacoplamiento"]
+        A --&gt; A3["Centralización"]
+
+        CV --&gt; CV1["Configuración"]
+        CV --&gt; CV2["Validación"]
+        CV --&gt; CV3["Habilitación"]
+        CV --&gt; CV4["Deshabilitación"]
+
+        AMB --&gt; AMB1["Grupo actual"]
+        AMB --&gt; AMB2["Descendientes"]
+        AMB --&gt; AMB3["Sin herencia ascendente"]
+        AMB --&gt; AMB4["Sin herencia lateral"]
+
+        B --&gt; B1["Rendimiento"]
+        B --&gt; B2["Mantenimiento"]
+        B --&gt; B3["Consistencia"]
+        B --&gt; B4["Escalabilidad"]</code></pre>
 
 
 

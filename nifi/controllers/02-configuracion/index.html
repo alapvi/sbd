@@ -75,6 +75,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#configuracion-de-controller-services" class="md-skip">
+          Saltar a contenido
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -998,6 +1003,26 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración de controladores
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -1015,6 +1040,36 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1331,6 +1386,27 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1347,9 +1423,813 @@
 
 
 
-  <h1>Configuración de controladores</h1>
+<h1 id="configuracion-de-controller-services">Configuración de Controller Services</h1>
+<h2 id="introduccion">Introducción</h2>
+<p>Después de estudiar qué son los Controller Services, cómo funciona su ciclo de vida y de qué manera se aplican el ámbito y la herencia, el siguiente paso consiste en aprender a configurarlos desde la interfaz de Apache NiFi.</p>
+<p>La configuración de un Controller Service suele seguir siempre el mismo proceso:</p>
+<ol>
+<li>Acceder al Process Group adecuado.</li>
+<li>Abrir la sección de Controller Services.</li>
+<li>Añadir una nueva instancia.</li>
+<li>Seleccionar el tipo de servicio.</li>
+<li>Configurar sus propiedades.</li>
+<li>Validar la configuración.</li>
+<li>Habilitar el servicio.</li>
+<li>Asociarlo a uno o varios Processors.</li>
+</ol>
+<pre class="mermaid"><code>flowchart LR
+    SCOPE["Elegir ámbito"]
+    CREATE["Crear servicio"]
+    PROPS["Configurar propiedades"]
+    VALIDATE["Validar"]
+    ENABLE["Habilitar"]
+    USE["Asignar a Processors"]
 
+    SCOPE --&gt; CREATE
+    CREATE --&gt; PROPS
+    PROPS --&gt; VALIDATE
+    VALIDATE --&gt; ENABLE
+    ENABLE --&gt; USE</code></pre>
+<p>Aunque el procedimiento es sencillo, existen varias decisiones importantes que deben tomarse antes de crear el servicio. Entre ellas destacan su ubicación en la jerarquía, el tipo de Controller Service que se necesita y la forma en que se gestionarán las credenciales y los parámetros de entorno.</p>
+<hr />
+<h1 id="creacion">Creación</h1>
+<h2 id="antes-de-crear-el-servicio">Antes de crear el servicio</h2>
+<p>Antes de añadir un Controller Service conviene identificar con claridad qué problema debe resolver.</p>
+<p>No todos los recursos compartidos necesitan la misma implementación. Por ejemplo:</p>
+<table>
+<thead>
+<tr>
+<th>Necesidad</th>
+<th>Controller Service habitual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Conexión con una base de datos</td>
+<td><code>DBCPConnectionPool</code></td>
+</tr>
+<tr>
+<td>Interpretar registros JSON</td>
+<td><code>JsonTreeReader</code></td>
+</tr>
+<tr>
+<td>Generar registros JSON</td>
+<td><code>JsonRecordSetWriter</code></td>
+</tr>
+<tr>
+<td>Interpretar archivos CSV</td>
+<td><code>CSVReader</code></td>
+</tr>
+<tr>
+<td>Proporcionar contexto TLS</td>
+<td><code>StandardSSLContextService</code></td>
+</tr>
+<tr>
+<td>Consultar valores por clave</td>
+<td><code>LookupService</code></td>
+</tr>
+<tr>
+<td>Gestionar esquemas</td>
+<td><code>SchemaRegistry</code></td>
+</tr>
+<tr>
+<td>Compartir una caché distribuida</td>
+<td><code>DistributedMapCacheClientService</code></td>
+</tr>
+</tbody>
+</table>
+<p>Antes de crear el componente, es recomendable responder a las siguientes preguntas:</p>
+<ul>
+<li>¿Qué Processors van a utilizarlo?</li>
+<li>¿En qué Process Groups se encuentran?</li>
+<li>¿Existe ya un servicio equivalente?</li>
+<li>¿La configuración será común para varios flujos?</li>
+<li>¿Contendrá credenciales o información sensible?</li>
+<li>¿Dependerá de otro Controller Service?</li>
+<li>¿Debe variar entre desarrollo, preproducción y producción?</li>
+</ul>
+<p>Estas cuestiones permiten decidir el tipo de servicio, su ámbito y la estrategia de parametrización.</p>
+<hr />
+<h2 id="elegir-el-ambito-adecuado">Elegir el ámbito adecuado</h2>
+<p>El Controller Service debe crearse en el Process Group que actúe como ancestro común más bajo de todos sus consumidores.</p>
+<p>Supongamos la siguiente jerarquía:</p>
+<pre class="mermaid"><code>flowchart TD
+    ROOT["Plataforma NiFi"]
+    FIN["Finanzas"]
+    HR["Recursos Humanos"]
+    BILL["Facturación"]
+    ACC["Contabilidad"]
 
+    ROOT --&gt; FIN
+    ROOT --&gt; HR
+    FIN --&gt; BILL
+    FIN --&gt; ACC</code></pre>
+<p>Si tanto <code>Facturación</code> como <code>Contabilidad</code> necesitan utilizar la misma conexión con PostgreSQL, el Controller Service debería crearse dentro de <code>Finanzas</code>.</p>
+<p>No sería recomendable crearlo:</p>
+<ul>
+<li>En <code>Facturación</code>, porque <code>Contabilidad</code> no podría verlo.</li>
+<li>En el grupo raíz, porque tendría un ámbito mayor del necesario.</li>
+<li>Duplicado en ambos grupos, porque aumentaría el mantenimiento y el consumo de recursos.</li>
+</ul>
+<p>La decisión correcta sería:</p>
+<pre class="mermaid"><code>flowchart TD
+    ROOT["Plataforma NiFi"]
+    FIN["Finanzas&lt;br/&gt;DBCP-PostgreSQL-Finanzas"]
+    BILL["Facturación"]
+    ACC["Contabilidad"]
+
+    ROOT --&gt; FIN
+    FIN --&gt; BILL
+    FIN --&gt; ACC
+
+    FIN -. "Servicio heredado" .-&gt; BILL
+    FIN -. "Servicio heredado" .-&gt; ACC</code></pre>
+<hr />
+<h2 id="acceder-a-la-configuracion-del-process-group">Acceder a la configuración del Process Group</h2>
+<p>Para crear un Controller Service, el primer paso consiste en acceder al Process Group en el que se desea definir.</p>
+<p>El procedimiento habitual es:</p>
+<ol>
+<li>Entrar en el Process Group correspondiente.</li>
+<li>Abrir el menú contextual del grupo.</li>
+<li>Seleccionar la opción de configuración.</li>
+<li>Acceder a la pestaña <strong>Controller Services</strong>.</li>
+</ol>
+<p>Dependiendo de la versión de NiFi y del diseño de la interfaz, también puede accederse mediante el panel de operación situado en la parte superior de la aplicación.</p>
+<p>Dentro de la sección aparecerá una tabla con los servicios definidos en ese ámbito.</p>
+<p>Normalmente se muestran columnas similares a las siguientes:</p>
+<table>
+<thead>
+<tr>
+<th>Columna</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td>Nombre asignado al servicio</td>
+</tr>
+<tr>
+<td>Type</td>
+<td>Implementación seleccionada</td>
+</tr>
+<tr>
+<td>Bundle</td>
+<td>Extensión o NAR que proporciona el servicio</td>
+</tr>
+<tr>
+<td>State</td>
+<td>Estado actual</td>
+</tr>
+<tr>
+<td>Referencing Components</td>
+<td>Componentes que dependen del servicio</td>
+</tr>
+<tr>
+<td>Comments</td>
+<td>Descripción o documentación adicional</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="anadir-un-nuevo-controller-service">Añadir un nuevo Controller Service</h2>
+<p>Para crear un servicio, se utiliza el botón de añadir Controller Service.</p>
+<p>Apache NiFi mostrará una ventana de selección con los tipos disponibles.</p>
+<p>Cada entrada incluye normalmente:</p>
+<ul>
+<li>Nombre del componente.</li>
+<li>Descripción.</li>
+<li>Bundle.</li>
+<li>Grupo del bundle.</li>
+<li>Versión.</li>
+<li>Etiquetas o información adicional.</li>
+</ul>
+<pre class="mermaid"><code>flowchart LR
+    ADD["Add Controller Service"]
+    SEARCH["Buscar tipo"]
+    SELECT["Seleccionar implementación"]
+    CREATE["Crear instancia"]
+
+    ADD --&gt; SEARCH
+    SEARCH --&gt; SELECT
+    SELECT --&gt; CREATE</code></pre>
+<p>La cantidad de servicios disponibles depende de:</p>
+<ul>
+<li>La versión de Apache NiFi.</li>
+<li>Los NAR instalados.</li>
+<li>Las extensiones adicionales.</li>
+<li>Los componentes personalizados desplegados.</li>
+<li>Los servicios incluidos por cada proveedor.</li>
+</ul>
+<hr />
+<h2 id="buscar-el-tipo-de-servicio">Buscar el tipo de servicio</h2>
+<p>La ventana de selección dispone de un buscador que permite filtrar los componentes.</p>
+<p>Por ejemplo, para crear una conexión JDBC puede buscarse:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>DBCP
+</span></code></pre></div>
+<p>La interfaz mostrará servicios compatibles, como:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>DBCPConnectionPool
+</span></code></pre></div>
+<p>Para un lector JSON puede utilizarse:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>JsonTreeReader
+</span></code></pre></div>
+<p>Y para un contexto TLS:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>SSLContextService
+</span></code></pre></div>
+<p>Es importante leer la descripción del componente antes de seleccionarlo. Algunos servicios pueden tener nombres similares, pero comportamientos o dependencias diferentes.</p>
+<hr />
+<h2 id="tipo-bundle-y-version">Tipo, bundle y versión</h2>
+<p>Cada Controller Service pertenece a un <strong>bundle</strong>.</p>
+<p>Un bundle es una unidad de distribución de extensiones de Apache NiFi, normalmente empaquetada como un archivo NAR.</p>
+<p>Por ejemplo, la interfaz puede mostrar información similar a:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Type: DBCPConnectionPool
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Bundle: org.apache.nifi:nifi-dbcp-service-nar
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>Version: 2.x
+</span></code></pre></div>
+<p>Estos datos permiten identificar la implementación concreta utilizada por el flujo.</p>
+<p>Son especialmente importantes cuando:</p>
+<ul>
+<li>Se migra un flujo entre entornos.</li>
+<li>Se actualiza Apache NiFi.</li>
+<li>Se utilizan componentes personalizados.</li>
+<li>Existen varias versiones de una misma extensión.</li>
+<li>Se importa un Process Group.</li>
+</ul>
+<p>Si el bundle no existe en el entorno de destino, el servicio aparecerá como componente ausente o incompatible.</p>
+<hr />
+<h2 id="crear-la-instancia">Crear la instancia</h2>
+<p>Una vez seleccionado el tipo, Apache NiFi crea una nueva instancia del Controller Service.</p>
+<p>En este momento el servicio todavía no está configurado ni habilitado.</p>
+<p>Su estado inicial suele ser:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Disabled
+</span></code></pre></div>
+<p>o:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Invalid
+</span></code></pre></div>
+<p>Que aparezca como <code>Invalid</code> no significa necesariamente que exista un fallo grave. Normalmente indica que faltan propiedades obligatorias.</p>
+<p>Por ejemplo, un <code>DBCPConnectionPool</code> será inválido mientras no se hayan definido:</p>
+<ul>
+<li>La URL JDBC.</li>
+<li>La clase del driver.</li>
+<li>La ubicación del driver, cuando sea necesaria.</li>
+<li>Las credenciales, si la base de datos las requiere.</li>
+</ul>
+<hr />
+<h2 id="nombre-del-servicio">Nombre del servicio</h2>
+<p>Todos los Controller Services deberían recibir un nombre claro y descriptivo.</p>
+<p>No es recomendable mantener el nombre genérico generado por defecto.</p>
+<p>Por ejemplo:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>DBCPConnectionPool
+</span></code></pre></div>
+<p>no permite saber:</p>
+<ul>
+<li>A qué base de datos se conecta.</li>
+<li>Qué entorno utiliza.</li>
+<li>Qué aplicación lo consume.</li>
+<li>Qué finalidad tiene.</li>
+</ul>
+<p>En cambio, un nombre como:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>DBCP-PostgreSQL-Clientes-PRO
+</span></code></pre></div>
+<p>aporta información inmediata.</p>
+<p>Una convención útil puede ser:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>TIPO-TECNOLOGIA-FINALIDAD-ENTORNO
+</span></code></pre></div>
+<p>Ejemplos:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>DBCP-POSTGRESQL-CLIENTES-PRO
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>DBCP-MARIADB-INVENTARIO-DEV
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>SSL-API-PAGOS-PRE
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>CSVREADER-PROVEEDOR-A
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>JSONWRITER-KAFKA-EVENTOS
+</span></code></pre></div>
+<p>La convención debe ser:</p>
+<ul>
+<li>Clara.</li>
+<li>Homogénea.</li>
+<li>Fácil de buscar.</li>
+<li>Comprensible para todo el equipo.</li>
+<li>Independiente del nombre interno del Processor.</li>
+</ul>
+<hr />
+<h2 id="descripcion-y-comentarios">Descripción y comentarios</h2>
+<p>Además del nombre, conviene utilizar el campo de comentarios o descripción.</p>
+<p>Una documentación útil puede incluir:</p>
+<ul>
+<li>Sistema al que se conecta.</li>
+<li>Finalidad.</li>
+<li>Equipo responsable.</li>
+<li>Entorno.</li>
+<li>Process Groups consumidores.</li>
+<li>Dependencias.</li>
+<li>Consideraciones de seguridad.</li>
+<li>Procedimiento de renovación de credenciales.</li>
+</ul>
+<p>Ejemplo:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Pool JDBC compartido para los flujos de facturación y contabilidad.
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>Conecta con PostgreSQL de producción.
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>Las credenciales se obtienen mediante el Parameter Context FINANZAS-PRO.
+</span></code></pre></div>
+<p>Esta documentación resulta muy valiosa cuando la plataforma contiene decenas o cientos de servicios.</p>
+<hr />
+<h2 id="creacion-desde-un-processor">Creación desde un Processor</h2>
+<p>Apache NiFi también permite crear determinados Controller Services directamente desde la propiedad de un Processor.</p>
+<p>Supongamos que se configura un Processor <code>ExecuteSQL</code>.</p>
+<p>En la propiedad destinada al servicio de conexión aparecerá una lista con los Controller Services compatibles.</p>
+<p>Si no existe ninguno, la interfaz puede ofrecer la posibilidad de crear uno nuevo.</p>
+<pre class="mermaid"><code>flowchart LR
+    PROC["Configurar Processor"]
+    PROPERTY["Propiedad Controller Service"]
+    EXISTING{"¿Existe servicio compatible?"}
+    SELECT["Seleccionar servicio"]
+    CREATE["Crear nuevo servicio"]
+
+    PROC --&gt; PROPERTY
+    PROPERTY --&gt; EXISTING
+    EXISTING --&gt;|Sí| SELECT
+    EXISTING --&gt;|No| CREATE</code></pre>
+<p>Este método resulta cómodo, pero debe utilizarse con precaución.</p>
+<p>Antes de crear el servicio desde el Processor conviene comprobar:</p>
+<ul>
+<li>En qué ámbito se va a crear.</li>
+<li>Si otros Processors también lo necesitarán.</li>
+<li>Si ya existe un servicio equivalente.</li>
+<li>Si debería situarse en un Process Group superior.</li>
+</ul>
+<p>Crear servicios rápidamente desde los Processors puede provocar duplicaciones si no se planifica correctamente.</p>
+<hr />
+<h2 id="referencias-iniciales">Referencias iniciales</h2>
+<p>Tras crear el servicio, todavía no tendrá componentes consumidores.</p>
+<p>Una vez seleccionado desde un Processor, Apache NiFi registrará automáticamente la referencia.</p>
+<pre class="mermaid"><code>flowchart LR
+    PROC["ExecuteSQL"]
+    PROP["Database Connection Pooling Service"]
+    SERVICE["DBCP-PostgreSQL"]
+
+    PROC --&gt; PROP
+    PROP --&gt; SERVICE</code></pre>
+<p>A partir de ese momento, la sección de componentes referenciados permitirá consultar la dependencia.</p>
+<hr />
+<h2 id="creacion-de-servicios-dependientes">Creación de servicios dependientes</h2>
+<p>Algunos Controller Services dependen de otros.</p>
+<p>Por ejemplo, un cliente puede requerir un <code>SSLContextService</code>.</p>
+<pre class="mermaid"><code>flowchart TD
+    SSL["StandardSSLContextService"]
+    CLIENT["Cliente HTTPS"]
+    PROC["Processor"]
+
+    SSL --&gt; CLIENT
+    CLIENT --&gt; PROC</code></pre>
+<p>En estos casos se recomienda crear primero los servicios base.</p>
+<p>El orden adecuado sería:</p>
+<ol>
+<li>Crear el servicio TLS.</li>
+<li>Configurarlo.</li>
+<li>Validarlo.</li>
+<li>Habilitarlo.</li>
+<li>Crear el servicio cliente.</li>
+<li>Asociar el servicio TLS.</li>
+<li>Habilitar el servicio cliente.</li>
+<li>Configurar el Processor.</li>
+</ol>
+<p>De este modo se evita que los componentes dependientes permanezcan inválidos por falta de recursos.</p>
+<hr />
+<h2 id="creacion-en-cluster">Creación en clúster</h2>
+<p>En una instalación NiFi en clúster, los Controller Services forman parte de la definición del flujo compartido.</p>
+<p>Esto significa que la configuración lógica se distribuye a todos los nodos.</p>
+<pre class="mermaid"><code>flowchart TD
+    FLOW["Definición del flujo"]
+    CS["Controller Service"]
+    N1["Nodo 1"]
+    N2["Nodo 2"]
+    N3["Nodo 3"]
+
+    FLOW --&gt; CS
+    CS --&gt; N1
+    CS --&gt; N2
+    CS --&gt; N3</code></pre>
+<p>Sin embargo, algunos recursos referenciados deben existir localmente en todos los nodos.</p>
+<p>Ejemplos:</p>
+<ul>
+<li>Drivers JDBC.</li>
+<li>Keystores.</li>
+<li>Truststores.</li>
+<li>Archivos de configuración.</li>
+<li>Rutas locales.</li>
+<li>Bibliotecas externas.</li>
+</ul>
+<p>Si un driver JDBC está configurado mediante una ruta como:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>/opt/nifi/drivers/postgresql.jar
+</span></code></pre></div>
+<p>el archivo debe estar disponible en esa ubicación en todos los nodos del clúster.</p>
+<p>De lo contrario, el servicio puede habilitarse correctamente en algunos nodos y fallar en otros.</p>
+<hr />
+<h2 id="creacion-en-docker">Creación en Docker</h2>
+<p>En entornos Docker debe prestarse especial atención a las rutas.</p>
+<p>Una ruta configurada dentro de NiFi se interpreta desde el sistema de archivos del contenedor, no desde el host.</p>
+<p>Por ejemplo:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>/opt/nifi/drivers/postgresql.jar
+</span></code></pre></div>
+<p>debe existir dentro del contenedor.</p>
+<p>Puede proporcionarse mediante un bind mount:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">services</span><span class="p">:</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="nt">nifi</span><span class="p">:</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apache/nifi:2.10.0</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./drivers:/opt/nifi/drivers</span>
+</span></code></pre></div>
+<p>De este modo, un archivo situado en el host:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>./drivers/postgresql.jar
+</span></code></pre></div>
+<p>estará disponible dentro del contenedor como:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>/opt/nifi/drivers/postgresql.jar
+</span></code></pre></div>
+<pre class="mermaid"><code>flowchart LR
+    HOST["Host&lt;br/&gt;./drivers/postgresql.jar"]
+    MOUNT["Bind mount"]
+    CONTAINER["Contenedor NiFi&lt;br/&gt;/opt/nifi/drivers/postgresql.jar"]
+    SERVICE["DBCPConnectionPool"]
+
+    HOST --&gt; MOUNT
+    MOUNT --&gt; CONTAINER
+    CONTAINER --&gt; SERVICE</code></pre>
+<p>Este mismo principio se aplica a:</p>
+<ul>
+<li>Certificados.</li>
+<li>Drivers.</li>
+<li>Archivos de configuración.</li>
+<li>Esquemas.</li>
+<li>Recursos auxiliares.</li>
+</ul>
+<hr />
+<h2 id="creacion-mediante-definiciones-de-flujo">Creación mediante definiciones de flujo</h2>
+<p>Los Controller Services también pueden incorporarse mediante:</p>
+<ul>
+<li>Importación de Process Groups.</li>
+<li>Definiciones de flujo JSON.</li>
+<li>NiFi Registry.</li>
+<li>Versionado de flujos.</li>
+<li>Despliegues automatizados.</li>
+</ul>
+<p>Cuando se importa un flujo, Apache NiFi intenta recrear sus Controller Services y dependencias.</p>
+<p>Sin embargo, es posible que sea necesario revisar:</p>
+<ul>
+<li>Credenciales.</li>
+<li>Parameter Contexts.</li>
+<li>Rutas locales.</li>
+<li>Drivers.</li>
+<li>Certificados.</li>
+<li>Identificadores sensibles.</li>
+<li>Servicios externos.</li>
+</ul>
+<p>La estructura puede importarse correctamente, pero la configuración específica del entorno debe adaptarse.</p>
+<hr />
+<h2 id="errores-frecuentes-durante-la-creacion">Errores frecuentes durante la creación</h2>
+<h3 id="crear-el-servicio-en-el-ambito-incorrecto">Crear el servicio en el ámbito incorrecto</h3>
+<p>Si se crea demasiado abajo, otros Process Groups no podrán utilizarlo.</p>
+<p>Si se crea demasiado arriba, quedará expuesto a más componentes de los necesarios.</p>
+<h3 id="duplicar-servicios-existentes">Duplicar servicios existentes</h3>
+<p>Antes de crear uno nuevo, debe revisarse la lista de servicios disponibles y heredados.</p>
+<h3 id="mantener-el-nombre-generico">Mantener el nombre genérico</h3>
+<p>Nombres como <code>DBCPConnectionPool</code> o <code>JsonTreeReader</code> dificultan la administración en plataformas grandes.</p>
+<h3 id="ignorar-el-bundle">Ignorar el bundle</h3>
+<p>Un flujo puede depender de una extensión que no exista en otro entorno.</p>
+<h3 id="utilizar-rutas-del-host-en-docker">Utilizar rutas del host en Docker</h3>
+<p>NiFi solo puede acceder a las rutas disponibles dentro del contenedor.</p>
+<h3 id="no-considerar-todos-los-nodos-del-cluster">No considerar todos los nodos del clúster</h3>
+<p>Los archivos locales necesarios deben existir en todos los nodos.</p>
+<h3 id="introducir-credenciales-directamente">Introducir credenciales directamente</h3>
+<p>Las contraseñas deberían gestionarse mediante propiedades sensibles y Parameter Contexts, evitando configuraciones dispersas.</p>
+<hr />
+<h2 id="buenas-practicas">Buenas prácticas</h2>
+<ul>
+<li>Definir primero el ámbito.</li>
+<li>Buscar servicios existentes antes de crear uno nuevo.</li>
+<li>Aplicar una convención de nombres.</li>
+<li>Añadir una descripción funcional.</li>
+<li>Crear primero los servicios base.</li>
+<li>Usar Parameter Contexts para valores variables.</li>
+<li>Mantener credenciales fuera de configuraciones visibles.</li>
+<li>Verificar rutas en todos los nodos.</li>
+<li>Utilizar bind mounts en Docker.</li>
+<li>Documentar dependencias externas.</li>
+<li>Revisar el bundle y la versión.</li>
+<li>Evitar crear servicios de forma improvisada desde los Processors.</li>
+</ul>
+<hr />
+<h2 id="lista-de-comprobacion">Lista de comprobación</h2>
+<p>Antes de dar por finalizada la creación del servicio, conviene verificar:</p>
+<ul>
+<li>[ ] El tipo de servicio es el adecuado.</li>
+<li>[ ] Se ha creado en el ámbito correcto.</li>
+<li>[ ] No existe otro servicio equivalente.</li>
+<li>[ ] Tiene un nombre descriptivo.</li>
+<li>[ ] Dispone de comentarios o documentación.</li>
+<li>[ ] Sus dependencias están identificadas.</li>
+<li>[ ] Las rutas existen dentro de NiFi.</li>
+<li>[ ] Los recursos locales están presentes en todos los nodos.</li>
+<li>[ ] Las credenciales se gestionan de forma segura.</li>
+<li>[ ] El bundle está disponible en todos los entornos.</li>
+</ul>
+<hr />
+<h2 id="ideas-clave">Ideas clave</h2>
+<p>La creación de un Controller Service no consiste únicamente en pulsar el botón <strong>Add</strong>.</p>
+<p>También implica tomar decisiones sobre:</p>
+<ul>
+<li>Tipo.</li>
+<li>Ámbito.</li>
+<li>Reutilización.</li>
+<li>Seguridad.</li>
+<li>Dependencias.</li>
+<li>Portabilidad.</li>
+<li>Mantenimiento.</li>
+<li>Entorno de ejecución.</li>
+</ul>
+<p>Un servicio bien ubicado y correctamente documentado puede reutilizarse de forma segura durante años. Por el contrario, una creación improvisada puede generar duplicación, dependencias ocultas y problemas durante la migración.</p>
+<h1 id="propiedades">Propiedades</h1>
+<p>Una vez creado un Controller Service, el siguiente paso consiste en configurar sus propiedades. Estas propiedades determinan el comportamiento del servicio y permiten adaptarlo al recurso que debe proporcionar.</p>
+<p>Dependiendo del tipo de Controller Service, el número de propiedades puede variar considerablemente. Algunos servicios únicamente requieren dos o tres parámetros, mientras que otros incorporan decenas de opciones de configuración.</p>
+<p>Por ejemplo:</p>
+<ul>
+<li>Un <code>JsonTreeReader</code> necesita conocer cómo interpretar documentos JSON.</li>
+<li>Un <code>StandardSSLContextService</code> requiere certificados, almacenes de claves y algoritmos criptográficos.</li>
+<li>Un <code>DBCPConnectionPool</code> necesita la información necesaria para establecer conexiones con una base de datos.</li>
+</ul>
+<p>Aunque las propiedades cambian según el tipo de servicio, Apache NiFi utiliza una filosofía común para todos ellos, lo que facilita enormemente su aprendizaje.</p>
+<hr />
+<h2 id="la-ventana-de-configuracion">La ventana de configuración</h2>
+<p>Al editar un Controller Service aparece una ventana similar a la de cualquier Processor.</p>
+<p>Generalmente se divide en varias pestañas:</p>
+<pre class="mermaid"><code>flowchart LR
+    SETTINGS["Settings"]
+    PROPERTIES["Properties"]
+    COMMENTS["Comments"]
+
+    SETTINGS --&gt; PROPERTIES
+    PROPERTIES --&gt; COMMENTS</code></pre>
+<p>La pestaña <strong>Properties</strong> concentra prácticamente toda la configuración funcional del servicio.</p>
+<p>Cada propiedad dispone normalmente de la siguiente información:</p>
+<ul>
+<li>Nombre.</li>
+<li>Valor.</li>
+<li>Descripción.</li>
+<li>Si es obligatoria.</li>
+<li>Si admite Expression Language.</li>
+<li>Si es sensible.</li>
+<li>Si tiene un valor por defecto.</li>
+<li>Restricciones de validación.</li>
+</ul>
+<hr />
+<h2 id="tipos-de-propiedades">Tipos de propiedades</h2>
+<p>Apache NiFi utiliza diferentes tipos de propiedades dependiendo del dato que deba almacenarse.</p>
+<p>Las más habituales son:</p>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Texto</td>
+<td>Nombre de un esquema</td>
+</tr>
+<tr>
+<td>Número</td>
+<td>Tamaño del pool</td>
+</tr>
+<tr>
+<td>Booleano</td>
+<td>Activado / Desactivado</td>
+</tr>
+<tr>
+<td>Enumeración</td>
+<td>Estrategia de lectura</td>
+</tr>
+<tr>
+<td>Ruta</td>
+<td>Ubicación de un fichero</td>
+</tr>
+<tr>
+<td>URL</td>
+<td>Dirección de un servidor</td>
+</tr>
+<tr>
+<td>Contraseña</td>
+<td>Password JDBC</td>
+</tr>
+<tr>
+<td>Referencia</td>
+<td>Otro Controller Service</td>
+</tr>
+</tbody>
+</table>
+<p>Cada tipo incorpora su propio mecanismo de validación.</p>
+<p>Por ejemplo:</p>
+<ul>
+<li>Un número debe contener un valor numérico válido.</li>
+<li>Una URL debe respetar un formato correcto.</li>
+<li>Una referencia debe apuntar a un Controller Service compatible.</li>
+<li>Una contraseña permanece oculta en la interfaz.</li>
+</ul>
+<hr />
+<h2 id="propiedades-obligatorias">Propiedades obligatorias</h2>
+<p>Muchas propiedades son obligatorias.</p>
+<p>Mientras una propiedad requerida permanezca vacía, el Controller Service será considerado <strong>Invalid</strong>.</p>
+<p>Por ejemplo, un <code>DBCPConnectionPool</code> no podrá habilitarse si faltan:</p>
+<ul>
+<li>JDBC URL</li>
+<li>Database Driver Class Name</li>
+</ul>
+<p>La interfaz muestra estas propiedades mediante indicadores visuales.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>JDBC URL *
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>Driver Class Name *
+</span></code></pre></div>
+<p>El asterisco indica que el valor es obligatorio.</p>
+<hr />
+<h2 id="valores-por-defecto">Valores por defecto</h2>
+<p>Muchos Controller Services incluyen valores predeterminados.</p>
+<p>Por ejemplo:</p>
+<table>
+<thead>
+<tr>
+<th>Propiedad</th>
+<th>Valor por defecto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Max Wait Time</td>
+<td>500 ms</td>
+</tr>
+<tr>
+<td>Validation Timeout</td>
+<td>1 min</td>
+</tr>
+<tr>
+<td>Max Total Connections</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<p>Los valores por defecto permiten comenzar rápidamente, aunque en entornos de producción conviene revisarlos cuidadosamente.</p>
+<p>No siempre representan la configuración más adecuada para todos los escenarios.</p>
+<hr />
+<h2 id="propiedades-sensibles">Propiedades sensibles</h2>
+<p>Determinadas propiedades contienen información confidencial.</p>
+<p>Entre ellas destacan:</p>
+<ul>
+<li>Contraseñas.</li>
+<li>Tokens.</li>
+<li>Claves privadas.</li>
+<li>Secretos de autenticación.</li>
+<li>Passwords de certificados.</li>
+</ul>
+<p>Apache NiFi marca estas propiedades como <strong>Sensitive</strong>.</p>
+<p>La interfaz oculta automáticamente su contenido.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>**************
+</span></code></pre></div>
+<p>Aunque el usuario vuelva a abrir el Controller Service, el valor no será mostrado.</p>
+<p>Este comportamiento evita la exposición accidental de credenciales.</p>
+<hr />
+<h2 id="uso-de-parameter-contexts">Uso de Parameter Contexts</h2>
+<p>En lugar de escribir directamente una contraseña, es recomendable utilizar un Parameter Context.</p>
+<p>Por ejemplo:</p>
+<p>En lugar de:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>Password = MiPassword2025
+</span></code></pre></div>
+<p>utilizaremos:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>#{db.password}
+</span></code></pre></div>
+<p>Del mismo modo:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>#{db.user}
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>#{db.host}
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>#{db.port}
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>#{db.name}
+</span></code></pre></div>
+<p>Este enfoque aporta numerosas ventajas:</p>
+<ul>
+<li>Separación entre configuración y lógica.</li>
+<li>Mayor seguridad.</li>
+<li>Facilidad para cambiar entre entornos.</li>
+<li>Menor duplicación.</li>
+<li>Despliegues más sencillos.</li>
+</ul>
+<hr />
+<h2 id="expression-language">Expression Language</h2>
+<p>No todas las propiedades admiten Expression Language.</p>
+<p>Cuando una propiedad lo permite, Apache NiFi lo indica claramente en su descripción.</p>
+<p>Por ejemplo:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>Supports Expression Language: Yes
+</span></code></pre></div>
+<p>o</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>Supports Expression Language: No
+</span></code></pre></div>
+<p>En los Controller Services es mucho más habitual utilizar <strong>Parameter Contexts</strong> que Expression Language.</p>
+<p>La razón es sencilla.</p>
+<p>Los Controller Services se inicializan antes de que existan FlowFiles.</p>
+<p>Como consecuencia, muchas variables asociadas al FlowFile no están disponibles durante su configuración.</p>
+<hr />
+<h2 id="referencias-a-otros-controller-services">Referencias a otros Controller Services</h2>
+<p>Una característica muy potente consiste en que un Controller Service puede utilizar otro Controller Service.</p>
+<p>Por ejemplo:</p>
+<pre class="mermaid"><code>flowchart LR
+    SSL["StandardSSLContextService"]
+    CLIENT["Client Service"]
+    PROCESSOR["InvokeHTTP"]
+
+    SSL --&gt; CLIENT
+    CLIENT --&gt; PROCESSOR</code></pre>
+<p>En este caso:</p>
+<ul>
+<li>El Processor utiliza un Client Service.</li>
+<li>El Client Service utiliza un SSLContextService.</li>
+</ul>
+<p>Apache NiFi gestiona automáticamente estas dependencias.</p>
+<hr />
+<h2 id="propiedades-dinamicas">Propiedades dinámicas</h2>
+<p>Algunos Controller Services permiten crear propiedades dinámicas.</p>
+<p>Estas propiedades no aparecen inicialmente en la configuración y pueden añadirse según las necesidades del usuario.</p>
+<p>Su funcionamiento depende de cada implementación.</p>
+<p>Ejemplos habituales:</p>
+<ul>
+<li>Cabeceras HTTP.</li>
+<li>Parámetros personalizados.</li>
+<li>Opciones específicas del proveedor.</li>
+<li>Configuraciones avanzadas.</li>
+</ul>
+<p>No todos los servicios admiten propiedades dinámicas.</p>
+<p>Cuando están disponibles, la documentación del componente las describe detalladamente.</p>
+<hr />
+<h2 id="validacion-de-propiedades">Validación de propiedades</h2>
+<p>Cada vez que una propiedad cambia, Apache NiFi ejecuta un proceso de validación.</p>
+<p>Este proceso verifica aspectos como:</p>
+<ul>
+<li>Tipo correcto.</li>
+<li>Formato.</li>
+<li>Restricciones.</li>
+<li>Dependencias.</li>
+<li>Compatibilidad.</li>
+</ul>
+<p>Si alguna comprobación falla, el servicio permanecerá inválido.</p>
+<pre class="mermaid"><code>flowchart TD
+    EDIT["Modificar propiedad"]
+    VALIDATE["Validación automática"]
+    OK["Configuración válida"]
+    ERROR["Configuración inválida"]
+
+    EDIT --&gt; VALIDATE
+    VALIDATE --&gt; OK
+    VALIDATE --&gt; ERROR</code></pre>
+<p>Esta validación inmediata evita numerosos errores durante la ejecución.</p>
+<hr />
+<h2 id="dependencias-entre-propiedades">Dependencias entre propiedades</h2>
+<p>En algunos Controller Services determinadas propiedades dependen de otras.</p>
+<p>Por ejemplo:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>SSL Enabled = true
+</span></code></pre></div>
+<p>provocará que aparezcan nuevas propiedades relacionadas con:</p>
+<ul>
+<li>Keystore</li>
+<li>Truststore</li>
+<li>Passwords</li>
+<li>Protocolos TLS</li>
+</ul>
+<p>Si SSL está desactivado, dichas propiedades pueden permanecer ocultas o dejar de ser obligatorias.</p>
+<p>Este comportamiento simplifica considerablemente la interfaz.</p>
+<hr />
+<h2 id="buenas-practicas_1">Buenas prácticas</h2>
+<p>Al configurar las propiedades de un Controller Service es recomendable:</p>
+<ul>
+<li>Utilizar Parameter Contexts.</li>
+<li>Evitar valores codificados.</li>
+<li>Revisar siempre los valores por defecto.</li>
+<li>Leer la documentación de cada propiedad.</li>
+<li>Utilizar nombres descriptivos.</li>
+<li>Documentar configuraciones complejas.</li>
+<li>Mantener la configuración homogénea entre entornos.</li>
+<li>Revisar periódicamente las propiedades sensibles.</li>
+</ul>
+<hr />
+<h2 id="errores-frecuentes">Errores frecuentes</h2>
+<p>Los errores más habituales son:</p>
+<ul>
+<li>Introducir credenciales directamente.</li>
+<li>No utilizar parámetros.</li>
+<li>Ignorar los valores por defecto.</li>
+<li>Pensar que todas las propiedades admiten Expression Language.</li>
+<li>Seleccionar un Controller Service incompatible.</li>
+<li>Modificar propiedades críticas sin conocer su impacto.</li>
+<li>Configurar rutas inexistentes.</li>
+<li>No revisar la validación antes de habilitar el servicio.</li>
+</ul>
+<hr />
+<h2 id="ideas-clave_1">Ideas clave</h2>
+<p>Las propiedades constituyen el núcleo de configuración de un Controller Service.</p>
+<p>Apache NiFi proporciona un sistema homogéneo de validación, parametrización y gestión de dependencias que facilita la creación de configuraciones reutilizables y seguras.</p>
 
 
 
