@@ -1,0 +1,2616 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://alapvi.github.io/nifi/connections/">
+      
+      
+        <link rel="prev" href="../processors/">
+      
+      
+        <link rel="next" href="../../elastic/elastic_intro/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/logo_peq.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Connections - Sistemas de BigData</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#capitulo-8-connections-y-queues-en-apache-nifi-2x" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Sistemas de BigData" class="md-header__button md-logo" aria-label="Sistemas de BigData" data-md-component="logo">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sistemas de BigData
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Connections
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sistemas de BigData" class="md-nav__button md-logo" aria-label="Sistemas de BigData" data-md-component="logo">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    Sistemas de BigData
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Almacenamiento de datos. NoSQL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Almacenamiento de datos. NoSQL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nosql/nosql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NoSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nosql/moddatos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelos de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nosql/consistencia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consistencia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MongoDB
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MongoDB
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/intromongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción a MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/mongodb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/modelado/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Diseño de modelado de BD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/instalacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/basicsmongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primeros pasos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/mongodbcrud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operaciones con datos CRUD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/mongodbdatos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consulta de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nifi
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Nifi
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduccion_nifi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arquitectura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitectura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interfaz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interfaz gráfica de NiFi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../instalacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalación y despliegue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../primerflujo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primer flujo de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../flowfiles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowfiles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../processors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Processors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Connections
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Connections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elastic Stack
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Elastic Stack
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../elastic/elastic_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../elastic/elastic_ops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../elastic/kibana/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kibana
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../elastic/caso_uso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso de uso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../elastic/dashboards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboards Covid
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../elastic/ampliacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ampliación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="capitulo-8-connections-y-queues-en-apache-nifi-2x">Capítulo 8. Connections y Queues en Apache NiFi 2.x</h1>
+<blockquote>
+<p><em>Los Processors realizan las operaciones. Las Connections permiten que los FlowFiles esperen y circulen de forma controlada entre ellas.</em></p>
+</blockquote>
+<hr />
+<h2 id="objetivos">Objetivos</h2>
+<p>Al finalizar este capítulo serás capaz de:</p>
+<ul>
+<li>Comprender qué es una Connection.</li>
+<li>Diferenciar una Connection de una Relationship.</li>
+<li>Explicar por qué una Connection actúa como Queue.</li>
+<li>Crear y configurar Connections desde la interfaz.</li>
+<li>Interpretar la información mostrada sobre una Queue.</li>
+<li>Comprender cómo se almacenan los FlowFiles pendientes.</li>
+<li>Seleccionar las Relationships que atraviesan una Connection.</li>
+<li>Identificar el componente origen y el componente destino.</li>
+<li>Comprender el comportamiento de las colas durante la ejecución.</li>
+<li>Examinar, descargar y eliminar FlowFiles en espera.</li>
+<li>Configurar Back Pressure.</li>
+<li>Aplicar FlowFile Prioritizers.</li>
+<li>Configurar FlowFile Expiration.</li>
+<li>Comprender las estrategias de Load Balance en clúster.</li>
+<li>Detectar acumulaciones y cuellos de botella.</li>
+</ul>
+<hr />
+<h2 id="introduccion">Introducción</h2>
+<p>En los capítulos anteriores se estudiaron los dos componentes principales de un DataFlow:</p>
+<ul>
+<li>los <strong>FlowFiles</strong>, que representan los datos;</li>
+<li>los <strong>Processors</strong>, que realizan operaciones sobre esos datos.</li>
+</ul>
+<p>Sin embargo, todavía falta un elemento fundamental: el componente que permite transportar los FlowFiles entre Processors.</p>
+<p>Ese componente es la <strong>Connection</strong>.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[Processor A]
+    --&gt; C[[Connection]]
+    --&gt; B[Processor B]</code></pre>
+<p>Una Connection no es únicamente una línea visual.</p>
+<p>También representa una <strong>Queue persistente</strong> en la que los FlowFiles pueden permanecer hasta que el siguiente componente esté preparado para procesarlos.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[Processor productor]
+    --&gt; Q[(Queue de FlowFiles)]
+    --&gt; B[Processor consumidor]</code></pre>
+<p>Esta separación permite que ambos Processors trabajen a velocidades diferentes.</p>
+<p>Por ejemplo:</p>
+<ul>
+<li>el Processor A puede generar 100 FlowFiles por segundo;</li>
+<li>el Processor B puede procesar 50 FlowFiles por segundo;</li>
+<li>los FlowFiles restantes permanecerán temporalmente en la Queue.</li>
+</ul>
+<pre class="mermaid"><code>flowchart LR
+    A[Productor&lt;br/&gt;100 FlowFiles/s]
+    --&gt; Q[(Queue)]
+    --&gt; B[Consumidor&lt;br/&gt;50 FlowFiles/s]</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Idea fundamental</p>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Una Connection enlaza componentes, pero también desacopla sus velocidades de ejecución.
+</span></code></pre></div>
+<hr />
+<h1 id="81-que-es-una-connection">8.1 ¿Qué es una Connection?</h1>
+<p>Una <strong>Connection</strong> es un enlace dirigido entre dos componentes de un DataFlow.</p>
+<p>Normalmente conecta:</p>
+<ul>
+<li>un Processor con otro Processor;</li>
+<li>un Processor con un Process Group;</li>
+<li>un Processor con un Funnel;</li>
+<li>un Input Port con un Processor;</li>
+<li>un Processor con un Output Port;</li>
+<li>un Funnel con otro componente.</li>
+</ul>
+<pre class="mermaid"><code>flowchart TB
+    A[Processor]
+    --&gt; B[Processor]
+
+    C[Processor]
+    --&gt; D[[Process Group]]
+
+    E[Input Port]
+    --&gt; F[Processor]
+
+    G[Processor]
+    --&gt; H[Output Port]
+
+    I[Funnel]
+    --&gt; J[Processor]</code></pre>
+<p>La Connection contiene los FlowFiles que han salido del componente origen, pero todavía no han sido obtenidos por el componente destino.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[Origen]
+    --&gt;|Transfiere FlowFile| Q[(Connection)]
+    --&gt;|Obtiene FlowFile| B[Destino]</code></pre>
+<p>Apache NiFi describe las Connections como enlaces entre Processors que actúan como colas y permiten que los procesos interactúen a velocidades diferentes. Estas colas pueden aplicar límites y mecanismos de prioridad.</p>
+<hr />
+<h1 id="82-connection-y-queue">8.2 Connection y Queue</h1>
+<p>En la interfaz de NiFi, los términos <strong>Connection</strong> y <strong>Queue</strong> están estrechamente relacionados.</p>
+<h2 id="connection">Connection</h2>
+<p>Representa el enlace completo entre dos componentes.</p>
+<p>Incluye:</p>
+<ul>
+<li>componente origen;</li>
+<li>componente destino;</li>
+<li>Relationships seleccionadas;</li>
+<li>nombre;</li>
+<li>configuración de Back Pressure;</li>
+<li>priorización;</li>
+<li>expiración;</li>
+<li>Load Balance;</li>
+<li>Queue de FlowFiles.</li>
+</ul>
+<h2 id="queue">Queue</h2>
+<p>Es la parte de la Connection en la que esperan los FlowFiles.</p>
+<pre class="mermaid"><code>flowchart TB
+    C[Connection]
+
+    C --&gt; O[Origen]
+    C --&gt; R[Relationships]
+    C --&gt; Q[Queue]
+    C --&gt; D[Destino]
+    C --&gt; BP[Back Pressure]
+    C --&gt; P[Prioritizers]</code></pre>
+<p>En la práctica, cuando se selecciona la línea de una Connection, muchas de las acciones disponibles actúan sobre la Queue.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>La Connection es el enlace configurado. La Queue es el almacenamiento temporal de los FlowFiles dentro de ese enlace.
+</span></code></pre></div>
+<hr />
+<h1 id="83-la-connection-como-buffer">8.3 La Connection como buffer</h1>
+<p>Una Queue actúa como un <strong>buffer</strong> entre el productor y el consumidor.</p>
+<p>Supongamos este flujo:</p>
+<pre class="mermaid"><code>flowchart LR
+    A[GetFile]
+    --&gt; Q[(Queue)]
+    --&gt; B[PutDatabaseRecord]</code></pre>
+<p><code>GetFile</code> puede leer archivos rápidamente.</p>
+<p>Sin embargo, <code>PutDatabaseRecord</code> puede depender de:</p>
+<ul>
+<li>la velocidad de la base de datos;</li>
+<li>el número de conexiones;</li>
+<li>los bloqueos;</li>
+<li>la latencia de red;</li>
+<li>el tamaño de los lotes.</li>
+</ul>
+<p>Si la base de datos procesa más lentamente que <code>GetFile</code>, los FlowFiles se acumularán en la Queue.</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant G as GetFile
+    participant Q as Queue
+    participant D as Base de datos
+
+    G-&gt;&gt;Q: FlowFile 1
+    G-&gt;&gt;Q: FlowFile 2
+    G-&gt;&gt;Q: FlowFile 3
+    Q-&gt;&gt;D: FlowFile 1
+    G-&gt;&gt;Q: FlowFile 4
+    Q-&gt;&gt;D: FlowFile 2</code></pre>
+<p>Sin la Queue, el Processor productor tendría que esperar directamente a que finalizara el consumidor.</p>
+<p>Gracias a la Connection:</p>
+<ul>
+<li>ambos componentes pueden ejecutarse de forma independiente;</li>
+<li>los datos pueden absorber variaciones temporales;</li>
+<li>el flujo puede recuperarse de interrupciones;</li>
+<li>es posible aplicar control de carga.</li>
+</ul>
+<hr />
+<h1 id="84-desacoplamiento-de-componentes">8.4 Desacoplamiento de componentes</h1>
+<p>Una de las principales ventajas de las Connections es el <strong>desacoplamiento</strong>.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[Processor A]
+    --&gt; Q[(Queue)]
+    --&gt; B[Processor B]</code></pre>
+<p>El Processor A no necesita conocer:</p>
+<ul>
+<li>cuándo se ejecutará B;</li>
+<li>cuánto tardará B;</li>
+<li>cuántas tareas concurrentes utiliza B;</li>
+<li>si B está detenido temporalmente;</li>
+<li>si B se encuentra esperando un servicio externo.</li>
+</ul>
+<p>A simplemente transfiere el FlowFile a la Connection.</p>
+<p>Posteriormente, B lo obtiene cuando puede procesarlo.</p>
+<pre class="mermaid"><code>flowchart TB
+    A[Processor A termina]
+    --&gt; B[Transfiere el FlowFile]
+    --&gt; C[(Queue persistente)]
+    --&gt; D[Processor B lo obtiene después]</code></pre>
+<div class="admonition tip">
+<p class="admonition-title">Diseño desacoplado</p>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Las Connections permiten construir el DataFlow como una serie de etapas independientes, unidas mediante colas controladas.
+</span></code></pre></div>
+<hr />
+<h1 id="85-connection-y-relationship">8.5 Connection y Relationship</h1>
+<p>Una <strong>Relationship</strong> no es lo mismo que una Connection.</p>
+<h2 id="relationship">Relationship</h2>
+<p>Representa un resultado posible de un Processor.</p>
+<p>Ejemplos:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>success
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>failure
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>matched
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>unmatched
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>retry
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>original
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>split
+</span></code></pre></div>
+<h2 id="connection_1">Connection</h2>
+<p>Representa el enlace físico y lógico por el que circulan una o varias Relationships.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[Processor]
+    --&gt;|Relationship success| C[[Connection]]
+    --&gt; B[Processor destino]</code></pre>
+<p>La Relationship pertenece al Processor.</p>
+<p>La Connection utiliza esa Relationship para determinar qué FlowFiles debe recibir.</p>
+<hr />
+<h2 id="ejemplo">Ejemplo</h2>
+<p>Supongamos un <code>EvaluateJsonPath</code> con las relaciones:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>matched
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>unmatched
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>failure
+</span></code></pre></div>
+<p>Podemos crear tres Connections:</p>
+<pre class="mermaid"><code>flowchart TB
+    A[EvaluateJsonPath]
+
+    A --&gt;|matched| B[Procesamiento correcto]
+    A --&gt;|unmatched| C[Datos incompletos]
+    A --&gt;|failure| D[Errores JSON]</code></pre>
+<p>Cada línea representa una Connection diferente.</p>
+<p>Cada Connection transporta una Relationship concreta.</p>
+<hr />
+<h2 id="varias-relationships-en-una-connection">Varias Relationships en una Connection</h2>
+<p>Una Connection puede transportar más de una Relationship.</p>
+<p>Por ejemplo:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>unmatched
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>failure
+</span></code></pre></div>
+<p>podrían dirigirse al mismo Process Group de errores.</p>
+<pre class="mermaid"><code>flowchart TB
+    A[EvaluateJsonPath]
+
+    A --&gt;|matched| B[Flujo normal]
+    A --&gt;|unmatched y failure| C[Gestión de errores]</code></pre>
+<p>En este caso, la Connection hacia la gestión de errores incluiría dos Relationships.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Si varias Relationships comparten una Connection, los FlowFiles llegarán al mismo destino. Es posible conservar un atributo que permita distinguir el motivo de la ruta.
+</span></code></pre></div>
+<hr />
+<h1 id="86-componentes-de-origen-y-destino">8.6 Componentes de origen y destino</h1>
+<p>Toda Connection tiene:</p>
+<ul>
+<li>un <strong>Source Component</strong>;</li>
+<li>un <strong>Destination Component</strong>.</li>
+</ul>
+<pre class="mermaid"><code>flowchart LR
+    A[Source Component]
+    --&gt; C[[Connection]]
+    --&gt; B[Destination Component]</code></pre>
+<h2 id="source-component">Source Component</h2>
+<p>Es el componente que transfiere los FlowFiles a la Connection.</p>
+<p>Puede ser:</p>
+<ul>
+<li>un Processor;</li>
+<li>un Input Port;</li>
+<li>un Funnel;</li>
+<li>un Process Group, mediante sus puertos.</li>
+</ul>
+<h2 id="destination-component">Destination Component</h2>
+<p>Es el componente que obtiene los FlowFiles de la Queue.</p>
+<p>Puede ser:</p>
+<ul>
+<li>un Processor;</li>
+<li>un Output Port;</li>
+<li>un Funnel;</li>
+<li>un Process Group.</li>
+</ul>
+<hr />
+<h2 id="direccion-de-la-connection">Dirección de la Connection</h2>
+<p>Las Connections son dirigidas.</p>
+<p>Esto significa que los FlowFiles solo circulan desde el origen hacia el destino.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[Origen]
+    --&gt; B[Destino]</code></pre>
+<p>No circulan automáticamente en sentido contrario.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[Origen]
+    --X B[Destino]</code></pre>
+<p>Si se necesita devolver un FlowFile a una etapa anterior, debe crearse otra Connection.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[Validar]
+    --&gt; B[Procesar]
+
+    B --&gt;|retry| A</code></pre>
+<div class="admonition warning">
+<p class="admonition-title">Ciclos</p>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>NiFi permite crear ciclos, pero deben diseñarse con cuidado para evitar reintentos infinitos o FlowFiles atrapados permanentemente.
+</span></code></pre></div>
+<hr />
+<h1 id="87-creacion-de-una-connection">8.7 Creación de una Connection</h1>
+<p>Una Connection se crea arrastrando desde un componente origen hacia un componente destino.</p>
+<h2 id="procedimiento-general">Procedimiento general</h2>
+<ol>
+<li>Sitúa ambos componentes en el lienzo.</li>
+<li>Coloca el cursor sobre el componente origen.</li>
+<li>Utiliza el controlador de conexión.</li>
+<li>Arrastra la línea hasta el componente destino.</li>
+<li>Selecciona las Relationships.</li>
+<li>Asigna opcionalmente un nombre.</li>
+<li>Guarda la configuración.</li>
+</ol>
+<pre class="mermaid"><code>flowchart LR
+    A[Seleccionar origen]
+    --&gt; B[Arrastrar conexión]
+    --&gt; C[Seleccionar destino]
+    --&gt; D[Elegir Relationships]
+    --&gt; E[Crear Connection]</code></pre>
+<hr />
+<h2 id="ejemplo_1">Ejemplo</h2>
+<p>Disponemos de:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>GenerateFlowFile
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>LogAttribute
+</span></code></pre></div>
+<p>Creamos una Connection desde <code>GenerateFlowFile</code> hasta <code>LogAttribute</code>.</p>
+<p>La Relationship disponible será normalmente:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>success
+</span></code></pre></div>
+<p>El resultado será:</p>
+<pre class="mermaid"><code>flowchart LR
+    A[GenerateFlowFile]
+    --&gt;|success| Q[(Queue)]
+    --&gt; B[LogAttribute]</code></pre>
+<hr />
+<h1 id="88-seleccion-de-relationships">8.8 Selección de Relationships</h1>
+<p>Durante la creación de una Connection, NiFi muestra las Relationships disponibles en el componente origen.</p>
+<p>Ejemplo:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>success
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>failure
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>original
+</span></code></pre></div>
+<p>Se puede seleccionar una o varias.</p>
+<pre class="mermaid"><code>flowchart TB
+    A[Processor origen]
+    --&gt; B{Relationships}
+
+    B --&gt; C[success]
+    B --&gt; D[failure]
+    B --&gt; E[original]</code></pre>
+<p>Solo los FlowFiles transferidos a las Relationships seleccionadas entrarán en esa Connection.</p>
+<hr />
+<h2 id="relationship-ya-utilizada">Relationship ya utilizada</h2>
+<p>Una Relationship puede, dependiendo del Processor y del diseño, dirigirse a una o varias Connections.</p>
+<p>Por ejemplo, una Relationship <code>success</code> puede enviarse a dos destinos:</p>
+<pre class="mermaid"><code>flowchart TB
+    A[Processor]
+
+    A --&gt;|success| B[Destino 1]
+    A --&gt;|success| C[Destino 2]</code></pre>
+<p>En este caso, NiFi puede crear copias lógicas del FlowFile para transferirlo a ambos destinos.</p>
+<div class="admonition warning">
+<p class="admonition-title">Duplicación lógica</p>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Conectar la misma Relationship a varios destinos implica que el FlowFile continuará por varias ramas. No es un reparto alternativo automático.
+</span></code></pre></div>
+<hr />
+<h2 id="distribucion-frente-a-duplicacion">Distribución frente a duplicación</h2>
+<p>Supongamos que <code>success</code> está conectada a:</p>
+<ul>
+<li><code>PutFile</code>;</li>
+<li><code>PublishKafka</code>.</li>
+</ul>
+<pre class="mermaid"><code>flowchart TB
+    A[Transformar pedido]
+
+    A --&gt;|success| B[PutFile]
+    A --&gt;|success| C[PublishKafka]</code></pre>
+<p>El pedido se enviará a ambos destinos:</p>
+<ol>
+<li>se guardará como archivo;</li>
+<li>se publicará en Kafka.</li>
+</ol>
+<p>No se enviará unas veces a uno y otras veces al otro.</p>
+<p>Para repartir alternativamente los FlowFiles deben utilizarse otros mecanismos de diseño, como:</p>
+<ul>
+<li>rutas explícitas;</li>
+<li>particionamiento;</li>
+<li>balanceo en clúster;</li>
+<li>estrategias específicas de distribución.</li>
+</ul>
+<hr />
+<h1 id="89-nombre-de-la-connection">8.9 Nombre de la Connection</h1>
+<p>Una Connection puede tener un nombre descriptivo.</p>
+<p>Ejemplos:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Pedidos validados
+</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>Errores pendientes de reintento
+</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Facturas internacionales
+</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>Mensajes para Kafka
+</span></code></pre></div>
+<p>Esto facilita la interpretación del flujo.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[Validar pedido]
+    --&gt;|Pedidos válidos| B[Guardar pedido]</code></pre>
+<p>Un nombre resulta especialmente útil cuando:</p>
+<ul>
+<li>se transportan varias Relationships;</li>
+<li>la ruta representa una decisión funcional;</li>
+<li>existen muchas conexiones;</li>
+<li>el flujo contiene ciclos;</li>
+<li>se conectan Process Groups.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>Nombra la Connection según los datos que contiene, no únicamente según el componente al que se dirige.
+</span></code></pre></div>
+<hr />
+<h1 id="810-la-queue-durante-la-ejecucion">8.10 La Queue durante la ejecución</h1>
+<p>Cuando un Processor transfiere un FlowFile, este entra en la Queue.</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant A as Processor A
+    participant Q as Queue
+    participant B as Processor B
+
+    A-&gt;&gt;Q: Transferir FlowFile
+    Q--&gt;&gt;Q: FlowFile en espera
+    Q-&gt;&gt;B: Entregar FlowFile</code></pre>
+<p>El FlowFile puede permanecer en la Queue porque:</p>
+<ul>
+<li>el Processor destino está detenido;</li>
+<li>el destino todavía no ha sido programado;</li>
+<li>no existen hilos disponibles;</li>
+<li>el destino está en <code>yield</code>;</li>
+<li>el FlowFile está penalizado;</li>
+<li>existen otros FlowFiles con mayor prioridad;</li>
+<li>se está aplicando balanceo;</li>
+<li>el sistema externo es lento.</li>
+</ul>
+<hr />
+<h2 id="processor-destino-detenido">Processor destino detenido</h2>
+<pre class="mermaid"><code>flowchart LR
+    A[Processor A ejecutándose]
+    --&gt; Q[(Queue creciente)]
+    -.-&gt; B[Processor B detenido]</code></pre>
+<p>Mientras B permanezca detenido, los FlowFiles se acumularán.</p>
+<p>Cuando B se inicie:</p>
+<pre class="mermaid"><code>flowchart LR
+    Q[(Queue)]
+    --&gt; B[Processor B iniciado]</code></pre>
+<p>comenzará a obtener FlowFiles de la Queue.</p>
+<hr />
+<h2 id="processor-origen-detenido">Processor origen detenido</h2>
+<pre class="mermaid"><code>flowchart LR
+    A[Processor A detenido]
+    -.-&gt; Q[(Queue existente)]
+    --&gt; B[Processor B ejecutándose]</code></pre>
+<p>Aunque el origen esté detenido, el destino puede continuar procesando los FlowFiles que ya estén en la Queue.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>Detener un Processor no elimina los FlowFiles que ya ha transferido.
+</span></code></pre></div>
+<hr />
+<h1 id="811-persistencia-de-los-flowfiles-en-la-queue">8.11 Persistencia de los FlowFiles en la Queue</h1>
+<p>Los FlowFiles en espera no dependen únicamente de la memoria RAM.</p>
+<p>NiFi utiliza sus repositorios para conservar:</p>
+<ul>
+<li>el estado del FlowFile;</li>
+<li>los atributos;</li>
+<li>la referencia a su contenido;</li>
+<li>la posición dentro del flujo.</li>
+</ul>
+<pre class="mermaid"><code>flowchart TB
+    Q[Queue]
+
+    Q --&gt; F[FlowFile Repository]
+    Q --&gt; C[Content Repository]
+    Q --&gt; P[Provenance Repository]</code></pre>
+<p>El FlowFile Repository registra el estado y la ubicación lógica del FlowFile.</p>
+<p>El Content Repository conserva el contenido mediante Content Claims.</p>
+<p>El Provenance Repository registra los eventos relacionados con su recorrido.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[FlowFile en Queue]
+    --&gt; B[Metadatos en FlowFile Repository]
+    --&gt; C[Contenido referenciado en Content Repository]</code></pre>
+<p>Esta arquitectura permite que los FlowFiles pendientes sobrevivan normalmente a un reinicio controlado de NiFi.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>La Queue se visualiza en el lienzo, pero su persistencia depende de los repositorios internos estudiados en el capítulo de FlowFiles.
+</span></code></pre></div>
+<hr />
+<h1 id="812-informacion-mostrada-en-una-connection">8.12 Información mostrada en una Connection</h1>
+<p>La interfaz muestra información resumida sobre cada Queue.</p>
+<p>Normalmente puede incluir:</p>
+<ul>
+<li>número de FlowFiles;</li>
+<li>tamaño total;</li>
+<li>estado de Back Pressure;</li>
+<li>antigüedad del FlowFile más antiguo;</li>
+<li>indicador de expiración;</li>
+<li>actividad reciente.</li>
+</ul>
+<p>Ejemplo conceptual:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>125 FlowFiles / 82.4 MB
+</span></code></pre></div>
+<p>Esto significa que la Queue contiene:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>125 objetos
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>82,4 MB de contenido total
+</span></code></pre></div>
+<pre class="mermaid"><code>flowchart TB
+    Q[Queue]
+
+    Q --&gt; A[Número de FlowFiles]
+    Q --&gt; B[Tamaño total]
+    Q --&gt; C[Antigüedad]
+    Q --&gt; D[Estado de presión]</code></pre>
+<hr />
+<h2 id="numero-de-flowfiles">Número de FlowFiles</h2>
+<p>Representa la cantidad de FlowFiles pendientes.</p>
+<p>Ejemplo:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>250 FlowFiles
+</span></code></pre></div>
+<p>Una gran cantidad no implica necesariamente un problema.</p>
+<p>Depende de:</p>
+<ul>
+<li>el tamaño de los FlowFiles;</li>
+<li>la velocidad de entrada;</li>
+<li>la velocidad de salida;</li>
+<li>el diseño del flujo;</li>
+<li>los umbrales configurados.</li>
+</ul>
+<hr />
+<h2 id="tamano-total">Tamaño total</h2>
+<p>Representa la suma aproximada de los contenidos referenciados por los FlowFiles.</p>
+<p>Ejemplo:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>2.8 GB
+</span></code></pre></div>
+<p>Una Queue puede contener:</p>
+<ul>
+<li>muchos FlowFiles pequeños;</li>
+<li>pocos FlowFiles grandes.</li>
+</ul>
+<p>Estas dos situaciones generan cargas diferentes.</p>
+<table>
+<thead>
+<tr>
+<th>Queue</th>
+<th style="text-align: right;">Objetos</th>
+<th style="text-align: right;">Tamaño</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td style="text-align: right;">1.000.000</td>
+<td style="text-align: right;">500 MB</td>
+</tr>
+<tr>
+<td>B</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">50 GB</td>
+</tr>
+</tbody>
+</table>
+<p>La Queue A puede ejercer mayor presión sobre la gestión de metadatos.</p>
+<p>La Queue B puede ejercer mayor presión sobre el almacenamiento.</p>
+<hr />
+<h2 id="flowfile-mas-antiguo">FlowFile más antiguo</h2>
+<p>La antigüedad del FlowFile más antiguo ayuda a detectar latencia acumulada.</p>
+<p>Ejemplo:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>Oldest FlowFile = 2 hours
+</span></code></pre></div>
+<p>Esto indica que al menos un FlowFile lleva dos horas esperando.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[FlowFile entra]
+    --&gt; B[Espera en Queue]
+    --&gt; C[Antigüedad creciente]</code></pre>
+<div class="admonition warning">
+<p class="admonition-title">Latencia</p>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>Una Queue con pocos FlowFiles también puede ser problemática si alguno lleva demasiado tiempo sin procesarse.
+</span></code></pre></div>
+<hr />
+<h1 id="813-interpretacion-visual-de-una-queue">8.13 Interpretación visual de una Queue</h1>
+<p>La Connection puede cambiar su apariencia según su estado.</p>
+<p>Puede mostrar visualmente:</p>
+<ul>
+<li>Queue vacía;</li>
+<li>FlowFiles acumulados;</li>
+<li>Back Pressure activa;</li>
+<li>FlowFiles expirados o próximos a expirar;</li>
+<li>transmisión balanceada;</li>
+<li>datos en movimiento.</li>
+</ul>
+<p>La representación exacta puede variar entre versiones y según el tema de la interfaz.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>No dependas únicamente del color. Revisa también los contadores, el tamaño, la antigüedad y la configuración.
+</span></code></pre></div>
+<hr />
+<h1 id="814-abrir-una-queue">8.14 Abrir una Queue</h1>
+<p>Al seleccionar una Connection puede utilizarse la opción <strong>List Queue</strong>.</p>
+<p>Esta acción permite consultar los FlowFiles que están esperando.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[Seleccionar Connection]
+    --&gt; B[List Queue]
+    --&gt; C[Listado de FlowFiles]</code></pre>
+<p>La lista puede mostrar información como:</p>
+<ul>
+<li>UUID;</li>
+<li>posición;</li>
+<li>tamaño;</li>
+<li>fecha de entrada;</li>
+<li>antigüedad;</li>
+<li>atributos;</li>
+<li>estado de penalización.</li>
+</ul>
+<hr />
+<h2 id="list-queue-no-detiene-necesariamente-el-flujo">List Queue no detiene necesariamente el flujo</h2>
+<p>Mientras se solicita el listado, el Processor destino podría continuar consumiendo FlowFiles.</p>
+<p>Por tanto, la lista obtenida representa una vista temporal.</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant U as Usuario
+    participant Q as Queue
+    participant P as Processor
+
+    U-&gt;&gt;Q: Solicitar listado
+    Q-&gt;&gt;P: Entregar algunos FlowFiles
+    Q--&gt;&gt;U: Mostrar estado observado</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>En una Queue activa, algunos FlowFiles pueden desaparecer de la lista porque ya han sido procesados.
+</span></code></pre></div>
+<hr />
+<h1 id="815-examinar-un-flowfile-de-la-queue">8.15 Examinar un FlowFile de la Queue</h1>
+<p>Desde el listado puede seleccionarse un FlowFile para consultar sus detalles.</p>
+<p>Normalmente es posible examinar:</p>
+<ul>
+<li>atributos;</li>
+<li>contenido;</li>
+<li>tamaño;</li>
+<li>UUID;</li>
+<li>información de Provenance;</li>
+<li>posición en la Queue.</li>
+</ul>
+<pre class="mermaid"><code>flowchart TB
+    A[FlowFile seleccionado]
+
+    A --&gt; B[Attributes]
+    A --&gt; C[Content]
+    A --&gt; D[Provenance]
+    A --&gt; E[Metadata]</code></pre>
+<hr />
+<h2 id="visualizar-atributos">Visualizar atributos</h2>
+<p>Ejemplo:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>filename = pedido_1001.json
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>pedido.id = 1001
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>cliente.pais = ES
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>pedido.importe = 1250
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>mime.type = application/json
+</span></code></pre></div>
+<p>Esto permite comprobar si los Processors anteriores han generado los metadatos esperados.</p>
+<hr />
+<h2 id="visualizar-contenido">Visualizar contenido</h2>
+<p>Para contenido textual puede utilizarse una vista previa.</p>
+<p>Ejemplo:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="p">{</span>
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="w">  </span><span class="nt">&quot;pedido&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1001</span><span class="p">,</span>
+</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="w">  </span><span class="nt">&quot;cliente&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Alberto&quot;</span><span class="p">,</span>
+</span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="w">  </span><span class="nt">&quot;pais&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ES&quot;</span><span class="p">,</span>
+</span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="w">  </span><span class="nt">&quot;importe&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1250</span>
+</span><span id="__span-28-6"><a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Para archivos binarios, la previsualización puede no ser interpretable.</p>
+<hr />
+<h2 id="descargar-contenido">Descargar contenido</h2>
+<p>También puede descargarse el contenido para analizarlo externamente.</p>
+<p>Esto resulta útil para:</p>
+<ul>
+<li>documentos grandes;</li>
+<li>archivos binarios;</li>
+<li>pruebas con validadores;</li>
+<li>comparación de transformaciones;</li>
+<li>análisis de errores.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Datos sensibles</p>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>La descarga o visualización de FlowFiles puede exponer datos personales, credenciales, tokens o información empresarial. Deben respetarse los permisos y las políticas de seguridad.
+</span></code></pre></div>
+<hr />
+<h1 id="816-vaciar-una-queue">8.16 Vaciar una Queue</h1>
+<p>NiFi permite eliminar todos los FlowFiles pendientes mediante la acción <strong>Empty Queue</strong>.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[(Queue con FlowFiles)]
+    --&gt; B[Empty Queue]
+    --&gt; C[(Queue vacía)]</code></pre>
+<p>Esta operación descarta los FlowFiles.</p>
+<p>No los envía al siguiente Processor.</p>
+<p>No los mueve automáticamente a una papelera.</p>
+<hr />
+<h2 id="cuando-puede-utilizarse">Cuándo puede utilizarse</h2>
+<ul>
+<li>limpieza de un laboratorio;</li>
+<li>eliminación de datos de prueba;</li>
+<li>reinicio de una prueba;</li>
+<li>descarte consciente de información inválida;</li>
+<li>retirada de una acumulación que ya no debe procesarse.</li>
+</ul>
+<hr />
+<h2 id="cuando-no-debe-utilizarse">Cuándo no debe utilizarse</h2>
+<ul>
+<li>para resolver rápidamente un atasco de producción;</li>
+<li>sin conocer qué datos contiene;</li>
+<li>cuando no existe una copia en el origen;</li>
+<li>si los FlowFiles representan operaciones económicas;</li>
+<li>si es necesario conservar trazabilidad completa.</li>
+</ul>
+<div class="admonition danger">
+<p class="admonition-title">Operación destructiva</p>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>`Empty Queue` provoca la eliminación de los FlowFiles pendientes. Debe comprobarse siempre el contenido y el impacto antes de confirmar.
+</span></code></pre></div>
+<hr />
+<h1 id="817-eliminar-una-connection">8.17 Eliminar una Connection</h1>
+<p>Para eliminar una Connection normalmente debe encontrarse vacía.</p>
+<pre class="mermaid"><code>flowchart TD
+    A[Eliminar Connection]
+    --&gt; B{¿Queue vacía?}
+
+    B --&gt;|Sí| C[Eliminar]
+    B --&gt;|No| D[Procesar o vaciar los FlowFiles]</code></pre>
+<p>Si contiene datos, primero deben:</p>
+<ul>
+<li>procesarse;</li>
+<li>trasladarse mediante el flujo;</li>
+<li>eliminarse conscientemente.</li>
+</ul>
+<p>Además, los componentes relacionados pueden necesitar estar detenidos.</p>
+<hr />
+<h1 id="818-modificar-una-connection">8.18 Modificar una Connection</h1>
+<p>Una Connection existente puede configurarse desde su ventana de propiedades.</p>
+<p>Entre las opciones disponibles se encuentran:</p>
+<ul>
+<li>nombre;</li>
+<li>Relationships;</li>
+<li>Back Pressure Object Threshold;</li>
+<li>Back Pressure Data Size Threshold;</li>
+<li>FlowFile Expiration;</li>
+<li>Prioritizers;</li>
+<li>Load Balance Strategy;</li>
+<li>Partitioning Attribute;</li>
+<li>Compression.</li>
+</ul>
+<pre class="mermaid"><code>flowchart TB
+    C[Configure Connection]
+
+    C --&gt; N[Name]
+    C --&gt; R[Relationships]
+    C --&gt; B[Back Pressure]
+    C --&gt; E[Expiration]
+    C --&gt; P[Prioritizers]
+    C --&gt; L[Load Balance]</code></pre>
+<p>Estas opciones se desarrollarán en las siguientes partes del capítulo.</p>
+<hr />
+<h1 id="819-conectar-un-processor-con-varias-entradas">8.19 Conectar un Processor con varias entradas</h1>
+<p>Un Processor puede recibir FlowFiles desde varias Connections.</p>
+<pre class="mermaid"><code>flowchart TB
+    A[Origen A]
+    --&gt; Q1[(Queue A)]
+    --&gt; D[Processor destino]
+
+    B[Origen B]
+    --&gt; Q2[(Queue B)]
+    --&gt; D</code></pre>
+<p>Por ejemplo:</p>
+<pre class="mermaid"><code>flowchart TB
+    A[Pedidos HTTP]
+    --&gt; D[Validar pedidos]
+
+    B[Pedidos Kafka]
+    --&gt; D</code></pre>
+<p>El Processor destino puede consumir FlowFiles de ambas colas.</p>
+<hr />
+<h2 id="seleccion-entre-varias-queues">Selección entre varias Queues</h2>
+<p>NiFi selecciona FlowFiles de las Connections de entrada según su disponibilidad y la configuración interna.</p>
+<p>No debe asumirse necesariamente un orden global perfecto entre varias Queues.</p>
+<pre class="mermaid"><code>flowchart TB
+    Q1[(Queue A)]
+    --&gt; P[Processor]
+
+    Q2[(Queue B)]
+    --&gt; P</code></pre>
+<p>Posible secuencia:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>A1
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>B1
+</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>B2
+</span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>A2
+</span></code></pre></div>
+<p>Aunque las entradas originales fueran:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>Queue A: A1, A2
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>Queue B: B1, B2
+</span></code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Orden global</p>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>Mantener el orden dentro de una única Queue no garantiza un orden global cuando un Processor recibe datos desde varias Connections.
+</span></code></pre></div>
+<hr />
+<h1 id="820-conectar-una-salida-con-varios-destinos">8.20 Conectar una salida con varios destinos</h1>
+<p>Una Relationship puede dirigir FlowFiles hacia varias Connections.</p>
+<pre class="mermaid"><code>flowchart TB
+    A[Processor]
+
+    A --&gt;|success| B[Destino A]
+    A --&gt;|success| C[Destino B]</code></pre>
+<p>Este patrón se utiliza cuando es necesario realizar varias operaciones con los mismos datos.</p>
+<p>Ejemplo:</p>
+<pre class="mermaid"><code>flowchart TB
+    A[Pedido validado]
+
+    A --&gt; B[Guardar en PostgreSQL]
+    A --&gt; C[Publicar en Kafka]
+    A --&gt; D[Archivar en disco]</code></pre>
+<p>NiFi gestiona referencias al mismo contenido y puede evitar copias físicas innecesarias mediante el modelo de Content Claims y Copy-on-Write.</p>
+<hr />
+<h1 id="821-funnels-y-connections">8.21 Funnels y Connections</h1>
+<p>Un <strong>Funnel</strong> permite reunir varias Connections en una única salida.</p>
+<pre class="mermaid"><code>flowchart TB
+    A[Origen A]
+    --&gt; F((Funnel))
+
+    B[Origen B]
+    --&gt; F
+
+    C[Origen C]
+    --&gt; F
+
+    F --&gt; D[Destino común]</code></pre>
+<p>Resulta útil para:</p>
+<ul>
+<li>reducir líneas visuales;</li>
+<li>centralizar rutas;</li>
+<li>enviar varios tipos de error a un mismo Process Group;</li>
+<li>mejorar la organización del lienzo.</li>
+</ul>
+<hr />
+<h2 id="ejemplo-de-errores">Ejemplo de errores</h2>
+<pre class="mermaid"><code>flowchart TB
+    A[Processor A]
+    --&gt;|failure| F((Funnel de errores))
+
+    B[Processor B]
+    --&gt;|failure| F
+
+    C[Processor C]
+    --&gt;|failure| F
+
+    F --&gt; D[[Gestión de errores]]</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>El Funnel no transforma los FlowFiles. Se utiliza principalmente para simplificar y reorganizar Connections.
+</span></code></pre></div>
+<hr />
+<h1 id="822-connections-y-process-groups">8.22 Connections y Process Groups</h1>
+<p>Los Process Groups encapsulan conjuntos de componentes.</p>
+<p>La comunicación con su exterior se realiza mediante:</p>
+<ul>
+<li>Input Ports;</li>
+<li>Output Ports.</li>
+</ul>
+<pre class="mermaid"><code>flowchart LR
+    A[Processor externo]
+    --&gt; I[Input Port]
+    --&gt; PG[[Process Group]]
+    --&gt; O[Output Port]
+    --&gt; B[Processor externo]</code></pre>
+<p>Una Connection exterior no se conecta directamente a un Processor interno.</p>
+<p>Se conecta al puerto correspondiente.</p>
+<hr />
+<h2 id="entrada-a-un-process-group">Entrada a un Process Group</h2>
+<pre class="mermaid"><code>flowchart LR
+    A[Flujo externo]
+    --&gt; B[Input Port]
+    --&gt; C[Flujo interno]</code></pre>
+<h2 id="salida-de-un-process-group">Salida de un Process Group</h2>
+<pre class="mermaid"><code>flowchart LR
+    A[Flujo interno]
+    --&gt; B[Output Port]
+    --&gt; C[Flujo externo]</code></pre>
+<p>Este mecanismo permite tratar un Process Group como un componente reutilizable.</p>
+<hr />
+<h1 id="823-connections-locales-y-remotas">8.23 Connections locales y remotas</h1>
+<p>Las Connections habituales enlazan componentes dentro del mismo flujo o clúster.</p>
+<p>Para comunicar distintas instancias de NiFi se utilizan mecanismos como:</p>
+<ul>
+<li>Remote Process Groups;</li>
+<li>Site-to-Site;</li>
+<li>sistemas externos de mensajería;</li>
+<li>HTTP;</li>
+<li>Kafka.</li>
+</ul>
+<pre class="mermaid"><code>flowchart LR
+    A[NiFi origen]
+    --&gt; R[Remote Process Group]
+    --&gt; B[NiFi destino]</code></pre>
+<p>El Remote Process Group se conecta mediante Connections locales a los componentes del DataFlow.</p>
+<hr />
+<h1 id="824-ciclo-de-un-flowfile-entre-processors">8.24 Ciclo de un FlowFile entre Processors</h1>
+<p>El recorrido general de un FlowFile es:</p>
+<pre class="mermaid"><code>flowchart LR
+    A[Processor A obtiene FlowFile]
+    --&gt; B[Processor A lo modifica]
+    --&gt; C[Transferencia a Relationship]
+    --&gt; D[(Connection / Queue)]
+    --&gt; E[Processor B obtiene FlowFile]</code></pre>
+<p>De forma más detallada:</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant Q1 as Queue de entrada
+    participant A as Processor A
+    participant Q2 as Queue de salida
+    participant B as Processor B
+
+    Q1-&gt;&gt;A: Obtener FlowFile
+    A-&gt;&gt;A: Procesar
+    A-&gt;&gt;Q2: Transferir por Relationship
+    Q2-&gt;&gt;B: Obtener FlowFile</code></pre>
+<p>Una vez que el FlowFile se transfiere correctamente:</p>
+<ul>
+<li>deja la sesión del Processor anterior;</li>
+<li>queda asociado a la Connection;</li>
+<li>espera al siguiente componente;</li>
+<li>conserva sus atributos y contenido;</li>
+<li>genera eventos de Provenance según la operación.</li>
+</ul>
+<hr />
+<h1 id="825-transaction-boundaries">8.25 Transaction boundaries</h1>
+<p>Los Processors trabajan dentro de sesiones transaccionales.</p>
+<p>De forma conceptual, un Processor:</p>
+<ol>
+<li>obtiene uno o varios FlowFiles;</li>
+<li>lee o modifica sus datos;</li>
+<li>los transfiere a Relationships;</li>
+<li>confirma la sesión.</li>
+</ol>
+<pre class="mermaid"><code>flowchart TD
+    A[Obtener FlowFile]
+    --&gt; B[Procesar]
+    --&gt; C[Transferir]
+    --&gt; D[Commit]</code></pre>
+<p>Si la sesión falla antes de confirmarse, NiFi puede revertir los cambios de la sesión.</p>
+<pre class="mermaid"><code>flowchart TD
+    A[Obtener FlowFile]
+    --&gt; B[Procesar]
+    --&gt; C{¿Operación correcta?}
+
+    C --&gt;|Sí| D[Commit]
+    C --&gt;|No| E[Rollback]</code></pre>
+<p>Las Connections marcan los límites entre las etapas confirmadas del DataFlow.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>Cuando un FlowFile aparece en una Queue, el Processor anterior ya ha completado y confirmado normalmente su transferencia.
+</span></code></pre></div>
+<hr />
+<h1 id="826-detectar-un-cuello-de-botella">8.26 Detectar un cuello de botella</h1>
+<p>Una Queue que crece de manera continuada puede indicar que el componente posterior procesa más lentamente que el anterior.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[Entrada rápida]
+    --&gt; Q[(Queue creciente)]
+    --&gt; B[Salida lenta]</code></pre>
+<p>Posibles causas:</p>
+<ul>
+<li>Processor destino detenido;</li>
+<li>errores repetidos;</li>
+<li>base de datos lenta;</li>
+<li>API saturada;</li>
+<li>falta de tareas concurrentes;</li>
+<li>CPU insuficiente;</li>
+<li>disco lento;</li>
+<li>mala configuración de lotes;</li>
+<li>FlowFiles penalizados;</li>
+<li>reglas de priorización inadecuadas.</li>
+</ul>
+<hr />
+<h2 id="crecimiento-temporal">Crecimiento temporal</h2>
+<p>No toda acumulación es un problema.</p>
+<p>Ejemplo:</p>
+<ul>
+<li>llegan datos intensamente durante diez minutos;</li>
+<li>la Queue crece;</li>
+<li>después disminuye hasta vaciarse.</li>
+</ul>
+<pre class="mermaid"><code>xychart-beta
+    title "Crecimiento temporal de una Queue"
+    x-axis [0, 5, 10, 15, 20, 25]
+    y-axis "FlowFiles" 0 --&gt; 1000
+    line [0, 400, 900, 700, 300, 0]</code></pre>
+<hr />
+<h2 id="crecimiento-sostenido">Crecimiento sostenido</h2>
+<p>Si la Queue no deja de crecer, existe un desequilibrio.</p>
+<pre class="mermaid"><code>xychart-beta
+    title "Crecimiento sostenido"
+    x-axis [0, 5, 10, 15, 20, 25]
+    y-axis "FlowFiles" 0 --&gt; 2000
+    line [0, 300, 650, 1000, 1400, 1800]</code></pre>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>Un crecimiento sostenido terminará activando Back Pressure o agotando recursos si los límites no están correctamente configurados.
+</span></code></pre></div>
+<hr />
+<h1 id="827-metricas-basicas-para-analizar-una-queue">8.27 Métricas básicas para analizar una Queue</h1>
+<p>Antes de modificar el flujo conviene observar:</p>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th>Pregunta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FlowFiles en espera</td>
+<td>¿Cuántos objetos están acumulados?</td>
+</tr>
+<tr>
+<td>Tamaño total</td>
+<td>¿Cuánto almacenamiento ocupan?</td>
+</tr>
+<tr>
+<td>Edad máxima</td>
+<td>¿Cuánto lleva esperando el más antiguo?</td>
+</tr>
+<tr>
+<td>Entrada</td>
+<td>¿A qué velocidad llegan?</td>
+</tr>
+<tr>
+<td>Salida</td>
+<td>¿A qué velocidad se consumen?</td>
+</tr>
+<tr>
+<td>Back Pressure</td>
+<td>¿Se han alcanzado los límites?</td>
+</tr>
+<tr>
+<td>Penalización</td>
+<td>¿Hay FlowFiles no disponibles temporalmente?</td>
+</tr>
+<tr>
+<td>Errores</td>
+<td>¿El destino está fallando?</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid"><code>flowchart TB
+    Q[Analizar Queue]
+
+    Q --&gt; A[Cantidad]
+    Q --&gt; B[Tamaño]
+    Q --&gt; C[Antigüedad]
+    Q --&gt; D[Entrada/salida]
+    Q --&gt; E[Errores]</code></pre>
+<hr />
+<h1 id="828-errores-frecuentes">8.28 Errores frecuentes</h1>
+<h2 id="considerar-la-connection-una-simple-linea">Considerar la Connection una simple línea</h2>
+<p>Una Connection mantiene una Queue y dispone de configuración propia.</p>
+<hr />
+<h2 id="confundir-relationship-y-connection">Confundir Relationship y Connection</h2>
+<p>La Relationship es el resultado del Processor.</p>
+<p>La Connection es el enlace por el que circula ese resultado.</p>
+<hr />
+<h2 id="vaciar-una-queue-sin-revisar-sus-datos">Vaciar una Queue sin revisar sus datos</h2>
+<p>Puede provocar pérdida irreversible.</p>
+<hr />
+<h2 id="ignorar-la-antiguedad">Ignorar la antigüedad</h2>
+<p>Una Queue pequeña puede contener FlowFiles bloqueados desde hace horas.</p>
+<hr />
+<h2 id="conectar-la-misma-relationship-a-varios-destinos-sin-prever-duplicacion">Conectar la misma Relationship a varios destinos sin prever duplicación</h2>
+<p>El FlowFile continuará por todas las ramas conectadas.</p>
+<hr />
+<h2 id="crear-ciclos-sin-limite">Crear ciclos sin límite</h2>
+<p>Un FlowFile puede permanecer indefinidamente en el flujo.</p>
+<hr />
+<h2 id="no-nombrar-connections-importantes">No nombrar Connections importantes</h2>
+<p>Esto dificulta interpretar rutas complejas.</p>
+<hr />
+<h2 id="acumular-datos-sin-back-pressure">Acumular datos sin Back Pressure</h2>
+<p>Una Queue sin límites adecuados puede consumir todo el almacenamiento disponible.</p>
+<hr />
+<h2 id="suponer-que-varias-entradas-mantienen-un-orden-global">Suponer que varias entradas mantienen un orden global</h2>
+<p>Cada Queue conserva su propio contexto de ordenación, pero varias entradas pueden intercalarse.</p>
+<hr />
+<h1 id="829-buenas-practicas-iniciales">8.29 Buenas prácticas iniciales</h1>
+<h2 id="utilizar-nombres-funcionales">Utilizar nombres funcionales</h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>Pedidos pendientes de validación
+</span></code></pre></div>
+<p>es más informativo que:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>Connection 1
+</span></code></pre></div>
+<hr />
+<h2 id="separar-las-rutas-de-error">Separar las rutas de error</h2>
+<pre class="mermaid"><code>flowchart TB
+    A[Processor]
+
+    A --&gt;|success| B[Flujo normal]
+    A --&gt;|failure| C[Gestión de errores]</code></pre>
+<hr />
+<h2 id="revisar-las-queues-antes-de-detener-nifi">Revisar las Queues antes de detener NiFi</h2>
+<p>Una detención controlada conserva normalmente los FlowFiles, pero conviene saber qué datos quedan pendientes.</p>
+<hr />
+<h2 id="observar-numero-tamano-y-antiguedad">Observar número, tamaño y antigüedad</h2>
+<p>No utilices una única métrica para evaluar la salud de la Queue.</p>
+<hr />
+<h2 id="evitar-flowfiles-excesivamente-pequenos">Evitar FlowFiles excesivamente pequeños</h2>
+<p>Una cantidad enorme de objetos pequeños incrementa la carga de gestión.</p>
+<hr />
+<h2 id="disenar-explicitamente-los-ciclos">Diseñar explícitamente los ciclos</h2>
+<p>Incluye:</p>
+<ul>
+<li>contador de reintentos;</li>
+<li>espera;</li>
+<li>ruta definitiva;</li>
+<li>Dead Letter Queue.</li>
+</ul>
+<hr />
+<h2 id="no-auto-terminar-relaciones-para-eliminar-avisos">No auto-terminar relaciones para eliminar avisos</h2>
+<p>Cada Relationship debe tener un destino consciente.</p>
+<hr />
+<h1 id="laboratorio-1-creacion-y-observacion-de-una-connection">Laboratorio 1. Creación y observación de una Connection</h1>
+<h2 id="objetivo">Objetivo</h2>
+<p>Crear una Connection y observar cómo funciona su Queue.</p>
+<h2 id="flujo">Flujo</h2>
+<pre class="mermaid"><code>flowchart LR
+    A[GenerateFlowFile]
+    --&gt; Q[(Queue)]
+    --&gt; B[LogAttribute]</code></pre>
+<hr />
+<h2 id="configuracion-de-generateflowfile">Configuración de GenerateFlowFile</h2>
+<p>Contenido:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="p">{</span>
+</span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="w">  </span><span class="nt">&quot;mensaje&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Prueba de Connection&quot;</span><span class="p">,</span>
+</span><span id="__span-39-3"><a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="w">  </span><span class="nt">&quot;curso&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Apache NiFi&quot;</span>
+</span><span id="__span-39-4"><a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Configura:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>Batch Size = 3
+</span></code></pre></div>
+<hr />
+<h2 id="procedimiento">Procedimiento</h2>
+<ol>
+<li>Añade <code>GenerateFlowFile</code>.</li>
+<li>Añade <code>LogAttribute</code>.</li>
+<li>Crea una Connection entre ambos.</li>
+<li>Selecciona la Relationship <code>success</code>.</li>
+<li>Mantén <code>LogAttribute</code> detenido.</li>
+<li>Ejecuta <code>GenerateFlowFile</code> mediante <code>Run Once</code>.</li>
+<li>Observa la Queue.</li>
+</ol>
+<hr />
+<h2 id="resultado-esperado">Resultado esperado</h2>
+<p>La Connection mostrará:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>3 FlowFiles
+</span></code></pre></div>
+<p>Los FlowFiles permanecerán en espera porque <code>LogAttribute</code> está detenido.</p>
+<hr />
+<h2 id="segunda-parte">Segunda parte</h2>
+<ol>
+<li>Inicia <code>LogAttribute</code>.</li>
+<li>Observa cómo disminuye la Queue.</li>
+<li>Detén nuevamente el Processor.</li>
+<li>Comprueba que la Queue queda vacía.</li>
+</ol>
+<hr />
+<h1 id="laboratorio-2-examinar-los-flowfiles-de-una-queue">Laboratorio 2. Examinar los FlowFiles de una Queue</h1>
+<h2 id="objetivo_1">Objetivo</h2>
+<p>Consultar los atributos y el contenido de un FlowFile pendiente.</p>
+<h2 id="procedimiento_1">Procedimiento</h2>
+<ol>
+<li>Genera tres FlowFiles.</li>
+<li>Mantén detenido el Processor destino.</li>
+<li>Selecciona la Connection.</li>
+<li>Utiliza <code>List Queue</code>.</li>
+<li>Selecciona uno de los FlowFiles.</li>
+<li>Examina sus atributos.</li>
+<li>Utiliza <code>View Content</code>.</li>
+<li>Comprueba el JSON generado.</li>
+</ol>
+<hr />
+<h2 id="atributos-esperados">Atributos esperados</h2>
+<p>Entre otros:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-42-1"><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>filename
+</span><span id="__span-42-2"><a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a>path
+</span><span id="__span-42-3"><a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a>uuid
+</span><span id="__span-42-4"><a id="__codelineno-42-4" name="__codelineno-42-4" href="#__codelineno-42-4"></a>mime.type
+</span></code></pre></div>
+<p>Los valores exactos dependerán de la configuración utilizada.</p>
+<hr />
+<h1 id="laboratorio-3-varias-relationships-hacia-un-mismo-destino">Laboratorio 3. Varias Relationships hacia un mismo destino</h1>
+<h2 id="objetivo_2">Objetivo</h2>
+<p>Comprender que una Connection puede transportar varias Relationships.</p>
+<h2 id="flujo_1">Flujo</h2>
+<pre class="mermaid"><code>flowchart TB
+    A[RouteOnAttribute]
+
+    A --&gt;|urgente| B[LogAttribute normal]
+    A --&gt;|unmatched| B</code></pre>
+<hr />
+<h2 id="configuracion-previa">Configuración previa</h2>
+<p>Crea un atributo:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-43-1"><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>prioridad = alta
+</span></code></pre></div>
+<p>En <code>RouteOnAttribute</code>, añade:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-44-1"><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>urgente = ${prioridad:equals(&quot;urgente&quot;)}
+</span></code></pre></div>
+<p>Conecta a <code>LogAttribute</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-45-1"><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>urgente
+</span><span id="__span-45-2"><a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>unmatched
+</span></code></pre></div>
+<hr />
+<h2 id="procedimiento_2">Procedimiento</h2>
+<ol>
+<li>Ejecuta un FlowFile con <code>prioridad = alta</code>.</li>
+<li>Comprueba que se envía por <code>unmatched</code>.</li>
+<li>Cambia el atributo a <code>prioridad = urgente</code>.</li>
+<li>Ejecuta otro FlowFile.</li>
+<li>Comprueba que ambos llegan al mismo destino mediante relaciones diferentes.</li>
+</ol>
+<hr />
+<h1 id="laboratorio-4-una-relationship-hacia-dos-destinos">Laboratorio 4. Una Relationship hacia dos destinos</h1>
+<h2 id="objetivo_3">Objetivo</h2>
+<p>Comprobar que una misma Relationship puede alimentar varias ramas.</p>
+<h2 id="flujo_2">Flujo</h2>
+<pre class="mermaid"><code>flowchart TB
+    A[GenerateFlowFile]
+
+    A --&gt;|success| B[LogAttribute A]
+    A --&gt;|success| C[LogAttribute B]</code></pre>
+<hr />
+<h2 id="procedimiento_3">Procedimiento</h2>
+<ol>
+<li>Conecta <code>success</code> a <code>LogAttribute A</code>.</li>
+<li>Conecta también <code>success</code> a <code>LogAttribute B</code>.</li>
+<li>Ejecuta <code>GenerateFlowFile</code> mediante <code>Run Once</code>.</li>
+<li>Mantén ambos destinos detenidos.</li>
+<li>Observa las dos Queues.</li>
+<li>Comprueba que ambas contienen un FlowFile.</li>
+<li>Compara sus UUID y atributos.</li>
+</ol>
+<hr />
+<h2 id="resultado-esperado_1">Resultado esperado</h2>
+<p>El flujo se distribuye hacia las dos ramas.</p>
+<p>El contenido puede compartir inicialmente el mismo Content Claim, aunque cada rama mantiene su propio FlowFile lógico.</p>
+<hr />
+<h1 id="laboratorio-5-vaciar-una-queue-de-prueba">Laboratorio 5. Vaciar una Queue de prueba</h1>
+<h2 id="objetivo_4">Objetivo</h2>
+<p>Conocer el comportamiento de <code>Empty Queue</code>.</p>
+<h2 id="procedimiento_4">Procedimiento</h2>
+<ol>
+<li>Genera cinco FlowFiles de prueba.</li>
+<li>Mantén el destino detenido.</li>
+<li>Abre <code>List Queue</code>.</li>
+<li>Examina uno de los FlowFiles.</li>
+<li>Cierra el listado.</li>
+<li>Selecciona <code>Empty Queue</code>.</li>
+<li>Confirma la operación.</li>
+<li>Comprueba que la Queue queda vacía.</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-46-1"><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>Realiza este laboratorio únicamente con datos generados expresamente para la prueba.
+</span></code></pre></div>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "content.code.select", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
