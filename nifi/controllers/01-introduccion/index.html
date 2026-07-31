@@ -1,0 +1,3273 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://alapvi.github.io/nifi/controllers/01-introduccion/">
+      
+      
+        <link rel="prev" href="../../connections/">
+      
+      
+        <link rel="next" href="../02-configuracion/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../images/logo_peq.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Introducción - Sistemas de BigData</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#controller-services" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../.." title="Sistemas de BigData" class="md-header__button md-logo" aria-label="Sistemas de BigData" data-md-component="logo">
+      
+  <img src="../../../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sistemas de BigData
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introducción
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Sistemas de BigData" class="md-nav__button md-logo" aria-label="Sistemas de BigData" data-md-component="logo">
+      
+  <img src="../../../images/logo.png" alt="logo">
+
+    </a>
+    Sistemas de BigData
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Almacenamiento de datos. NoSQL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Almacenamiento de datos. NoSQL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../nosql/nosql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NoSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../nosql/moddatos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelos de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../nosql/consistencia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consistencia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MongoDB
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MongoDB
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mongodb/intromongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción a MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mongodb/mongodb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mongodb/modelado/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Diseño de modelado de BD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mongodb/instalacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mongodb/basicsmongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primeros pasos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mongodb/mongodbcrud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operaciones con datos CRUD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mongodb/mongodbdatos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consulta de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nifi
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Nifi
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduccion_nifi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arquitectura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitectura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../interfaz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interfaz gráfica de NiFi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../instalacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalación y despliegue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../primerflujo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primer flujo de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../flowfiles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowfiles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../processors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Processors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Connections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_9" id="__nav_4_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Controllers
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Controllers
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-configuracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración de controladores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-principales-controller-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Servicios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-arquitecturas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitecturas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elastic Stack
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Elastic Stack
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../elastic/elastic_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../elastic/elastic_ops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../elastic/kibana/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kibana
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../elastic/caso_uso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso de uso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../elastic/dashboards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboards Covid
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../elastic/ampliacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ampliación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="controller-services">Controller Services</h1>
+<h2 id="introduccion">Introducción</h2>
+<p>En los capítulos anteriores hemos aprendido a construir flujos de datos mediante Processors, Connections y FlowFiles. Gracias a estos componentes, Apache NiFi permite diseñar canalizaciones capaces de adquirir información desde múltiples orígenes, transformarla y distribuirla hacia diferentes sistemas de almacenamiento o aplicaciones.</p>
+<p>Sin embargo, conforme un flujo de datos aumenta en tamaño y complejidad, surge una necesidad que no puede resolverse únicamente mediante Processors: <strong>la reutilización de recursos compartidos</strong>.</p>
+<p>Imaginemos un flujo compuesto por varios Processors que deben conectarse a la misma base de datos PostgreSQL. Una primera aproximación consistiría en configurar individualmente cada Processor indicando la URL JDBC, el usuario, la contraseña y el resto de parámetros necesarios. Aunque esta solución es completamente funcional, presenta importantes inconvenientes:</p>
+<ul>
+<li>La configuración queda duplicada en numerosos componentes.</li>
+<li>Aumenta la probabilidad de cometer errores.</li>
+<li>El mantenimiento resulta costoso.</li>
+<li>Cualquier modificación obliga a actualizar manualmente todos los Processors afectados.</li>
+<li>La reutilización de recursos es prácticamente inexistente.</li>
+</ul>
+<p>Este mismo problema aparece cuando varios Processors necesitan compartir certificados SSL, lectores de registros (<em>Record Readers</em>), escritores de registros (<em>Record Writers</em>), clientes HTTP, servicios LDAP o conexiones con sistemas de mensajería como Kafka.</p>
+<p>Apache NiFi resuelve esta situación mediante los <strong>Controller Services</strong>, uno de los elementos arquitectónicos más importantes de toda la plataforma.</p>
+<p>Un Controller Service es un componente especializado cuya finalidad consiste en proporcionar recursos y funcionalidades compartidas a otros componentes del flujo. A diferencia de un Processor, un Controller Service no procesa FlowFiles directamente ni participa en el recorrido de los datos. Su misión consiste en ofrecer un servicio reutilizable que pueda ser utilizado simultáneamente por múltiples Processors.</p>
+<p>Gracias a esta arquitectura, la configuración deja de estar distribuida entre decenas de componentes para centralizarse en un único punto. Como consecuencia, los flujos son más sencillos de mantener, más eficientes y considerablemente más escalables.</p>
+<p>En realidad, los Controller Services representan uno de los principios fundamentales sobre los que se diseñó Apache NiFi: <strong>la separación de responsabilidades</strong>. Mientras que los Processors implementan la lógica de procesamiento de los datos, los Controller Services encapsulan todos aquellos recursos compartidos necesarios para realizar dicho procesamiento.</p>
+<p>Esta filosofía aporta numerosas ventajas:</p>
+<ul>
+<li>Favorece la reutilización de configuraciones.</li>
+<li>Reduce la duplicidad de información.</li>
+<li>Facilita el mantenimiento.</li>
+<li>Mejora el rendimiento mediante recursos persistentes.</li>
+<li>Simplifica la administración de grandes plataformas de integración.</li>
+</ul>
+<p>A lo largo de este capítulo aprenderemos qué son los Controller Services, cómo funcionan internamente, cuál es su ciclo de vida y cómo deben organizarse dentro de una arquitectura profesional de Apache NiFi.</p>
+<hr />
+<h1 id="objetivos">Objetivos</h1>
+<p>Al finalizar este capítulo el lector será capaz de:</p>
+<ul>
+<li>Comprender el papel que desempeñan los Controller Services dentro de la arquitectura de Apache NiFi.</li>
+<li>Diferenciar claramente un Processor de un Controller Service.</li>
+<li>Entender la filosofía de reutilización de recursos compartidos.</li>
+<li>Conocer el ciclo de vida completo de un Controller Service.</li>
+<li>Comprender el ámbito (<em>scope</em>) y la herencia entre Process Groups.</li>
+<li>Diseñar flujos reutilizables mediante servicios compartidos.</li>
+<li>Aplicar buenas prácticas para mejorar la mantenibilidad y escalabilidad de los flujos de datos.</li>
+</ul>
+<p>Más concretamente, durante este capítulo aprenderemos a responder preguntas como las siguientes:</p>
+<ul>
+<li>¿Por qué existen los Controller Services?</li>
+<li>¿Qué problemas resuelven?</li>
+<li>¿Cuándo conviene crear uno?</li>
+<li>¿Qué recursos pueden compartirse?</li>
+<li>¿Cómo interactúan con los Processors?</li>
+<li>¿Qué ocurre cuando un servicio deja de estar disponible?</li>
+<li>¿Cómo afectan al rendimiento del sistema?</li>
+</ul>
+<p>Responder correctamente a estas cuestiones permitirá comprender una de las características que diferencia a Apache NiFi de otras plataformas de integración de datos.</p>
+<hr />
+<h1 id="que-es-un-controller-service">¿Qué es un Controller Service?</h1>
+<p>Un <strong>Controller Service</strong> es un componente de Apache NiFi diseñado para proporcionar funcionalidades compartidas a otros componentes del flujo de datos.</p>
+<p>En otras palabras, actúa como un proveedor de recursos reutilizables que pueden ser utilizados simultáneamente por múltiples Processors sin necesidad de duplicar su configuración.</p>
+<p>Desde un punto de vista conceptual, un Controller Service puede entenderse como una capa intermedia situada entre los Processors y los recursos externos.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>                 +----------------------+
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>                 |   PostgreSQL         |
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>                 +----------------------+
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>                          ▲
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>                          │
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>                 +----------------------+
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>                 | DBCPConnectionPool   |
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>                 | (Controller Service) |
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>                 +----------------------+
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>                    ▲        ▲        ▲
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>                    │        │        │
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>          +---------+        │        +---------+
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>          │                  │                  │
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>+----------------+ +----------------+ +----------------+
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>| ExecuteSQL     | | PutDatabaseRec | | QueryDatabase  |
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>|   Processor    | |    Processor   | |    Processor   |
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>+----------------+ +----------------+ +----------------+
+</span></code></pre></div>
+<p>En este ejemplo, tres Processors diferentes utilizan exactamente la misma conexión con PostgreSQL. Ninguno de ellos conoce los detalles de la configuración de la base de datos. Toda esa información se encuentra centralizada dentro del Controller Service.</p>
+<p>Este modelo ofrece numerosas ventajas:</p>
+<ul>
+<li>Un único punto de configuración.</li>
+<li>Reutilización de conexiones.</li>
+<li>Menor consumo de recursos.</li>
+<li>Configuración homogénea.</li>
+<li>Mayor seguridad.</li>
+<li>Administración simplificada.</li>
+</ul>
+<p>Es importante comprender que un Controller Service <strong>no procesa datos</strong>.</p>
+<p>Nunca:</p>
+<ul>
+<li>recibe FlowFiles,</li>
+<li>genera relaciones,</li>
+<li>modifica contenido,</li>
+<li>enruta información,</li>
+<li>crea nuevos FlowFiles.</li>
+</ul>
+<p>Su única responsabilidad consiste en ofrecer un servicio reutilizable.</p>
+<p>Desde un punto de vista arquitectónico, un Controller Service funciona como un objeto compartido que permanece disponible mientras se encuentra habilitado. Los Processors simplemente solicitan dicho recurso cuando lo necesitan.</p>
+<p>Esta diferencia puede parecer pequeña al principio, pero constituye uno de los pilares fundamentales sobre los que se construye la arquitectura de Apache NiFi.</p>
+<p>En los siguientes apartados veremos cómo esta separación de responsabilidades permite diseñar flujos mucho más robustos, escalables y fáciles de mantener.</p>
+<h1 id="filosofia-de-diseno">Filosofía de diseño</h1>
+<p>Uno de los aspectos que diferencia a Apache NiFi de otras plataformas de integración de datos es su arquitectura basada en la <strong>separación de responsabilidades</strong> (<em>Separation of Concerns</em>). Este principio de diseño, ampliamente utilizado en el desarrollo de software, persigue un objetivo muy claro: que cada componente del sistema tenga una única responsabilidad bien definida.</p>
+<p>En Apache NiFi esta filosofía se aplica dividiendo el flujo de trabajo en dos grandes categorías de componentes:</p>
+<ul>
+<li><strong>Processors</strong>, responsables del procesamiento de los datos.</li>
+<li><strong>Controller Services</strong>, responsables de proporcionar recursos compartidos a los Processors.</li>
+</ul>
+<p>Esta separación evita que un mismo componente tenga que realizar tareas que pertenecen a ámbitos diferentes. Como consecuencia, los flujos son más sencillos de diseñar, mantener y ampliar.</p>
+<h2 id="el-problema-de-la-duplicacion">El problema de la duplicación</h2>
+<p>Para comprender la necesidad de los Controller Services, imaginemos un flujo en el que varios Processors deben acceder a una misma base de datos PostgreSQL.</p>
+<p>Una implementación sencilla podría consistir en configurar cada Processor de forma independiente.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ExecuteSQL
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    ├── URL JDBC
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    ├── Usuario
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    ├── Contraseña
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    └── Driver
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>PutDatabaseRecord
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    ├── URL JDBC
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    ├── Usuario
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    ├── Contraseña
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    └── Driver
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>QueryDatabaseTable
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    ├── URL JDBC
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>    ├── Usuario
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    ├── Contraseña
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>    └── Driver
+</span></code></pre></div>
+<p>Aunque este enfoque funciona, presenta varios inconvenientes importantes:</p>
+<ul>
+<li>La configuración se encuentra repetida en numerosos componentes.</li>
+<li>Es fácil cometer errores al copiar parámetros.</li>
+<li>Una modificación obliga a editar todos los Processors afectados.</li>
+<li>El mantenimiento resulta complejo.</li>
+<li>La reutilización es prácticamente inexistente.</li>
+</ul>
+<p>En un flujo pequeño este problema puede pasar desapercibido, pero en una instalación empresarial con cientos de Processors se convierte en una fuente constante de incidencias.</p>
+<h2 id="centralizacion-de-recursos">Centralización de recursos</h2>
+<p>Apache NiFi resuelve este problema mediante los Controller Services.</p>
+<p>En lugar de que cada Processor mantenga su propia configuración, todos utilizan un recurso compartido.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>                 PostgreSQL
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>                      ▲
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>                      │
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        DBCPConnectionPool
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        (Controller Service)
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>          ▲      ▲      ▲
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>          │      │      │
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a> ExecuteSQL  PutDatabaseRecord  QueryDatabaseTable
+</span></code></pre></div>
+<p>En este modelo:</p>
+<ul>
+<li>La configuración se define una única vez.</li>
+<li>Todos los Processors reutilizan la misma conexión.</li>
+<li>El mantenimiento se simplifica.</li>
+<li>La configuración permanece centralizada.</li>
+</ul>
+<p>Si en algún momento cambia el servidor de base de datos o las credenciales de acceso, únicamente será necesario modificar el Controller Service.</p>
+<p>Todos los Processors comenzarán a utilizar automáticamente la nueva configuración.</p>
+<h2 id="separacion-de-responsabilidades">Separación de responsabilidades</h2>
+<p>La filosofía de Apache NiFi puede resumirse mediante una idea muy sencilla:</p>
+<blockquote>
+<p><strong>Cada componente debe encargarse únicamente de aquello para lo que ha sido diseñado.</strong></p>
+</blockquote>
+<p>Un Processor debe preocuparse únicamente por procesar FlowFiles.</p>
+<p>No debería conocer:</p>
+<ul>
+<li>cómo se establece una conexión JDBC,</li>
+<li>cómo se inicializa un cliente HTTP,</li>
+<li>cómo se carga un certificado SSL,</li>
+<li>cómo se administra un pool de conexiones,</li>
+<li>cómo se obtiene un esquema Avro.</li>
+</ul>
+<p>Todas esas tareas corresponden a un Controller Service.</p>
+<p>Esta división hace que cada componente sea más sencillo, reutilizable y fácil de mantener.</p>
+<h2 id="reutilizacion">Reutilización</h2>
+<p>La reutilización constituye uno de los objetivos principales de los Controller Services.</p>
+<p>Un mismo servicio puede ser utilizado por numerosos Processors simultáneamente.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>                 SSLContextService
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>                 /       |       \
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>                /        |        \
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        InvokeHTTP  ListenHTTP  FetchSFTP
+</span></code></pre></div>
+<p>Del mismo modo que varios usuarios pueden compartir una misma impresora de red, varios Processors pueden compartir un mismo recurso dentro de Apache NiFi.</p>
+<p>Este modelo evita configuraciones duplicadas y garantiza que todos los componentes utilicen exactamente los mismos parámetros.</p>
+<h2 id="desacoplamiento">Desacoplamiento</h2>
+<p>Otra ventaja importante es el <strong>desacoplamiento</strong> entre los Processors y los recursos externos.</p>
+<p>Los Processors no necesitan conocer cómo se implementa un recurso.</p>
+<p>Por ejemplo, un Processor que ejecuta consultas SQL únicamente necesita saber que existe un Controller Service que proporciona una conexión válida con la base de datos.</p>
+<p>Desconoce:</p>
+<ul>
+<li>la URL del servidor,</li>
+<li>el tipo de base de datos,</li>
+<li>el controlador JDBC,</li>
+<li>las credenciales,</li>
+<li>el tamaño del pool de conexiones.</li>
+</ul>
+<p>Toda esa complejidad queda encapsulada dentro del Controller Service.</p>
+<p>Este desacoplamiento facilita enormemente la evolución de los flujos.</p>
+<h2 id="mantenibilidad">Mantenibilidad</h2>
+<p>Centralizar la configuración tiene un impacto directo sobre la mantenibilidad.</p>
+<p>Supongamos una instalación con:</p>
+<ul>
+<li>80 Processors que utilizan PostgreSQL.</li>
+<li>25 Processors que utilizan Kafka.</li>
+<li>40 Processors que consumen APIs HTTPS.</li>
+</ul>
+<p>Sin Controller Services, cualquier modificación obligaría a revisar uno por uno todos los componentes afectados.</p>
+<p>Con Controller Services, basta con modificar el recurso compartido.</p>
+<p>Esta diferencia supone un enorme ahorro de tiempo y reduce significativamente la posibilidad de introducir errores durante las tareas de mantenimiento.</p>
+<h2 id="rendimiento">Rendimiento</h2>
+<p>Los Controller Services también mejoran el rendimiento de la plataforma.</p>
+<p>Muchos recursos externos son costosos de inicializar.</p>
+<p>Por ejemplo:</p>
+<ul>
+<li>conexiones JDBC,</li>
+<li>clientes HTTP,</li>
+<li>conexiones LDAP,</li>
+<li>conexiones JMS,</li>
+<li>clientes Kafka,</li>
+<li>lectores y escritores de registros.</li>
+</ul>
+<p>Crear estos recursos para cada FlowFile supondría un coste muy elevado.</p>
+<p>Los Controller Services permiten mantener dichos recursos inicializados mientras permanezcan habilitados.</p>
+<p>Como consecuencia:</p>
+<ul>
+<li>disminuye el tiempo de respuesta,</li>
+<li>se reduce el consumo de CPU,</li>
+<li>se aprovechan los pools de conexiones,</li>
+<li>disminuye el número de conexiones abiertas y cerradas.</li>
+</ul>
+<p>En sistemas de alto volumen esta optimización puede marcar una diferencia muy importante.</p>
+<h2 id="escalabilidad">Escalabilidad</h2>
+<p>La arquitectura basada en Controller Services también facilita la escalabilidad.</p>
+<p>Cuando un flujo crece desde unos pocos Processors hasta varios cientos, la organización de los recursos compartidos resulta fundamental.</p>
+<p>Al centralizar la configuración:</p>
+<ul>
+<li>se reduce la complejidad del flujo,</li>
+<li>disminuye el número de configuraciones repetidas,</li>
+<li>resulta más sencillo localizar errores,</li>
+<li>se facilita el trabajo colaborativo entre varios administradores.</li>
+</ul>
+<p>Por este motivo, los Controller Services son considerados un elemento imprescindible en cualquier arquitectura empresarial basada en Apache NiFi.</p>
+<h2 id="beneficios-de-la-filosofia-de-diseno">Beneficios de la filosofía de diseño</h2>
+<p>La siguiente tabla resume las principales ventajas que aporta esta arquitectura.</p>
+<table>
+<thead>
+<tr>
+<th>Principio</th>
+<th>Beneficio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Separación de responsabilidades</td>
+<td>Componentes más simples y especializados</td>
+</tr>
+<tr>
+<td>Reutilización</td>
+<td>Un único recurso puede ser utilizado por numerosos Processors</td>
+</tr>
+<tr>
+<td>Centralización</td>
+<td>Configuración única para todos los consumidores</td>
+</tr>
+<tr>
+<td>Desacoplamiento</td>
+<td>Los Processors desconocen la implementación del recurso</td>
+</tr>
+<tr>
+<td>Mantenibilidad</td>
+<td>Los cambios afectan únicamente al Controller Service</td>
+</tr>
+<tr>
+<td>Rendimiento</td>
+<td>Reutilización de conexiones y recursos persistentes</td>
+</tr>
+<tr>
+<td>Escalabilidad</td>
+<td>Arquitecturas más limpias y fáciles de administrar</td>
+</tr>
+</tbody>
+</table>
+<h2 id="buenas-practicas">Buenas prácticas</h2>
+<ul>
+<li>Diseñar los Processors para que únicamente procesen datos.</li>
+<li>Centralizar siempre los recursos compartidos mediante Controller Services.</li>
+<li>Evitar duplicar configuraciones entre distintos componentes.</li>
+<li>Reutilizar servicios siempre que sea posible.</li>
+<li>Agrupar los Controller Services por dominio funcional (bases de datos, seguridad, registros, mensajería, etc.).</li>
+<li>Documentar claramente la finalidad de cada servicio compartido.</li>
+</ul>
+<h2 id="errores-frecuentes">Errores frecuentes</h2>
+<p>Al comenzar a trabajar con Apache NiFi es habitual cometer algunos errores relacionados con esta filosofía de diseño:</p>
+<ul>
+<li>Crear un Controller Service diferente para cada Processor.</li>
+<li>Duplicar conexiones JDBC innecesariamente.</li>
+<li>Configurar certificados SSL en cada componente.</li>
+<li>No reutilizar Record Readers y Record Writers.</li>
+<li>Pensar que un Controller Service procesa FlowFiles.</li>
+</ul>
+<p>Evitar estos errores desde el inicio permitirá construir flujos mucho más robustos y sencillos de mantener.</p>
+<h2 id="ideas-clave">Ideas clave</h2>
+<p>La filosofía de diseño de Apache NiFi puede resumirse en una frase:</p>
+<blockquote>
+<p><strong>Los Processors procesan datos; los Controller Services proporcionan los recursos necesarios para procesarlos.</strong></p>
+</blockquote>
+<p>Comprender este principio resulta fundamental para diseñar arquitecturas escalables, mantenibles y alineadas con las buenas prácticas de la plataforma. En el siguiente apartado analizaremos con detalle las diferencias entre un Processor y un Controller Service, estudiando el papel que desempeña cada uno dentro de un flujo de datos.</p>
+<h1 id="processor-vs-controller-service">Processor vs Controller Service</h1>
+<p>Una de las dudas más habituales entre los usuarios que comienzan a trabajar con Apache NiFi consiste en diferenciar correctamente el papel que desempeñan los <strong>Processors</strong> y los <strong>Controller Services</strong>. Aunque ambos son componentes fundamentales de la plataforma y colaboran estrechamente entre sí, sus responsabilidades son completamente diferentes.</p>
+<p>Comprender esta diferencia es esencial para diseñar flujos bien estructurados, reutilizables y fáciles de mantener.</p>
+<h2 id="dos-componentes-con-responsabilidades-diferentes">Dos componentes con responsabilidades diferentes</h2>
+<p>Apache NiFi sigue el principio de <strong>responsabilidad única</strong> (<em>Single Responsibility Principle</em>), uno de los pilares del diseño de software moderno. Según este principio, cada componente debe encargarse de realizar una única tarea y hacerlo de la mejor forma posible.</p>
+<p>En NiFi esta filosofía se materializa de la siguiente manera:</p>
+<ul>
+<li>Los <strong>Processors</strong> implementan la lógica del flujo de datos.</li>
+<li>Los <strong>Controller Services</strong> proporcionan recursos compartidos que permiten a los Processors realizar su trabajo.</li>
+</ul>
+<p>Podemos imaginar ambos componentes como los trabajadores de una empresa.</p>
+<ul>
+<li>El <strong>Processor</strong> sería un empleado que realiza una tarea concreta, como leer un archivo, transformar un registro o insertar datos en una base de datos.</li>
+<li>El <strong>Controller Service</strong> sería un servicio común de la empresa, como la red informática, el sistema de autenticación o la base de datos corporativa, que está disponible para todos los empleados.</li>
+</ul>
+<p>Mientras que los trabajadores realizan el trabajo diario, los servicios comunes proporcionan la infraestructura necesaria para que dicho trabajo pueda llevarse a cabo.</p>
+<h2 id="comparativa-general">Comparativa general</h2>
+<p>La siguiente tabla resume las principales diferencias entre ambos componentes.</p>
+<table>
+<thead>
+<tr>
+<th>Característica</th>
+<th>Processor</th>
+<th>Controller Service</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Procesa FlowFiles</td>
+<td>Sí</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Genera relaciones</td>
+<td>Sí</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Puede crear FlowFiles</td>
+<td>Sí</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Ejecuta lógica de negocio</td>
+<td>Sí</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Proporciona recursos compartidos</td>
+<td>No</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>Puede ser utilizado por varios componentes</td>
+<td>No</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>Se conecta directamente mediante Connections</td>
+<td>Sí</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Puede depender de Controller Services</td>
+<td>Sí</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Reutiliza conexiones y recursos</td>
+<td>No</td>
+<td>Sí</td>
+</tr>
+</tbody>
+</table>
+<p>Esta tabla pone de manifiesto que ambos componentes cumplen funciones claramente diferenciadas y complementarias.</p>
+<h2 id="como-colaboran">Cómo colaboran</h2>
+<p>En un flujo de datos típico, los Processors realizan el procesamiento mientras que los Controller Services actúan como proveedores de recursos.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>                 PostgreSQL
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>                      ▲
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>                      │
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>         DBCPConnectionPool
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        (Controller Service)
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>                      ▲
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>                      │
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>              ExecuteSQL
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>               (Processor)
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>                      │
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>                 FlowFile
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>                      │
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>                UpdateRecord
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>               (Processor)
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>                      │
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>                 FlowFile
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>                      │
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>             PutDatabaseRecord
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>               (Processor)
+</span></code></pre></div>
+<p>En este ejemplo:</p>
+<ul>
+<li><code>ExecuteSQL</code> utiliza el Controller Service para ejecutar consultas SQL.</li>
+<li><code>UpdateRecord</code> transforma el contenido del FlowFile.</li>
+<li><code>PutDatabaseRecord</code> vuelve a utilizar el mismo Controller Service para insertar información en la base de datos.</li>
+</ul>
+<p>Obsérvese que el Controller Service nunca interviene directamente en el recorrido de los FlowFiles. Su función consiste únicamente en proporcionar una conexión reutilizable.</p>
+<h2 id="diferencias-funcionales">Diferencias funcionales</h2>
+<h3 id="processor">Processor</h3>
+<p>Los Processors representan la unidad básica de procesamiento de Apache NiFi.</p>
+<p>Cada Processor implementa una operación específica sobre los FlowFiles.</p>
+<p>Entre las tareas que puede realizar un Processor se encuentran:</p>
+<ul>
+<li>Leer archivos.</li>
+<li>Consumir mensajes Kafka.</li>
+<li>Consultar una base de datos.</li>
+<li>Ejecutar consultas SQL.</li>
+<li>Transformar registros.</li>
+<li>Convertir formatos.</li>
+<li>Invocar servicios REST.</li>
+<li>Enrutar información.</li>
+<li>Comprimir archivos.</li>
+<li>Validar contenido.</li>
+</ul>
+<p>Los Processors son los únicos componentes capaces de modificar el flujo de los datos.</p>
+<h3 id="controller-service">Controller Service</h3>
+<p>Un Controller Service no realiza ninguna operación sobre los FlowFiles.</p>
+<p>Su misión consiste en ofrecer recursos compartidos como:</p>
+<ul>
+<li>Conexiones JDBC.</li>
+<li>Certificados SSL.</li>
+<li>Clientes HTTP.</li>
+<li>Lectores de registros.</li>
+<li>Escritores de registros.</li>
+<li>Lookup Services.</li>
+<li>Esquemas Avro.</li>
+<li>Pools de conexiones.</li>
+</ul>
+<p>Estos recursos permanecen disponibles para cualquier Processor autorizado mientras el servicio permanezca habilitado.</p>
+<h2 id="dependencias">Dependencias</h2>
+<p>Un aspecto importante es que los Processors pueden depender de uno o varios Controller Services.</p>
+<p>Por ejemplo:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>PutDatabaseRecord
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>        │
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        ├────────► DBCPConnectionPool
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        │
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        └────────► JsonTreeReader
+</span></code></pre></div>
+<p>En este caso el Processor necesita dos servicios diferentes:</p>
+<ul>
+<li>Un servicio para conectarse a la base de datos.</li>
+<li>Un servicio para interpretar los registros JSON.</li>
+</ul>
+<p>Cada Controller Service resuelve una necesidad concreta, manteniendo una arquitectura modular y reutilizable.</p>
+<h2 id="configuracion">Configuración</h2>
+<p>Otra diferencia importante radica en la forma de configurar ambos componentes.</p>
+<p>Los Processors disponen de propiedades relacionadas con la lógica del flujo:</p>
+<ul>
+<li>Relaciones.</li>
+<li>Planificación.</li>
+<li>Concurrencia.</li>
+<li>Estrategias de ejecución.</li>
+<li>Expresión Language.</li>
+<li>Parámetros específicos.</li>
+</ul>
+<p>Los Controller Services, por el contrario, almacenan únicamente la configuración necesaria para proporcionar el recurso compartido.</p>
+<p>Por ejemplo, un <code>DBCPConnectionPool</code> contendrá información como:</p>
+<ul>
+<li>URL JDBC.</li>
+<li>Usuario.</li>
+<li>Contraseña.</li>
+<li>Driver JDBC.</li>
+<li>Tamaño del pool.</li>
+<li>Tiempo máximo de espera.</li>
+</ul>
+<p>Ninguna de estas propiedades tiene relación con el procesamiento de FlowFiles.</p>
+<h2 id="ciclo-de-ejecucion">Ciclo de ejecución</h2>
+<p>También existen diferencias importantes en su comportamiento durante la ejecución.</p>
+<h3 id="processor_1">Processor</h3>
+<p>Un Processor:</p>
+<ol>
+<li>Espera FlowFiles.</li>
+<li>Procesa la información.</li>
+<li>Genera nuevos FlowFiles o modifica los existentes.</li>
+<li>Los envía mediante sus relaciones de salida.</li>
+</ol>
+<p>Este ciclo se repite continuamente mientras el Processor permanezca en ejecución.</p>
+<h3 id="controller-service_1">Controller Service</h3>
+<p>Un Controller Service funciona de forma distinta.</p>
+<ol>
+<li>Se configura.</li>
+<li>Se valida.</li>
+<li>Se habilita.</li>
+<li>Inicializa sus recursos internos.</li>
+<li>Permanece disponible para otros componentes.</li>
+<li>Se deshabilita cuando deja de ser necesario.</li>
+</ol>
+<p>Mientras permanece habilitado no procesa datos, sino que espera peticiones de los Processors que lo utilizan.</p>
+<h2 id="ejemplo-practico">Ejemplo práctico</h2>
+<p>Supongamos un flujo encargado de importar información desde una base de datos.</p>
+<p>Sin Controller Service:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>ExecuteSQL
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    ├── URL JDBC
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    ├── Usuario
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    ├── Contraseña
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    └── Driver
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>PutDatabaseRecord
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    ├── URL JDBC
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    ├── Usuario
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>    ├── Contraseña
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>    └── Driver
+</span></code></pre></div>
+<p>Con Controller Service:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>DBCPConnectionPool
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    ├── URL JDBC
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    ├── Usuario
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    ├── Contraseña
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    └── Driver
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>          ▲
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>          │
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>ExecuteSQL      PutDatabaseRecord
+</span></code></pre></div>
+<p>La segunda solución elimina configuraciones duplicadas y facilita enormemente el mantenimiento del flujo.</p>
+<h2 id="cuando-utilizar-cada-uno">¿Cuándo utilizar cada uno?</h2>
+<p>Como regla general:</p>
+<p>Utilice un <strong>Processor</strong> cuando necesite:</p>
+<ul>
+<li>Leer datos.</li>
+<li>Transformarlos.</li>
+<li>Validarlos.</li>
+<li>Filtrarlos.</li>
+<li>Enrutarlos.</li>
+<li>Escribirlos en otro sistema.</li>
+</ul>
+<p>Utilice un <strong>Controller Service</strong> cuando necesite compartir:</p>
+<ul>
+<li>Conexiones.</li>
+<li>Certificados.</li>
+<li>Clientes.</li>
+<li>Esquemas.</li>
+<li>Lectores de registros.</li>
+<li>Escritores de registros.</li>
+<li>Servicios de búsqueda.</li>
+<li>Recursos reutilizables.</li>
+</ul>
+<p>Si un recurso va a ser utilizado por varios componentes del flujo, probablemente deba implementarse mediante un Controller Service.</p>
+<h2 id="buenas-practicas_1">Buenas prácticas</h2>
+<ul>
+<li>Mantener separados el procesamiento y la configuración compartida.</li>
+<li>Reutilizar Controller Services siempre que sea posible.</li>
+<li>Evitar crear un servicio diferente para cada Processor.</li>
+<li>Utilizar nombres descriptivos para identificar claramente la finalidad del servicio.</li>
+<li>Documentar las dependencias entre Processors y Controller Services.</li>
+</ul>
+<h2 id="errores-frecuentes_1">Errores frecuentes</h2>
+<p>Los errores más comunes en esta fase son:</p>
+<ul>
+<li>Pensar que un Controller Service procesa FlowFiles.</li>
+<li>Duplicar conexiones JDBC en varios Processors.</li>
+<li>Crear múltiples Controller Services con la misma configuración.</li>
+<li>No reutilizar Record Readers y Record Writers.</li>
+<li>Configurar certificados SSL de forma independiente en cada Processor.</li>
+</ul>
+<h2 id="ideas-clave_1">Ideas clave</h2>
+<p>Los Processors y los Controller Services no compiten entre sí, sino que desempeñan funciones complementarias dentro de Apache NiFi.</p>
+<p>Los primeros implementan la lógica del flujo de datos, mientras que los segundos proporcionan los recursos compartidos necesarios para ejecutar dicha lógica de forma eficiente, reutilizable y escalable.</p>
+<p>Comprender esta diferencia constituye uno de los pasos más importantes para diseñar arquitecturas profesionales en Apache NiFi.</p>
+<h1 id="ciclo-de-vida">Ciclo de vida</h1>
+<p>Al igual que el resto de componentes de Apache NiFi, los <strong>Controller Services</strong> poseen un ciclo de vida bien definido que determina su estado dentro del flujo de datos. Comprender este ciclo es fundamental para administrar correctamente los servicios compartidos, diagnosticar incidencias y evitar interrupciones durante la ejecución de los flujos.</p>
+<p>A diferencia de los Processors, cuyo ciclo de vida está orientado al procesamiento continuo de FlowFiles, los Controller Services se centran en la gestión de recursos compartidos. Su objetivo es inicializar dichos recursos una única vez, mantenerlos disponibles mientras sean necesarios y liberarlos de forma controlada cuando dejan de utilizarse.</p>
+<h2 id="estados-de-un-controller-service">Estados de un Controller Service</h2>
+<p>Durante su funcionamiento, un Controller Service puede encontrarse en diferentes estados.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>                +----------------+
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>                |   Configurado  |
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>                +----------------+
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>                        │
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>                        ▼
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>                +----------------+
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>                |   Validando    |
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>                +----------------+
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>                        │
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>                        ▼
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>                +----------------+
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>                |   Habilitado   |
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>                |   (Enabled)    |
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>                +----------------+
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>                        │
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>            +-----------+-----------+
+</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>            │                       │
+</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>            ▼                       ▼
+</span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>      En uso por              Sin referencias
+</span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>      Processors
+</span><span id="__span-8-21"><a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>            │
+</span><span id="__span-8-22"><a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>            ▼
+</span><span id="__span-8-23"><a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a>                +----------------+
+</span><span id="__span-8-24"><a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a>                | Deshabilitado  |
+</span><span id="__span-8-25"><a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a>                |   (Disabled)   |
+</span><span id="__span-8-26"><a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a>                +----------------+
+</span><span id="__span-8-27"><a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a>                        │
+</span><span id="__span-8-28"><a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a>                        ▼
+</span><span id="__span-8-29"><a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a>                +----------------+
+</span><span id="__span-8-30"><a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a>                |   Eliminado    |
+</span><span id="__span-8-31"><a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a>                +----------------+
+</span></code></pre></div>
+<p>Cada uno de estos estados representa una fase diferente del ciclo de vida del servicio.</p>
+<hr />
+<h2 id="1-configuracion">1. Configuración</h2>
+<p>Todo Controller Service comienza su ciclo de vida cuando es creado desde la interfaz de Apache NiFi.</p>
+<p>En este momento únicamente existe como un componente de configuración y todavía no proporciona ningún recurso al flujo.</p>
+<p>Su icono aparecerá normalmente marcado como <strong>Invalid</strong> o <strong>Disabled</strong>, indicando que todavía no puede utilizarse.</p>
+<p>Durante esta fase se definen todas sus propiedades:</p>
+<ul>
+<li>Nombre.</li>
+<li>Descripción.</li>
+<li>Parámetros de conexión.</li>
+<li>Credenciales.</li>
+<li>Certificados.</li>
+<li>Rutas.</li>
+<li>Configuración específica del servicio.</li>
+</ul>
+<p>Por ejemplo, un <code>DBCPConnectionPool</code> requerirá definir:</p>
+<ul>
+<li>URL JDBC.</li>
+<li>Driver.</li>
+<li>Usuario.</li>
+<li>Contraseña.</li>
+<li>Número máximo de conexiones.</li>
+</ul>
+<p>Hasta que toda esta información sea correcta, el servicio no podrá habilitarse.</p>
+<hr />
+<h2 id="2-validacion">2. Validación</h2>
+<p>Antes de que un Controller Service pueda utilizarse, Apache NiFi realiza automáticamente un proceso de validación.</p>
+<p>El objetivo consiste en comprobar que todas las propiedades obligatorias contienen valores válidos y que la configuración es coherente.</p>
+<p>Durante esta fase se revisan aspectos como:</p>
+<ul>
+<li>Propiedades obligatorias.</li>
+<li>Tipos de datos.</li>
+<li>Expresiones permitidas.</li>
+<li>Dependencias.</li>
+<li>Parámetros inexistentes.</li>
+<li>Referencias a otros servicios.</li>
+</ul>
+<p>Si alguna comprobación falla, el servicio permanecerá en estado <strong>Invalid</strong>.</p>
+<p>Por ejemplo:</p>
+<ul>
+<li>Falta la URL JDBC.</li>
+<li>El Driver JDBC no existe.</li>
+<li>No se ha seleccionado un certificado SSL.</li>
+<li>Se referencia un Parameter Context inexistente.</li>
+</ul>
+<p>Mientras exista algún error de validación, Apache NiFi impedirá habilitar el servicio.</p>
+<p>Esta validación preventiva evita numerosos errores durante la ejecución de los flujos.</p>
+<hr />
+<h2 id="3-habilitacion-enable">3. Habilitación (Enable)</h2>
+<p>Una vez superada la validación, el siguiente paso consiste en habilitar el Controller Service.</p>
+<p>Este proceso puede realizarse mediante la opción <strong>Enable</strong> disponible en el menú contextual.</p>
+<p>Cuando un servicio pasa al estado <strong>Enabled</strong>, Apache NiFi ejecuta todas las tareas necesarias para inicializar los recursos internos.</p>
+<p>Dependiendo del tipo de servicio, esto puede implicar:</p>
+<ul>
+<li>Crear un pool de conexiones JDBC.</li>
+<li>Cargar certificados digitales.</li>
+<li>Inicializar clientes HTTP.</li>
+<li>Abrir conexiones con Kafka.</li>
+<li>Leer esquemas Avro.</li>
+<li>Inicializar lectores y escritores de registros.</li>
+</ul>
+<p>A partir de ese momento, el servicio queda disponible para todos los Processors autorizados.</p>
+<p>Es importante destacar que esta inicialización se realiza una única vez, independientemente del número de Processors que utilicen el servicio.</p>
+<hr />
+<h2 id="4-utilizacion-por-los-processors">4. Utilización por los Processors</h2>
+<p>Una vez habilitado, el Controller Service permanece disponible mientras existan Processors que lo utilicen.</p>
+<p>Cada vez que un Processor necesita acceder al recurso compartido, simplemente solicita una referencia al servicio.</p>
+<p>Por ejemplo:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>ExecuteSQL
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>      │
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>      ▼
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>DBCPConnectionPool
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>      │
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>      ▼
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a> PostgreSQL
+</span></code></pre></div>
+<p>El Processor nunca crea una nueva conexión.</p>
+<p>Simplemente reutiliza la conexión proporcionada por el Controller Service.</p>
+<p>Este modelo reduce considerablemente el consumo de recursos y mejora el rendimiento general del sistema.</p>
+<hr />
+<h2 id="5-actualizacion-de-la-configuracion">5. Actualización de la configuración</h2>
+<p>En muchas ocasiones será necesario modificar la configuración de un Controller Service.</p>
+<p>Por ejemplo:</p>
+<ul>
+<li>Cambiar la contraseña de una base de datos.</li>
+<li>Actualizar un certificado SSL.</li>
+<li>Modificar el tamaño del pool.</li>
+<li>Cambiar la URL de un servidor.</li>
+</ul>
+<p>Para realizar estos cambios es necesario deshabilitar previamente el servicio.</p>
+<p>Apache NiFi no permite modificar determinadas propiedades críticas mientras el servicio permanece habilitado.</p>
+<p>Este comportamiento garantiza la consistencia de los recursos compartidos y evita cambios que puedan afectar a los Processors en ejecución.</p>
+<hr />
+<h2 id="6-deshabilitacion-disable">6. Deshabilitación (Disable)</h2>
+<p>Cuando un Controller Service deja de ser necesario o debe modificarse, pasa al estado <strong>Disabled</strong>.</p>
+<p>Durante esta fase Apache NiFi libera todos los recursos asociados al servicio.</p>
+<p>Dependiendo del tipo de Controller Service, esto puede implicar:</p>
+<ul>
+<li>Cerrar conexiones JDBC.</li>
+<li>Liberar memoria.</li>
+<li>Finalizar conexiones HTTP persistentes.</li>
+<li>Cerrar sockets.</li>
+<li>Liberar clientes Kafka.</li>
+<li>Descargar certificados.</li>
+</ul>
+<p>Una vez deshabilitado, ningún Processor podrá utilizar el servicio.</p>
+<p>Si algún Processor depende de él, Apache NiFi impedirá su ejecución hasta que vuelva a habilitarse.</p>
+<hr />
+<h2 id="dependencias-y-restricciones">Dependencias y restricciones</h2>
+<p>Uno de los aspectos más importantes del ciclo de vida es la gestión automática de dependencias.</p>
+<p>Apache NiFi conoce en todo momento qué Processors utilizan cada Controller Service.</p>
+<p>Por este motivo, no permite deshabilitar un servicio mientras existan componentes activos que dependan de él.</p>
+<p>Por ejemplo:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>ExecuteSQL
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>      │
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>      ├──────────────┐
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>PutDatabaseRecord    │
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>      │              │
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>      ▼              ▼
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>     DBCPConnectionPool
+</span></code></pre></div>
+<p>Si alguno de estos Processors continúa en ejecución, Apache NiFi mostrará un mensaje similar a:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Controller Service cannot be disabled because it is referenced by running components.
+</span></code></pre></div>
+<p>En estos casos será necesario detener primero los Processors consumidores.</p>
+<p>Esta protección evita que un flujo quede en un estado inconsistente.</p>
+<hr />
+<h2 id="eliminacion">Eliminación</h2>
+<p>Un Controller Service únicamente puede eliminarse cuando:</p>
+<ul>
+<li>Está deshabilitado.</li>
+<li>No existen Processors que dependan de él.</li>
+<li>Ningún otro Controller Service lo referencia.</li>
+</ul>
+<p>Solo entonces Apache NiFi permitirá su eliminación definitiva.</p>
+<p>Este mecanismo evita eliminar accidentalmente recursos utilizados por otros componentes del flujo.</p>
+<hr />
+<h2 id="ciclo-de-vida-completo">Ciclo de vida completo</h2>
+<p>El siguiente esquema resume todo el proceso.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Crear
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>   │
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>   ▼
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>Configurar
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>   │
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>   ▼
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>Validar
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>   │
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>   ▼
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>Enable
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>   │
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>   ▼
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>Inicializar recursos
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>   │
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>   ▼
+</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>Uso compartido
+</span><span id="__span-12-17"><a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>   │
+</span><span id="__span-12-18"><a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>   ▼
+</span><span id="__span-12-19"><a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a>Disable
+</span><span id="__span-12-20"><a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>   │
+</span><span id="__span-12-21"><a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a>   ▼
+</span><span id="__span-12-22"><a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>Liberar recursos
+</span><span id="__span-12-23"><a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a>   │
+</span><span id="__span-12-24"><a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a>   ▼
+</span><span id="__span-12-25"><a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a>Eliminar
+</span></code></pre></div>
+<hr />
+<h2 id="buenas-practicas_2">Buenas prácticas</h2>
+<p>Durante la administración de Controller Services es recomendable seguir las siguientes recomendaciones:</p>
+<ul>
+<li>Configurar completamente el servicio antes de habilitarlo.</li>
+<li>Verificar siempre que la validación sea correcta.</li>
+<li>Utilizar nombres descriptivos para facilitar su identificación.</li>
+<li>Documentar las dependencias con otros componentes.</li>
+<li>Deshabilitar el servicio antes de realizar modificaciones importantes.</li>
+<li>Evitar eliminar servicios que puedan ser reutilizados en otros flujos.</li>
+</ul>
+<hr />
+<h2 id="errores-frecuentes_2">Errores frecuentes</h2>
+<p>Los problemas más habituales relacionados con el ciclo de vida son:</p>
+<ul>
+<li>Intentar habilitar un servicio con propiedades incompletas.</li>
+<li>Modificar un servicio mientras permanece habilitado.</li>
+<li>Intentar eliminar un servicio utilizado por otros componentes.</li>
+<li>Desconocer qué Processors dependen del Controller Service.</li>
+<li>Interpretar incorrectamente el estado <strong>Invalid</strong> como un error de ejecución, cuando realmente indica un problema de configuración.</li>
+</ul>
+<hr />
+<h2 id="ideas-clave_2">Ideas clave</h2>
+<p>El ciclo de vida de un Controller Service está diseñado para garantizar que los recursos compartidos permanezcan siempre en un estado consistente. Gracias a los procesos de validación, habilitación, control de dependencias y liberación de recursos, Apache NiFi evita configuraciones erróneas y proporciona una gestión segura y eficiente de los servicios compartidos.</p>
+<p>Comprender este ciclo resulta esencial para administrar plataformas NiFi de tamaño medio o grande, donde un único Controller Service puede ser utilizado simultáneamente por decenas o incluso cientos de Processors.</p>
+<h1 id="ambito-y-herencia">Ámbito y herencia</h1>
+<p>Los <strong>Controller Services</strong> no están disponibles automáticamente para todos los componentes de una instancia de Apache NiFi. Su visibilidad depende del lugar de la jerarquía en el que hayan sido creados.</p>
+<p>Este comportamiento se conoce como <strong>ámbito</strong> o <em>scope</em>.</p>
+<p>Comprender el ámbito de un Controller Service es fundamental para organizar correctamente los flujos, evitar configuraciones duplicadas y garantizar que cada Process Group pueda acceder únicamente a los recursos que necesita.</p>
+<p>En Apache NiFi, los Process Groups forman una estructura jerárquica. Un Process Group puede contener:</p>
+<ul>
+<li>Processors.</li>
+<li>Connections.</li>
+<li>Input Ports.</li>
+<li>Output Ports.</li>
+<li>Funnels.</li>
+<li>Remote Process Groups.</li>
+<li>Otros Process Groups.</li>
+<li>Controller Services.</li>
+<li>Parameter Contexts asociados.</li>
+</ul>
+<p>Los Controller Services se integran en esta jerarquía mediante un modelo de herencia descendente.</p>
+<p>Un servicio creado en un Process Group puede ser utilizado por los componentes que se encuentran dentro de ese mismo grupo y, normalmente, por los componentes incluidos en sus Process Groups descendientes.</p>
+<p>Sin embargo, no puede ser utilizado por componentes situados en grupos hermanos, ascendentes o completamente independientes.</p>
+<hr />
+<h2 id="el-concepto-de-ambito">El concepto de ámbito</h2>
+<p>El ámbito determina desde qué partes del flujo puede utilizarse un Controller Service.</p>
+<p>Cuando se crea un servicio dentro de un Process Group, su disponibilidad queda vinculada a esa posición de la jerarquía.</p>
+<p>La regla principal puede expresarse de la siguiente forma:</p>
+<blockquote>
+<p>Un Controller Service es visible dentro del Process Group en el que se define y en sus grupos descendientes, pero no en sus grupos ascendentes ni en otros grupos paralelos.</p>
+</blockquote>
+<p>El siguiente diagrama muestra una jerarquía básica.</p>
+<p>```mermaid id="controller-service-scope-basic"
+flowchart TD
+    ROOT["Process Group raíz"]
+    ING["Ingesta"]
+    TRA["Transformación"]
+    EXP["Exportación"]
+    API["APIs"]
+    FILES["Archivos"]
+    CLEAN["Limpieza"]
+    ENRICH["Enriquecimiento"]</p>
+<div class="language-text highlight"><pre><span></span><code>ROOT --&gt; ING
+ROOT --&gt; TRA
+ROOT --&gt; EXP
+
+ING --&gt; API
+ING --&gt; FILES
+
+TRA --&gt; CLEAN
+TRA --&gt; ENRICH
+</code></pre></div>
+<p><code>``
+
+Si un Controller Service se crea en el Process Group raíz, podrá ser utilizado por los componentes situados en:
+
+* Ingesta.
+* Transformación.
+* Exportación.
+* APIs.
+* Archivos.
+* Limpieza.
+* Enriquecimiento.
+
+En cambio, si se crea dentro de</code>Ingesta<code>, únicamente estará disponible para:
+
+* Los componentes del propio grupo</code>Ingesta<code>.
+* Los componentes de</code>APIs<code>.
+* Los componentes de</code>Archivos<code>.
+
+No será visible desde</code>Transformación<code>ni desde</code>Exportación`.</p>
+<hr />
+<h2 id="herencia-descendente">Herencia descendente</h2>
+<p>La herencia de los Controller Services sigue una dirección descendente.
+
+Esto significa que los Process Groups hijos pueden utilizar los servicios definidos en sus grupos padres.
+
+<code>mermaid id="controller-service-downward-inheritance"
+flowchart TD
+    ROOT["Raíz&lt;br/&gt;DBCP-Global"]
+    PG1["Process Group A"]
+    PG2["Process Group B"]
+    PG11["Process Group A.1"]
+    PG12["Process Group A.2"]
+    PG21["Process Group B.1"]
+
+    ROOT --&gt; PG1
+    ROOT --&gt; PG2
+    PG1 --&gt; PG11
+    PG1 --&gt; PG12
+    PG2 --&gt; PG21
+
+    ROOT -. "Visible" .-&gt; PG1
+    ROOT -. "Visible" .-&gt; PG2
+    ROOT -. "Visible" .-&gt; PG11
+    ROOT -. "Visible" .-&gt; PG12
+    ROOT -. "Visible" .-&gt; PG21</code></p>
+<p>En este ejemplo, <code>DBCP-Global</code> se ha creado en el nivel raíz.</p>
+<p>Por tanto, todos los Process Groups descendientes pueden utilizarlo.</p>
+<p>Este modelo resulta especialmente útil cuando muchos flujos deben acceder al mismo recurso corporativo, como:</p>
+<ul>
+<li>Una base de datos común.</li>
+<li>Un servidor LDAP.</li>
+<li>Una autoridad certificadora.</li>
+<li>Un repositorio de esquemas.</li>
+<li>Un clúster Kafka.</li>
+<li>Un servicio de secretos.</li>
+</ul>
+<hr />
+<h2 id="ausencia-de-herencia-ascendente">Ausencia de herencia ascendente</h2>
+<p>La herencia no funciona en sentido ascendente.</p>
+<p>Un Controller Service creado dentro de un Process Group hijo no puede ser utilizado por su grupo padre.</p>
+<p>```mermaid id="controller-service-no-upward-inheritance"
+flowchart BT
+    CHILD["Process Group hijo<br/>SSLContextService"]
+    PARENT["Process Group padre"]
+    ROOT["Process Group raíz"]</p>
+<div class="language-text highlight"><pre><span></span><code>CHILD --&gt; PARENT
+PARENT --&gt; ROOT
+
+CHILD -. &quot;No visible&quot; .-&gt; PARENT
+CHILD -. &quot;No visible&quot; .-&gt; ROOT
+</code></pre></div>
+<p>```
+
+Esto significa que un servicio local permanece encapsulado dentro de su propia rama del flujo.
+
+Esta limitación no es un inconveniente, sino un mecanismo de aislamiento. Evita que los recursos internos de un flujo sean utilizados accidentalmente por otros componentes.</p>
+<hr />
+<h2 id="ausencia-de-herencia-lateral">Ausencia de herencia lateral</h2>
+<p>Los Process Groups hermanos tampoco comparten automáticamente sus Controller Services.
+
+<code>mermaid id="controller-service-no-sibling-visibility"
+flowchart LR
+    ROOT["Process Group raíz"]
+    SALES["Ventas&lt;br/&gt;DBCP-Ventas"]
+    HR["Recursos Humanos"]
+    LOG["Logística"]
+
+    ROOT --&gt; SALES
+    ROOT --&gt; HR
+    ROOT --&gt; LOG
+
+    SALES -. "No visible" .-&gt; HR
+    SALES -. "No visible" .-&gt; LOG</code></p>
+<p>En este ejemplo, <code>DBCP-Ventas</code> solo podrá ser utilizado dentro del Process Group <code>Ventas</code> y en sus descendientes.</p>
+<p>No será visible desde:</p>
+<ul>
+<li>Recursos Humanos.</li>
+<li>Logística.</li>
+<li>El Process Group raíz.</li>
+</ul>
+<p>Si varios grupos hermanos necesitan acceder al mismo servicio, deberá crearse en un nivel superior común.</p>
+<hr />
+<h2 id="eleccion-del-nivel-adecuado">Elección del nivel adecuado</h2>
+<p>La ubicación de un Controller Service determina su grado de reutilización.</p>
+<p>Por tanto, antes de crear un servicio conviene responder a la siguiente pregunta:</p>
+<blockquote>
+<p>¿Qué componentes necesitan utilizar este recurso?</p>
+</blockquote>
+<p>La respuesta permitirá decidir el nivel adecuado de la jerarquía.</p>
+<h3 id="servicio-global">Servicio global</h3>
+<p>Debe crearse en un nivel alto cuando lo utilizan numerosos Process Groups.</p>
+<p>Ejemplos:</p>
+<ul>
+<li>Conexión con una base de datos corporativa.</li>
+<li>Configuración TLS común.</li>
+<li>Servicio LDAP central.</li>
+<li>Schema Registry compartido.</li>
+<li>Acceso al clúster Kafka principal.</li>
+</ul>
+<p>```mermaid id="controller-service-global-scope"
+flowchart TD
+    ROOT["Raíz<br/>SSL-Corporativo"]
+    A["Ingesta"]
+    B["Procesamiento"]
+    C["Publicación"]
+    D["Monitorización"]</p>
+<div class="language-text highlight"><pre><span></span><code>ROOT --&gt; A
+ROOT --&gt; B
+ROOT --&gt; C
+ROOT --&gt; D
+
+ROOT -. &quot;Servicio compartido&quot; .-&gt; A
+ROOT -. &quot;Servicio compartido&quot; .-&gt; B
+ROOT -. &quot;Servicio compartido&quot; .-&gt; C
+ROOT -. &quot;Servicio compartido&quot; .-&gt; D
+</code></pre></div>
+<p>```
+</p>
+<h3 id="servicio-departamental">Servicio departamental</h3>
+<p>Debe crearse en un Process Group intermedio cuando únicamente lo utiliza una rama concreta.
+
+Ejemplos:
+
+* Base de datos del departamento financiero.
+* Certificado de una API interna.
+* Reader específico para los archivos de un proveedor.
+* Lookup Service utilizado por una sola aplicación.
+
+<code>mermaid id="controller-service-department-scope"
+flowchart TD
+    ROOT["Raíz"]
+    FIN["Finanzas&lt;br/&gt;DBCP-Finanzas"]
+    OPS["Operaciones"]
+    BILL["Facturación"]
+    ACCOUNT["Contabilidad"]
+    STOCK["Inventario"]
+
+    ROOT --&gt; FIN
+    ROOT --&gt; OPS
+
+    FIN --&gt; BILL
+    FIN --&gt; ACCOUNT
+    OPS --&gt; STOCK
+
+    FIN -. "Visible" .-&gt; BILL
+    FIN -. "Visible" .-&gt; ACCOUNT</code></p>
+<h3 id="servicio-local">Servicio local</h3>
+<p>Debe crearse dentro de un Process Group concreto cuando su uso está limitado a un único flujo.</p>
+<p>Ejemplos:</p>
+<ul>
+<li>Un <code>CSVReader</code> con un formato exclusivo.</li>
+<li>Un servicio de pruebas.</li>
+<li>Una conexión temporal.</li>
+<li>Un <code>JsonRecordSetWriter</code> específico para una API.</li>
+<li>Un servicio utilizado por un único Processor.</li>
+</ul>
+<hr />
+<h2 id="principio-de-minimo-ambito">Principio de mínimo ámbito</h2>
+<p>Una buena práctica consiste en aplicar el <strong>principio de mínimo ámbito</strong>.</p>
+<p>Según este principio, un Controller Service debe situarse en el nivel más bajo de la jerarquía que permita cubrir todos sus consumidores.</p>
+<p>No debe crearse en el nivel raíz simplemente por comodidad.</p>
+<p>Por ejemplo, si un servicio solo lo utilizan dos Process Groups situados dentro de la rama <code>Finanzas</code>, debería crearse en <code>Finanzas</code>, no en el grupo raíz.</p>
+<p>```mermaid id="controller-service-minimum-scope"
+flowchart TD
+    ROOT["Raíz"]
+    FIN["Finanzas<br/>Nivel recomendado"]
+    HR["Recursos Humanos"]
+    INV["Facturación"]
+    ACC["Contabilidad"]</p>
+<div class="language-text highlight"><pre><span></span><code>ROOT --&gt; FIN
+ROOT --&gt; HR
+FIN --&gt; INV
+FIN --&gt; ACC
+
+SERVICE[&quot;DBCP-Finanzas&quot;]
+FIN --- SERVICE
+SERVICE -. &quot;Utilizado por&quot; .-&gt; INV
+SERVICE -. &quot;Utilizado por&quot; .-&gt; ACC
+</code></pre></div>
+<p>```
+
+Este enfoque aporta varias ventajas:
+
+* Reduce la visibilidad innecesaria.
+* Evita selecciones accidentales.
+* Mejora el aislamiento.
+* Simplifica la administración.
+* Facilita la aplicación de permisos.
+* Reduce el impacto de los cambios.</p>
+<hr />
+<h2 id="ambito-y-seguridad">Ámbito y seguridad</h2>
+<p>El ámbito también tiene implicaciones de seguridad.
+
+Un Controller Service puede contener información sensible, como:
+
+* Usuarios.
+* Contraseñas.
+* Tokens.
+* Certificados.
+* Claves privadas.
+* URLs internas.
+* Rutas de almacenamiento.
+* Configuración de servicios críticos.
+
+Situar estos servicios en un nivel demasiado alto puede hacer que estén disponibles para más componentes de los necesarios.
+
+Aunque Apache NiFi dispone de políticas de autorización, una jerarquía bien diseñada añade una capa adicional de protección.
+
+La combinación recomendada es:
+
+1. Crear el servicio en el ámbito mínimo necesario.
+2. Utilizar parámetros sensibles para las credenciales.
+3. Aplicar políticas de acceso.
+4. Documentar sus consumidores.
+5. Revisar periódicamente las referencias.</p>
+<hr />
+<h2 id="ambito-y-process-groups-reutilizables">Ámbito y Process Groups reutilizables</h2>
+<p>Los Process Groups se utilizan con frecuencia como unidades modulares y reutilizables.
+
+Por ejemplo, una organización puede disponer de un Process Group encargado de:
+
+* Validar registros.
+* Publicar mensajes en Kafka.
+* Normalizar archivos CSV.
+* Enviar datos a una API.
+* Registrar auditorías.
+
+Cuando un Process Group depende de un Controller Service definido fuera de él, aparece una dependencia externa.
+
+<code>mermaid id="controller-service-external-dependency"
+flowchart LR
+    PARENT["Process Group padre&lt;br/&gt;JsonTreeReader"]
+    CHILD["Process Group reutilizable"]
+    PROC1["ConvertRecord"]
+    PROC2["ValidateRecord"]
+
+    PARENT --&gt; CHILD
+    CHILD --&gt; PROC1
+    CHILD --&gt; PROC2
+
+    PARENT -. "Dependencia heredada" .-&gt; PROC1
+    PARENT -. "Dependencia heredada" .-&gt; PROC2</code></p>
+<p>Esta situación puede ser válida, pero debe documentarse correctamente.</p>
+<p>Cuando el Process Group se exporta o se despliega en otro entorno, el Controller Service externo puede no existir.</p>
+<p>Por este motivo, los módulos reutilizables deben diseñarse cuidadosamente.</p>
+<p>Existen dos estrategias principales.</p>
+<h3 id="estrategia-1-servicio-interno">Estrategia 1. Servicio interno</h3>
+<p>El Controller Service se incluye dentro del Process Group reutilizable.</p>
+<p>Ventajas:</p>
+<ul>
+<li>Mayor portabilidad.</li>
+<li>Menos dependencias externas.</li>
+<li>Configuración autocontenida.</li>
+<li>Exportación más sencilla.</li>
+</ul>
+<p>Inconvenientes:</p>
+<ul>
+<li>Puede duplicarse en varias instancias.</li>
+<li>Reduce la reutilización global.</li>
+<li>Puede crear múltiples pools o clientes innecesarios.</li>
+</ul>
+<h3 id="estrategia-2-servicio-heredado">Estrategia 2. Servicio heredado</h3>
+<p>El Controller Service se define en un grupo padre.</p>
+<p>Ventajas:</p>
+<ul>
+<li>Máxima reutilización.</li>
+<li>Configuración centralizada.</li>
+<li>Menor consumo de recursos.</li>
+<li>Administración simplificada.</li>
+</ul>
+<p>Inconvenientes:</p>
+<ul>
+<li>El Process Group depende del entorno.</li>
+<li>Debe recrearse la referencia al migrarlo.</li>
+<li>La portabilidad es menor.</li>
+</ul>
+<p>La elección depende del tipo de recurso y del diseño de la plataforma.</p>
+<hr />
+<h2 id="servicios-con-el-mismo-tipo-y-distinta-finalidad">Servicios con el mismo tipo y distinta finalidad</h2>
+<p>Un mismo Process Group puede acceder a varios Controller Services del mismo tipo.</p>
+<p>Por ejemplo:</p>
+<ul>
+<li><code>DBCP-Clientes</code>.</li>
+<li><code>DBCP-Facturación</code>.</li>
+<li><code>DBCP-Auditoría</code>.</li>
+<li><code>DBCP-DataWarehouse</code>.</li>
+</ul>
+<p>Todos pueden ser instancias de <code>DBCPConnectionPool</code>, pero conectarse a bases de datos diferentes.</p>
+<p>```mermaid id="multiple-controller-services-same-type"
+flowchart TD
+    PROC["PutDatabaseRecord"]
+    C1["DBCP-Clientes"]
+    C2["DBCP-Facturación"]
+    C3["DBCP-Auditoría"]</p>
+<div class="language-text highlight"><pre><span></span><code>PROC -. &quot;Selecciona uno&quot; .-&gt; C1
+PROC -. &quot;Selecciona uno&quot; .-&gt; C2
+PROC -. &quot;Selecciona uno&quot; .-&gt; C3
+</code></pre></div>
+<p><code>Por este motivo, es esencial utilizar nombres descriptivos.
+
+Un nombre como `DBCPConnectionPool` apenas aporta información. En cambio, nombres como los siguientes permiten identificar rápidamente su función:</code>text
+DBCP-PostgreSQL-Clientes-PRO
+DBCP-Oracle-Facturacion-PRE
+SSL-API-Pagos
+CSVReader-Proveedor-A
+JsonWriter-Eventos-Kafka
+```</p>
+<hr />
+<h2 id="referencias-y-componentes-consumidores">Referencias y componentes consumidores</h2>
+<p>Apache NiFi permite consultar qué componentes utilizan un Controller Service mediante la opción de componentes referenciados, normalmente identificada como <strong>Referencing Components</strong>.</p>
+<p>Esta vista permite conocer:</p>
+<ul>
+<li>Qué Processors utilizan el servicio.</li>
+<li>Qué otros Controller Services dependen de él.</li>
+<li>En qué Process Groups se encuentran.</li>
+<li>Qué componentes están habilitados.</li>
+<li>Qué componentes están detenidos.</li>
+<li>Qué referencias impiden modificar o deshabilitar el servicio.</li>
+</ul>
+<p>```mermaid id="controller-service-reference-tree"
+flowchart TD
+    SERVICE["DBCP-PostgreSQL"]
+    SQL["ExecuteSQL"]
+    PUT["PutDatabaseRecord"]
+    QUERY["QueryDatabaseTableRecord"]
+    LOOKUP["DatabaseRecordLookup"]</p>
+<div class="language-text highlight"><pre><span></span><code>SERVICE --&gt; SQL
+SERVICE --&gt; PUT
+SERVICE --&gt; QUERY
+SERVICE --&gt; LOOKUP
+</code></pre></div>
+<p>```
+
+Esta funcionalidad resulta especialmente útil antes de:
+
+* Deshabilitar un servicio.
+* Cambiar sus credenciales.
+* Modificar una URL.
+* Actualizar un certificado.
+* Eliminar el componente.
+* Migrar un flujo.
+* Analizar el impacto de una incidencia.</p>
+<hr />
+<h2 id="dependencias-entre-controller-services">Dependencias entre Controller Services</h2>
+<p>Un Controller Service también puede depender de otro Controller Service.
+
+Por ejemplo, un servicio de conexión puede necesitar un <code>SSLContextService</code> para establecer una comunicación cifrada.
+
+<code>mermaid id="controller-service-chained-dependencies"
+flowchart LR
+    PROCESSOR["Processor"]
+    CLIENT["Cliente de servicio"]
+    SSL["SSLContextService"]
+    CERT["Keystore / Truststore"]
+
+    PROCESSOR --&gt; CLIENT
+    CLIENT --&gt; SSL
+    SSL --&gt; CERT</code></p>
+<p>Esta arquitectura genera una cadena de dependencias.</p>
+<p>Si el servicio situado en la base de la cadena no está habilitado, los componentes dependientes pueden quedar inválidos.</p>
+<p>```mermaid id="controller-service-dependency-chain"
+flowchart TD
+    SSL["SSLContextService<br/>Disabled"]
+    CLIENT["Servicio cliente<br/>Invalid"]
+    PROC["Processor<br/>Invalid"]</p>
+<div class="language-text highlight"><pre><span></span><code>SSL --&gt; CLIENT
+CLIENT --&gt; PROC
+</code></pre></div>
+<p>```
+
+Por tanto, el orden de habilitación suele ser:
+
+1. Servicios base.
+2. Servicios dependientes.
+3. Processors consumidores.
+
+El orden de deshabilitación se realiza en sentido contrario:
+
+1. Detener Processors.
+2. Deshabilitar servicios dependientes.
+3. Deshabilitar servicios base.</p>
+<hr />
+<h2 id="ejemplo-completo-de-jerarquia">Ejemplo completo de jerarquía</h2>
+<p>Supongamos una plataforma NiFi organizada en tres dominios:
+
+* Ingesta.
+* Procesamiento.
+* Explotación.
+
+Cada dominio contiene distintos Process Groups.
+
+<code>mermaid id="controller-service-complete-hierarchy"
+flowchart TD
+    ROOT["Plataforma NiFi&lt;br/&gt;SSL-Corporativo"]
+
+    ING["Ingesta&lt;br/&gt;KafkaService-Ingesta"]
+    PROC["Procesamiento&lt;br/&gt;SchemaRegistry"]
+    EXP["Explotación&lt;br/&gt;DBCP-DataWarehouse"]
+
+    API["APIs"]
+    KAFKA["Kafka"]
+    CLEAN["Limpieza"]
+    ENRICH["Enriquecimiento"]
+    BI["Business Intelligence"]
+    REPORTS["Informes"]
+
+    ROOT --&gt; ING
+    ROOT --&gt; PROC
+    ROOT --&gt; EXP
+
+    ING --&gt; API
+    ING --&gt; KAFKA
+
+    PROC --&gt; CLEAN
+    PROC --&gt; ENRICH
+
+    EXP --&gt; BI
+    EXP --&gt; REPORTS</code></p>
+<p>En esta arquitectura:</p>
+<ul>
+<li><code>SSL-Corporativo</code> está disponible para toda la plataforma.</li>
+<li><code>KafkaService-Ingesta</code> solo está disponible dentro de Ingesta.</li>
+<li><code>SchemaRegistry</code> solo está disponible dentro de Procesamiento.</li>
+<li><code>DBCP-DataWarehouse</code> solo está disponible dentro de Explotación.</li>
+</ul>
+<p>Este modelo combina reutilización y aislamiento.</p>
+<hr />
+<h2 id="estrategias-de-organizacion">Estrategias de organización</h2>
+<p>Existen varias estrategias para organizar Controller Services.</p>
+<h3 id="organizacion-centralizada">Organización centralizada</h3>
+<p>Todos los servicios se crean en el nivel raíz.</p>
+<p>Ventajas:</p>
+<ul>
+<li>Máxima reutilización.</li>
+<li>Administración centralizada.</li>
+<li>Menor duplicación.</li>
+</ul>
+<p>Inconvenientes:</p>
+<ul>
+<li>Exceso de visibilidad.</li>
+<li>Mayor riesgo de selección incorrecta.</li>
+<li>Dependencias globales.</li>
+<li>Menor aislamiento.</li>
+</ul>
+<h3 id="organizacion-descentralizada">Organización descentralizada</h3>
+<p>Cada Process Group contiene sus propios servicios.</p>
+<p>Ventajas:</p>
+<ul>
+<li>Máximo aislamiento.</li>
+<li>Flujos autocontenidos.</li>
+<li>Mayor portabilidad.</li>
+</ul>
+<p>Inconvenientes:</p>
+<ul>
+<li>Configuración duplicada.</li>
+<li>Mayor consumo de recursos.</li>
+<li>Mantenimiento distribuido.</li>
+<li>Dificultad para aplicar cambios globales.</li>
+</ul>
+<h3 id="organizacion-hibrida">Organización híbrida</h3>
+<p>Combina servicios globales, departamentales y locales.</p>
+<p>Normalmente es la estrategia más adecuada para entornos empresariales.</p>
+<p>```mermaid id="controller-service-hybrid-strategy"
+flowchart TD
+    ROOT["Servicios globales<br/>TLS · LDAP · Kafka corporativo"]
+    DOMAIN["Servicios de dominio<br/>DBCP · Schema Registry"]
+    LOCAL["Servicios locales<br/>Readers · Writers · Lookups"]
+    PROCESSORS["Processors"]</p>
+<div class="language-text highlight"><pre><span></span><code>ROOT --&gt; DOMAIN
+DOMAIN --&gt; LOCAL
+LOCAL --&gt; PROCESSORS
+</code></pre></div>
+<p>```
+
+La estrategia híbrida permite:
+
+* Reutilizar los recursos corporativos.
+* Aislar los recursos departamentales.
+* Mantener configuraciones específicas cerca de sus consumidores.
+* Evitar una jerarquía completamente plana.</p>
+<hr />
+<h2 id="buenas-practicas_3">Buenas prácticas</h2>
+<p>Al diseñar el ámbito de los Controller Services, conviene aplicar las siguientes recomendaciones:
+
+* Crear cada servicio en el nivel común más bajo posible.
+* Evitar situar todos los servicios en el grupo raíz.
+* Utilizar nombres descriptivos y homogéneos.
+* Separar servicios por entorno: desarrollo, preproducción y producción.
+* Documentar los Process Groups consumidores.
+* Revisar las referencias antes de modificar un servicio.
+* Evitar duplicar servicios que representan el mismo recurso.
+* Mantener los servicios sensibles en ámbitos restringidos.
+* Diseñar Process Groups reutilizables teniendo en cuenta sus dependencias externas.
+* Utilizar Parameter Contexts para separar configuración y arquitectura.</p>
+<hr />
+<h2 id="errores-frecuentes_3">Errores frecuentes</h2>
+<h3 id="crear-todos-los-servicios-en-el-nivel-raiz">Crear todos los servicios en el nivel raíz</h3>
+<p>Aunque resulta cómodo, genera una lista excesiva de servicios visibles desde cualquier punto del flujo.
+
+Esto dificulta la selección y aumenta el riesgo de utilizar una conexión incorrecta.
+</p>
+<h3 id="crear-el-servicio-demasiado-abajo">Crear el servicio demasiado abajo</h3>
+<p>Si varios Process Groups hermanos necesitan el mismo servicio y este se crea dentro de uno de ellos, los demás no podrán utilizarlo.
+
+La solución consiste en mover o recrear el servicio en el ancestro común.
+</p>
+<h3 id="confundir-herencia-con-copia">Confundir herencia con copia</h3>
+<p>Los Process Groups hijos no reciben una copia independiente del Controller Service.
+
+Todos utilizan la misma instancia heredada.
+
+Por tanto, cualquier modificación afecta a todos los consumidores.
+</p>
+<h3 id="duplicar-servicios-innecesariamente">Duplicar servicios innecesariamente</h3>
+<p>Crear múltiples servicios idénticos puede provocar:
+
+* Más conexiones abiertas.
+* Mayor consumo de memoria.
+* Configuraciones divergentes.
+* Más trabajo de mantenimiento.
+</p>
+<h3 id="ignorar-las-dependencias-al-exportar">Ignorar las dependencias al exportar</h3>
+<p>Un Process Group exportado puede depender de un servicio definido en su grupo padre.
+
+Al importarlo en otro entorno, esa referencia deberá resolverse.</p>
+<hr />
+<h2 id="ideas-clave_3">Ideas clave</h2>
+<p>El ámbito y la herencia determinan qué componentes pueden utilizar un Controller Service.
+
+Los principios fundamentales son:
+
+* Un servicio es visible en el grupo donde se define.
+* Los grupos descendientes pueden heredarlo.
+* Los grupos ascendentes no pueden utilizarlo.
+* Los grupos hermanos no comparten servicios entre sí.
+* El servicio debe crearse en el ancestro común más bajo de todos sus consumidores.
+* Un ámbito correcto mejora la reutilización, la seguridad y la mantenibilidad.
+
+Una jerarquía bien diseñada evita tanto la duplicación excesiva como la exposición innecesaria de recursos compartidos. Por este motivo, la ubicación de los Controller Services debe considerarse una decisión arquitectónica y no una simple cuestión organizativa.
+</p>
+<h1 id="resumen">Resumen</h1>
+<p>Los <strong>Controller Services</strong> constituyen uno de los componentes más importantes de la arquitectura de Apache NiFi. Su función principal consiste en proporcionar recursos compartidos a los Processors y a otros componentes del flujo, evitando la duplicación de configuraciones y facilitando la reutilización.
+
+A diferencia de los Processors, los Controller Services no reciben, generan ni modifican FlowFiles. Tampoco participan directamente en el recorrido de los datos. Su responsabilidad consiste en encapsular recursos como conexiones JDBC, configuraciones TLS, lectores y escritores de registros, clientes externos, servicios de búsqueda o repositorios de esquemas.
+
+Esta separación responde a uno de los principios fundamentales del diseño de Apache NiFi: la <strong>separación de responsabilidades</strong>.
+
+<code>mermaid id="controller-services-summary-responsibilities"
+flowchart LR
+    FLOWFILE["FlowFiles"]
+    PROCESSOR["Processor&lt;br/&gt;Procesa los datos"]
+    SERVICE["Controller Service&lt;br/&gt;Proporciona recursos"]
+    EXTERNAL["Sistema externo"]
+
+    FLOWFILE --&gt; PROCESSOR
+    PROCESSOR --&gt; FLOWFILE
+    PROCESSOR -. "Solicita el recurso" .-&gt; SERVICE
+    SERVICE --&gt; EXTERNAL</code></p>
+<p>Gracias a este modelo, los Processors pueden concentrarse exclusivamente en la lógica del flujo, mientras que los Controller Services gestionan la infraestructura necesaria para ejecutarla.</p>
+<h2 id="conceptos-fundamentales">Conceptos fundamentales</h2>
+<p>A lo largo de este documento se han estudiado los siguientes conceptos:</p>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Controller Service</td>
+<td>Componente que proporciona recursos y funcionalidades compartidas</td>
+</tr>
+<tr>
+<td>Processor</td>
+<td>Componente que recibe, genera, modifica o enruta FlowFiles</td>
+</tr>
+<tr>
+<td>Reutilización</td>
+<td>Capacidad de utilizar una misma configuración desde varios componentes</td>
+</tr>
+<tr>
+<td>Centralización</td>
+<td>Administración del recurso compartido desde un único punto</td>
+</tr>
+<tr>
+<td>Desacoplamiento</td>
+<td>Separación entre la lógica de procesamiento y la implementación del recurso</td>
+</tr>
+<tr>
+<td>Ciclo de vida</td>
+<td>Proceso de configuración, validación, habilitación y deshabilitación</td>
+</tr>
+<tr>
+<td>Ámbito</td>
+<td>Nivel de la jerarquía desde el que puede utilizarse el servicio</td>
+</tr>
+<tr>
+<td>Herencia</td>
+<td>Disponibilidad descendente del servicio hacia Process Groups hijos</td>
+</tr>
+<tr>
+<td>Referencias</td>
+<td>Componentes que dependen de un Controller Service</td>
+</tr>
+<tr>
+<td>Dependencias</td>
+<td>Relaciones entre Processors y servicios, o entre varios servicios</td>
+</tr>
+</tbody>
+</table>
+<h2 id="processor-y-controller-service">Processor y Controller Service</h2>
+<p>Los Processors y los Controller Services desempeñan funciones complementarias.</p>
+<p>```mermaid id="controller-services-summary-comparison"
+flowchart TD
+    NIFI["Apache NiFi"]</p>
+<div class="language-text highlight"><pre><span></span><code>PROCESSORS[&quot;Processors&quot;]
+SERVICES[&quot;Controller Services&quot;]
+
+DATA[&quot;Procesan FlowFiles&quot;]
+ROUTING[&quot;Transforman y enrutan&quot;]
+CONNECTIONS[&quot;Utilizan Connections&quot;]
+
+RESOURCES[&quot;Proporcionan recursos&quot;]
+SHARED[&quot;Centralizan configuración&quot;]
+REUSE[&quot;Favorecen la reutilización&quot;]
+
+NIFI --&gt; PROCESSORS
+NIFI --&gt; SERVICES
+
+PROCESSORS --&gt; DATA
+PROCESSORS --&gt; ROUTING
+PROCESSORS --&gt; CONNECTIONS
+
+SERVICES --&gt; RESOURCES
+SERVICES --&gt; SHARED
+SERVICES --&gt; REUSE
+</code></pre></div>
+<p>```
+
+La diferencia esencial puede resumirse en una frase:
+</p>
+<blockquote>
+<p>Los Processors procesan los datos; los Controller Services proporcionan los recursos necesarios para procesarlos.</p>
+<p>Un Processor puede utilizar uno o varios Controller Services. Por ejemplo, <code>PutDatabaseRecord</code> puede necesitar simultáneamente:</p>
+<ul>
+<li>Un <code>Record Reader</code> para interpretar el contenido del FlowFile.</li>
+<li>Un <code>DBCPConnectionPool</code> para acceder a la base de datos.</li>
+</ul>
+<p>Esta composición permite crear flujos modulares, reutilizables y fáciles de mantener.
+</p>
+</blockquote>
+<h2 id="beneficios-principales">Beneficios principales</h2>
+<p>El uso correcto de Controller Services aporta importantes ventajas.
+</p>
+<h3 id="configuracion-centralizada">Configuración centralizada</h3>
+<p>La configuración se define una sola vez y puede ser utilizada por numerosos componentes.
+
+Esto evita repetir:
+
+* URLs de conexión.
+* Usuarios y contraseñas.
+* Rutas de drivers.
+* Certificados.
+* Esquemas.
+* Parámetros de clientes externos.
+</p>
+<h3 id="reutilizacion-de-recursos">Reutilización de recursos</h3>
+<p>Un único servicio puede ser compartido por decenas o cientos de Processors.
+
+Por ejemplo, varios componentes pueden utilizar el mismo pool de conexiones JDBC.
+
+<code>mermaid id="controller-services-summary-reuse"
+flowchart TD
+    SERVICE["DBCPConnectionPool"]
+    P1["ExecuteSQL"]
+    P2["PutDatabaseRecord"]
+    P3["QueryDatabaseTableRecord"]
+    P4["ExecuteSQLRecord"]
+
+    SERVICE --&gt; P1
+    SERVICE --&gt; P2
+    SERVICE --&gt; P3
+    SERVICE --&gt; P4</code></p>
+<h3 id="mayor-rendimiento">Mayor rendimiento</h3>
+<p>Los recursos costosos pueden inicializarse una sola vez y mantenerse disponibles mientras el servicio permanezca habilitado.</p>
+<p>Esto resulta especialmente importante para:</p>
+<ul>
+<li>Pools de conexiones.</li>
+<li>Clientes de red.</li>
+<li>Contextos TLS.</li>
+<li>Repositorios de esquemas.</li>
+<li>Servicios de búsqueda.</li>
+<li>Clientes de mensajería.</li>
+</ul>
+<h3 id="mantenimiento-simplificado">Mantenimiento simplificado</h3>
+<p>Cuando cambia una configuración, solo es necesario modificar el Controller Service.</p>
+<p>Los Processors que lo utilizan recibirán la nueva configuración cuando el servicio vuelva a habilitarse.</p>
+<h3 id="menor-acoplamiento">Menor acoplamiento</h3>
+<p>Los Processors no necesitan conocer los detalles internos del recurso.</p>
+<p>Un Processor puede utilizar una conexión JDBC sin conocer directamente:</p>
+<ul>
+<li>El servidor.</li>
+<li>El puerto.</li>
+<li>El driver.</li>
+<li>Las credenciales.</li>
+<li>El tamaño del pool.</li>
+<li>Los tiempos de espera.</li>
+</ul>
+<h3 id="mayor-consistencia">Mayor consistencia</h3>
+<p>Todos los componentes consumidores utilizan la misma configuración, lo que reduce errores y diferencias accidentales entre Processors.</p>
+<h2 id="ciclo-de-vida_1">Ciclo de vida</h2>
+<p>Los Controller Services disponen de un ciclo de vida controlado.</p>
+<p>```mermaid id="controller-services-summary-lifecycle"
+stateDiagram-v2
+    [<em>] --&gt; Creado
+    Creado --&gt; Invalido: Configuración incompleta
+    Creado --&gt; Deshabilitado: Configuración válida
+    Invalido --&gt; Deshabilitado: Corregir propiedades
+    Deshabilitado --&gt; Habilitando: Enable
+    Habilitando --&gt; Habilitado: Inicialización correcta
+    Habilitando --&gt; Deshabilitado: Error de inicialización
+    Habilitado --&gt; Deshabilitando: Disable
+    Deshabilitando --&gt; Deshabilitado: Liberar recursos
+    Deshabilitado --&gt; Eliminado: Sin referencias
+    Eliminado --&gt; [</em>]
+<div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>Las fases principales son:
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>1. Creación del servicio.
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>2. Configuración de sus propiedades.
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>3. Validación.
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>4. Habilitación.
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>5. Inicialización de recursos.
+</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>6. Utilización por los componentes consumidores.
+</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>7. Deshabilitación.
+</span><span id="__span-22-10"><a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>8. Liberación de recursos.
+</span><span id="__span-22-11"><a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>9. Modificación o eliminación.
+</span><span id="__span-22-12"><a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>
+</span><span id="__span-22-13"><a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a>Apache NiFi controla automáticamente las dependencias y evita determinadas operaciones cuando podrían dejar el flujo en un estado inconsistente.
+</span><span id="__span-22-14"><a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a>
+</span><span id="__span-22-15"><a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a>Por ejemplo, normalmente no será posible deshabilitar un Controller Service mientras existan Processors en ejecución que dependan de él.
+</span><span id="__span-22-16"><a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a>
+</span><span id="__span-22-17"><a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a>## Ámbito y herencia
+</span><span id="__span-22-18"><a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a>
+</span><span id="__span-22-19"><a id="__codelineno-22-19" name="__codelineno-22-19" href="#__codelineno-22-19"></a>La visibilidad de un Controller Service depende del Process Group en el que haya sido creado.
+</span><span id="__span-22-20"><a id="__codelineno-22-20" name="__codelineno-22-20" href="#__codelineno-22-20"></a>
+</span><span id="__span-22-21"><a id="__codelineno-22-21" name="__codelineno-22-21" href="#__codelineno-22-21"></a>La regla fundamental es la siguiente:
+</span><span id="__span-22-22"><a id="__codelineno-22-22" name="__codelineno-22-22" href="#__codelineno-22-22"></a>
+</span><span id="__span-22-23"><a id="__codelineno-22-23" name="__codelineno-22-23" href="#__codelineno-22-23"></a>&gt; Un Controller Service puede utilizarse en el Process Group donde se define y en sus grupos descendientes.
+</span><span id="__span-22-24"><a id="__codelineno-22-24" name="__codelineno-22-24" href="#__codelineno-22-24"></a>
+</span><span id="__span-22-25"><a id="__codelineno-22-25" name="__codelineno-22-25" href="#__codelineno-22-25"></a>La herencia funciona de forma descendente, pero no ascendente ni lateral.
+</span><span id="__span-22-26"><a id="__codelineno-22-26" name="__codelineno-22-26" href="#__codelineno-22-26"></a>
+</span><span id="__span-22-27"><a id="__codelineno-22-27" name="__codelineno-22-27" href="#__codelineno-22-27"></a>```mermaid id=&quot;controller-services-summary-scope&quot;
+</span><span id="__span-22-28"><a id="__codelineno-22-28" name="__codelineno-22-28" href="#__codelineno-22-28"></a>flowchart TD
+</span><span id="__span-22-29"><a id="__codelineno-22-29" name="__codelineno-22-29" href="#__codelineno-22-29"></a>    ROOT[&quot;Grupo raíz&lt;br/&gt;Servicio global&quot;]
+</span><span id="__span-22-30"><a id="__codelineno-22-30" name="__codelineno-22-30" href="#__codelineno-22-30"></a>    A[&quot;Process Group A&quot;]
+</span><span id="__span-22-31"><a id="__codelineno-22-31" name="__codelineno-22-31" href="#__codelineno-22-31"></a>    B[&quot;Process Group B&quot;]
+</span><span id="__span-22-32"><a id="__codelineno-22-32" name="__codelineno-22-32" href="#__codelineno-22-32"></a>    A1[&quot;Process Group A.1&quot;]
+</span><span id="__span-22-33"><a id="__codelineno-22-33" name="__codelineno-22-33" href="#__codelineno-22-33"></a>    A2[&quot;Process Group A.2&quot;]
+</span><span id="__span-22-34"><a id="__codelineno-22-34" name="__codelineno-22-34" href="#__codelineno-22-34"></a>    B1[&quot;Process Group B.1&quot;]
+</span><span id="__span-22-35"><a id="__codelineno-22-35" name="__codelineno-22-35" href="#__codelineno-22-35"></a>
+</span><span id="__span-22-36"><a id="__codelineno-22-36" name="__codelineno-22-36" href="#__codelineno-22-36"></a>    ROOT --&gt; A
+</span><span id="__span-22-37"><a id="__codelineno-22-37" name="__codelineno-22-37" href="#__codelineno-22-37"></a>    ROOT --&gt; B
+</span><span id="__span-22-38"><a id="__codelineno-22-38" name="__codelineno-22-38" href="#__codelineno-22-38"></a>    A --&gt; A1
+</span><span id="__span-22-39"><a id="__codelineno-22-39" name="__codelineno-22-39" href="#__codelineno-22-39"></a>    A --&gt; A2
+</span><span id="__span-22-40"><a id="__codelineno-22-40" name="__codelineno-22-40" href="#__codelineno-22-40"></a>    B --&gt; B1
+</span><span id="__span-22-41"><a id="__codelineno-22-41" name="__codelineno-22-41" href="#__codelineno-22-41"></a>
+</span><span id="__span-22-42"><a id="__codelineno-22-42" name="__codelineno-22-42" href="#__codelineno-22-42"></a>    ROOT -. &quot;Visible&quot; .-&gt; A
+</span><span id="__span-22-43"><a id="__codelineno-22-43" name="__codelineno-22-43" href="#__codelineno-22-43"></a>    ROOT -. &quot;Visible&quot; .-&gt; B
+</span><span id="__span-22-44"><a id="__codelineno-22-44" name="__codelineno-22-44" href="#__codelineno-22-44"></a>    ROOT -. &quot;Visible&quot; .-&gt; A1
+</span><span id="__span-22-45"><a id="__codelineno-22-45" name="__codelineno-22-45" href="#__codelineno-22-45"></a>    ROOT -. &quot;Visible&quot; .-&gt; A2
+</span><span id="__span-22-46"><a id="__codelineno-22-46" name="__codelineno-22-46" href="#__codelineno-22-46"></a>    ROOT -. &quot;Visible&quot; .-&gt; B1
+</span></code></pre></div></p>
+<p>Un servicio creado dentro de <code>Process Group A</code> podrá utilizarse desde <code>A</code>, <code>A.1</code> y <code>A.2</code>, pero no desde <code>B</code>, <code>B.1</code> ni desde el grupo raíz.</p>
+<h2 id="principio-de-minimo-ambito_1">Principio de mínimo ámbito</h2>
+<p>Los Controller Services deben crearse en el nivel común más bajo que permita atender a todos sus consumidores.</p>
+<p>```mermaid id="controller-services-summary-minimum-scope"
+flowchart TD
+    ROOT["Raíz"]
+    FIN["Finanzas<br/>DBCP-Finanzas"]
+    HR["Recursos Humanos"]
+    BILL["Facturación"]
+    ACC["Contabilidad"]</p>
+<div class="language-text highlight"><pre><span></span><code>ROOT --&gt; FIN
+ROOT --&gt; HR
+FIN --&gt; BILL
+FIN --&gt; ACC
+
+FIN -. &quot;Servicio heredado&quot; .-&gt; BILL
+FIN -. &quot;Servicio heredado&quot; .-&gt; ACC
+</code></pre></div>
+<p><code>``
+
+En este ejemplo, si solo</code>Facturación<code>y</code>Contabilidad<code>necesitan utilizar la conexión, el servicio debe crearse en</code>Finanzas`, no en el grupo raíz.
+
+Este enfoque mejora:
+
+* El aislamiento.
+* La seguridad.
+* La claridad.
+* La administración.
+* La selección correcta de servicios.
+* El análisis de impacto.
+</p>
+<h2 id="estrategia-recomendada">Estrategia recomendada</h2>
+<p>En entornos empresariales suele resultar adecuada una organización híbrida.
+
+<code>mermaid id="controller-services-summary-hybrid"
+flowchart TD
+    GLOBAL["Servicios globales&lt;br/&gt;TLS · LDAP · Kafka corporativo"]
+    DOMAIN["Servicios de dominio&lt;br/&gt;Bases de datos · Esquemas"]
+    LOCAL["Servicios locales&lt;br/&gt;Readers · Writers · Lookups"]
+    PROC["Processors"]
+
+    GLOBAL --&gt; DOMAIN
+    DOMAIN --&gt; LOCAL
+    LOCAL --&gt; PROC</code></p>
+<p>Los servicios globales se ubican en niveles altos, mientras que los servicios específicos se mantienen cerca de los componentes que los consumen.</p>
+<h2 id="buenas-practicas_4">Buenas prácticas</h2>
+<p>Al trabajar con Controller Services conviene aplicar las siguientes recomendaciones:</p>
+<ul>
+<li>Utilizar nombres descriptivos.</li>
+<li>Evitar nombres genéricos como <code>DBCPConnectionPool</code>.</li>
+<li>Centralizar recursos realmente compartidos.</li>
+<li>Evitar crear un servicio nuevo para cada Processor.</li>
+<li>Aplicar el principio de mínimo ámbito.</li>
+<li>Mantener separados los servicios de desarrollo, preproducción y producción.</li>
+<li>Utilizar parámetros sensibles para usuarios, contraseñas y tokens.</li>
+<li>Revisar los componentes referenciados antes de modificar un servicio.</li>
+<li>Documentar las dependencias externas de los Process Groups.</li>
+<li>Habilitar primero los servicios base y después los componentes dependientes.</li>
+<li>Detener primero los Processors antes de deshabilitar sus servicios.</li>
+<li>Evitar duplicar pools, clientes o conexiones innecesariamente.</li>
+<li>Utilizar una convención homogénea de nombres.</li>
+</ul>
+<p>Una posible convención sería:</p>
+<p>```text id="controller-services-summary-naming"
+TIPO-SISTEMA-FINALIDAD-ENTORNO
+<div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>Ejemplos:
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>```text id=&quot;controller-services-summary-naming-examples&quot;
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>DBCP-POSTGRESQL-CLIENTES-PRO
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>DBCP-ORACLE-FACTURACION-PRE
+</span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>SSL-API-PAGOS-PRO
+</span><span id="__span-24-7"><a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>CSVREADER-PROVEEDOR-A
+</span><span id="__span-24-8"><a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a>JSONWRITER-KAFKA-EVENTOS
+</span></code></pre></div></p>
+<h2 id="errores-frecuentes_4">Errores frecuentes</h2>
+<p>Los errores más habituales son:</p>
+<ul>
+<li>Pensar que un Controller Service procesa FlowFiles.</li>
+<li>Crear configuraciones duplicadas.</li>
+<li>Situar todos los servicios en el nivel raíz.</li>
+<li>Crear un servicio en un nivel demasiado bajo.</li>
+<li>Confundir herencia con copia.</li>
+<li>Intentar modificar un servicio habilitado.</li>
+<li>Intentar deshabilitarlo mientras sus consumidores están ejecutándose.</li>
+<li>Eliminar un servicio que todavía tiene referencias.</li>
+<li>Exportar un Process Group sin considerar sus dependencias externas.</li>
+<li>Mantener varios servicios idénticos sin una justificación técnica.</li>
+</ul>
+<h2 id="lista-de-comprobacion">Lista de comprobación</h2>
+<p>Antes de crear un Controller Service, conviene responder a estas preguntas:</p>
+<ul>
+<li>¿Qué recurso proporciona?</li>
+<li>¿Qué Processors lo utilizarán?</li>
+<li>¿Será compartido por varios Process Groups?</li>
+<li>¿Cuál es el ancestro común más bajo de sus consumidores?</li>
+<li>¿Contiene información sensible?</li>
+<li>¿Depende de otro Controller Service?</li>
+<li>¿Debe ser portable junto con el Process Group?</li>
+<li>¿Existe ya otro servicio equivalente?</li>
+<li>¿Su nombre permite identificar claramente su finalidad?</li>
+<li>¿La configuración debe variar según el entorno?</li>
+</ul>
+<p>Antes de modificarlo:</p>
+<ul>
+<li>¿Qué componentes lo referencian?</li>
+<li>¿Hay Processors en ejecución?</li>
+<li>¿Existen otros servicios dependientes?</li>
+<li>¿El cambio afectará a varios flujos?</li>
+<li>¿Se han externalizado las credenciales?</li>
+<li>¿Existe un procedimiento de reversión?</li>
+</ul>
+<h2 id="ideas-clave_4">Ideas clave</h2>
+<p>Los Controller Services permiten transformar una colección de Processors aislados en una arquitectura de integración organizada.</p>
+<p>Sus principios esenciales son:</p>
+<ol>
+<li>No procesan FlowFiles.</li>
+<li>Proporcionan recursos reutilizables.</li>
+<li>Centralizan configuraciones.</li>
+<li>Mejoran el rendimiento.</li>
+<li>Reducen el acoplamiento.</li>
+<li>Poseen un ciclo de vida controlado.</li>
+<li>Pueden depender de otros servicios.</li>
+<li>Su visibilidad depende del ámbito.</li>
+<li>La herencia funciona de forma descendente.</li>
+<li>Su ubicación constituye una decisión arquitectónica.</li>
+</ol>
+<p><code>mermaid id="controller-services-summary-final-map"
+mindmap
+  root((Controller Services))
+    Reutilización
+      Conexiones
+      Certificados
+      Readers
+      Writers
+      Lookups
+    Arquitectura
+      Separación de responsabilidades
+      Desacoplamiento
+      Centralización
+    Ciclo de vida
+      Configuración
+      Validación
+      Habilitación
+      Deshabilitación
+    Ámbito
+      Grupo actual
+      Descendientes
+      Sin herencia ascendente
+      Sin herencia lateral
+    Beneficios
+      Rendimiento
+      Mantenimiento
+      Consistencia
+      Escalabilidad</code></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.code.copy", "content.code.select", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

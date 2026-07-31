@@ -8,31 +8,31 @@
       
       
       
-        <link rel="canonical" href="https://alapvi.github.io/mongodb/intromongo/">
+        <link rel="canonical" href="https://alapvi.github.io/nifi/controllers/02-configuracion/">
       
       
-        <link rel="prev" href="../../nosql/consistencia/">
+        <link rel="prev" href="../01-introduccion/">
       
       
-        <link rel="next" href="../mongodb/">
+        <link rel="next" href="../03-principales-controller-services/">
       
       
         
       
       
-      <link rel="icon" href="../../images/logo_peq.png">
+      <link rel="icon" href="../../../images/logo_peq.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Introducción a MongoDB - Sistemas de BigData</title>
+        <title>Configuración de controladores - Sistemas de BigData</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,7 +51,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -75,11 +75,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#mongodb" class="md-skip">
-          Saltar a contenido
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -92,9 +87,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="../.." title="Sistemas de BigData" class="md-header__button md-logo" aria-label="Sistemas de BigData" data-md-component="logo">
+    <a href="../../.." title="Sistemas de BigData" class="md-header__button md-logo" aria-label="Sistemas de BigData" data-md-component="logo">
       
-  <img src="../../images/logo.png" alt="logo">
+  <img src="../../../images/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -111,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Introducción a MongoDB
+              Configuración de controladores
             
           </span>
         </div>
@@ -215,9 +210,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Sistemas de BigData" class="md-nav__button md-logo" aria-label="Sistemas de BigData" data-md-component="logo">
+    <a href="../../.." title="Sistemas de BigData" class="md-nav__button md-logo" aria-label="Sistemas de BigData" data-md-component="logo">
       
-  <img src="../../images/logo.png" alt="logo">
+  <img src="../../../images/logo.png" alt="logo">
 
     </a>
     Sistemas de BigData
@@ -232,7 +227,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -306,7 +301,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nosql/nosql/" class="md-nav__link">
+      <a href="../../../nosql/nosql/" class="md-nav__link">
         
   
   
@@ -334,7 +329,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nosql/moddatos/" class="md-nav__link">
+      <a href="../../../nosql/moddatos/" class="md-nav__link">
         
   
   
@@ -362,7 +357,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nosql/consistencia/" class="md-nav__link">
+      <a href="../../../nosql/consistencia/" class="md-nav__link">
         
   
   
@@ -370,6 +365,256 @@
     
   
     Consistencia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MongoDB
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MongoDB
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mongodb/intromongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción a MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mongodb/mongodb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mongodb/modelado/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Diseño de modelado de BD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mongodb/instalacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mongodb/basicsmongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primeros pasos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mongodb/mongodbcrud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operaciones con datos CRUD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mongodb/mongodbdatos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consulta de datos
   
 
     
@@ -407,315 +652,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    MongoDB
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    MongoDB
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Introducción a MongoDB
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Introducción a MongoDB
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduccion-a-mongodb" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Introducción a MongoDB
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../mongodb/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    MongoDB
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../modelado/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Diseño de modelado de BD
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../instalacion/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Instalación
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../basicsmongo/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Primeros pasos
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../mongodbcrud/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Operaciones con datos CRUD
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../mongodbdatos/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Consulta de datos
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -736,7 +673,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -754,7 +691,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nifi/introduccion_nifi/" class="md-nav__link">
+      <a href="../../introduccion_nifi/" class="md-nav__link">
         
   
   
@@ -782,7 +719,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nifi/arquitectura/" class="md-nav__link">
+      <a href="../../arquitectura/" class="md-nav__link">
         
   
   
@@ -810,7 +747,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nifi/interfaz/" class="md-nav__link">
+      <a href="../../interfaz/" class="md-nav__link">
         
   
   
@@ -838,7 +775,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nifi/instalacion/" class="md-nav__link">
+      <a href="../../instalacion/" class="md-nav__link">
         
   
   
@@ -866,7 +803,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nifi/primerflujo/" class="md-nav__link">
+      <a href="../../primerflujo/" class="md-nav__link">
         
   
   
@@ -894,7 +831,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nifi/flowfiles/" class="md-nav__link">
+      <a href="../../flowfiles/" class="md-nav__link">
         
   
   
@@ -922,7 +859,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nifi/processors/" class="md-nav__link">
+      <a href="../../processors/" class="md-nav__link">
         
   
   
@@ -950,7 +887,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nifi/connections/" class="md-nav__link">
+      <a href="../../connections/" class="md-nav__link">
         
   
   
@@ -975,18 +912,20 @@
                 
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_9" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_9" checked>
         
           
           <label class="md-nav__link" for="__nav_4_9" id="__nav_4_9_label" tabindex="0">
@@ -1007,7 +946,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4_9">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1025,7 +964,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nifi/controllers/01-introduccion/" class="md-nav__link">
+      <a href="../01-introduccion/" class="md-nav__link">
         
   
   
@@ -1050,10 +989,17 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../nifi/controllers/02-configuracion/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1069,6 +1015,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -1081,7 +1028,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nifi/controllers/03-principales-controller-services/" class="md-nav__link">
+      <a href="../03-principales-controller-services/" class="md-nav__link">
         
   
   
@@ -1109,7 +1056,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nifi/controllers/04-arquitecturas/" class="md-nav__link">
+      <a href="../04-arquitecturas/" class="md-nav__link">
         
   
   
@@ -1199,7 +1146,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../elastic/elastic_intro/" class="md-nav__link">
+      <a href="../../../elastic/elastic_intro/" class="md-nav__link">
         
   
   
@@ -1227,7 +1174,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../elastic/elastic_ops/" class="md-nav__link">
+      <a href="../../../elastic/elastic_ops/" class="md-nav__link">
         
   
   
@@ -1255,7 +1202,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../elastic/kibana/" class="md-nav__link">
+      <a href="../../../elastic/kibana/" class="md-nav__link">
         
   
   
@@ -1283,7 +1230,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../elastic/caso_uso/" class="md-nav__link">
+      <a href="../../../elastic/caso_uso/" class="md-nav__link">
         
   
   
@@ -1311,7 +1258,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../elastic/dashboards/" class="md-nav__link">
+      <a href="../../../elastic/dashboards/" class="md-nav__link">
         
   
   
@@ -1339,7 +1286,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../elastic/ampliacion/" class="md-nav__link">
+      <a href="../../../elastic/ampliacion/" class="md-nav__link">
         
   
   
@@ -1384,27 +1331,6 @@
   
   
   
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduccion-a-mongodb" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Introducción a MongoDB
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -1421,29 +1347,9 @@
 
 
 
-<h1 id="mongodb">MongoDB</h1>
-<h2 id="introduccion-a-mongodb">Introducción a MongoDB</h2>
-<p>En el mundo del Big Data, donde la cantidad de datos generados y procesados continúa creciendo exponencialmente, la elección de la tecnología adecuada para almacenar, gestionar y analizar estos datos es fundamental. MongoDB, una base de datos NoSQL de código abierto y orientada a documentos, ha emergido como una solución poderosa y versátil en este panorama en constante evolución.</p>
-<p>!!! note "Así fue cómo nació MongoDB
-    <strong>MongoDB</strong> fue fundada en 2007 por Dwight Merriman, Eliot Horowitz y Kevin Ryan, el equipo detrás de <strong>DoubleClick</strong>.
-    En la empresa de publicidad en Internet <strong>DoubleClick</strong> (ahora propiedad de Google), el equipo desarrolló y utilizó numerosos almacenes de datos personalizados para solucionar las carencias de las bases de datos existentes. El negocio servía 400 000 anuncios por segundo, pero a menudo tenía problemas de escalabilidad y agilidad. Frustrado, el equipo halló inspiración para crear una base de datos que abordara los desafíos a los que se enfrentaban en DoubleClick.</p>
-<p><a href="http://www.mongodb.com/">MongoDB</a> es una de las bases de datos NoSQL más conocidas. Sigue un modelo de datos documental.</p>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>Como curiosidad, su nombre viene de la palabra inglesa humongous, que significa gigantesco/enorme.</p>
-</div>
-<p>En este apartado exploraremos cómo MongoDB se integra perfectamente en los entornos de Big Data, ofreciendo capacidades escalables, flexibles y de alto rendimiento para abordar una variedad de desafíos y escenarios de datos a gran escala. Desde su modelo de datos flexible hasta su capacidad para manejar grandes volúmenes de datos en tiempo real, MongoDB se ha convertido en una herramienta indispensable para empresas y organizaciones que buscan aprovechar al máximo sus datos en el mundo del Big Data.</p>
-<hr />
-<div class="admonition info">
-<p class="admonition-title">Fuentes utilizadas</p>
-<ul>
-<li><a href="https://www.mongodb.com/docs/manual/">Manual oficial de MongoDB</a></li>
-<li><a href="https://sergio-apuntes.github.io/sbd/">Apuntes MongoDB. Sergio Rey Martínez</a></li>
-<li><a href="https://aitor-medrano.github.io/iabd/sa/nosql.html&quot;&gt;">Aitor Medrano. Cursos Inteligencia Artificial y Big Data. Almacen de datos NoSQL</a></li>
-<li><a href="https://www.w3resource.com/mongodb-exercises/mongodb-movies-collection-index.php&quot;">Algunos ejemplos de uso</a></li>
-<li><a href="" title="https://www.adictosaltrabajo.com/2013/12/16/mongodb-agregatte/">Manipulación de datos en MongoDB mediante Aggregation Pipeline</a></li>
-</ul>
-</div>
+  <h1>Configuración de controladores</h1>
+
+
 
 
 
@@ -1493,10 +1399,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "content.code.select", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.code.copy", "content.code.select", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>
