@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#capitulo-9-controller-services" class="md-skip">
+        <a href="#04-arquitecturas-con-controller-services" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -1062,24 +1062,6 @@
         
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Arquitecturas
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1096,53 +1078,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#arquitecturas-profesionales" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Arquitecturas profesionales
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Arquitecturas profesionales">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#contenido" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Contenido
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -1406,42 +1341,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#arquitecturas-profesionales" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Arquitecturas profesionales
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Arquitecturas profesionales">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#contenido" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Contenido
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -1457,17 +1356,603 @@
 
 
 
-<h1 id="capitulo-9-controller-services">Capítulo 9. Controller Services</h1>
-<h2 id="arquitecturas-profesionales">Arquitecturas profesionales</h2>
-<h3 id="contenido">Contenido</h3>
+<h1 id="04-arquitecturas-con-controller-services">04. Arquitecturas con Controller Services</h1>
+<h1 id="objetivos">Objetivos</h1>
+<p>En los capítulos anteriores se ha estudiado qué son los <strong>Controller Services</strong>, cómo configurarlos y cuáles son los más utilizados en Apache NiFi. Sin embargo, en proyectos reales no basta con conocer estos componentes de forma individual; es necesario organizarlos siguiendo una arquitectura que facilite su reutilización, mantenimiento y escalabilidad.</p>
+<p>El objetivo de este capítulo es presentar diferentes formas de organizar los Controller Services dentro de un flujo de datos, aplicando buenas prácticas de diseño que permitan desarrollar soluciones más limpias y fáciles de administrar.</p>
+<p>Al finalizar este capítulo el lector será capaz de:</p>
 <ul>
-<li>Patrones</li>
-<li>Reutilización</li>
-<li>Parameter Contexts</li>
-<li>Clúster</li>
-<li>Buenas prácticas</li>
-<li>Laboratorio final</li>
+<li>Comprender distintas arquitecturas de organización de Controller Services.</li>
+<li>Elegir la arquitectura más adecuada según el tamaño del proyecto.</li>
+<li>Reutilizar configuraciones entre distintos Process Groups.</li>
+<li>Diseñar flujos más modulares y fáciles de mantener.</li>
+<li>Aplicar buenas prácticas de organización y seguridad.</li>
 </ul>
+<hr />
+<h1 id="introduccion">Introducción</h1>
+<p>En Apache NiFi, los Controller Services constituyen la base sobre la que trabajan muchos Processors. Una buena organización de estos servicios facilita el mantenimiento del flujo, reduce la duplicidad de configuraciones y mejora la reutilización de recursos.</p>
+<p>No existe una única arquitectura válida para todos los proyectos. La organización dependerá de factores como el tamaño del flujo, el número de Process Groups, los entornos de despliegue o las necesidades de seguridad.</p>
+<p>Por ejemplo, un pequeño laboratorio puede compartir un único <code>DBCPConnectionPool</code>, mientras que una solución empresarial puede disponer de distintos Controller Services para cada aplicación, entorno o base de datos.</p>
+<pre class="mermaid"><code>flowchart LR
+    subgraph NiFi
+        PG1["Clientes"]
+        PG2["Pedidos"]
+        PG3["Facturación"]
+    end
+
+    CS["Controller Services"]
+
+    PG1 --&gt; CS
+    PG2 --&gt; CS
+    PG3 --&gt; CS</code></pre>
+<p>A lo largo de este capítulo se analizarán diferentes arquitecturas de diseño, mostrando sus ventajas, limitaciones y los escenarios en los que resulta recomendable utilizar cada una de ellas. El objetivo es proporcionar una serie de pautas que permitan construir flujos de Apache NiFi más organizados, reutilizables y preparados para evolucionar con el tiempo.</p>
+<h1 id="1-arquitectura-centralizada">1. Arquitectura centralizada</h1>
+<h2 id="en-que-consiste">¿En qué consiste?</h2>
+<p>La <strong>arquitectura centralizada</strong> consiste en crear los Controller Services en un único lugar para que sean compartidos por todos los Processors del mismo <strong>Process Group</strong>.</p>
+<p>Es la arquitectura más sencilla y la más habitual en proyectos pequeños o medianos, ya que evita duplicar configuraciones y facilita su administración.</p>
+<pre class="mermaid"><code>flowchart LR
+    subgraph Process Group
+        P1["ExecuteSQL"]
+        P2["PutDatabaseRecord"]
+        P3["InvokeHTTP"]
+
+        DBCP["DBCPConnectionPool"]
+        SSL["StandardSSLContextService"]
+
+        P1 --&gt; DBCP
+        P2 --&gt; DBCP
+        P3 --&gt; SSL
+    end</code></pre>
+<p>En este ejemplo, varios Processors comparten el mismo <code>DBCPConnectionPool</code> y el mismo <code>StandardSSLContextService</code>.</p>
+<hr />
+<h2 id="ventajas">Ventajas</h2>
+<ul>
+<li>Configuración única.</li>
+<li>Fácil mantenimiento.</li>
+<li>Evita duplicar Controller Services.</li>
+<li>Menor consumo de recursos.</li>
+<li>Todos los Processors utilizan la misma configuración.</li>
+</ul>
+<hr />
+<h2 id="inconvenientes">Inconvenientes</h2>
+<ul>
+<li>Todos los Processors dependen del mismo servicio.</li>
+<li>Un cambio afecta a todos los componentes que lo utilizan.</li>
+<li>No resulta adecuado cuando distintos flujos requieren configuraciones diferentes.</li>
+</ul>
+<hr />
+<h2 id="ejemplo">Ejemplo</h2>
+<p>Supongamos un flujo que trabaja con una única base de datos PostgreSQL.</p>
+<p>En lugar de crear un <code>DBCPConnectionPool</code> para cada Processor, todos utilizan el mismo servicio.</p>
+<pre class="mermaid"><code>flowchart LR
+    SQL["ExecuteSQL"]
+    PUT["PutDatabaseRecord"]
+    QUERY["QueryDatabaseTable"]
+
+    DBCP["DBCP-POSTGRESQL"]
+
+    DB["PostgreSQL"]
+
+    SQL --&gt; DBCP
+    PUT --&gt; DBCP
+    QUERY --&gt; DBCP
+
+    DBCP --&gt; DB</code></pre>
+<p>De esta forma, cualquier modificación (por ejemplo, cambiar la contraseña o aumentar el número máximo de conexiones) se realiza una única vez.</p>
+<hr />
+<h2 id="cuando-utilizar-esta-arquitectura">¿Cuándo utilizar esta arquitectura?</h2>
+<p>Es recomendable cuando:</p>
+<ul>
+<li>Existe una única base de datos.</li>
+<li>Los Processors comparten la misma configuración.</li>
+<li>El proyecto es pequeño o mediano.</li>
+<li>No existen requisitos especiales de seguridad o aislamiento.</li>
+</ul>
+<p>Por el contrario, si distintos módulos necesitan configuraciones independientes, será preferible utilizar una arquitectura basada en <strong>Process Groups</strong>, que se estudiará en el siguiente apartado.</p>
+<h1 id="2-arquitectura-por-process-groups">2. Arquitectura por Process Groups</h1>
+<h2 id="en-que-consiste_1">¿En qué consiste?</h2>
+<p>En esta arquitectura, cada <strong>Process Group</strong> dispone de sus propios <strong>Controller Services</strong>, de forma que las configuraciones quedan aisladas entre los distintos módulos del flujo.</p>
+<p>Esta organización es muy habitual en proyectos grandes, donde cada Process Group representa una aplicación, un departamento o un proceso de negocio diferente.</p>
+<pre class="mermaid"><code>flowchart TD
+    ROOT["NiFi"]
+
+    subgraph PG1["Clientes"]
+        DBCP1["DBCP Clientes"]
+        SSL1["SSL Clientes"]
+        P1["Processors"]
+        P1 --&gt; DBCP1
+        P1 --&gt; SSL1
+    end
+
+    subgraph PG2["Pedidos"]
+        DBCP2["DBCP Pedidos"]
+        SSL2["SSL Pedidos"]
+        P2["Processors"]
+        P2 --&gt; DBCP2
+        P2 --&gt; SSL2
+    end
+
+    ROOT --&gt; PG1
+    ROOT --&gt; PG2</code></pre>
+<p>Cada grupo administra sus propios recursos de forma independiente.</p>
+<hr />
+<h2 id="ambito-de-los-controller-services">Ámbito de los Controller Services</h2>
+<p>Un aspecto importante es que los Controller Services tienen un <strong>ámbito (Scope)</strong>.</p>
+<p>Un Processor únicamente puede utilizar:</p>
+<ul>
+<li>Los Controller Services definidos en su propio Process Group.</li>
+<li>Los Controller Services definidos en alguno de sus grupos padre.</li>
+</ul>
+<p>No puede acceder directamente a los Controller Services definidos en un Process Group "hermano".</p>
+<pre class="mermaid"><code>flowchart TD
+    ROOT["Root Process Group"]
+
+    ROOTCS["DBCP Corporativo"]
+
+    subgraph PG1["Clientes"]
+        CS1["DBCP Clientes"]
+        P1["ExecuteSQL"]
+    end
+
+    subgraph PG2["Pedidos"]
+        CS2["DBCP Pedidos"]
+        P2["ExecuteSQL"]
+    end
+
+    ROOT --&gt; PG1
+    ROOT --&gt; PG2
+
+    ROOTCS --&gt; P1
+    ROOTCS --&gt; P2
+
+    CS1 --&gt; P1
+    CS2 --&gt; P2</code></pre>
+<p>En este ejemplo:</p>
+<ul>
+<li>Ambos Process Groups pueden utilizar el servicio corporativo.</li>
+<li>Cada grupo dispone además de un servicio específico.</li>
+</ul>
+<hr />
+<h2 id="ventajas_1">Ventajas</h2>
+<ul>
+<li>Mayor aislamiento entre aplicaciones.</li>
+<li>Cada módulo puede evolucionar de forma independiente.</li>
+<li>Facilita el mantenimiento.</li>
+<li>Permite utilizar distintas bases de datos, certificados o configuraciones.</li>
+</ul>
+<hr />
+<h2 id="inconvenientes_1">Inconvenientes</h2>
+<ul>
+<li>Puede aumentar el número de Controller Services.</li>
+<li>Requiere una mejor organización para evitar duplicidades.</li>
+<li>Es necesario documentar correctamente qué servicios pertenecen a cada grupo.</li>
+</ul>
+<hr />
+<h2 id="cuando-utilizar-esta-arquitectura_1">¿Cuándo utilizar esta arquitectura?</h2>
+<p>Es recomendable cuando:</p>
+<ul>
+<li>El proyecto contiene varios Process Groups.</li>
+<li>Cada módulo trabaja con recursos diferentes.</li>
+<li>Existen distintos equipos de desarrollo.</li>
+<li>Es necesario aislar aplicaciones o departamentos.</li>
+<li>Se requiere una mayor modularidad.</li>
+</ul>
+<p>Esta arquitectura es la más utilizada en entornos empresariales, ya que permite desarrollar soluciones escalables y mantener cada módulo de forma independiente sin afectar al resto del sistema.</p>
+<h1 id="3-arquitectura-por-entornos">3. Arquitectura por entornos</h1>
+<h2 id="en-que-consiste_2">¿En qué consiste?</h2>
+<p>En los proyectos reales es habitual disponer de varios entornos de trabajo, como <strong>desarrollo</strong>, <strong>preproducción</strong> y <strong>producción</strong>. Aunque el flujo de Apache NiFi suele ser el mismo, cambian elementos como la base de datos, las direcciones de los servidores o las credenciales.</p>
+<p>Para evitar modificar el flujo en cada despliegue, se utilizan <strong>Parameter Contexts</strong>, que permiten adaptar la configuración a cada entorno.</p>
+<pre class="mermaid"><code>flowchart LR
+    FLOW["Mismo flujo"]
+
+    DEV["Desarrollo"]
+    PRE["Preproducción"]
+    PRO["Producción"]
+
+    FLOW --&gt; DEV
+    FLOW --&gt; PRE
+    FLOW --&gt; PRO</code></pre>
+<hr />
+<h2 id="uso-de-parameter-contexts">Uso de Parameter Contexts</h2>
+<p>Cada entorno dispone de su propio <strong>Parameter Context</strong>, con valores diferentes para los mismos parámetros.</p>
+<p>Por ejemplo:</p>
+<table>
+<thead>
+<tr>
+<th>Parámetro</th>
+<th>Desarrollo</th>
+<th>Producción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>db.host</code></td>
+<td><code>postgres-dev</code></td>
+<td><code>postgres-prod</code></td>
+</tr>
+<tr>
+<td><code>db.name</code></td>
+<td><code>clientes_dev</code></td>
+<td><code>clientes</code></td>
+</tr>
+<tr>
+<td><code>db.user</code></td>
+<td><code>nifi_dev</code></td>
+<td><code>svc_nifi</code></td>
+</tr>
+<tr>
+<td><code>db.password</code></td>
+<td><code>********</code></td>
+<td><code>********</code></td>
+</tr>
+</tbody>
+</table>
+<p>El <code>DBCPConnectionPool</code> utilizará estos parámetros sin necesidad de modificar su configuración.</p>
+<pre class="mermaid"><code>flowchart LR
+    PC["Parameter Context"]
+    DBCP["DBCPConnectionPool"]
+    DB["Base de datos"]
+
+    PC --&gt; DBCP
+    DBCP --&gt; DB</code></pre>
+<hr />
+<h2 id="ventajas_2">Ventajas</h2>
+<ul>
+<li>El mismo flujo puede desplegarse en distintos entornos.</li>
+<li>No es necesario modificar Processors ni Controller Services.</li>
+<li>Las credenciales permanecen separadas del flujo.</li>
+<li>Facilita la promoción de cambios entre desarrollo y producción.</li>
+</ul>
+<hr />
+<h2 id="buenas-practicas">Buenas prácticas</h2>
+<ul>
+<li>Crear un Parameter Context para cada entorno.</li>
+<li>Marcar las contraseñas como <strong>parámetros sensibles</strong>.</li>
+<li>Utilizar los mismos nombres de parámetros en todos los entornos.</li>
+<li>Evitar valores fijos dentro de los Processors o Controller Services.</li>
+</ul>
+<p>La arquitectura por entornos mejora la portabilidad de los flujos y simplifica su despliegue, siendo una práctica recomendada en cualquier proyecto que evolucione entre diferentes fases de desarrollo.</p>
+<h1 id="4-arquitectura-modular">4. Arquitectura modular</h1>
+<h2 id="en-que-consiste_3">¿En qué consiste?</h2>
+<p>La arquitectura modular organiza el flujo en <strong>Process Groups independientes</strong>, cada uno responsable de una función concreta.</p>
+<p>Por ejemplo:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Clientes
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Pedidos
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Facturación
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Monitorización
+</span></code></pre></div>
+<p>Cada módulo puede disponer de sus propios Processors, Connections y Controller Services, facilitando su mantenimiento y evolución.</p>
+<pre class="mermaid"><code>flowchart TD
+    ROOT["Plataforma NiFi"]
+
+    CLIENTES["Clientes"]
+    PEDIDOS["Pedidos"]
+    FACT["Facturación"]
+    MON["Monitorización"]
+
+    ROOT --&gt; CLIENTES
+    ROOT --&gt; PEDIDOS
+    ROOT --&gt; FACT
+    ROOT --&gt; MON</code></pre>
+<hr />
+<h2 id="reutilizacion-de-servicios">Reutilización de servicios</h2>
+<p>Los servicios comunes pueden situarse en un nivel superior, mientras que los específicos permanecen dentro de cada módulo.</p>
+<pre class="mermaid"><code>flowchart TD
+    GLOBAL["Servicios compartidos&lt;br/&gt;SSL · Kafka · LDAP"]
+
+    CLIENTES["Clientes&lt;br/&gt;DBCP Clientes"]
+    PEDIDOS["Pedidos&lt;br/&gt;DBCP Pedidos"]
+    FACT["Facturación&lt;br/&gt;DBCP Facturación"]
+
+    GLOBAL --&gt; CLIENTES
+    GLOBAL --&gt; PEDIDOS
+    GLOBAL --&gt; FACT</code></pre>
+<p>De esta forma se combinan:</p>
+<ul>
+<li>Reutilización.</li>
+<li>Aislamiento.</li>
+<li>Organización.</li>
+<li>Escalabilidad.</li>
+</ul>
+<hr />
+<h2 id="ventajas_3">Ventajas</h2>
+<ul>
+<li>Cada módulo tiene una responsabilidad clara.</li>
+<li>Los cambios afectan a una parte concreta del flujo.</li>
+<li>Facilita el trabajo de varios equipos.</li>
+<li>Mejora la legibilidad del Canvas.</li>
+<li>Permite reutilizar componentes comunes.</li>
+</ul>
+<hr />
+<h2 id="buenas-practicas_1">Buenas prácticas</h2>
+<ul>
+<li>Crear un Process Group por dominio funcional.</li>
+<li>Evitar módulos demasiado grandes.</li>
+<li>Utilizar nombres claros.</li>
+<li>Situar los Controller Services en el nivel adecuado.</li>
+<li>Documentar las entradas, salidas y dependencias de cada módulo.</li>
+</ul>
+<p>La arquitectura modular es especialmente adecuada para proyectos medianos y grandes, ya que permite dividir una solución compleja en unidades más pequeñas y fáciles de administrar.</p>
+<h1 id="5-arquitectura-orientada-a-records">5. Arquitectura orientada a Records</h1>
+<h2 id="en-que-consiste_4">¿En qué consiste?</h2>
+<p>La arquitectura orientada a <strong>Records</strong> basa el procesamiento de datos en registros estructurados en lugar de trabajar directamente con el contenido de los FlowFiles.</p>
+<p>Para ello, Apache NiFi utiliza <strong>Record Readers</strong> y <strong>Record Writers</strong>, que permiten leer y escribir datos en distintos formatos de forma transparente.</p>
+<pre class="mermaid"><code>flowchart LR
+    INPUT["CSV / JSON / Avro"]
+    READER["Record Reader"]
+    PROCESSOR["Processor"]
+    WRITER["Record Writer"]
+    OUTPUT["CSV / JSON / Avro"]
+
+    INPUT --&gt; READER
+    READER --&gt; PROCESSOR
+    PROCESSOR --&gt; WRITER
+    WRITER --&gt; OUTPUT</code></pre>
+<hr />
+<h2 id="componentes-principales">Componentes principales</h2>
+<p>Los elementos más habituales son:</p>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CSVReader</td>
+<td>Lee archivos CSV</td>
+</tr>
+<tr>
+<td>JsonTreeReader</td>
+<td>Lee documentos JSON</td>
+</tr>
+<tr>
+<td>JsonRecordSetWriter</td>
+<td>Genera JSON</td>
+</tr>
+<tr>
+<td>CSVRecordSetWriter</td>
+<td>Genera CSV</td>
+</tr>
+<tr>
+<td>AvroRecordSetWriter</td>
+<td>Genera Avro</td>
+</tr>
+</tbody>
+</table>
+<p>Estos servicios son utilizados por Processors como:</p>
+<ul>
+<li>ConvertRecord</li>
+<li>QueryRecord</li>
+<li>UpdateRecord</li>
+<li>PutDatabaseRecord</li>
+<li>PartitionRecord</li>
+</ul>
+<hr />
+<h2 id="ventajas_4">Ventajas</h2>
+<ul>
+<li>Permite trabajar con datos estructurados.</li>
+<li>Facilita la transformación entre formatos.</li>
+<li>Reduce la complejidad de los flujos.</li>
+<li>Favorece la reutilización de Readers y Writers.</li>
+<li>Mejora el rendimiento al procesar grandes volúmenes de datos.</li>
+</ul>
+<hr />
+<h2 id="ejemplo_1">Ejemplo</h2>
+<p>Un mismo flujo puede convertir un archivo CSV en un documento JSON sin necesidad de programar ninguna transformación.</p>
+<pre class="mermaid"><code>flowchart LR
+    CSV["clientes.csv"]
+    CSVR["CSVReader"]
+    CONVERT["ConvertRecord"]
+    JSONW["JsonRecordSetWriter"]
+    JSON["clientes.json"]
+
+    CSV --&gt; CSVR
+    CSVR --&gt; CONVERT
+    CONVERT --&gt; JSONW
+    JSONW --&gt; JSON</code></pre>
+<hr />
+<h2 id="cuando-utilizar-esta-arquitectura_2">¿Cuándo utilizar esta arquitectura?</h2>
+<p>Es recomendable cuando:</p>
+<ul>
+<li>Se procesan archivos CSV, JSON o Avro.</li>
+<li>Es necesario transformar datos entre distintos formatos.</li>
+<li>Se trabaja con grandes volúmenes de información.</li>
+<li>Varios Processors comparten el mismo esquema de datos.</li>
+</ul>
+<p>La arquitectura orientada a Records es una de las más utilizadas en Apache NiFi, ya que simplifica el tratamiento de datos estructurados y favorece la reutilización de componentes mediante Readers y Writers.</p>
+<h1 id="6-arquitectura-segura">6. Arquitectura segura</h1>
+<h2 id="en-que-consiste_5">¿En qué consiste?</h2>
+<p>La arquitectura segura tiene como objetivo proteger los datos y las comunicaciones del flujo mediante una correcta gestión de credenciales, certificados y permisos.</p>
+<p>En Apache NiFi, la seguridad no depende únicamente de los Processors, sino también de los <strong>Controller Services</strong>, especialmente aquellos relacionados con conexiones a bases de datos y comunicaciones cifradas.</p>
+<pre class="mermaid"><code>flowchart LR
+    P["Processor"]
+    SSL["StandardSSLContextService"]
+    DBCP["DBCPConnectionPool"]
+    PARAM["Parameter Context"]
+
+    SSL --&gt; P
+    PARAM --&gt; SSL
+    PARAM --&gt; DBCP
+    DBCP --&gt; P</code></pre>
+<hr />
+<h2 id="elementos-principales">Elementos principales</h2>
+<p>Una arquitectura segura suele apoyarse en los siguientes componentes:</p>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>StandardSSLContextService</td>
+<td>Gestiona certificados SSL/TLS.</td>
+</tr>
+<tr>
+<td>DBCPConnectionPool</td>
+<td>Centraliza las conexiones a bases de datos.</td>
+</tr>
+<tr>
+<td>Parameter Contexts</td>
+<td>Almacenan parámetros y credenciales.</td>
+</tr>
+<tr>
+<td>Parámetros sensibles</td>
+<td>Protegen contraseñas y secretos.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="buenas-practicas_2">Buenas prácticas</h2>
+<ul>
+<li>Utilizar <strong>HTTPS/TLS</strong> siempre que sea posible.</li>
+<li>Guardar las contraseñas como <strong>parámetros sensibles</strong>.</li>
+<li>Evitar credenciales escritas directamente en los Processors.</li>
+<li>Aplicar el <strong>principio de mínimo privilegio</strong> en las cuentas de bases de datos.</li>
+<li>Compartir los Controller Services cuando utilicen la misma configuración de seguridad.</li>
+</ul>
+<hr />
+<h2 id="ejemplo_2">Ejemplo</h2>
+<p>Supongamos un flujo que consulta una API segura y almacena la información en una base de datos.</p>
+<pre class="mermaid"><code>flowchart LR
+    API["API HTTPS"]
+    HTTP["InvokeHTTP"]
+    SSL["StandardSSLContextService"]
+
+    DBCP["DBCPConnectionPool"]
+    DB["PostgreSQL"]
+
+    HTTP --&gt; SSL
+    SSL --&gt; API
+
+    HTTP --&gt; DBCP
+    DBCP --&gt; DB</code></pre>
+<p>En este ejemplo:</p>
+<ul>
+<li><code>StandardSSLContextService</code> protege la comunicación con la API.</li>
+<li><code>DBCPConnectionPool</code> gestiona el acceso a la base de datos.</li>
+<li>Las credenciales pueden almacenarse en un <strong>Parameter Context</strong>, evitando que aparezcan en la configuración del flujo.</li>
+</ul>
+<p>Una arquitectura segura reduce los riesgos de exposición de credenciales, facilita su mantenimiento y mejora la protección de los datos durante todo el ciclo de vida del flujo.</p>
+<h1 id="7-buenas-practicas">7. Buenas prácticas</h1>
+<p>Una buena arquitectura no depende únicamente de los Processors utilizados, sino también de cómo se organizan los <strong>Controller Services</strong>. Aplicar unas normas básicas facilita el mantenimiento de los flujos y mejora su escalabilidad.</p>
+<hr />
+<h2 id="utilizar-nombres-descriptivos">Utilizar nombres descriptivos</h2>
+<p>Asignar nombres claros permite identificar rápidamente la función de cada servicio.</p>
+<p><strong>Ejemplos:</strong></p>
+<p>```text id="x2w4g7"
+DBCP-POSTGRESQL-CLIENTES
+SSL-CORPORATIVO
+JSON-RECORD-WRITER
+CSV-READER
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Evita nombres genéricos como:
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>```text id=&quot;zcg9tb&quot;
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>DBCP1
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>ServicioSQL
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>Reader
+</span></code></pre></div></p>
+<hr />
+<h2 id="evitar-duplicar-controller-services">Evitar duplicar Controller Services</h2>
+<p>Si varios Processors utilizan la misma configuración, es preferible compartir un único Controller Service.</p>
+<pre class="mermaid"><code>flowchart LR
+    P1["Processor"]
+    P2["Processor"]
+    P3["Processor"]
+
+    DBCP["DBCPConnectionPool"]
+
+    P1 --&gt; DBCP
+    P2 --&gt; DBCP
+    P3 --&gt; DBCP</code></pre>
+<hr />
+<h2 id="organizar-por-process-groups">Organizar por Process Groups</h2>
+<p>En proyectos grandes, cada módulo puede disponer de sus propios Controller Services.</p>
+<p>```text id="vpk9ga"
+Clientes
+Pedidos
+Facturación
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Esto mejora la organización y reduce el impacto de los cambios.
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>---
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>## Utilizar Parameter Contexts
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>Los parámetros permiten reutilizar el mismo flujo en distintos entornos sin modificar la configuración.
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>Es recomendable parametrizar:
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>* Hosts.
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>* Puertos.
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>* Usuarios.
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>* Contraseñas.
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>* URLs.
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>* Tamaños del pool.
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>---
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>## Proteger la información sensible
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>Las credenciales nunca deberían almacenarse directamente en los Processors.
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>Utiliza siempre:
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>* Parámetros sensibles.
+</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>* `StandardSSLContextService` para conexiones seguras.
+</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>* Cuentas con el mínimo privilegio necesario.
+</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>
+</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>---
+</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>
+</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>## Documentar la arquitectura
+</span><span id="__span-2-33"><a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>
+</span><span id="__span-2-34"><a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a>En proyectos colaborativos es recomendable documentar:
+</span><span id="__span-2-35"><a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>
+</span><span id="__span-2-36"><a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>* Los Process Groups.
+</span><span id="__span-2-37"><a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a>* Los Controller Services utilizados.
+</span><span id="__span-2-38"><a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a>* Las dependencias entre componentes.
+</span><span id="__span-2-39"><a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a>* Los Parameter Contexts.
+</span><span id="__span-2-40"><a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a>
+</span><span id="__span-2-41"><a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a>Una buena documentación facilita el mantenimiento y la incorporación de nuevos miembros al equipo.
+</span><span id="__span-2-42"><a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a>
+</span><span id="__span-2-43"><a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a>---
+</span><span id="__span-2-44"><a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a>
+</span><span id="__span-2-45"><a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a># Resumen
+</span><span id="__span-2-46"><a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a>
+</span><span id="__span-2-47"><a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a>Las arquitecturas presentadas permiten organizar los Controller Services de acuerdo con las necesidades de cada proyecto.
+</span><span id="__span-2-48"><a id="__codelineno-2-48" name="__codelineno-2-48" href="#__codelineno-2-48"></a>
+</span><span id="__span-2-49"><a id="__codelineno-2-49" name="__codelineno-2-49" href="#__codelineno-2-49"></a>| Arquitectura        | Uso recomendado                               |
+</span><span id="__span-2-50"><a id="__codelineno-2-50" name="__codelineno-2-50" href="#__codelineno-2-50"></a>| ------------------- | --------------------------------------------- |
+</span><span id="__span-2-51"><a id="__codelineno-2-51" name="__codelineno-2-51" href="#__codelineno-2-51"></a>| Centralizada        | Proyectos pequeños o medianos                 |
+</span><span id="__span-2-52"><a id="__codelineno-2-52" name="__codelineno-2-52" href="#__codelineno-2-52"></a>| Por Process Groups  | Soluciones modulares                          |
+</span><span id="__span-2-53"><a id="__codelineno-2-53" name="__codelineno-2-53" href="#__codelineno-2-53"></a>| Por entornos        | Desarrollo, pruebas y producción              |
+</span><span id="__span-2-54"><a id="__codelineno-2-54" name="__codelineno-2-54" href="#__codelineno-2-54"></a>| Orientada a Records | Procesamiento de datos estructurados          |
+</span><span id="__span-2-55"><a id="__codelineno-2-55" name="__codelineno-2-55" href="#__codelineno-2-55"></a>| Segura              | Entornos con requisitos de seguridad elevados |
+</span><span id="__span-2-56"><a id="__codelineno-2-56" name="__codelineno-2-56" href="#__codelineno-2-56"></a>
+</span><span id="__span-2-57"><a id="__codelineno-2-57" name="__codelineno-2-57" href="#__codelineno-2-57"></a>En la práctica, estas arquitecturas suelen combinarse. Por ejemplo, un proyecto puede utilizar una organización modular por **Process Groups**, parametrizar la configuración mediante **Parameter Contexts** y compartir determinados Controller Services comunes, como `StandardSSLContextService`.
+</span><span id="__span-2-58"><a id="__codelineno-2-58" name="__codelineno-2-58" href="#__codelineno-2-58"></a>
+</span><span id="__span-2-59"><a id="__codelineno-2-59" name="__codelineno-2-59" href="#__codelineno-2-59"></a>```mermaid
+</span><span id="__span-2-60"><a id="__codelineno-2-60" name="__codelineno-2-60" href="#__codelineno-2-60"></a>flowchart TD
+</span><span id="__span-2-61"><a id="__codelineno-2-61" name="__codelineno-2-61" href="#__codelineno-2-61"></a>    ROOT[&quot;NiFi&quot;]
+</span><span id="__span-2-62"><a id="__codelineno-2-62" name="__codelineno-2-62" href="#__codelineno-2-62"></a>
+</span><span id="__span-2-63"><a id="__codelineno-2-63" name="__codelineno-2-63" href="#__codelineno-2-63"></a>    PG1[&quot;Clientes&quot;]
+</span><span id="__span-2-64"><a id="__codelineno-2-64" name="__codelineno-2-64" href="#__codelineno-2-64"></a>    PG2[&quot;Pedidos&quot;]
+</span><span id="__span-2-65"><a id="__codelineno-2-65" name="__codelineno-2-65" href="#__codelineno-2-65"></a>
+</span><span id="__span-2-66"><a id="__codelineno-2-66" name="__codelineno-2-66" href="#__codelineno-2-66"></a>    PARAM[&quot;Parameter Context&quot;]
+</span><span id="__span-2-67"><a id="__codelineno-2-67" name="__codelineno-2-67" href="#__codelineno-2-67"></a>    SSL[&quot;SSLContextService&quot;]
+</span><span id="__span-2-68"><a id="__codelineno-2-68" name="__codelineno-2-68" href="#__codelineno-2-68"></a>
+</span><span id="__span-2-69"><a id="__codelineno-2-69" name="__codelineno-2-69" href="#__codelineno-2-69"></a>    ROOT --&gt; PG1
+</span><span id="__span-2-70"><a id="__codelineno-2-70" name="__codelineno-2-70" href="#__codelineno-2-70"></a>    ROOT --&gt; PG2
+</span><span id="__span-2-71"><a id="__codelineno-2-71" name="__codelineno-2-71" href="#__codelineno-2-71"></a>
+</span><span id="__span-2-72"><a id="__codelineno-2-72" name="__codelineno-2-72" href="#__codelineno-2-72"></a>    PARAM --&gt; PG1
+</span><span id="__span-2-73"><a id="__codelineno-2-73" name="__codelineno-2-73" href="#__codelineno-2-73"></a>    PARAM --&gt; PG2
+</span><span id="__span-2-74"><a id="__codelineno-2-74" name="__codelineno-2-74" href="#__codelineno-2-74"></a>
+</span><span id="__span-2-75"><a id="__codelineno-2-75" name="__codelineno-2-75" href="#__codelineno-2-75"></a>    SSL --&gt; PG1
+</span><span id="__span-2-76"><a id="__codelineno-2-76" name="__codelineno-2-76" href="#__codelineno-2-76"></a>    SSL --&gt; PG2
+</span></code></pre></div></p>
+<p>Aplicar estas buenas prácticas permite construir flujos más organizados, reutilizables y fáciles de mantener, facilitando su evolución desde pequeños laboratorios hasta entornos empresariales de gran tamaño.</p>
 
 
 

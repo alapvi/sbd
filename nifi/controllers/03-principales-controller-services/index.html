@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#capitulo-9-controller-services" class="md-skip">
+        <a href="#objetivos" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -1034,24 +1034,6 @@
         
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Servicios
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1068,53 +1050,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#principales-controller-services" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Principales Controller Services
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Principales Controller Services">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#contenido" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Contenido
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -1406,42 +1341,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#principales-controller-services" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Principales Controller Services
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Principales Controller Services">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#contenido" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Contenido
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -1457,17 +1356,646 @@
 
 
 
-<h1 id="capitulo-9-controller-services">Capítulo 9. Controller Services</h1>
-<h2 id="principales-controller-services">Principales Controller Services</h2>
-<h3 id="contenido">Contenido</h3>
+<h1 id="objetivos">Objetivos</h1>
+<p>En el capítulo anterior se estudió cómo crear, configurar y habilitar un <strong>Controller Service</strong> utilizando como ejemplo <code>DBCPConnectionPool</code>. Sin embargo, Apache NiFi incorpora decenas de Controller Services destinados a resolver necesidades muy diferentes: acceso a bases de datos, lectura y escritura de registros, comunicaciones seguras, enriquecimiento de datos o integración con sistemas externos.</p>
+<p>El objetivo de este capítulo es presentar los Controller Services más utilizados en el desarrollo de flujos de datos, proporcionando una visión práctica de su finalidad, funcionamiento y escenarios de uso.</p>
+<p>Al finalizar este capítulo el lector será capaz de:</p>
 <ul>
-<li>DBCPConnectionPool</li>
-<li>SSLContextService</li>
-<li>CSVReader</li>
-<li>JsonTreeReader</li>
-<li>Writers</li>
-<li>Lookup Services</li>
+<li>Comprender el papel de los principales Controller Services de Apache NiFi.</li>
+<li>Identificar qué servicio utilizar según el problema que se desea resolver.</li>
+<li>Configurar los servicios más habituales utilizados por los Processors.</li>
+<li>Entender la relación existente entre Readers, Writers y Processors.</li>
+<li>Diferenciar los distintos tipos de Lookup Services.</li>
+<li>Diseñar flujos reutilizables mediante servicios compartidos.</li>
 </ul>
+<p>No se pretende realizar un estudio exhaustivo de cada componente, sino ofrecer una guía de referencia que permita reconocer rápidamente cuándo utilizar cada uno de ellos.</p>
+<hr />
+<h1 id="introduccion">Introducción</h1>
+<p>Apache NiFi incorpora más de un centenar de <strong>Controller Services</strong> que proporcionan funcionalidades reutilizables a los Processors. Gracias a ellos es posible compartir configuraciones comunes, centralizar recursos y evitar la duplicación de información dentro de un flujo.</p>
+<p>En lugar de que cada Processor implemente su propia conexión a una base de datos, su propia configuración SSL o su propio lector de registros, estas tareas se delegan en Controller Services especializados.</p>
+<pre class="mermaid"><code>flowchart LR
+    subgraph PG["Process Group"]
+        P1["ExecuteSQL"]
+        P2["PutDatabaseRecord"]
+        P3["ConsumeKafka"]
+        P4["FetchFile"]
+    end
+
+    DBCP["DBCPConnectionPool"]
+    SSL["StandardSSLContextService"]
+    READER["JsonTreeReader"]
+    WRITER["JsonRecordSetWriter"]
+
+    P1 --&gt; DBCP
+    P2 --&gt; DBCP
+    P2 --&gt; READER
+    P2 --&gt; WRITER
+    P3 --&gt; SSL</code></pre>
+<p>Cada Controller Service tiene una responsabilidad concreta.</p>
+<table>
+<thead>
+<tr>
+<th>Controller Service</th>
+<th>Función principal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DBCPConnectionPool</td>
+<td>Compartir conexiones JDBC</td>
+</tr>
+<tr>
+<td>StandardSSLContextService</td>
+<td>Gestionar conexiones TLS/SSL</td>
+</tr>
+<tr>
+<td>CSVReader</td>
+<td>Leer registros CSV</td>
+</tr>
+<tr>
+<td>JsonTreeReader</td>
+<td>Leer documentos JSON</td>
+</tr>
+<tr>
+<td>Record Writers</td>
+<td>Escribir registros en distintos formatos</td>
+</tr>
+<tr>
+<td>Lookup Services</td>
+<td>Consultar información externa para enriquecer datos</td>
+</tr>
+</tbody>
+</table>
+<p>Todos ellos comparten una característica común: <strong>no procesan FlowFiles directamente</strong>. Su misión consiste en proporcionar servicios reutilizables a otros componentes del flujo.</p>
+<p>Esta separación de responsabilidades aporta importantes ventajas:</p>
+<ul>
+<li>Mayor reutilización.</li>
+<li>Configuración centralizada.</li>
+<li>Mantenimiento más sencillo.</li>
+<li>Mejor seguridad.</li>
+<li>Flujos más limpios y fáciles de comprender.</li>
+<li>Menor duplicidad de configuraciones.</li>
+</ul>
+<p>En los siguientes apartados se estudiarán los Controller Services más utilizados en la mayoría de proyectos desarrollados con Apache NiFi.</p>
+<h1 id="1-dbcpconnectionpool">1. DBCPConnectionPool</h1>
+<h2 id="que-es">¿Qué es?</h2>
+<p><code>DBCPConnectionPool</code> es el Controller Service encargado de administrar un <strong>pool de conexiones JDBC</strong> para que varios Processors puedan acceder a una base de datos sin crear una nueva conexión en cada operación.</p>
+<p>Su uso mejora el rendimiento y reduce el consumo de recursos.</p>
+<pre class="mermaid"><code>flowchart LR
+    P1["ExecuteSQL"] --&gt; DBCP["DBCPConnectionPool"]
+    P2["PutDatabaseRecord"] --&gt; DBCP
+    DBCP --&gt; DB["Base de datos"]</code></pre>
+<hr />
+<h2 id="cuando-utilizarlo">¿Cuándo utilizarlo?</h2>
+<p>Debe utilizarse siempre que un Processor necesite acceder a una base de datos relacional, por ejemplo:</p>
+<ul>
+<li>PostgreSQL</li>
+<li>MariaDB</li>
+<li>MySQL</li>
+<li>Oracle</li>
+<li>SQL Server</li>
+</ul>
+<p>Algunos Processors que lo utilizan son:</p>
+<ul>
+<li>ExecuteSQL</li>
+<li>ExecuteSQLRecord</li>
+<li>PutDatabaseRecord</li>
+<li>PutSQL</li>
+<li>QueryDatabaseTable</li>
+</ul>
+<hr />
+<h2 id="propiedades-principales">Propiedades principales</h2>
+<table>
+<thead>
+<tr>
+<th>Propiedad</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Database Connection URL</td>
+<td>URL JDBC de la base de datos</td>
+</tr>
+<tr>
+<td>Database Driver Class Name</td>
+<td>Clase del driver JDBC</td>
+</tr>
+<tr>
+<td>Database Driver Locations</td>
+<td>Ubicación del driver</td>
+</tr>
+<tr>
+<td>Database User</td>
+<td>Usuario</td>
+</tr>
+<tr>
+<td>Password</td>
+<td>Contraseña</td>
+</tr>
+<tr>
+<td>Max Total Connections</td>
+<td>Máximo de conexiones del pool</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="ejemplo">Ejemplo</h2>
+<p>Un Processor <code>ExecuteSQL</code> puede utilizar un único <code>DBCPConnectionPool</code> compartido con otros Processors.</p>
+<pre class="mermaid"><code>flowchart LR
+    SQL["ExecuteSQL"]
+    PUT["PutDatabaseRecord"]
+
+    DBCP["DBCPConnectionPool"]
+
+    DB["PostgreSQL"]
+
+    SQL --&gt; DBCP
+    PUT --&gt; DBCP
+    DBCP --&gt; DB</code></pre>
+<p>De esta forma se centraliza la configuración y se evita duplicar conexiones.</p>
+<hr />
+<h2 id="buenas-practicas">Buenas prácticas</h2>
+<ul>
+<li>Compartir un mismo pool cuando varios Processors acceden a la misma base de datos.</li>
+<li>Utilizar <strong>Parameter Contexts</strong> para las credenciales.</li>
+<li>Configurar un número máximo de conexiones adecuado.</li>
+<li>Evitar utilizar cuentas con permisos de administrador.</li>
+<li>Asignar nombres descriptivos al servicio, por ejemplo:</li>
+</ul>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>DBCP-POSTGRESQL-PRODUCCION
+</span></code></pre></div>
+<p><code>DBCPConnectionPool</code> es, probablemente, el Controller Service más utilizado en Apache NiFi, ya que sirve de base para la mayoría de integraciones con bases de datos.</p>
+<h1 id="2-standardsslcontextservice">2. StandardSSLContextService</h1>
+<h2 id="que-es_1">¿Qué es?</h2>
+<p><code>StandardSSLContextService</code> es el Controller Service encargado de gestionar las conexiones seguras mediante <strong>SSL/TLS</strong>. Permite que los Processors se comuniquen de forma cifrada con servidores externos, garantizando la confidencialidad e integridad de la información transmitida.</p>
+<p>Muchos Processors que trabajan con HTTPS, FTPS, Kafka, MQTT o servicios REST requieren este Controller Service.</p>
+<pre class="mermaid"><code>flowchart LR
+    P["Processor"]
+    SSL["StandardSSLContextService"]
+    SERVER["Servidor seguro&lt;br/&gt;HTTPS / TLS"]
+
+    P --&gt; SSL
+    SSL --&gt; SERVER</code></pre>
+<hr />
+<h2 id="cuando-utilizarlo_1">¿Cuándo utilizarlo?</h2>
+<p>Se utiliza cuando un Processor necesita establecer una conexión cifrada, por ejemplo con:</p>
+<ul>
+<li>APIs REST mediante HTTPS.</li>
+<li>Servidores FTP seguros (FTPS).</li>
+<li>Brokers Kafka.</li>
+<li>Servidores MQTT.</li>
+<li>Otros servicios que utilicen TLS/SSL.</li>
+</ul>
+<p>Algunos Processors compatibles son:</p>
+<ul>
+<li>InvokeHTTP</li>
+<li>PublishKafka</li>
+<li>ConsumeKafka</li>
+<li>ListenHTTP</li>
+</ul>
+<hr />
+<h2 id="propiedades-principales_1">Propiedades principales</h2>
+<table>
+<thead>
+<tr>
+<th>Propiedad</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Keystore Filename</td>
+<td>Ruta del almacén de certificados del cliente</td>
+</tr>
+<tr>
+<td>Keystore Password</td>
+<td>Contraseña del Keystore</td>
+</tr>
+<tr>
+<td>Truststore Filename</td>
+<td>Ruta del almacén de certificados de confianza</td>
+</tr>
+<tr>
+<td>Truststore Password</td>
+<td>Contraseña del Truststore</td>
+</tr>
+<tr>
+<td>TLS Protocol</td>
+<td>Versión del protocolo TLS</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="ejemplo_1">Ejemplo</h2>
+<p>Un único <code>StandardSSLContextService</code> puede compartirse entre varios Processors que necesiten conexiones seguras.</p>
+<pre class="mermaid"><code>flowchart LR
+    HTTP["InvokeHTTP"]
+    KAFKA["PublishKafka"]
+
+    SSL["StandardSSLContextService"]
+
+    API["API HTTPS"]
+    BROKER["Kafka"]
+
+    HTTP --&gt; SSL
+    KAFKA --&gt; SSL
+
+    SSL --&gt; API
+    SSL --&gt; BROKER</code></pre>
+<hr />
+<h2 id="buenas-practicas_1">Buenas prácticas</h2>
+<ul>
+<li>Utilizar siempre <strong>TLS 1.2 o superior</strong>.</li>
+<li>Proteger los archivos <strong>Keystore</strong> y <strong>Truststore</strong>.</li>
+<li>Parametrizar las contraseñas mediante <strong>Parameter Contexts</strong>.</li>
+<li>Compartir el mismo servicio cuando varios Processors utilicen la misma configuración SSL.</li>
+<li>Renovar los certificados antes de su fecha de expiración.</li>
+</ul>
+<p><code>StandardSSLContextService</code> centraliza toda la configuración relacionada con certificados digitales, facilitando la administración y aumentando la seguridad de los flujos de datos.</p>
+<h1 id="3-csvreader">3. CSVReader</h1>
+<h2 id="que-es_2">¿Qué es?</h2>
+<p><code>CSVReader</code> es un Controller Service que permite leer archivos <strong>CSV</strong> y convertir cada fila en un <strong>registro (Record)</strong> que puede ser procesado por los Processors de Apache NiFi.</p>
+<p>Gracias a este servicio, NiFi interpreta automáticamente las columnas del fichero y las pone a disposición del flujo de datos.</p>
+<pre class="mermaid"><code>flowchart LR
+    CSV["Archivo CSV"]
+    READER["CSVReader"]
+    RECORDS["Records"]
+
+    CSV --&gt; READER
+    READER --&gt; RECORDS</code></pre>
+<hr />
+<h2 id="cuando-utilizarlo_2">¿Cuándo utilizarlo?</h2>
+<p>Se utiliza cuando se trabaja con archivos CSV y Processors basados en <strong>Records</strong>, como por ejemplo:</p>
+<ul>
+<li>ConvertRecord</li>
+<li>QueryRecord</li>
+<li>UpdateRecord</li>
+<li>PutDatabaseRecord</li>
+<li>PartitionRecord</li>
+</ul>
+<hr />
+<h2 id="propiedades-principales_2">Propiedades principales</h2>
+<table>
+<thead>
+<tr>
+<th>Propiedad</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CSV Header Line</td>
+<td>Indica si la primera fila contiene los nombres de las columnas</td>
+</tr>
+<tr>
+<td>Value Separator</td>
+<td>Separador de campos (<code>,</code> <code>;</code> <code>\t</code>, etc.)</td>
+</tr>
+<tr>
+<td>Quote Character</td>
+<td>Carácter utilizado para delimitar textos</td>
+</tr>
+<tr>
+<td>Schema Access Strategy</td>
+<td>Estrategia para obtener el esquema de los datos</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="ejemplo_2">Ejemplo</h2>
+<p>Supongamos el siguiente archivo:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>id,nombre,ciudad
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>1,Ana,Valencia
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>2,Carlos,Madrid
+</span></code></pre></div>
+<p>Tras pasar por <code>CSVReader</code>, NiFi obtiene dos registros estructurados:</p>
+<pre class="mermaid"><code>flowchart LR
+    CSV["clientes.csv"]
+    READER["CSVReader"]
+    RECORD1["Registro 1"]
+    RECORD2["Registro 2"]
+
+    CSV --&gt; READER
+    READER --&gt; RECORD1
+    READER --&gt; RECORD2</code></pre>
+<p>Estos registros pueden enviarse posteriormente a una base de datos, convertirse a JSON o transformarse mediante otros Processors.</p>
+<hr />
+<h2 id="buenas-practicas_2">Buenas prácticas</h2>
+<ul>
+<li>Incluir siempre una fila de cabecera cuando sea posible.</li>
+<li>Utilizar el separador correcto (<code>,</code> o <code>;</code>).</li>
+<li>Definir un esquema cuando los datos sean conocidos.</li>
+<li>Utilizar <code>CSVReader</code> junto con un <strong>Record Writer</strong> para transformar fácilmente entre formatos.</li>
+</ul>
+<p><code>CSVReader</code> es uno de los Readers más utilizados para integrar datos procedentes de hojas de cálculo, exportaciones de aplicaciones o sistemas heredados.</p>
+<h1 id="4-jsontreereader">4. JsonTreeReader</h1>
+<h2 id="que-es_3">¿Qué es?</h2>
+<p><code>JsonTreeReader</code> es un Controller Service que permite leer documentos <strong>JSON</strong> y convertirlos en <strong>Records</strong> que pueden ser procesados por los Processors de Apache NiFi.</p>
+<p>Es uno de los Readers más utilizados, ya que JSON es uno de los formatos de intercambio de datos más habituales en APIs y aplicaciones modernas.</p>
+<pre class="mermaid"><code>flowchart LR
+    JSON["Documento JSON"]
+    READER["JsonTreeReader"]
+    RECORDS["Records"]
+
+    JSON --&gt; READER
+    READER --&gt; RECORDS</code></pre>
+<hr />
+<h2 id="cuando-utilizarlo_3">¿Cuándo utilizarlo?</h2>
+<p>Se utiliza cuando el flujo recibe información en formato JSON y se desea trabajar con Processors basados en Records, por ejemplo:</p>
+<ul>
+<li>ConvertRecord</li>
+<li>QueryRecord</li>
+<li>UpdateRecord</li>
+<li>PutDatabaseRecord</li>
+<li>SplitRecord</li>
+</ul>
+<hr />
+<h2 id="propiedades-principales_3">Propiedades principales</h2>
+<table>
+<thead>
+<tr>
+<th>Propiedad</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Schema Access Strategy</td>
+<td>Estrategia para obtener el esquema de los datos</td>
+</tr>
+<tr>
+<td>Date Format</td>
+<td>Formato de las fechas</td>
+</tr>
+<tr>
+<td>Time Format</td>
+<td>Formato de las horas</td>
+</tr>
+<tr>
+<td>Timestamp Format</td>
+<td>Formato de fecha y hora</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="ejemplo_3">Ejemplo</h2>
+<p>Documento JSON de entrada:</p>
+<p>```json id="qqrr47"
+{
+  "id": 1,
+  "nombre": "Ana",
+  "ciudad": "Valencia"
+}
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Tras pasar por `JsonTreeReader`, NiFi interpreta el documento como un registro estructurado.
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>```mermaid
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>flowchart LR
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    JSON[&quot;JSON&quot;]
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    READER[&quot;JsonTreeReader&quot;]
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    RECORD[&quot;Record&quot;]
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    JSON --&gt; READER
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    READER --&gt; RECORD
+</span></code></pre></div></p>
+<p>Este registro puede transformarse, consultarse o almacenarse en una base de datos mediante otros Processors.</p>
+<hr />
+<h2 id="buenas-practicas_3">Buenas prácticas</h2>
+<ul>
+<li>Utilizar una estructura JSON consistente en todos los documentos.</li>
+<li>Definir un esquema cuando sea posible para mejorar la validación.</li>
+<li>Utilizar <code>JsonTreeReader</code> junto con un <strong>Record Writer</strong> para convertir fácilmente entre formatos.</li>
+<li>Verificar el formato de fechas y marcas temporales cuando existan campos de tipo fecha.</li>
+</ul>
+<p><code>JsonTreeReader</code> es el Reader recomendado para la mayoría de integraciones con APIs REST, aplicaciones web y servicios que intercambian información en formato JSON.</p>
+<h1 id="5-record-writers">5. Record Writers</h1>
+<h2 id="que-son">¿Qué son?</h2>
+<p>Los <strong>Record Writers</strong> son Controller Services encargados de <strong>escribir Records</strong> en un formato determinado. Trabajan junto con los <strong>Record Readers</strong>, permitiendo transformar fácilmente los datos entre distintos formatos.</p>
+<p>Por ejemplo, un flujo puede leer un archivo CSV mediante <code>CSVReader</code> y generar un documento JSON utilizando <code>JsonRecordSetWriter</code>.</p>
+<pre class="mermaid"><code>flowchart LR
+    CSV["Archivo CSV"]
+    READER["CSVReader"]
+    RECORD["Records"]
+    WRITER["JsonRecordSetWriter"]
+    JSON["Documento JSON"]
+
+    CSV --&gt; READER
+    READER --&gt; RECORD
+    RECORD --&gt; WRITER
+    WRITER --&gt; JSON</code></pre>
+<hr />
+<h2 id="writers-mas-utilizados">Writers más utilizados</h2>
+<table>
+<thead>
+<tr>
+<th>Writer</th>
+<th>Formato de salida</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JsonRecordSetWriter</td>
+<td>JSON</td>
+</tr>
+<tr>
+<td>CSVRecordSetWriter</td>
+<td>CSV</td>
+</tr>
+<tr>
+<td>AvroRecordSetWriter</td>
+<td>Avro</td>
+</tr>
+<tr>
+<td>FreeFormTextRecordSetWriter</td>
+<td>Texto plano</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="cuando-utilizar-cada-uno">¿Cuándo utilizar cada uno?</h2>
+<h3 id="jsonrecordsetwriter">JsonRecordSetWriter</h3>
+<p>Genera documentos JSON. Es el Writer más utilizado cuando los datos se envían a APIs REST o aplicaciones web.</p>
+<h3 id="csvrecordsetwriter">CSVRecordSetWriter</h3>
+<p>Genera archivos CSV, muy útiles para exportaciones o intercambio de datos con hojas de cálculo.</p>
+<h3 id="avrorecordsetwriter">AvroRecordSetWriter</h3>
+<p>Escribe los datos en formato <strong>Apache Avro</strong>, optimizado para almacenamiento y procesamiento de grandes volúmenes de información.</p>
+<h3 id="freeformtextrecordsetwriter">FreeFormTextRecordSetWriter</h3>
+<p>Permite generar texto plano personalizado mediante plantillas.</p>
+<hr />
+<h2 id="ejemplo_4">Ejemplo</h2>
+<p>El siguiente flujo convierte un archivo CSV en un documento JSON.</p>
+<pre class="mermaid"><code>flowchart LR
+    FILE["clientes.csv"]
+    CSVR["CSVReader"]
+    CONVERT["ConvertRecord"]
+    JSONW["JsonRecordSetWriter"]
+    OUTPUT["clientes.json"]
+
+    FILE --&gt; CSVR
+    CSVR --&gt; CONVERT
+    CONVERT --&gt; JSONW
+    JSONW --&gt; OUTPUT</code></pre>
+<hr />
+<h2 id="buenas-practicas_4">Buenas prácticas</h2>
+<ul>
+<li>Elegir el Writer según el formato que necesite el sistema de destino.</li>
+<li>Utilizar el mismo esquema en el Reader y el Writer para evitar incompatibilidades.</li>
+<li>Configurar correctamente el formato de fechas y números.</li>
+<li>Compartir el mismo Writer entre varios Processors cuando la salida tenga el mismo formato.</li>
+</ul>
+<p>Los Record Writers, junto con los Record Readers, constituyen la base del procesamiento de datos estructurados en Apache NiFi y permiten transformar información entre distintos formatos de manera sencilla y reutilizable.</p>
+<h1 id="6-lookup-services">6. Lookup Services</h1>
+<h2 id="que-son_1">¿Qué son?</h2>
+<p>Los <strong>Lookup Services</strong> son Controller Services que permiten <strong>consultar información externa</strong> para enriquecer los datos que circulan por un flujo.</p>
+<p>En lugar de almacenar toda la información en el propio FlowFile, un Processor puede realizar una consulta a un Lookup Service para obtener valores adicionales, como códigos, descripciones o datos de referencia.</p>
+<pre class="mermaid"><code>flowchart LR
+    FF["FlowFile"]
+    PROC["LookupRecord"]
+    LOOKUP["Lookup Service"]
+    DATA["Origen de datos"]
+
+    FF --&gt; PROC
+    PROC --&gt; LOOKUP
+    LOOKUP --&gt; DATA
+    LOOKUP --&gt; PROC</code></pre>
+<hr />
+<h2 id="cuando-utilizarlos">¿Cuándo utilizarlos?</h2>
+<p>Son útiles cuando es necesario:</p>
+<ul>
+<li>Completar información de un registro.</li>
+<li>Traducir códigos a descripciones.</li>
+<li>Consultar tablas de referencia.</li>
+<li>Evitar duplicar datos en el flujo.</li>
+<li>Centralizar información compartida.</li>
+</ul>
+<hr />
+<h2 id="lookup-services-mas-utilizados">Lookup Services más utilizados</h2>
+<table>
+<thead>
+<tr>
+<th>Lookup Service</th>
+<th>Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SimpleKeyValueLookupService</td>
+<td>Consulta pares clave-valor definidos manualmente.</td>
+</tr>
+<tr>
+<td>CSVRecordLookupService</td>
+<td>Busca información en un archivo CSV.</td>
+</tr>
+<tr>
+<td>DatabaseRecordLookupService</td>
+<td>Consulta datos en una base de datos mediante JDBC.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="ejemplo_5">Ejemplo</h2>
+<p>Supongamos un FlowFile que contiene únicamente el código de una provincia:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">&quot;codigo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;46&quot;</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>El <code>Lookup Service</code> consulta una tabla de referencia y devuelve el nombre correspondiente.</p>
+<pre class="mermaid"><code>flowchart LR
+    INPUT["Código 46"]
+    LOOKUP["DatabaseRecordLookupService"]
+    OUTPUT["Valencia"]
+
+    INPUT --&gt; LOOKUP
+    LOOKUP --&gt; OUTPUT</code></pre>
+<p>El resultado podría ser:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">&quot;codigo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;46&quot;</span><span class="p">,</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">&quot;provincia&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Valencia&quot;</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">}</span>
+</span></code></pre></div>
+<hr />
+<h2 id="buenas-practicas_5">Buenas prácticas</h2>
+<ul>
+<li>Utilizar Lookups para información de referencia que cambia con poca frecuencia.</li>
+<li>Centralizar los datos de consulta para evitar duplicidades.</li>
+<li>Elegir el tipo de Lookup según el origen de la información (CSV, base de datos, etc.).</li>
+<li>Compartir el mismo Lookup Service entre varios Processors cuando utilicen la misma fuente de datos.</li>
+</ul>
+<p>Los <strong>Lookup Services</strong> facilitan el enriquecimiento de los datos durante su procesamiento, permitiendo construir flujos más flexibles y reutilizables sin necesidad de incorporar toda la información dentro de los FlowFiles.</p>
+<h1 id="resumen">Resumen</h1>
+<p>En este capítulo se han presentado los <strong>Controller Services</strong> más utilizados en Apache NiFi. Estos componentes permiten centralizar configuraciones y compartir recursos entre distintos Processors, facilitando el desarrollo de flujos más reutilizables, seguros y fáciles de mantener.</p>
+<p>Cada Controller Service está especializado en una tarea concreta:</p>
+<table>
+<thead>
+<tr>
+<th>Controller Service</th>
+<th>Función principal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DBCPConnectionPool</strong></td>
+<td>Gestiona conexiones JDBC compartidas.</td>
+</tr>
+<tr>
+<td><strong>StandardSSLContextService</strong></td>
+<td>Configura conexiones seguras mediante SSL/TLS.</td>
+</tr>
+<tr>
+<td><strong>CSVReader</strong></td>
+<td>Convierte archivos CSV en Records.</td>
+</tr>
+<tr>
+<td><strong>JsonTreeReader</strong></td>
+<td>Convierte documentos JSON en Records.</td>
+</tr>
+<tr>
+<td><strong>Record Writers</strong></td>
+<td>Generan la salida en distintos formatos (JSON, CSV, Avro, etc.).</td>
+</tr>
+<tr>
+<td><strong>Lookup Services</strong></td>
+<td>Enriquecen los datos mediante consultas externas.</td>
+</tr>
+</tbody>
+</table>
+<p>Su funcionamiento puede resumirse de la siguiente forma:</p>
+<pre class="mermaid"><code>flowchart LR
+    INPUT["Datos de entrada"]
+    READER["Record Reader"]
+    PROCESSOR["Processor"]
+    LOOKUP["Lookup Service"]
+    WRITER["Record Writer"]
+    OUTPUT["Datos de salida"]
+
+    INPUT --&gt; READER
+    READER --&gt; PROCESSOR
+    LOOKUP --&gt; PROCESSOR
+    PROCESSOR --&gt; WRITER
+    WRITER --&gt; OUTPUT</code></pre>
+<p>En la práctica, estos servicios suelen combinarse dentro del mismo flujo. Por ejemplo, un Processor puede utilizar simultáneamente un <code>DBCPConnectionPool</code> para acceder a una base de datos, un <code>JsonTreeReader</code> para interpretar un documento JSON y un <code>JsonRecordSetWriter</code> para generar la salida.</p>
+<pre class="mermaid"><code>flowchart LR
+    JSON["JSON"]
+    JR["JsonTreeReader"]
+    P["PutDatabaseRecord"]
+    DBCP["DBCPConnectionPool"]
+    DB["PostgreSQL"]
+
+    JSON --&gt; JR
+    JR --&gt; P
+    P --&gt; DBCP
+    DBCP --&gt; DB</code></pre>
+<h2 id="ideas-clave">Ideas clave</h2>
+<ul>
+<li>Los <strong>Controller Services</strong> proporcionan funcionalidades compartidas a los Processors.</li>
+<li>Favorecen la reutilización y evitan duplicar configuraciones.</li>
+<li>Los <strong>Readers</strong> leen datos estructurados y los convierten en Records.</li>
+<li>Los <strong>Writers</strong> generan la salida en distintos formatos.</li>
+<li><code>DBCPConnectionPool</code> centraliza las conexiones a bases de datos.</li>
+<li><code>StandardSSLContextService</code> gestiona las comunicaciones seguras.</li>
+<li>Los <strong>Lookup Services</strong> permiten enriquecer los datos durante el procesamiento.</li>
+</ul>
+<p>En el siguiente capítulo se estudiarán diferentes <strong>arquitecturas de diseño</strong> para organizar Controller Services en Apache NiFi, analizando buenas prácticas de reutilización, modularidad y escalabilidad en entornos de producción.</p>
 
 
 
