@@ -1623,24 +1623,41 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Host:        /opt/nifi/datos
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>Contenedor:  /datos
 </span></code></pre></div>
-<p>Por tanto, <code>PutFile</code> escribirá dentro del contenedor en:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>/datos/salida
-</span></code></pre></div>
+<p>¿Alguna vez te has parado a pensar de dónde salen los datos que utilizan las apps del tiempo?</p>
+<p>¿Por qué Google, AEMET o las webs meteorológicas pueden mostrarte, al segundo, la temperatura exacta de tu ciudad?</p>
+<p>En este mini-proyecto vas a construir tu propio sistema de ingesta de datos meteorológicos en tiempo real con Apache NiFi 2.10, usando un caso de uso muy cercano al que se emplea en entornos IoT, Smart Cities y analítica operativa.</p>
 <p>y el fichero podrá consultarse desde el host en:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>/opt/nifi/datos/salida
-</span></code></pre></div>
-<hr />
-<p><strong>6. Crear DBCPConnectionPool</strong></p>
-<p>Dentro del Process Group del laboratorio, abrir:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Configure → Controller Services
-</span></code></pre></div>
-<p>Añadir:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>DBCPConnectionPool
-</span></code></pre></div>
-<p>Asignar el nombre:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>DBCP-POSTGRESQL-CLIENTES
-</span></code></pre></div>
-<p>Configurar:</p>
+<p>Vas a diseñar, desplegar y automatizar un flujo completo en Apache NiFi 2.10 capaz de:
+/opt/nifi/datos/salida
+1. Consultar automáticamente una API meteorológica real (Open-Meteo)
+2. Parametrizar ciudad, latitud y longitud como atributos del flujo
+3. Obtener cada minuto la temperatura y el resto de variables meteorológicas actuales
+4. Transformar la respuesta para dejarla en formato limpio y analizable
+5. Guardar los datos en MongoDB para su análisis histórico
+6. Crear un documento por cada lectura, incluyendo:
+  - Ciudad
+  - Latitud y longitud
+  - Temperatura
+  - Humedad
+  - Viento
+  - Lluvia
+  - Nubes
+  - Hora oficial del dato (<code>timestamp_api</code>)
+  - Hora de captura real del flujo (<code>timestamp_nifi</code>)
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Configure → Controller Services
+</span></code></pre></div></p>
+<p>Añadir:
+1. Open-Meteo es un proveedor de API meteorológica gratuita.
+  - No requiere API key para muchos usos.
+  - Devuelve los datos en formato JSON, que es estándar en servicios web.
+2. La API funciona a base de parámetros en la URL.
+  - <code>latitude</code> y <code>longitude</code>: ubicación, Xàtiva en este caso.
+  - <code>current</code>: qué variables actuales queremos consultar.
+  - Variables separadas por comas: <code>temperature_2m</code>, <code>relative_humidity_2m</code>, <code>wind_speed_10m</code>, <code>precipitation</code>, <code>cloud_cover</code>.
+  - <code>timezone</code>: para ajustar las horas a Europa/Madrid.
+3. Respuesta JSON estructurada.
+  - Campos generales: <code>latitude</code>, <code>longitude</code>, <code>generationtime_ms</code>, etc.
+  - Sección <code>current</code> con la medición actual.</p>
 <table>
 <thead>
 <tr>
@@ -1650,8 +1667,8 @@
 </thead>
 <tbody>
 <tr>
-<td>Database Connection URL</td>
-<td><code>jdbc:postgresql://postgres:5432/clientes_db</code></td>
+<td>Flujo NiFi propuesto:</td>
+<td></td>
 </tr>
 <tr>
 <td>Database Driver Class Name</td>
@@ -1662,8 +1679,8 @@
 <td><code>/opt/nifi/drivers/postgresql.jar</code></td>
 </tr>
 <tr>
-<td>Database User</td>
-<td><code>nifi</code></td>
+<td>GenerateFlowFile → UpdateAttribute → InvokeHTTP → EvaluateJsonPath → ReplaceText → PutMongoRecord → LogAttribute</td>
+<td></td>
 </tr>
 <tr>
 <td>Password</td>
@@ -1681,23 +1698,43 @@
 <td>Validation Query</td>
 <td><code>SELECT 1</code></td>
 </tr>
+<tr>
+<td>Coordenadas oficiales de Xàtiva:</td>
+<td></td>
+</tr>
+<tr>
+<td>Guardar y habilitar el servicio.</td>
+<td></td>
+</tr>
+<tr>
+<td>- Latitud: <code>38.9878</code></td>
+<td></td>
+</tr>
+<tr>
+<td>- Longitud: <code>-0.5186</code></td>
+<td></td>
+</tr>
 </tbody>
 </table>
-<p>Guardar y habilitar el servicio.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-</div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>Si PostgreSQL se ejecuta en otro contenedor del mismo Docker Compose, debe utilizarse el nombre del servicio, por ejemplo `postgres`, y no `localhost`.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Si PostgreSQL se ejecuta en otro contenedor del mismo Docker Compose, debe utilizarse el nombre del servicio, por ejemplo `postgres`, y no `localhost`.
 </span></code></pre></div>
 <hr />
-<p><strong>7. Crear JsonRecordSetWriter</strong></p>
-<p>Añadir otro Controller Service:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>JsonRecordSetWriter
-</span></code></pre></div>
-<p>Asignar el nombre:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>JSON-WRITER-CLIENTES
-</span></code></pre></div>
-<p>Configurar:</p>
+<p>Endpoint a usar en Open-Meteo:</p>
+<p>Añadir otro Controller Service:
+https://api.open-meteo.com/v1/forecast?latitude=${latitude}&amp;longitude=${longitude}&amp;current=temperature_2m,relative_humidity_2m,wind_speed_10m,precipitation,cloud_cover&amp;timezone=Europe%2FMadrid
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>JsonRecordSetWriter
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>La respuesta tendrá una estructura similar a esta:
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>Asignar el nombre:
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>```text
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>JSON-WRITER-CLIENTES
+</span></code></pre></div></p>
+<p>"temperature_2m": 21.3,
+   "relative_humidity_2m": 54,
+   "wind_speed_10m": 11.2,
+   "precipitation": 0,
+   "cloud_cover": 36</p>
 <table>
 <thead>
 <tr>
@@ -1716,17 +1753,84 @@
 </tr>
 </tbody>
 </table>
-<p>Guardar y habilitar.</p>
-<p>Este servicio recibirá las filas obtenidas desde PostgreSQL y generará un documento JSON.</p>
-<hr />
+<p><strong>2.1 GenerateFlowFile</strong></p>
+<ul>
+<li>Run Schedule: <code>60 sec</code>, o el intervalo que prefieras</li>
+</ul>
+<p><strong>2.2 UpdateAttribute</strong></p>
+<p>Crear los atributos del FlowFile:</p>
+<table>
+<thead>
+<tr>
+<th>Atributo</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>city</td>
+<td><code>Xàtiva</code></td>
+</tr>
+<tr>
+<td>latitude</td>
+<td><code>38.9878</code></td>
+</tr>
+<tr>
+<td>longitude</td>
+<td><code>-0.5186</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>2.3 InvokeHTTP</strong></p>
 <p><strong>8. Crear GenerateFlowFile</strong></p>
-<p>Añadir un Processor:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>GenerateFlowFile
-</span></code></pre></div>
-<p>Asignar el nombre:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>Iniciar exportación
-</span></code></pre></div>
+<p>Añadir un Processor:
+Consultar Open-Meteo
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>GenerateFlowFile
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>Configurar:
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>| Propiedad  | Valor |
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>| ---------- | ----- |
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>| Method     | `GET` |
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>| Remote URL | `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&amp;longitude=${longitude}&amp;current=temperature_2m,relative_humidity_2m,wind_speed_10m,precipitation,cloud_cover&amp;timezone=Europe%2FMadrid` |
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>**2.4 EvaluateJsonPath**
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>Extraemos los campos que nos interesan.
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>```text
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>Iniciar exportación
+</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>- temperature: `$.current.temperature_2m`
+</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>- humidity: `$.current.relative_humidity_2m`
+</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>- wind_speed: `$.current.wind_speed_10m`
+</span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>- rain: `$.current.precipitation`
+</span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>- cloud: `$.current.cloud_cover`
+</span><span id="__span-13-20"><a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>- timestamp_api: `$.current.time`
+</span></code></pre></div></p>
 <p>Configurar:</p>
+<p><strong>2.5 ReplaceText</strong>
+| ------------ | ------------------- |
+| Run Schedule | <code>1 hour</code>            |
+| Custom Text  | <code>exportar_clientes</code> |
+| Batch Size   | <code>1</code>                 |</p>
+<p>Durante el laboratorio debe ejecutarse mediante:
+  "latitude": ${latitude:toNumber()},
+  "longitude": ${longitude:toNumber()},</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Run Once
+</span></code></pre></div>
+<p>De esta forma se evita generar ficheros continuamente.</p>
+<hr />
+<p><strong>9. Crear ExecuteSQLRecord</strong>
+<strong>3. Configurar MongoDB</strong>
+Añadir:
+En NiFi 2.10 la conexión se centraliza con un Controller Service de MongoDB.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>**3.1 MongoDBControllerService**
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>Nombre recomendado:
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>```text
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>MONGO-SERVICE-WEATHER
+</span></code></pre></div></p>
+<p>Configuración:</p>
 <table>
 <thead>
 <tr>
@@ -1736,71 +1840,126 @@
 </thead>
 <tbody>
 <tr>
-<td>Run Schedule</td>
-<td><code>1 hour</code></td>
+<td>URI</td>
+<td><code>mongodb://localhost:27017</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>3.2 JsonTreeReader</strong></p>
+<p>Nombre recomendado:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>JSON-READER-WEATHER
+</span></code></pre></div>
+<p>Configuración:</p>
+<table>
+<thead>
+<tr>
+<th>Propiedad</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Schema Access Strategy</td>
+<td><code>Infer Schema</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>3.3 PutMongoRecord</strong></p>
+<p>Nombre recomendado:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>Guardar clima en MongoDB
+</span></code></pre></div>
+<p>Configuración:</p>
+<table>
+<thead>
+<tr>
+<th>Propiedad</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Client Service</td>
+<td><code>MONGO-SERVICE-WEATHER</code></td>
 </tr>
 <tr>
-<td>Custom Text</td>
-<td><code>exportar_clientes</code></td>
+<td>Mongo Database Name</td>
+<td><code>test</code></td>
+</tr>
+<tr>
+<td>Mongo Collection Name</td>
+<td><code>weather</code></td>
+</tr>
+<tr>
+<td>Record Reader</td>
+<td><code>JSON-READER-WEATHER</code></td>
 </tr>
 <tr>
 <td>Batch Size</td>
 <td><code>1</code></td>
 </tr>
+<tr>
+<td>Ordered</td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td>Bypass Validation</td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td>Asignar el nombre:</td>
+<td></td>
+</tr>
 </tbody>
 </table>
-<p>Durante el laboratorio debe ejecutarse mediante:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>Run Once
-</span></code></pre></div>
-<p>De esta forma se evita generar ficheros continuamente.</p>
-<hr />
-<p><strong>9. Crear ExecuteSQLRecord</strong></p>
-<p>Añadir:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>ExecuteSQLRecord
-</span></code></pre></div>
-<p>Asignar el nombre:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>Extraer clientes
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>Extraer clientes
 </span></code></pre></div>
 <p>Configurar:</p>
-<table>
-<thead>
-<tr>
-<th>Propiedad</th>
-<th>Valor</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Database Connection Pooling Service</td>
-<td><code>DBCP-POSTGRESQL-CLIENTES</code></td>
-</tr>
-<tr>
-<td>Record Writer</td>
-<td><code>JSON-WRITER-CLIENTES</code></td>
-</tr>
-<tr>
-<td>SQL select query</td>
-<td>Consulta SQL</td>
-</tr>
-</tbody>
-</table>
-<p>Consulta:</p>
-<div class="language-sql highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="k">SELECT</span>
-</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">    </span><span class="n">id</span><span class="p">,</span>
-</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">    </span><span class="n">nombre</span><span class="p">,</span>
-</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="w">    </span><span class="n">email</span><span class="p">,</span>
-</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="w">    </span><span class="n">ciudad</span>
-</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="k">FROM</span><span class="w"> </span><span class="n">clientes</span>
-</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
-</span></code></pre></div>
-<p>Este Processor:</p>
+<p>| Propiedad                           | Valor                      |
+   "city": "Xàtiva",
+   "latitude": 38.9878,
+   "longitude": -0.5186,
+   "temperature": 13,
+   "humidity": 74,
+   "wind_speed": 11,
+   "rain": 0,
+   "cloud": 99,
+   "timestamp_api": "2025-11-01T00:00",
+   "timestamp_nifi": "2025-11-01 00:00:00"
+SELECT
+    id,
+    nombre,
+    email,
+    ciudad
+FROM clientes
+1. Añade como variables la ciudad, latitud y longitud.
+2. Cambia la frecuencia del flujo a <code>1 min</code>.
+3. Añade una rama de control con <code>LogAttribute</code> para registrar los errores HTTP o de MongoDB.
+4. Si quieres almacenar más de una lectura por ejecución, usa <code>Run Once</code> manualmente varias veces o aumenta el <code>Batch Size</code>.</p>
+<p>Cambiar el endpoint a:
+Este Processor:</p>
 <ol>
 <li>Obtiene una conexión de <code>DBCPConnectionPool</code>.</li>
 <li>Ejecuta la consulta.</li>
 <li>Convierte cada fila en un Record.</li>
 <li>Entrega los Records a <code>JsonRecordSetWriter</code>.</li>
-<li>Sustituye el contenido del FlowFile por el JSON generado.</li>
+<li>Sustituye el contenido del FlowFile por el JSON generado.
+Genera el template del flujo y guarda el <code>.xml</code>.</li>
 </ol>
+<p><strong>Resumen del flujo</strong></p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>GenerateFlowFile
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>      ↓
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>UpdateAttribute
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>      ↓
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>InvokeHTTP
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>      ↓
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>EvaluateJsonPath
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>      ↓
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>ReplaceText
+</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>      ↓
+</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>PutMongoRecord
+</span><span id="__span-19-12"><a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>      ↓
+</span><span id="__span-19-13"><a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>LogAttribute
+</span></code></pre></div>
 <pre class="mermaid"><code>sequenceDiagram
     participant G as GenerateFlowFile
     participant S as ExecuteSQLRecord
@@ -1814,17 +1973,17 @@
     S-&gt;&gt;DB: Ejecutar SELECT
     DB--&gt;&gt;S: Filas de clientes
     S-&gt;&gt;W: Enviar Records
-    W--&gt;&gt;S: Documento JSON</code></pre>
+    W--&gt;&gt;S: Documento JSON</code></pre></p>
 <hr />
 <p><strong>10. Preparar el nombre del fichero</strong></p>
 <p>Añadir un Processor:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>UpdateAttribute
+<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>UpdateAttribute
 </span></code></pre></div>
 <p>Asignar el nombre:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>Definir nombre de salida
+<div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>Definir nombre de salida
 </span></code></pre></div>
 <p>Crear la propiedad dinámica:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>filename = clientes.json
+<div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>filename = clientes.json
 </span></code></pre></div>
 <p>El flujo quedará:</p>
 <pre class="mermaid"><code>flowchart LR
@@ -1837,18 +1996,18 @@
     SQL --&gt; U
     U --&gt; FILE</code></pre>
 <p>Para conservar un histórico puede utilizarse:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>filename = clientes_${now():format(&quot;yyyyMMdd_HHmmss&quot;)}.json
+<div class="language-text highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>filename = clientes_${now():format(&quot;yyyyMMdd_HHmmss&quot;)}.json
 </span></code></pre></div>
 <p>Ejemplo:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>clientes_20260731_180500.json
+<div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>clientes_20260731_180500.json
 </span></code></pre></div>
 <hr />
 <p><strong>11. Crear PutFile</strong></p>
 <p>Añadir:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>PutFile
+<div class="language-text highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>PutFile
 </span></code></pre></div>
 <p>Asignar el nombre:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>Guardar clientes JSON
+<div class="language-text highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>Guardar clientes JSON
 </span></code></pre></div>
 <p>Configurar:</p>
 <table>
@@ -1874,13 +2033,13 @@
 </tbody>
 </table>
 <p>Conectar:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>GenerateFlowFile
-</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>        ↓
-</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>ExecuteSQLRecord
-</span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>        ↓
-</span><span id="__span-31-5"><a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a>UpdateAttribute
-</span><span id="__span-31-6"><a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a>        ↓
-</span><span id="__span-31-7"><a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a>PutFile
+<div class="language-text highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>GenerateFlowFile
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>        ↓
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>ExecuteSQLRecord
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>        ↓
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>UpdateAttribute
+</span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>        ↓
+</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>PutFile
 </span></code></pre></div>
 <p>Gestionar las relaciones:</p>
 <pre class="mermaid"><code>flowchart LR
@@ -1911,39 +2070,39 @@
 <hr />
 <p><strong>13. Comprobar el resultado</strong></p>
 <p>Desde el host:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>ls<span class="w"> </span>-l<span class="w"> </span>/opt/nifi/datos/salida
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>ls<span class="w"> </span>-l<span class="w"> </span>/opt/nifi/datos/salida
 </span></code></pre></div>
 <p>Debe aparecer:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>clientes.json
+<div class="language-text highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>clientes.json
 </span></code></pre></div>
 <p>Mostrar el contenido:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>cat<span class="w"> </span>/opt/nifi/datos/salida/clientes.json
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>cat<span class="w"> </span>/opt/nifi/datos/salida/clientes.json
 </span></code></pre></div>
 <p>Resultado esperado:</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="p">[</span>
-</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="w">  </span><span class="p">{</span>
-</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-</span><span id="__span-35-4"><a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="w">    </span><span class="nt">&quot;nombre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ana López&quot;</span><span class="p">,</span>
-</span><span id="__span-35-5"><a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a><span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ana@empresa.com&quot;</span><span class="p">,</span>
-</span><span id="__span-35-6"><a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a><span class="w">    </span><span class="nt">&quot;ciudad&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Valencia&quot;</span>
-</span><span id="__span-35-7"><a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a><span class="w">  </span><span class="p">},</span>
-</span><span id="__span-35-8"><a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a><span class="w">  </span><span class="p">{</span>
-</span><span id="__span-35-9"><a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a><span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-</span><span id="__span-35-10"><a id="__codelineno-35-10" name="__codelineno-35-10" href="#__codelineno-35-10"></a><span class="w">    </span><span class="nt">&quot;nombre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Carlos Ruiz&quot;</span><span class="p">,</span>
-</span><span id="__span-35-11"><a id="__codelineno-35-11" name="__codelineno-35-11" href="#__codelineno-35-11"></a><span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;carlos@empresa.com&quot;</span><span class="p">,</span>
-</span><span id="__span-35-12"><a id="__codelineno-35-12" name="__codelineno-35-12" href="#__codelineno-35-12"></a><span class="w">    </span><span class="nt">&quot;ciudad&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Madrid&quot;</span>
-</span><span id="__span-35-13"><a id="__codelineno-35-13" name="__codelineno-35-13" href="#__codelineno-35-13"></a><span class="w">  </span><span class="p">},</span>
-</span><span id="__span-35-14"><a id="__codelineno-35-14" name="__codelineno-35-14" href="#__codelineno-35-14"></a><span class="w">  </span><span class="p">{</span>
-</span><span id="__span-35-15"><a id="__codelineno-35-15" name="__codelineno-35-15" href="#__codelineno-35-15"></a><span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
-</span><span id="__span-35-16"><a id="__codelineno-35-16" name="__codelineno-35-16" href="#__codelineno-35-16"></a><span class="w">    </span><span class="nt">&quot;nombre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Laura Pérez&quot;</span><span class="p">,</span>
-</span><span id="__span-35-17"><a id="__codelineno-35-17" name="__codelineno-35-17" href="#__codelineno-35-17"></a><span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;laura@empresa.com&quot;</span><span class="p">,</span>
-</span><span id="__span-35-18"><a id="__codelineno-35-18" name="__codelineno-35-18" href="#__codelineno-35-18"></a><span class="w">    </span><span class="nt">&quot;ciudad&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sevilla&quot;</span>
-</span><span id="__span-35-19"><a id="__codelineno-35-19" name="__codelineno-35-19" href="#__codelineno-35-19"></a><span class="w">  </span><span class="p">}</span>
-</span><span id="__span-35-20"><a id="__codelineno-35-20" name="__codelineno-35-20" href="#__codelineno-35-20"></a><span class="p">]</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="p">[</span>
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="w">  </span><span class="p">{</span>
+</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="w">    </span><span class="nt">&quot;nombre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ana López&quot;</span><span class="p">,</span>
+</span><span id="__span-31-5"><a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ana@empresa.com&quot;</span><span class="p">,</span>
+</span><span id="__span-31-6"><a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a><span class="w">    </span><span class="nt">&quot;ciudad&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Valencia&quot;</span>
+</span><span id="__span-31-7"><a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-31-8"><a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a><span class="w">  </span><span class="p">{</span>
+</span><span id="__span-31-9"><a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a><span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+</span><span id="__span-31-10"><a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a><span class="w">    </span><span class="nt">&quot;nombre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Carlos Ruiz&quot;</span><span class="p">,</span>
+</span><span id="__span-31-11"><a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a><span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;carlos@empresa.com&quot;</span><span class="p">,</span>
+</span><span id="__span-31-12"><a id="__codelineno-31-12" name="__codelineno-31-12" href="#__codelineno-31-12"></a><span class="w">    </span><span class="nt">&quot;ciudad&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Madrid&quot;</span>
+</span><span id="__span-31-13"><a id="__codelineno-31-13" name="__codelineno-31-13" href="#__codelineno-31-13"></a><span class="w">  </span><span class="p">},</span>
+</span><span id="__span-31-14"><a id="__codelineno-31-14" name="__codelineno-31-14" href="#__codelineno-31-14"></a><span class="w">  </span><span class="p">{</span>
+</span><span id="__span-31-15"><a id="__codelineno-31-15" name="__codelineno-31-15" href="#__codelineno-31-15"></a><span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+</span><span id="__span-31-16"><a id="__codelineno-31-16" name="__codelineno-31-16" href="#__codelineno-31-16"></a><span class="w">    </span><span class="nt">&quot;nombre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Laura Pérez&quot;</span><span class="p">,</span>
+</span><span id="__span-31-17"><a id="__codelineno-31-17" name="__codelineno-31-17" href="#__codelineno-31-17"></a><span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;laura@empresa.com&quot;</span><span class="p">,</span>
+</span><span id="__span-31-18"><a id="__codelineno-31-18" name="__codelineno-31-18" href="#__codelineno-31-18"></a><span class="w">    </span><span class="nt">&quot;ciudad&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sevilla&quot;</span>
+</span><span id="__span-31-19"><a id="__codelineno-31-19" name="__codelineno-31-19" href="#__codelineno-31-19"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-31-20"><a id="__codelineno-31-20" name="__codelineno-31-20" href="#__codelineno-31-20"></a><span class="p">]</span>
 </span></code></pre></div>
 <p>También puede comprobarse desde el contenedor:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>nifi<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>cat<span class="w"> </span>/datos/salida/clientes.json
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>nifi<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>cat<span class="w"> </span>/datos/salida/clientes.json
 </span></code></pre></div>
 <hr />
 <p><strong>14. Comprobar el contenido antes de PutFile</strong></p>
@@ -2001,113 +2160,113 @@
 <hr />
 <p><strong>ClassNotFoundException</strong></p>
 <p>Mensaje:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>ClassNotFoundException: org.postgresql.Driver
+<div class="language-text highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>ClassNotFoundException: org.postgresql.Driver
 </span></code></pre></div>
 <p>Comprobar el driver:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>nifi<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-38-2"><a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>ls<span class="w"> </span>-l<span class="w"> </span>/opt/nifi/drivers
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>nifi<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>ls<span class="w"> </span>-l<span class="w"> </span>/opt/nifi/drivers
 </span></code></pre></div>
 <hr />
 <p><strong>Connection refused</strong></p>
 <p>Mensaje:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>Connection refused
+<div class="language-text highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>Connection refused
 </span></code></pre></div>
 <p>Comprobar PostgreSQL:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>docker<span class="w"> </span>ps
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>docker<span class="w"> </span>ps
 </span></code></pre></div>
 <p>Y la conectividad:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>nifi<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-41-2"><a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;echo &gt; /dev/tcp/postgres/5432&#39;</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>nifi<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;echo &gt; /dev/tcp/postgres/5432&#39;</span>
 </span></code></pre></div>
 <hr />
 <p><strong>UnknownHostException</strong></p>
 <p>Comprobar la resolución:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-42-1"><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>nifi<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-42-2"><a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a>getent<span class="w"> </span>hosts<span class="w"> </span>postgres
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>nifi<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-38-2"><a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>getent<span class="w"> </span>hosts<span class="w"> </span>postgres
 </span></code></pre></div>
 <p>Ambos contenedores deben pertenecer a la misma red Docker.</p>
 <hr />
 <p><strong>PutFile escribe dentro del contenedor</strong></p>
 <p>Comprobar el montaje:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-43-1"><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>docker<span class="w"> </span>inspect<span class="w"> </span>nifi<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-43-2"><a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>--format<span class="w"> </span><span class="s1">&#39;{{range .Mounts}}{{println .Source &quot;-&gt;&quot; .Destination}}{{end}}&#39;</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>docker<span class="w"> </span>inspect<span class="w"> </span>nifi<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>--format<span class="w"> </span><span class="s1">&#39;{{range .Mounts}}{{println .Source &quot;-&gt;&quot; .Destination}}{{end}}&#39;</span>
 </span></code></pre></div>
 <p>Debe aparecer:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-44-1"><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>/opt/nifi/datos -&gt; /datos
+<div class="language-text highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>/opt/nifi/datos -&gt; /datos
 </span></code></pre></div>
 <hr />
 <p><strong>Permission denied</strong></p>
 <p>Asignar permisos al directorio del host:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-45-1"><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">777</span><span class="w"> </span>/opt/nifi/datos
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">777</span><span class="w"> </span>/opt/nifi/datos
 </span></code></pre></div>
 <p>En un entorno de producción deben utilizarse permisos y propietarios más restrictivos.</p>
 <hr />
 <p><strong>El fichero ya existe</strong></p>
 <p>Si la estrategia es <code>fail</code>, <code>PutFile</code> enviará el FlowFile por <code>failure</code>.</p>
 <p>Configurar:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-46-1"><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>Conflict Resolution Strategy = replace
+<div class="language-text highlight"><pre><span></span><code><span id="__span-42-1"><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>Conflict Resolution Strategy = replace
 </span></code></pre></div>
 <p>o utilizar un nombre con fecha y hora.</p>
 <hr />
 <p><strong>El JSON aparece vacío</strong></p>
 <p>Comprobar directamente la consulta:</p>
-<div class="language-sql highlight"><pre><span></span><code><span id="__span-47-1"><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="k">SELECT</span>
-</span><span id="__span-47-2"><a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a><span class="w">    </span><span class="n">id</span><span class="p">,</span>
-</span><span id="__span-47-3"><a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a><span class="w">    </span><span class="n">nombre</span><span class="p">,</span>
-</span><span id="__span-47-4"><a id="__codelineno-47-4" name="__codelineno-47-4" href="#__codelineno-47-4"></a><span class="w">    </span><span class="n">email</span><span class="p">,</span>
-</span><span id="__span-47-5"><a id="__codelineno-47-5" name="__codelineno-47-5" href="#__codelineno-47-5"></a><span class="w">    </span><span class="n">ciudad</span>
-</span><span id="__span-47-6"><a id="__codelineno-47-6" name="__codelineno-47-6" href="#__codelineno-47-6"></a><span class="k">FROM</span><span class="w"> </span><span class="n">clientes</span><span class="p">;</span>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-43-1"><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="k">SELECT</span>
+</span><span id="__span-43-2"><a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a><span class="w">    </span><span class="n">id</span><span class="p">,</span>
+</span><span id="__span-43-3"><a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a><span class="w">    </span><span class="n">nombre</span><span class="p">,</span>
+</span><span id="__span-43-4"><a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a><span class="w">    </span><span class="n">email</span><span class="p">,</span>
+</span><span id="__span-43-5"><a id="__codelineno-43-5" name="__codelineno-43-5" href="#__codelineno-43-5"></a><span class="w">    </span><span class="n">ciudad</span>
+</span><span id="__span-43-6"><a id="__codelineno-43-6" name="__codelineno-43-6" href="#__codelineno-43-6"></a><span class="k">FROM</span><span class="w"> </span><span class="n">clientes</span><span class="p">;</span>
 </span></code></pre></div>
 <p>Si no existen registros, el resultado puede ser:</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-48-1"><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="p">[]</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-44-1"><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="p">[]</span>
 </span></code></pre></div>
 <hr />
 <p><strong>17. Reto adicional</strong></p>
 <p>Modificar la consulta para exportar únicamente los clientes de Valencia:</p>
-<div class="language-sql highlight"><pre><span></span><code><span id="__span-49-1"><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a><span class="k">SELECT</span>
-</span><span id="__span-49-2"><a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a><span class="w">    </span><span class="n">id</span><span class="p">,</span>
-</span><span id="__span-49-3"><a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a><span class="w">    </span><span class="n">nombre</span><span class="p">,</span>
-</span><span id="__span-49-4"><a id="__codelineno-49-4" name="__codelineno-49-4" href="#__codelineno-49-4"></a><span class="w">    </span><span class="n">email</span><span class="p">,</span>
-</span><span id="__span-49-5"><a id="__codelineno-49-5" name="__codelineno-49-5" href="#__codelineno-49-5"></a><span class="w">    </span><span class="n">ciudad</span>
-</span><span id="__span-49-6"><a id="__codelineno-49-6" name="__codelineno-49-6" href="#__codelineno-49-6"></a><span class="k">FROM</span><span class="w"> </span><span class="n">clientes</span>
-</span><span id="__span-49-7"><a id="__codelineno-49-7" name="__codelineno-49-7" href="#__codelineno-49-7"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">ciudad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Valencia&#39;</span>
-</span><span id="__span-49-8"><a id="__codelineno-49-8" name="__codelineno-49-8" href="#__codelineno-49-8"></a><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-45-1"><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="k">SELECT</span>
+</span><span id="__span-45-2"><a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a><span class="w">    </span><span class="n">id</span><span class="p">,</span>
+</span><span id="__span-45-3"><a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="w">    </span><span class="n">nombre</span><span class="p">,</span>
+</span><span id="__span-45-4"><a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a><span class="w">    </span><span class="n">email</span><span class="p">,</span>
+</span><span id="__span-45-5"><a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a><span class="w">    </span><span class="n">ciudad</span>
+</span><span id="__span-45-6"><a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a><span class="k">FROM</span><span class="w"> </span><span class="n">clientes</span>
+</span><span id="__span-45-7"><a id="__codelineno-45-7" name="__codelineno-45-7" href="#__codelineno-45-7"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">ciudad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Valencia&#39;</span>
+</span><span id="__span-45-8"><a id="__codelineno-45-8" name="__codelineno-45-8" href="#__codelineno-45-8"></a><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
 </span></code></pre></div>
 <p>Nombre del fichero:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-50-1"><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>clientes_valencia.json
+<div class="language-text highlight"><pre><span></span><code><span id="__span-46-1"><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>clientes_valencia.json
 </span></code></pre></div>
 <p>Resultado:</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-51-1"><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="p">[</span>
-</span><span id="__span-51-2"><a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a><span class="w">  </span><span class="p">{</span>
-</span><span id="__span-51-3"><a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a><span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-</span><span id="__span-51-4"><a id="__codelineno-51-4" name="__codelineno-51-4" href="#__codelineno-51-4"></a><span class="w">    </span><span class="nt">&quot;nombre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ana López&quot;</span><span class="p">,</span>
-</span><span id="__span-51-5"><a id="__codelineno-51-5" name="__codelineno-51-5" href="#__codelineno-51-5"></a><span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ana@empresa.com&quot;</span><span class="p">,</span>
-</span><span id="__span-51-6"><a id="__codelineno-51-6" name="__codelineno-51-6" href="#__codelineno-51-6"></a><span class="w">    </span><span class="nt">&quot;ciudad&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Valencia&quot;</span>
-</span><span id="__span-51-7"><a id="__codelineno-51-7" name="__codelineno-51-7" href="#__codelineno-51-7"></a><span class="w">  </span><span class="p">}</span>
-</span><span id="__span-51-8"><a id="__codelineno-51-8" name="__codelineno-51-8" href="#__codelineno-51-8"></a><span class="p">]</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-47-1"><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="p">[</span>
+</span><span id="__span-47-2"><a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a><span class="w">  </span><span class="p">{</span>
+</span><span id="__span-47-3"><a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a><span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-47-4"><a id="__codelineno-47-4" name="__codelineno-47-4" href="#__codelineno-47-4"></a><span class="w">    </span><span class="nt">&quot;nombre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ana López&quot;</span><span class="p">,</span>
+</span><span id="__span-47-5"><a id="__codelineno-47-5" name="__codelineno-47-5" href="#__codelineno-47-5"></a><span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ana@empresa.com&quot;</span><span class="p">,</span>
+</span><span id="__span-47-6"><a id="__codelineno-47-6" name="__codelineno-47-6" href="#__codelineno-47-6"></a><span class="w">    </span><span class="nt">&quot;ciudad&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Valencia&quot;</span>
+</span><span id="__span-47-7"><a id="__codelineno-47-7" name="__codelineno-47-7" href="#__codelineno-47-7"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-47-8"><a id="__codelineno-47-8" name="__codelineno-47-8" href="#__codelineno-47-8"></a><span class="p">]</span>
 </span></code></pre></div>
 <hr />
 <p><strong>18. Reto avanzado</strong></p>
 <p>Añadir información calculada directamente en la consulta:</p>
-<div class="language-sql highlight"><pre><span></span><code><span id="__span-52-1"><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a><span class="k">SELECT</span>
-</span><span id="__span-52-2"><a id="__codelineno-52-2" name="__codelineno-52-2" href="#__codelineno-52-2"></a><span class="w">    </span><span class="n">id</span><span class="p">,</span>
-</span><span id="__span-52-3"><a id="__codelineno-52-3" name="__codelineno-52-3" href="#__codelineno-52-3"></a><span class="w">    </span><span class="k">UPPER</span><span class="p">(</span><span class="n">nombre</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">nombre</span><span class="p">,</span>
-</span><span id="__span-52-4"><a id="__codelineno-52-4" name="__codelineno-52-4" href="#__codelineno-52-4"></a><span class="w">    </span><span class="k">LOWER</span><span class="p">(</span><span class="n">email</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">email</span><span class="p">,</span>
-</span><span id="__span-52-5"><a id="__codelineno-52-5" name="__codelineno-52-5" href="#__codelineno-52-5"></a><span class="w">    </span><span class="k">UPPER</span><span class="p">(</span><span class="n">ciudad</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">ciudad</span><span class="p">,</span>
-</span><span id="__span-52-6"><a id="__codelineno-52-6" name="__codelineno-52-6" href="#__codelineno-52-6"></a><span class="w">    </span><span class="k">CURRENT_TIMESTAMP</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">fecha_exportacion</span>
-</span><span id="__span-52-7"><a id="__codelineno-52-7" name="__codelineno-52-7" href="#__codelineno-52-7"></a><span class="k">FROM</span><span class="w"> </span><span class="n">clientes</span>
-</span><span id="__span-52-8"><a id="__codelineno-52-8" name="__codelineno-52-8" href="#__codelineno-52-8"></a><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-48-1"><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="k">SELECT</span>
+</span><span id="__span-48-2"><a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a><span class="w">    </span><span class="n">id</span><span class="p">,</span>
+</span><span id="__span-48-3"><a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a><span class="w">    </span><span class="k">UPPER</span><span class="p">(</span><span class="n">nombre</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">nombre</span><span class="p">,</span>
+</span><span id="__span-48-4"><a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a><span class="w">    </span><span class="k">LOWER</span><span class="p">(</span><span class="n">email</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">email</span><span class="p">,</span>
+</span><span id="__span-48-5"><a id="__codelineno-48-5" name="__codelineno-48-5" href="#__codelineno-48-5"></a><span class="w">    </span><span class="k">UPPER</span><span class="p">(</span><span class="n">ciudad</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">ciudad</span><span class="p">,</span>
+</span><span id="__span-48-6"><a id="__codelineno-48-6" name="__codelineno-48-6" href="#__codelineno-48-6"></a><span class="w">    </span><span class="k">CURRENT_TIMESTAMP</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">fecha_exportacion</span>
+</span><span id="__span-48-7"><a id="__codelineno-48-7" name="__codelineno-48-7" href="#__codelineno-48-7"></a><span class="k">FROM</span><span class="w"> </span><span class="n">clientes</span>
+</span><span id="__span-48-8"><a id="__codelineno-48-8" name="__codelineno-48-8" href="#__codelineno-48-8"></a><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
 </span></code></pre></div>
 <p>Resultado aproximado:</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-53-1"><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="p">[</span>
-</span><span id="__span-53-2"><a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a><span class="w">  </span><span class="p">{</span>
-</span><span id="__span-53-3"><a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a><span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-</span><span id="__span-53-4"><a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a><span class="w">    </span><span class="nt">&quot;nombre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ANA LÓPEZ&quot;</span><span class="p">,</span>
-</span><span id="__span-53-5"><a id="__codelineno-53-5" name="__codelineno-53-5" href="#__codelineno-53-5"></a><span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ana@empresa.com&quot;</span><span class="p">,</span>
-</span><span id="__span-53-6"><a id="__codelineno-53-6" name="__codelineno-53-6" href="#__codelineno-53-6"></a><span class="w">    </span><span class="nt">&quot;ciudad&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;VALENCIA&quot;</span><span class="p">,</span>
-</span><span id="__span-53-7"><a id="__codelineno-53-7" name="__codelineno-53-7" href="#__codelineno-53-7"></a><span class="w">    </span><span class="nt">&quot;fecha_exportacion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-07-31T18:00:00&quot;</span>
-</span><span id="__span-53-8"><a id="__codelineno-53-8" name="__codelineno-53-8" href="#__codelineno-53-8"></a><span class="w">  </span><span class="p">}</span>
-</span><span id="__span-53-9"><a id="__codelineno-53-9" name="__codelineno-53-9" href="#__codelineno-53-9"></a><span class="p">]</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-49-1"><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a><span class="p">[</span>
+</span><span id="__span-49-2"><a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a><span class="w">  </span><span class="p">{</span>
+</span><span id="__span-49-3"><a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a><span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-49-4"><a id="__codelineno-49-4" name="__codelineno-49-4" href="#__codelineno-49-4"></a><span class="w">    </span><span class="nt">&quot;nombre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ANA LÓPEZ&quot;</span><span class="p">,</span>
+</span><span id="__span-49-5"><a id="__codelineno-49-5" name="__codelineno-49-5" href="#__codelineno-49-5"></a><span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ana@empresa.com&quot;</span><span class="p">,</span>
+</span><span id="__span-49-6"><a id="__codelineno-49-6" name="__codelineno-49-6" href="#__codelineno-49-6"></a><span class="w">    </span><span class="nt">&quot;ciudad&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;VALENCIA&quot;</span><span class="p">,</span>
+</span><span id="__span-49-7"><a id="__codelineno-49-7" name="__codelineno-49-7" href="#__codelineno-49-7"></a><span class="w">    </span><span class="nt">&quot;fecha_exportacion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-07-31T18:00:00&quot;</span>
+</span><span id="__span-49-8"><a id="__codelineno-49-8" name="__codelineno-49-8" href="#__codelineno-49-8"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-49-9"><a id="__codelineno-49-9" name="__codelineno-49-9" href="#__codelineno-49-9"></a><span class="p">]</span>
 </span></code></pre></div>
 <p>En este caso, parte de la transformación se realiza directamente en PostgreSQL.</p>
 <hr />
@@ -2129,13 +2288,13 @@
 <li><code>PutFile</code>, para guardar el resultado.</li>
 </ul>
 <p>El flujo final es:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-54-1"><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a>GenerateFlowFile
-</span><span id="__span-54-2"><a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>        ↓
-</span><span id="__span-54-3"><a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a>ExecuteSQLRecord
-</span><span id="__span-54-4"><a id="__codelineno-54-4" name="__codelineno-54-4" href="#__codelineno-54-4"></a>        ↓
-</span><span id="__span-54-5"><a id="__codelineno-54-5" name="__codelineno-54-5" href="#__codelineno-54-5"></a>UpdateAttribute
-</span><span id="__span-54-6"><a id="__codelineno-54-6" name="__codelineno-54-6" href="#__codelineno-54-6"></a>        ↓
-</span><span id="__span-54-7"><a id="__codelineno-54-7" name="__codelineno-54-7" href="#__codelineno-54-7"></a>PutFile
+<div class="language-text highlight"><pre><span></span><code><span id="__span-50-1"><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>GenerateFlowFile
+</span><span id="__span-50-2"><a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>        ↓
+</span><span id="__span-50-3"><a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a>ExecuteSQLRecord
+</span><span id="__span-50-4"><a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a>        ↓
+</span><span id="__span-50-5"><a id="__codelineno-50-5" name="__codelineno-50-5" href="#__codelineno-50-5"></a>UpdateAttribute
+</span><span id="__span-50-6"><a id="__codelineno-50-6" name="__codelineno-50-6" href="#__codelineno-50-6"></a>        ↓
+</span><span id="__span-50-7"><a id="__codelineno-50-7" name="__codelineno-50-7" href="#__codelineno-50-7"></a>PutFile
 </span></code></pre></div>
 <p>Este patrón puede reutilizarse para:</p>
 <ul>
@@ -2150,127 +2309,273 @@
 <p><strong>Ingesta de datos meteorológicos → MongoDB</strong></p>
 <p>¿Alguna vez te has parado a pensar de dónde salen los datos que utilizan las apps del tiempo?</p>
 <p>¿Por qué Google, AEMET o las webs meteorológicas pueden mostrarte, al segundo, la temperatura exacta de tu ciudad?</p>
-<p>En este mini-proyecto vas a construir tu propio sistema profesional de ingesta de datos meteorológicos en tiempo real, usando las mismas tecnologías que emplean empresas de IoT, Smart Cities y Big Data.</p>
+<p>En este mini-proyecto vas a construir un flujo realista de ingesta de datos meteorológicos en tiempo real con Apache NiFi 2.10, usando una arquitectura que se puede llevar directamente a un entorno de prácticas.</p>
 <p><strong>Objetivo del reto</strong></p>
 <p>Vas a diseñar, desplegar y automatizar un flujo completo en Apache NiFi 2.10 capaz de:</p>
 <ol>
-<li>Consultar automáticamente una API meteorológica real (Open-Meteo)</li>
-<li>Obtener la temperatura actual de Xàtiva cada minuto</li>
-<li>Transformar la respuesta para dejarla en formato limpio y analizable</li>
-<li>Guardar los datos en MongoDB para su análisis histórico</li>
-<li>Crear un registro por cada lectura, incluyendo:</li>
+<li>Consultar automáticamente una API meteorológica real, Open-Meteo.</li>
+<li>Parametrizar ciudad, latitud y longitud como atributos del flujo.</li>
+<li>Obtener cada minuto la temperatura y el resto de variables meteorológicas actuales.</li>
+<li>Transformar la respuesta para dejarla en formato limpio y analizable.</li>
+<li>Guardar los datos en MongoDB para su análisis histórico.</li>
+<li>Crear un documento por cada lectura, incluyendo:</li>
+<li>Ciudad</li>
+<li>Latitud y longitud</li>
 <li>Temperatura</li>
-<li>Hora oficial del dato (timestamp_api)</li>
-<li>Hora de captura real del flujo (timestamp_nifi)</li>
+<li>Humedad</li>
+<li>Viento</li>
+<li>Lluvia</li>
+<li>Nubes</li>
+<li>Hora oficial del dato (<code>timestamp_api</code>)</li>
+<li>Hora de captura real del flujo (<code>timestamp_nifi</code>)</li>
 </ol>
 <p><strong>Cómo funciona Open-Meteo</strong></p>
-<p>Puedes explicarlo al alumnado con esta narrativa:</p>
 <ol>
 <li>Open-Meteo es un proveedor de API meteorológica gratuita.</li>
 <li>No requiere API key para muchos usos.</li>
 <li>Devuelve los datos en formato JSON, que es estándar en servicios web.</li>
 <li>La API funciona a base de parámetros en la URL.</li>
-<li>latitude y longitude: ubicación, Xàtiva en este caso.</li>
-<li>current o hourly: qué tipo de datos queremos, actuales u horarios.</li>
-<li>Lista de variables separadas por comas: temperature_2m, relative_humidity_2m, wind_speed_10m, precipitation, cloud_cover, etc.</li>
-<li>start_date y end_date: para pedir históricos por rango de fechas.</li>
-<li>timezone: para ajustar las horas a Europa/Madrid.</li>
-<li>Respuesta JSON estructurada.</li>
-<li>Campos generales: latitude, longitude, generationtime_ms, etc.</li>
-<li>Secciones como current o hourly que contienen arrays de tiempos y valores.</li>
+<li><code>latitude</code> y <code>longitude</code>: ubicación, Xàtiva en este caso.</li>
+<li><code>current</code>: variables actuales que queremos consultar.</li>
+<li>Variables separadas por comas: <code>temperature_2m</code>, <code>relative_humidity_2m</code>, <code>wind_speed_10m</code>, <code>precipitation</code>, <code>cloud_cover</code>.</li>
+<li><code>timezone</code>: para ajustar las horas a Europa/Madrid.</li>
+<li>La respuesta JSON está estructurada.</li>
+<li>Campos generales: <code>latitude</code>, <code>longitude</code>, <code>generationtime_ms</code>, etc.</li>
+<li>Sección <code>current</code> con la medición actual.</li>
 </ol>
 <p><strong>Descripción general del flujo</strong></p>
-<p>Flujo NiFi propuesto:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-55-1"><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>GenerateFlowFile → InvokeHTTP → EvaluateJsonPath → ReplaceText → PutMongo → LogAttribute
+<div class="language-text highlight"><pre><span></span><code><span id="__span-51-1"><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>GenerateFlowFile → UpdateAttribute → InvokeHTTP → EvaluateJsonPath → ReplaceText → PutMongoRecord → LogAttribute
 </span></code></pre></div>
 <p><strong>1. API de Open-Meteo</strong></p>
 <p>Coordenadas oficiales de Xàtiva:</p>
 <ul>
-<li>Latitud: 38.9878</li>
-<li>Longitud: -0.5186</li>
+<li>Latitud: <code>38.9878</code></li>
+<li>Longitud: <code>-0.5186</code></li>
 </ul>
 <p>Para obtener la latitud y longitud de tu ciudad:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-56-1"><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>https://nominatim.openstreetmap.org/search?city=XXXX&amp;country=Spain&amp;format=json
+<div class="language-text highlight"><pre><span></span><code><span id="__span-52-1"><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>https://nominatim.openstreetmap.org/search?city=XXXX&amp;country=Spain&amp;format=json
 </span></code></pre></div>
 <p>Endpoint a usar en Open-Meteo:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-57-1"><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>https://api.open-meteo.com/v1/forecast?latitude=38.9878&amp;longitude=-0.5186&amp;current=temperature_2m&amp;timezone=Europe%2FMadrid
+<div class="language-text highlight"><pre><span></span><code><span id="__span-53-1"><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>https://api.open-meteo.com/v1/forecast?latitude=${latitude}&amp;longitude=${longitude}&amp;current=temperature_2m,relative_humidity_2m,wind_speed_10m,precipitation,cloud_cover&amp;timezone=Europe%2FMadrid
 </span></code></pre></div>
-<p>La respuesta tendrá la estructura:</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-58-1"><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="p">{</span>
-</span><span id="__span-58-2"><a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a><span class="w">  </span><span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">38.99</span><span class="p">,</span>
-</span><span id="__span-58-3"><a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a><span class="w">  </span><span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.52</span><span class="p">,</span>
-</span><span id="__span-58-4"><a id="__codelineno-58-4" name="__codelineno-58-4" href="#__codelineno-58-4"></a><span class="w">  </span><span class="nt">&quot;current&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-58-5"><a id="__codelineno-58-5" name="__codelineno-58-5" href="#__codelineno-58-5"></a><span class="w">    </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-11-17T14:00&quot;</span><span class="p">,</span>
-</span><span id="__span-58-6"><a id="__codelineno-58-6" name="__codelineno-58-6" href="#__codelineno-58-6"></a><span class="w">    </span><span class="nt">&quot;temperature_2m&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">21.3</span>
-</span><span id="__span-58-7"><a id="__codelineno-58-7" name="__codelineno-58-7" href="#__codelineno-58-7"></a><span class="w">  </span><span class="p">}</span>
-</span><span id="__span-58-8"><a id="__codelineno-58-8" name="__codelineno-58-8" href="#__codelineno-58-8"></a><span class="p">}</span>
+<p>La respuesta tendrá una estructura similar a esta:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-54-1"><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="p">{</span>
+</span><span id="__span-54-2"><a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a><span class="w">  </span><span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">38.99</span><span class="p">,</span>
+</span><span id="__span-54-3"><a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a><span class="w">  </span><span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.52</span><span class="p">,</span>
+</span><span id="__span-54-4"><a id="__codelineno-54-4" name="__codelineno-54-4" href="#__codelineno-54-4"></a><span class="w">  </span><span class="nt">&quot;current&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-54-5"><a id="__codelineno-54-5" name="__codelineno-54-5" href="#__codelineno-54-5"></a><span class="w">    </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-11-17T14:00&quot;</span><span class="p">,</span>
+</span><span id="__span-54-6"><a id="__codelineno-54-6" name="__codelineno-54-6" href="#__codelineno-54-6"></a><span class="w">    </span><span class="nt">&quot;temperature_2m&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">21.3</span><span class="p">,</span>
+</span><span id="__span-54-7"><a id="__codelineno-54-7" name="__codelineno-54-7" href="#__codelineno-54-7"></a><span class="w">    </span><span class="nt">&quot;relative_humidity_2m&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">54</span><span class="p">,</span>
+</span><span id="__span-54-8"><a id="__codelineno-54-8" name="__codelineno-54-8" href="#__codelineno-54-8"></a><span class="w">    </span><span class="nt">&quot;wind_speed_10m&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">11.2</span><span class="p">,</span>
+</span><span id="__span-54-9"><a id="__codelineno-54-9" name="__codelineno-54-9" href="#__codelineno-54-9"></a><span class="w">    </span><span class="nt">&quot;precipitation&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+</span><span id="__span-54-10"><a id="__codelineno-54-10" name="__codelineno-54-10" href="#__codelineno-54-10"></a><span class="w">    </span><span class="nt">&quot;cloud_cover&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">36</span>
+</span><span id="__span-54-11"><a id="__codelineno-54-11" name="__codelineno-54-11" href="#__codelineno-54-11"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-54-12"><a id="__codelineno-54-12" name="__codelineno-54-12" href="#__codelineno-54-12"></a><span class="p">}</span>
 </span></code></pre></div>
 <p><strong>2. Configuración del flujo NiFi</strong></p>
 <p><strong>2.1 GenerateFlowFile</strong></p>
 <ul>
-<li>Run Schedule: 60 sec, o el intervalo que prefieras</li>
+<li>Run Schedule: <code>60 sec</code>, o el intervalo que prefieras.</li>
 </ul>
-<p><strong>2.2 InvokeHTTP</strong></p>
-<ul>
-<li>Method: GET</li>
-<li>Remote URL:</li>
-</ul>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-59-1"><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a>https://api.open-meteo.com/v1/forecast?latitude=38.9878&amp;longitude=-0.5186&amp;current=temperature_2m&amp;timezone=Europe%2FMadrid
-</span></code></pre></div>
-<p><strong>2.3 EvaluateJsonPath</strong></p>
-<p>Extraemos únicamente la temperatura y la hora.</p>
+<p><strong>2.2 UpdateAttribute</strong></p>
+<p>Crear los atributos del FlowFile:</p>
+<table>
+<thead>
+<tr>
+<th>Atributo</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>city</td>
+<td><code>Xàtiva</code></td>
+</tr>
+<tr>
+<td>latitude</td>
+<td><code>38.9878</code></td>
+</tr>
+<tr>
+<td>longitude</td>
+<td><code>-0.5186</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>2.3 InvokeHTTP</strong></p>
+<p>Configurar:</p>
+<table>
+<thead>
+<tr>
+<th>Propiedad</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Method</td>
+<td><code>GET</code></td>
+</tr>
+<tr>
+<td>Remote URL</td>
+<td><code>https://api.open-meteo.com/v1/forecast?latitude=${latitude}&amp;longitude=${longitude}&amp;current=temperature_2m,relative_humidity_2m,wind_speed_10m,precipitation,cloud_cover&amp;timezone=Europe%2FMadrid</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>2.4 EvaluateJsonPath</strong></p>
+<p>Extraemos los campos que nos interesan.</p>
 <p>Properties:</p>
 <ul>
-<li>temperature: $.current.temperature_2m</li>
-<li>timestamp_api: $.current.time</li>
-<li>Destination: flowfile-attribute</li>
+<li>temperature: <code>$.current.temperature_2m</code></li>
+<li>humidity: <code>$.current.relative_humidity_2m</code></li>
+<li>wind_speed: <code>$.current.wind_speed_10m</code></li>
+<li>rain: <code>$.current.precipitation</code></li>
+<li>cloud: <code>$.current.cloud_cover</code></li>
+<li>timestamp_api: <code>$.current.time</code></li>
+<li>Destination: <code>flowfile-attribute</code></li>
 </ul>
-<p><strong>2.4 ReplaceText</strong></p>
+<p><strong>2.5 ReplaceText</strong></p>
 <p>Reemplazamos con este JSON:</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-60-1"><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="p">{</span>
-</span><span id="__span-60-2"><a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a><span class="w">  </span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${city}&quot;</span><span class="p">,</span>
-</span><span id="__span-60-3"><a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a><span class="w">  </span><span class="nt">&quot;temperature&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="kc">te</span><span class="err">mpera</span><span class="kc">ture</span><span class="p">:</span><span class="kc">t</span><span class="err">oNumber()</span><span class="p">},</span>
-</span><span id="__span-60-4"><a id="__codelineno-60-4" name="__codelineno-60-4" href="#__codelineno-60-4"></a><span class="w">  </span><span class="nt">&quot;humidity&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="err">humidi</span><span class="kc">t</span><span class="err">y</span><span class="p">:</span><span class="kc">t</span><span class="err">oNumber()</span><span class="p">},</span>
-</span><span id="__span-60-5"><a id="__codelineno-60-5" name="__codelineno-60-5" href="#__codelineno-60-5"></a><span class="w">  </span><span class="nt">&quot;wind_speed&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="err">wi</span><span class="kc">n</span><span class="err">d_speed</span><span class="p">:</span><span class="kc">t</span><span class="err">oNumber()</span><span class="p">},</span>
-</span><span id="__span-60-6"><a id="__codelineno-60-6" name="__codelineno-60-6" href="#__codelineno-60-6"></a><span class="w">  </span><span class="nt">&quot;rain&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="err">rai</span><span class="kc">n</span><span class="p">:</span><span class="kc">t</span><span class="err">oNumber()</span><span class="p">},</span>
-</span><span id="__span-60-7"><a id="__codelineno-60-7" name="__codelineno-60-7" href="#__codelineno-60-7"></a><span class="w">  </span><span class="nt">&quot;cloud&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="err">cloud</span><span class="p">:</span><span class="kc">t</span><span class="err">oNumber()</span><span class="p">},</span>
-</span><span id="__span-60-8"><a id="__codelineno-60-8" name="__codelineno-60-8" href="#__codelineno-60-8"></a><span class="w">  </span><span class="nt">&quot;timestamp_api&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${timestamp_api}&quot;</span><span class="p">,</span>
-</span><span id="__span-60-9"><a id="__codelineno-60-9" name="__codelineno-60-9" href="#__codelineno-60-9"></a><span class="w">  </span><span class="nt">&quot;timestamp_nifi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${now():format(&#39;yyyy-MM-dd HH:mm:ss&#39;)}&quot;</span>
-</span><span id="__span-60-10"><a id="__codelineno-60-10" name="__codelineno-60-10" href="#__codelineno-60-10"></a><span class="p">}</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-55-1"><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a><span class="p">{</span>
+</span><span id="__span-55-2"><a id="__codelineno-55-2" name="__codelineno-55-2" href="#__codelineno-55-2"></a><span class="w">  </span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${city}&quot;</span><span class="p">,</span>
+</span><span id="__span-55-3"><a id="__codelineno-55-3" name="__codelineno-55-3" href="#__codelineno-55-3"></a><span class="w">  </span><span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="err">la</span><span class="kc">t</span><span class="err">i</span><span class="kc">tu</span><span class="err">de</span><span class="p">:</span><span class="kc">t</span><span class="err">oNumber()</span><span class="p">},</span>
+</span><span id="__span-55-4"><a id="__codelineno-55-4" name="__codelineno-55-4" href="#__codelineno-55-4"></a><span class="w">  </span><span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="err">lo</span><span class="kc">n</span><span class="err">gi</span><span class="kc">tu</span><span class="err">de</span><span class="p">:</span><span class="kc">t</span><span class="err">oNumber()</span><span class="p">},</span>
+</span><span id="__span-55-5"><a id="__codelineno-55-5" name="__codelineno-55-5" href="#__codelineno-55-5"></a><span class="w">  </span><span class="nt">&quot;temperature&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="kc">te</span><span class="err">mpera</span><span class="kc">ture</span><span class="p">:</span><span class="kc">t</span><span class="err">oNumber()</span><span class="p">},</span>
+</span><span id="__span-55-6"><a id="__codelineno-55-6" name="__codelineno-55-6" href="#__codelineno-55-6"></a><span class="w">  </span><span class="nt">&quot;humidity&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="err">humidi</span><span class="kc">t</span><span class="err">y</span><span class="p">:</span><span class="kc">t</span><span class="err">oNumber()</span><span class="p">},</span>
+</span><span id="__span-55-7"><a id="__codelineno-55-7" name="__codelineno-55-7" href="#__codelineno-55-7"></a><span class="w">  </span><span class="nt">&quot;wind_speed&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="err">wi</span><span class="kc">n</span><span class="err">d_speed</span><span class="p">:</span><span class="kc">t</span><span class="err">oNumber()</span><span class="p">},</span>
+</span><span id="__span-55-8"><a id="__codelineno-55-8" name="__codelineno-55-8" href="#__codelineno-55-8"></a><span class="w">  </span><span class="nt">&quot;rain&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="err">rai</span><span class="kc">n</span><span class="p">:</span><span class="kc">t</span><span class="err">oNumber()</span><span class="p">},</span>
+</span><span id="__span-55-9"><a id="__codelineno-55-9" name="__codelineno-55-9" href="#__codelineno-55-9"></a><span class="w">  </span><span class="nt">&quot;cloud&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="err">cloud</span><span class="p">:</span><span class="kc">t</span><span class="err">oNumber()</span><span class="p">},</span>
+</span><span id="__span-55-10"><a id="__codelineno-55-10" name="__codelineno-55-10" href="#__codelineno-55-10"></a><span class="w">  </span><span class="nt">&quot;timestamp_api&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${timestamp_api}&quot;</span><span class="p">,</span>
+</span><span id="__span-55-11"><a id="__codelineno-55-11" name="__codelineno-55-11" href="#__codelineno-55-11"></a><span class="w">  </span><span class="nt">&quot;timestamp_nifi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${now():format(&#39;yyyy-MM-dd HH:mm:ss&#39;)}&quot;</span>
+</span><span id="__span-55-12"><a id="__codelineno-55-12" name="__codelineno-55-12" href="#__codelineno-55-12"></a><span class="p">}</span>
 </span></code></pre></div>
-<p><strong>3. Configurar PutMongo</strong></p>
+<p><strong>3. Configurar MongoDB</strong></p>
+<p>En NiFi 2.10 la conexión se centraliza con un Controller Service.</p>
+<p><strong>3.1 MongoDBControllerService</strong></p>
+<p>Nombre recomendado:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-56-1"><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>MONGO-SERVICE-WEATHER
+</span></code></pre></div>
 <p>Configuración:</p>
-<ul>
-<li>Mongo URI: mongodb://localhost:27017</li>
-<li>Database Name: test</li>
-<li>Collection Name: weather</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>Propiedad</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>URI</td>
+<td><code>mongodb://localhost:27017</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>3.2 JsonTreeReader</strong></p>
+<p>Nombre recomendado:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-57-1"><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>JSON-READER-WEATHER
+</span></code></pre></div>
+<p>Configuración:</p>
+<table>
+<thead>
+<tr>
+<th>Propiedad</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Schema Access Strategy</td>
+<td><code>Infer Schema</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>3.3 PutMongoRecord</strong></p>
+<p>Nombre recomendado:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-58-1"><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a>Guardar clima en MongoDB
+</span></code></pre></div>
+<p>Configuración:</p>
+<table>
+<thead>
+<tr>
+<th>Propiedad</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Client Service</td>
+<td><code>MONGO-SERVICE-WEATHER</code></td>
+</tr>
+<tr>
+<td>Mongo Database Name</td>
+<td><code>test</code></td>
+</tr>
+<tr>
+<td>Mongo Collection Name</td>
+<td><code>weather</code></td>
+</tr>
+<tr>
+<td>Record Reader</td>
+<td><code>JSON-READER-WEATHER</code></td>
+</tr>
+<tr>
+<td>Batch Size</td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td>Ordered</td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td>Bypass Validation</td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
 <p><strong>4. Documento JSON final almacenado en MongoDB</strong></p>
 <p>Ejemplo registrado:</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-61-1"><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a><span class="p">[</span>
-</span><span id="__span-61-2"><a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a><span class="w">  </span><span class="p">{</span>
-</span><span id="__span-61-3"><a id="__codelineno-61-3" name="__codelineno-61-3" href="#__codelineno-61-3"></a><span class="w">    </span><span class="nt">&quot;_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;$oid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;691fb19041a5343f25c5f492&quot;</span><span class="w"> </span><span class="p">},</span>
-</span><span id="__span-61-4"><a id="__codelineno-61-4" name="__codelineno-61-4" href="#__codelineno-61-4"></a><span class="w">    </span><span class="nt">&quot;timestamp_api&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-11-01T00:00&quot;</span><span class="p">,</span>
-</span><span id="__span-61-5"><a id="__codelineno-61-5" name="__codelineno-61-5" href="#__codelineno-61-5"></a><span class="w">    </span><span class="nt">&quot;temperature&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span>
-</span><span id="__span-61-6"><a id="__codelineno-61-6" name="__codelineno-61-6" href="#__codelineno-61-6"></a><span class="w">    </span><span class="nt">&quot;humidity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">74</span><span class="p">,</span>
-</span><span id="__span-61-7"><a id="__codelineno-61-7" name="__codelineno-61-7" href="#__codelineno-61-7"></a><span class="w">    </span><span class="nt">&quot;wind_speed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span>
-</span><span id="__span-61-8"><a id="__codelineno-61-8" name="__codelineno-61-8" href="#__codelineno-61-8"></a><span class="w">    </span><span class="nt">&quot;rain&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-</span><span id="__span-61-9"><a id="__codelineno-61-9" name="__codelineno-61-9" href="#__codelineno-61-9"></a><span class="w">    </span><span class="nt">&quot;cloud&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">99</span><span class="p">,</span>
-</span><span id="__span-61-10"><a id="__codelineno-61-10" name="__codelineno-61-10" href="#__codelineno-61-10"></a><span class="w">    </span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Enguera&quot;</span><span class="p">,</span>
-</span><span id="__span-61-11"><a id="__codelineno-61-11" name="__codelineno-61-11" href="#__codelineno-61-11"></a><span class="w">    </span><span class="nt">&quot;timestamp_nifi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-11-01T00:00&quot;</span>
-</span><span id="__span-61-12"><a id="__codelineno-61-12" name="__codelineno-61-12" href="#__codelineno-61-12"></a><span class="w">  </span><span class="p">}</span>
-</span><span id="__span-61-13"><a id="__codelineno-61-13" name="__codelineno-61-13" href="#__codelineno-61-13"></a><span class="p">]</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-59-1"><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a><span class="p">[</span>
+</span><span id="__span-59-2"><a id="__codelineno-59-2" name="__codelineno-59-2" href="#__codelineno-59-2"></a><span class="w">  </span><span class="p">{</span>
+</span><span id="__span-59-3"><a id="__codelineno-59-3" name="__codelineno-59-3" href="#__codelineno-59-3"></a><span class="w">    </span><span class="nt">&quot;_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;$oid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;691fb19041a5343f25c5f492&quot;</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-59-4"><a id="__codelineno-59-4" name="__codelineno-59-4" href="#__codelineno-59-4"></a><span class="w">    </span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Xàtiva&quot;</span><span class="p">,</span>
+</span><span id="__span-59-5"><a id="__codelineno-59-5" name="__codelineno-59-5" href="#__codelineno-59-5"></a><span class="w">    </span><span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">38.9878</span><span class="p">,</span>
+</span><span id="__span-59-6"><a id="__codelineno-59-6" name="__codelineno-59-6" href="#__codelineno-59-6"></a><span class="w">    </span><span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.5186</span><span class="p">,</span>
+</span><span id="__span-59-7"><a id="__codelineno-59-7" name="__codelineno-59-7" href="#__codelineno-59-7"></a><span class="w">    </span><span class="nt">&quot;temperature&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span>
+</span><span id="__span-59-8"><a id="__codelineno-59-8" name="__codelineno-59-8" href="#__codelineno-59-8"></a><span class="w">    </span><span class="nt">&quot;humidity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">74</span><span class="p">,</span>
+</span><span id="__span-59-9"><a id="__codelineno-59-9" name="__codelineno-59-9" href="#__codelineno-59-9"></a><span class="w">    </span><span class="nt">&quot;wind_speed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span>
+</span><span id="__span-59-10"><a id="__codelineno-59-10" name="__codelineno-59-10" href="#__codelineno-59-10"></a><span class="w">    </span><span class="nt">&quot;rain&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+</span><span id="__span-59-11"><a id="__codelineno-59-11" name="__codelineno-59-11" href="#__codelineno-59-11"></a><span class="w">    </span><span class="nt">&quot;cloud&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">99</span><span class="p">,</span>
+</span><span id="__span-59-12"><a id="__codelineno-59-12" name="__codelineno-59-12" href="#__codelineno-59-12"></a><span class="w">    </span><span class="nt">&quot;timestamp_api&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-11-01T00:00&quot;</span><span class="p">,</span>
+</span><span id="__span-59-13"><a id="__codelineno-59-13" name="__codelineno-59-13" href="#__codelineno-59-13"></a><span class="w">    </span><span class="nt">&quot;timestamp_nifi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-11-01 00:00:00&quot;</span>
+</span><span id="__span-59-14"><a id="__codelineno-59-14" name="__codelineno-59-14" href="#__codelineno-59-14"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-59-15"><a id="__codelineno-59-15" name="__codelineno-59-15" href="#__codelineno-59-15"></a><span class="p">]</span>
 </span></code></pre></div>
 <p><strong>5. Ampliaciones a realizar en el proyecto</strong></p>
 <ol>
-<li>Añade como variables la ciudad, latitud y longitud.</li>
-<li>Añade humedad, viento, lluvia y nubes.</li>
-<li>Cambiar el endpoint a:</li>
+<li>Cambia la ciudad y las coordenadas como atributos del flujo.</li>
+<li>Ajusta la frecuencia de ejecución a <code>1 min</code>.</li>
+<li>Añade una rama de control con <code>LogAttribute</code> para registrar errores HTTP o de MongoDB.</li>
+<li>Si quieres almacenar varias lecturas por ejecución, aumenta el número de ejecuciones manuales o el <code>Batch Size</code>.</li>
 </ol>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-62-1"><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>...&amp;current=temperature_2m,relative_humidity_2m,wind_speed_10m,precipitation,cloud_cover
+<p>Endpoint ampliado:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-60-1"><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a>...&amp;current=temperature_2m,relative_humidity_2m,wind_speed_10m,precipitation,cloud_cover
 </span></code></pre></div>
 <p><strong>6. Entregable</strong></p>
 <p>Genera el template del flujo y guarda el <code>.xml</code>.</p>
+<p><strong>Resumen del flujo</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-61-1"><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a>GenerateFlowFile
+</span><span id="__span-61-2"><a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a>        ↓
+</span><span id="__span-61-3"><a id="__codelineno-61-3" name="__codelineno-61-3" href="#__codelineno-61-3"></a>UpdateAttribute
+</span><span id="__span-61-4"><a id="__codelineno-61-4" name="__codelineno-61-4" href="#__codelineno-61-4"></a>        ↓
+</span><span id="__span-61-5"><a id="__codelineno-61-5" name="__codelineno-61-5" href="#__codelineno-61-5"></a>InvokeHTTP
+</span><span id="__span-61-6"><a id="__codelineno-61-6" name="__codelineno-61-6" href="#__codelineno-61-6"></a>        ↓
+</span><span id="__span-61-7"><a id="__codelineno-61-7" name="__codelineno-61-7" href="#__codelineno-61-7"></a>EvaluateJsonPath
+</span><span id="__span-61-8"><a id="__codelineno-61-8" name="__codelineno-61-8" href="#__codelineno-61-8"></a>        ↓
+</span><span id="__span-61-9"><a id="__codelineno-61-9" name="__codelineno-61-9" href="#__codelineno-61-9"></a>ReplaceText
+</span><span id="__span-61-10"><a id="__codelineno-61-10" name="__codelineno-61-10" href="#__codelineno-61-10"></a>        ↓
+</span><span id="__span-61-11"><a id="__codelineno-61-11" name="__codelineno-61-11" href="#__codelineno-61-11"></a>PutMongoRecord
+</span><span id="__span-61-12"><a id="__codelineno-61-12" name="__codelineno-61-12" href="#__codelineno-61-12"></a>        ↓
+</span><span id="__span-61-13"><a id="__codelineno-61-13" name="__codelineno-61-13" href="#__codelineno-61-13"></a>LogAttribute
+</span></code></pre></div>
 
 
 
