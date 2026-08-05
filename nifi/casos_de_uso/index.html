@@ -1154,10 +1154,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#laboratorio-2-consumo-de-api-rest-y-carga-en-postgresql" class="md-nav__link">
+  <a href="#laboratorio-2-caso-de-uso-api-meteo-i" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Laboratorio 2: consumo de API REST y carga en PostgreSQL
+        Laboratorio 2: Caso de Uso API Meteo (I)
       
     </span>
   </a>
@@ -1438,10 +1438,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#laboratorio-2-consumo-de-api-rest-y-carga-en-postgresql" class="md-nav__link">
+  <a href="#laboratorio-2-caso-de-uso-api-meteo-i" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Laboratorio 2: consumo de API REST y carga en PostgreSQL
+        Laboratorio 2: Caso de Uso API Meteo (I)
       
     </span>
   </a>
@@ -2146,328 +2146,131 @@
 <li>Preparar datos para su envío a APIs, Kafka o almacenamiento en la nube.</li>
 </ul>
 <hr />
-<h2 id="laboratorio-2-consumo-de-api-rest-y-carga-en-postgresql">Laboratorio 2: consumo de API REST y carga en PostgreSQL</h2>
-<p><strong>Objetivos</strong></p>
-<p>En este laboratorio se construirá un flujo ETL para consumir datos JSON desde una API REST, transformarlos al esquema relacional y cargarlos en PostgreSQL.</p>
-<p>Al finalizar serás capaz de:</p>
-<ul>
-<li>Consultar una API HTTP con <code>InvokeHTTP</code>.</li>
-<li>Convertir JSON en registros mediante <code>JsonTreeReader</code>.</li>
-<li>Insertar registros en PostgreSQL con <code>PutDatabaseRecord</code>.</li>
-<li>Manejar respuestas correctas y errores.</li>
-<li>Verificar la carga en base de datos.</li>
-</ul>
-<hr />
-<p><strong>1. Escenario</strong></p>
-<p>Un servicio externo expone un endpoint con pedidos en formato JSON. Se necesita cargar estos pedidos en la tabla <code>pedidos</code> de PostgreSQL cada cierto tiempo.</p>
-<p>Endpoint de ejemplo:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-55-1"><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>http://api-pedidos:8080/pedidos
-</span></code></pre></div>
-<p>Ejemplo de respuesta JSON:</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-56-1"><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a><span class="p">[</span>
-</span><span id="__span-56-2"><a id="__codelineno-56-2" name="__codelineno-56-2" href="#__codelineno-56-2"></a><span class="w">  </span><span class="p">{</span>
-</span><span id="__span-56-3"><a id="__codelineno-56-3" name="__codelineno-56-3" href="#__codelineno-56-3"></a><span class="w">    </span><span class="nt">&quot;id_pedido&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1001</span><span class="p">,</span>
-</span><span id="__span-56-4"><a id="__codelineno-56-4" name="__codelineno-56-4" href="#__codelineno-56-4"></a><span class="w">    </span><span class="nt">&quot;cliente&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ana López&quot;</span><span class="p">,</span>
-</span><span id="__span-56-5"><a id="__codelineno-56-5" name="__codelineno-56-5" href="#__codelineno-56-5"></a><span class="w">    </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">59.90</span><span class="p">,</span>
-</span><span id="__span-56-6"><a id="__codelineno-56-6" name="__codelineno-56-6" href="#__codelineno-56-6"></a><span class="w">    </span><span class="nt">&quot;estado&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PAGADO&quot;</span>
-</span><span id="__span-56-7"><a id="__codelineno-56-7" name="__codelineno-56-7" href="#__codelineno-56-7"></a><span class="w">  </span><span class="p">},</span>
-</span><span id="__span-56-8"><a id="__codelineno-56-8" name="__codelineno-56-8" href="#__codelineno-56-8"></a><span class="w">  </span><span class="p">{</span>
-</span><span id="__span-56-9"><a id="__codelineno-56-9" name="__codelineno-56-9" href="#__codelineno-56-9"></a><span class="w">    </span><span class="nt">&quot;id_pedido&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1002</span><span class="p">,</span>
-</span><span id="__span-56-10"><a id="__codelineno-56-10" name="__codelineno-56-10" href="#__codelineno-56-10"></a><span class="w">    </span><span class="nt">&quot;cliente&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Carlos Ruiz&quot;</span><span class="p">,</span>
-</span><span id="__span-56-11"><a id="__codelineno-56-11" name="__codelineno-56-11" href="#__codelineno-56-11"></a><span class="w">    </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">120.50</span><span class="p">,</span>
-</span><span id="__span-56-12"><a id="__codelineno-56-12" name="__codelineno-56-12" href="#__codelineno-56-12"></a><span class="w">    </span><span class="nt">&quot;estado&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PENDIENTE&quot;</span>
-</span><span id="__span-56-13"><a id="__codelineno-56-13" name="__codelineno-56-13" href="#__codelineno-56-13"></a><span class="w">  </span><span class="p">}</span>
-</span><span id="__span-56-14"><a id="__codelineno-56-14" name="__codelineno-56-14" href="#__codelineno-56-14"></a><span class="p">]</span>
-</span></code></pre></div>
-<hr />
-<p><strong>2. Arquitectura del laboratorio</strong></p>
-<pre class="mermaid"><code>flowchart LR
-    E["Extract&lt;br/&gt;API REST"]
-    T["Transform&lt;br/&gt;JSON a Records"]
-    L["Load&lt;br/&gt;PostgreSQL"]
-
-    E --&gt; T
-    T --&gt; L</code></pre>
-<p>Implementación en NiFi:</p>
-<pre class="mermaid"><code>flowchart LR
-    G["GenerateFlowFile"]
-    H["InvokeHTTP"]
-    DBW["PutDatabaseRecord"]
-
-    DBCP["DBCPConnectionPool"]
-    READER["JsonTreeReader"]
-    API[("API pedidos")]
-    PG[("PostgreSQL")]
-
-    G --&gt; H
-    H --&gt; DBW
-    H --&gt;|failure| ERR["LogAttribute&lt;br/&gt;http_error"]
-
-    H --&gt; API
-    DBW -.-&gt; DBCP
-    DBW -.-&gt; READER
-    DBCP --&gt; PG
-    DBW --&gt;|success| OK["LogAttribute&lt;br/&gt;db_ok"]
-    DBW --&gt;|failure| ERRDB["LogAttribute&lt;br/&gt;db_error"]</code></pre>
-<hr />
-<p><strong>3. Preparación de PostgreSQL</strong></p>
-<p>Crear tabla destino:</p>
-<div class="language-sql highlight"><pre><span></span><code><span id="__span-57-1"><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">pedidos</span><span class="w"> </span><span class="p">(</span>
-</span><span id="__span-57-2"><a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a><span class="w">    </span><span class="n">id_pedido</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
-</span><span id="__span-57-3"><a id="__codelineno-57-3" name="__codelineno-57-3" href="#__codelineno-57-3"></a><span class="w">    </span><span class="n">cliente</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">120</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
-</span><span id="__span-57-4"><a id="__codelineno-57-4" name="__codelineno-57-4" href="#__codelineno-57-4"></a><span class="w">    </span><span class="n">total</span><span class="w"> </span><span class="nb">NUMERIC</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
-</span><span id="__span-57-5"><a id="__codelineno-57-5" name="__codelineno-57-5" href="#__codelineno-57-5"></a><span class="w">    </span><span class="n">estado</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
-</span><span id="__span-57-6"><a id="__codelineno-57-6" name="__codelineno-57-6" href="#__codelineno-57-6"></a><span class="w">    </span><span class="n">fecha_carga</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span>
-</span><span id="__span-57-7"><a id="__codelineno-57-7" name="__codelineno-57-7" href="#__codelineno-57-7"></a><span class="p">);</span>
-</span></code></pre></div>
-<hr />
-<p><strong>4. Configurar Controller Services</strong></p>
-<p><strong>DBCPConnectionPool</strong></p>
-<p>Nombre recomendado:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-58-1"><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a>DBCP-POSTGRESQL-PEDIDOS
-</span></code></pre></div>
-<p>Valores clave:</p>
-<table>
-<thead>
-<tr>
-<th>Propiedad</th>
-<th>Valor</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Database Connection URL</td>
-<td><code>jdbc:postgresql://postgres:5432/clientes_db</code></td>
-</tr>
-<tr>
-<td>Database Driver Class Name</td>
-<td><code>org.postgresql.Driver</code></td>
-</tr>
-<tr>
-<td>Database Driver Location(s)</td>
-<td><code>/opt/nifi/drivers/postgresql.jar</code></td>
-</tr>
-<tr>
-<td>Database User</td>
-<td><code>nifi</code></td>
-</tr>
-<tr>
-<td>Password</td>
-<td><code>nifi123</code></td>
-</tr>
-</tbody>
-</table>
-<p><strong>JsonTreeReader</strong></p>
-<p>Nombre recomendado:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-59-1"><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a>JSON-READER-PEDIDOS
-</span></code></pre></div>
-<p>Valores clave:</p>
-<table>
-<thead>
-<tr>
-<th>Propiedad</th>
-<th>Valor</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Schema Access Strategy</td>
-<td><code>Infer Schema</code></td>
-</tr>
-<tr>
-<td>Date Format</td>
-<td><code>yyyy-MM-dd</code></td>
-</tr>
-<tr>
-<td>Timestamp Format</td>
-<td><code>yyyy-MM-dd'T'HH:mm:ss</code></td>
-</tr>
-</tbody>
-</table>
-<p>Guardar y habilitar ambos servicios.</p>
-<hr />
-<p><strong>5. Crear los Processors</strong></p>
-<p><strong>GenerateFlowFile</strong></p>
-<p>Usar como disparador del flujo:</p>
-<table>
-<thead>
-<tr>
-<th>Propiedad</th>
-<th>Valor</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Run Schedule</td>
-<td><code>15 min</code></td>
-</tr>
-<tr>
-<td>Batch Size</td>
-<td><code>1</code></td>
-</tr>
-<tr>
-<td>Custom Text</td>
-<td><code>run_api</code></td>
-</tr>
-</tbody>
-</table>
-<p><strong>InvokeHTTP</strong></p>
-<p>Nombre:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-60-1"><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a>Consumir API pedidos
-</span></code></pre></div>
-<p>Configurar:</p>
-<table>
-<thead>
-<tr>
-<th>Propiedad</th>
-<th>Valor</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>HTTP Method</td>
-<td><code>GET</code></td>
-</tr>
-<tr>
-<td>Remote URL</td>
-<td><code>http://api-pedidos:8080/pedidos</code></td>
-</tr>
-<tr>
-<td>Follow Redirects</td>
-<td><code>true</code></td>
-</tr>
-<tr>
-<td>Content-Type</td>
-<td><code>application/json</code></td>
-</tr>
-<tr>
-<td>Read Timeout</td>
-<td><code>30 sec</code></td>
-</tr>
-<tr>
-<td>Put Response Body In Attribute</td>
-<td>dejar vacío</td>
-</tr>
-</tbody>
-</table>
-<p><strong>PutDatabaseRecord</strong></p>
-<p>Nombre:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-61-1"><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a>Insertar pedidos
-</span></code></pre></div>
-<p>Configurar:</p>
-<table>
-<thead>
-<tr>
-<th>Propiedad</th>
-<th>Valor</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Record Reader</td>
-<td><code>JSON-READER-PEDIDOS</code></td>
-</tr>
-<tr>
-<td>Database Type</td>
-<td><code>PostgreSQL</code></td>
-</tr>
-<tr>
-<td>Statement Type</td>
-<td><code>INSERT</code></td>
-</tr>
-<tr>
-<td>Table Name</td>
-<td><code>pedidos</code></td>
-</tr>
-<tr>
-<td>Catalog Name</td>
-<td>vacío</td>
-</tr>
-<tr>
-<td>Schema Name</td>
-<td><code>public</code></td>
-</tr>
-<tr>
-<td>Database Connection Pooling Service</td>
-<td><code>DBCP-POSTGRESQL-PEDIDOS</code></td>
-</tr>
-</tbody>
-</table>
-<hr />
-<p><strong>6. Conexiones y relaciones</strong></p>
-<p>Conectar en este orden:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-62-1"><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>GenerateFlowFile
-</span><span id="__span-62-2"><a id="__codelineno-62-2" name="__codelineno-62-2" href="#__codelineno-62-2"></a>        ↓
-</span><span id="__span-62-3"><a id="__codelineno-62-3" name="__codelineno-62-3" href="#__codelineno-62-3"></a>InvokeHTTP
-</span><span id="__span-62-4"><a id="__codelineno-62-4" name="__codelineno-62-4" href="#__codelineno-62-4"></a>        ↓
-</span><span id="__span-62-5"><a id="__codelineno-62-5" name="__codelineno-62-5" href="#__codelineno-62-5"></a>PutDatabaseRecord
-</span></code></pre></div>
-<p>Gestionar relaciones:</p>
-<ul>
-<li><code>InvokeHTTP.success</code> -&gt; <code>PutDatabaseRecord</code></li>
-<li><code>InvokeHTTP.failure</code> -&gt; <code>LogAttribute http_error</code></li>
-<li><code>InvokeHTTP.retry</code> -&gt; <code>LogAttribute http_retry</code></li>
-<li><code>PutDatabaseRecord.success</code> -&gt; <code>LogAttribute db_ok</code></li>
-<li><code>PutDatabaseRecord.failure</code> -&gt; <code>LogAttribute db_error</code></li>
-</ul>
-<hr />
-<p><strong>7. Ejecución y validación</strong></p>
+<h2 id="laboratorio-2-caso-de-uso-api-meteo-i">Laboratorio 2: Caso de Uso API Meteo (I)</h2>
+<p><strong>Ingesta de datos meteorológicos → MongoDB</strong></p>
+<p>¿Alguna vez te has parado a pensar de dónde salen los datos que utilizan las apps del tiempo?</p>
+<p>¿Por qué Google, AEMET o las webs meteorológicas pueden mostrarte, al segundo, la temperatura exacta de tu ciudad?</p>
+<p>En este mini-proyecto vas a construir tu propio sistema profesional de ingesta de datos meteorológicos en tiempo real, usando las mismas tecnologías que emplean empresas de IoT, Smart Cities y Big Data.</p>
+<p><strong>Objetivo del reto</strong></p>
+<p>Vas a diseñar, desplegar y automatizar un flujo completo en Apache NiFi 2.10 capaz de:</p>
 <ol>
-<li>Iniciar <code>LogAttribute</code> de errores y éxito.</li>
-<li>Iniciar <code>PutDatabaseRecord</code>.</li>
-<li>Iniciar <code>InvokeHTTP</code>.</li>
-<li>Ejecutar <code>GenerateFlowFile</code> con <strong>Run Once</strong>.</li>
+<li>Consultar automáticamente una API meteorológica real (Open-Meteo)</li>
+<li>Obtener la temperatura actual de Xàtiva cada minuto</li>
+<li>Transformar la respuesta para dejarla en formato limpio y analizable</li>
+<li>Guardar los datos en MongoDB para su análisis histórico</li>
+<li>Crear un registro por cada lectura, incluyendo:</li>
+<li>Temperatura</li>
+<li>Hora oficial del dato (timestamp_api)</li>
+<li>Hora de captura real del flujo (timestamp_nifi)</li>
 </ol>
-<p>Verificar en PostgreSQL:</p>
-<div class="language-sql highlight"><pre><span></span><code><span id="__span-63-1"><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a><span class="k">SELECT</span>
-</span><span id="__span-63-2"><a id="__codelineno-63-2" name="__codelineno-63-2" href="#__codelineno-63-2"></a><span class="w">    </span><span class="n">id_pedido</span><span class="p">,</span>
-</span><span id="__span-63-3"><a id="__codelineno-63-3" name="__codelineno-63-3" href="#__codelineno-63-3"></a><span class="w">    </span><span class="n">cliente</span><span class="p">,</span>
-</span><span id="__span-63-4"><a id="__codelineno-63-4" name="__codelineno-63-4" href="#__codelineno-63-4"></a><span class="w">    </span><span class="n">total</span><span class="p">,</span>
-</span><span id="__span-63-5"><a id="__codelineno-63-5" name="__codelineno-63-5" href="#__codelineno-63-5"></a><span class="w">    </span><span class="n">estado</span><span class="p">,</span>
-</span><span id="__span-63-6"><a id="__codelineno-63-6" name="__codelineno-63-6" href="#__codelineno-63-6"></a><span class="w">    </span><span class="n">fecha_carga</span>
-</span><span id="__span-63-7"><a id="__codelineno-63-7" name="__codelineno-63-7" href="#__codelineno-63-7"></a><span class="k">FROM</span><span class="w"> </span><span class="n">pedidos</span>
-</span><span id="__span-63-8"><a id="__codelineno-63-8" name="__codelineno-63-8" href="#__codelineno-63-8"></a><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">id_pedido</span><span class="p">;</span>
+<p><strong>Cómo funciona Open-Meteo</strong></p>
+<p>Puedes explicarlo al alumnado con esta narrativa:</p>
+<ol>
+<li>Open-Meteo es un proveedor de API meteorológica gratuita.</li>
+<li>No requiere API key para muchos usos.</li>
+<li>Devuelve los datos en formato JSON, que es estándar en servicios web.</li>
+<li>La API funciona a base de parámetros en la URL.</li>
+<li>latitude y longitude: ubicación, Xàtiva en este caso.</li>
+<li>current o hourly: qué tipo de datos queremos, actuales u horarios.</li>
+<li>Lista de variables separadas por comas: temperature_2m, relative_humidity_2m, wind_speed_10m, precipitation, cloud_cover, etc.</li>
+<li>start_date y end_date: para pedir históricos por rango de fechas.</li>
+<li>timezone: para ajustar las horas a Europa/Madrid.</li>
+<li>Respuesta JSON estructurada.</li>
+<li>Campos generales: latitude, longitude, generationtime_ms, etc.</li>
+<li>Secciones como current o hourly que contienen arrays de tiempos y valores.</li>
+</ol>
+<p><strong>Descripción general del flujo</strong></p>
+<p>Flujo NiFi propuesto:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-55-1"><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>GenerateFlowFile → InvokeHTTP → EvaluateJsonPath → ReplaceText → PutMongo → LogAttribute
 </span></code></pre></div>
-<p>Si el endpoint devuelve dos pedidos como el ejemplo, deberían aparecer dos filas nuevas.</p>
-<hr />
-<p><strong>8. Errores frecuentes</strong></p>
-<p><strong>HTTP 404 o 500</strong></p>
-<p>Revisar:</p>
+<p><strong>1. API de Open-Meteo</strong></p>
+<p>Coordenadas oficiales de Xàtiva:</p>
 <ul>
-<li>URL del endpoint.</li>
-<li>Puerto y red entre contenedores.</li>
-<li>Estado de la API.</li>
+<li>Latitud: 38.9878</li>
+<li>Longitud: -0.5186</li>
 </ul>
-<p><strong>JSON mal formado</strong></p>
-<p><code>PutDatabaseRecord</code> enviará por <code>failure</code> si el payload no es JSON válido o no coincide con el esquema inferido.</p>
-<p><strong>Duplicado de clave primaria</strong></p>
-<p>Si llega un <code>id_pedido</code> existente, PostgreSQL devolverá error por clave duplicada.</p>
-<p>Opciones:</p>
-<ul>
-<li>Limpiar datos previos para pruebas.</li>
-<li>Cambiar estrategia a <code>UPDATE</code> o <code>UPSERT</code> con otro patrón.</li>
-</ul>
-<hr />
-<p><strong>9. Reto adicional</strong></p>
-<p>Ampliar el flujo para cargar solo pedidos pagados.</p>
-<p>Pista: añadir <code>QueryRecord</code> entre <code>InvokeHTTP</code> y <code>PutDatabaseRecord</code> con una consulta similar a:</p>
-<div class="language-sql highlight"><pre><span></span><code><span id="__span-64-1"><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">FLOWFILE</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">estado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;PAGADO&#39;</span>
+<p>Para obtener la latitud y longitud de tu ciudad:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-56-1"><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>https://nominatim.openstreetmap.org/search?city=XXXX&amp;country=Spain&amp;format=json
 </span></code></pre></div>
-<hr />
-<p><strong>Resumen</strong></p>
-<p>Este laboratorio muestra el patrón inverso al laboratorio anterior:</p>
+<p>Endpoint a usar en Open-Meteo:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-57-1"><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>https://api.open-meteo.com/v1/forecast?latitude=38.9878&amp;longitude=-0.5186&amp;current=temperature_2m&amp;timezone=Europe%2FMadrid
+</span></code></pre></div>
+<p>La respuesta tendrá la estructura:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-58-1"><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="p">{</span>
+</span><span id="__span-58-2"><a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a><span class="w">  </span><span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">38.99</span><span class="p">,</span>
+</span><span id="__span-58-3"><a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a><span class="w">  </span><span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.52</span><span class="p">,</span>
+</span><span id="__span-58-4"><a id="__codelineno-58-4" name="__codelineno-58-4" href="#__codelineno-58-4"></a><span class="w">  </span><span class="nt">&quot;current&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-58-5"><a id="__codelineno-58-5" name="__codelineno-58-5" href="#__codelineno-58-5"></a><span class="w">    </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-11-17T14:00&quot;</span><span class="p">,</span>
+</span><span id="__span-58-6"><a id="__codelineno-58-6" name="__codelineno-58-6" href="#__codelineno-58-6"></a><span class="w">    </span><span class="nt">&quot;temperature_2m&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">21.3</span>
+</span><span id="__span-58-7"><a id="__codelineno-58-7" name="__codelineno-58-7" href="#__codelineno-58-7"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-58-8"><a id="__codelineno-58-8" name="__codelineno-58-8" href="#__codelineno-58-8"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><strong>2. Configuración del flujo NiFi</strong></p>
+<p><strong>2.1 GenerateFlowFile</strong></p>
 <ul>
-<li>Se extrae desde API REST en lugar de base de datos.</li>
-<li>Se transforma JSON a Records.</li>
-<li>Se carga en PostgreSQL en lugar de fichero.</li>
+<li>Run Schedule: 60 sec, o el intervalo que prefieras</li>
 </ul>
-<p>El diseño completo queda:</p>
-<pre class="mermaid"><code>flowchart LR
-    A["GenerateFlowFile"] --&gt; B["InvokeHTTP"]
-    B --&gt;|success| C["PutDatabaseRecord"]
-    B --&gt;|failure/retry| D["LogAttribute http_error"]
-    C --&gt;|success| E["LogAttribute db_ok"]
-    C --&gt;|failure| F["LogAttribute db_error"]</code></pre>
+<p><strong>2.2 InvokeHTTP</strong></p>
+<ul>
+<li>Method: GET</li>
+<li>Remote URL:</li>
+</ul>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-59-1"><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a>https://api.open-meteo.com/v1/forecast?latitude=38.9878&amp;longitude=-0.5186&amp;current=temperature_2m&amp;timezone=Europe%2FMadrid
+</span></code></pre></div>
+<p><strong>2.3 EvaluateJsonPath</strong></p>
+<p>Extraemos únicamente la temperatura y la hora.</p>
+<p>Properties:</p>
+<ul>
+<li>temperature: $.current.temperature_2m</li>
+<li>timestamp_api: $.current.time</li>
+<li>Destination: flowfile-attribute</li>
+</ul>
+<p><strong>2.4 ReplaceText</strong></p>
+<p>Reemplazamos con este JSON:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-60-1"><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="p">{</span>
+</span><span id="__span-60-2"><a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a><span class="w">  </span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${city}&quot;</span><span class="p">,</span>
+</span><span id="__span-60-3"><a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a><span class="w">  </span><span class="nt">&quot;temperature&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="kc">te</span><span class="err">mpera</span><span class="kc">ture</span><span class="p">:</span><span class="kc">t</span><span class="err">oNumber()</span><span class="p">},</span>
+</span><span id="__span-60-4"><a id="__codelineno-60-4" name="__codelineno-60-4" href="#__codelineno-60-4"></a><span class="w">  </span><span class="nt">&quot;humidity&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="err">humidi</span><span class="kc">t</span><span class="err">y</span><span class="p">:</span><span class="kc">t</span><span class="err">oNumber()</span><span class="p">},</span>
+</span><span id="__span-60-5"><a id="__codelineno-60-5" name="__codelineno-60-5" href="#__codelineno-60-5"></a><span class="w">  </span><span class="nt">&quot;wind_speed&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="err">wi</span><span class="kc">n</span><span class="err">d_speed</span><span class="p">:</span><span class="kc">t</span><span class="err">oNumber()</span><span class="p">},</span>
+</span><span id="__span-60-6"><a id="__codelineno-60-6" name="__codelineno-60-6" href="#__codelineno-60-6"></a><span class="w">  </span><span class="nt">&quot;rain&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="err">rai</span><span class="kc">n</span><span class="p">:</span><span class="kc">t</span><span class="err">oNumber()</span><span class="p">},</span>
+</span><span id="__span-60-7"><a id="__codelineno-60-7" name="__codelineno-60-7" href="#__codelineno-60-7"></a><span class="w">  </span><span class="nt">&quot;cloud&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="err">cloud</span><span class="p">:</span><span class="kc">t</span><span class="err">oNumber()</span><span class="p">},</span>
+</span><span id="__span-60-8"><a id="__codelineno-60-8" name="__codelineno-60-8" href="#__codelineno-60-8"></a><span class="w">  </span><span class="nt">&quot;timestamp_api&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${timestamp_api}&quot;</span><span class="p">,</span>
+</span><span id="__span-60-9"><a id="__codelineno-60-9" name="__codelineno-60-9" href="#__codelineno-60-9"></a><span class="w">  </span><span class="nt">&quot;timestamp_nifi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${now():format(&#39;yyyy-MM-dd HH:mm:ss&#39;)}&quot;</span>
+</span><span id="__span-60-10"><a id="__codelineno-60-10" name="__codelineno-60-10" href="#__codelineno-60-10"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><strong>3. Configurar PutMongo</strong></p>
+<p>Configuración:</p>
+<ul>
+<li>Mongo URI: mongodb://localhost:27017</li>
+<li>Database Name: test</li>
+<li>Collection Name: weather</li>
+</ul>
+<p><strong>4. Documento JSON final almacenado en MongoDB</strong></p>
+<p>Ejemplo registrado:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-61-1"><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a><span class="p">[</span>
+</span><span id="__span-61-2"><a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a><span class="w">  </span><span class="p">{</span>
+</span><span id="__span-61-3"><a id="__codelineno-61-3" name="__codelineno-61-3" href="#__codelineno-61-3"></a><span class="w">    </span><span class="nt">&quot;_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;$oid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;691fb19041a5343f25c5f492&quot;</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-61-4"><a id="__codelineno-61-4" name="__codelineno-61-4" href="#__codelineno-61-4"></a><span class="w">    </span><span class="nt">&quot;timestamp_api&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-11-01T00:00&quot;</span><span class="p">,</span>
+</span><span id="__span-61-5"><a id="__codelineno-61-5" name="__codelineno-61-5" href="#__codelineno-61-5"></a><span class="w">    </span><span class="nt">&quot;temperature&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span>
+</span><span id="__span-61-6"><a id="__codelineno-61-6" name="__codelineno-61-6" href="#__codelineno-61-6"></a><span class="w">    </span><span class="nt">&quot;humidity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">74</span><span class="p">,</span>
+</span><span id="__span-61-7"><a id="__codelineno-61-7" name="__codelineno-61-7" href="#__codelineno-61-7"></a><span class="w">    </span><span class="nt">&quot;wind_speed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span>
+</span><span id="__span-61-8"><a id="__codelineno-61-8" name="__codelineno-61-8" href="#__codelineno-61-8"></a><span class="w">    </span><span class="nt">&quot;rain&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+</span><span id="__span-61-9"><a id="__codelineno-61-9" name="__codelineno-61-9" href="#__codelineno-61-9"></a><span class="w">    </span><span class="nt">&quot;cloud&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">99</span><span class="p">,</span>
+</span><span id="__span-61-10"><a id="__codelineno-61-10" name="__codelineno-61-10" href="#__codelineno-61-10"></a><span class="w">    </span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Enguera&quot;</span><span class="p">,</span>
+</span><span id="__span-61-11"><a id="__codelineno-61-11" name="__codelineno-61-11" href="#__codelineno-61-11"></a><span class="w">    </span><span class="nt">&quot;timestamp_nifi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-11-01T00:00&quot;</span>
+</span><span id="__span-61-12"><a id="__codelineno-61-12" name="__codelineno-61-12" href="#__codelineno-61-12"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-61-13"><a id="__codelineno-61-13" name="__codelineno-61-13" href="#__codelineno-61-13"></a><span class="p">]</span>
+</span></code></pre></div>
+<p><strong>5. Ampliaciones a realizar en el proyecto</strong></p>
+<ol>
+<li>Añade como variables la ciudad, latitud y longitud.</li>
+<li>Añade humedad, viento, lluvia y nubes.</li>
+<li>Cambiar el endpoint a:</li>
+</ol>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-62-1"><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>...&amp;current=temperature_2m,relative_humidity_2m,wind_speed_10m,precipitation,cloud_cover
+</span></code></pre></div>
+<p><strong>6. Entregable</strong></p>
+<p>Genera el template del flujo y guarda el <code>.xml</code>.</p>
 
 
 
