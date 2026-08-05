@@ -1093,8 +1093,6 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -1137,8 +1135,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1147,10 +1143,21 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#objetivos" class="md-nav__link">
+  <a href="#laboratorio-1-extraccion-de-postgresql-y-conversion-a-json" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Objetivos
+        Laboratorio 1: extracción de PostgreSQL y conversión a JSON
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#laboratorio-2-consumo-de-api-rest-y-carga-en-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Laboratorio 2: consumo de API REST y carga en PostgreSQL
       
     </span>
   </a>
@@ -1412,8 +1419,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1422,10 +1427,21 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#objetivos" class="md-nav__link">
+  <a href="#laboratorio-1-extraccion-de-postgresql-y-conversion-a-json" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Objetivos
+        Laboratorio 1: extracción de PostgreSQL y conversión a JSON
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#laboratorio-2-consumo-de-api-rest-y-carga-en-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Laboratorio 2: consumo de API REST y carga en PostgreSQL
       
     </span>
   </a>
@@ -1449,8 +1465,11 @@
 
 
 
-<h1 id="laboratorio-1-extraccion-de-postgresql-y-conversion-a-json">Laboratorio 1: extracción de PostgreSQL y conversión a JSON</h1>
-<h2 id="objetivos">Objetivos</h2>
+  <h1>Casos de uso</h1>
+
+<p>En esta página se recogen dos laboratorios prácticos de NiFi con una estructura mínima en la tabla de contenidos.</p>
+<h2 id="laboratorio-1-extraccion-de-postgresql-y-conversion-a-json">Laboratorio 1: extracción de PostgreSQL y conversión a JSON</h2>
+<p><strong>Objetivos</strong></p>
 <p>En este laboratorio se construirá un flujo ETL sencillo para extraer información desde PostgreSQL, convertir el resultado a formato JSON y almacenarlo en un fichero.</p>
 <p>Al finalizar serás capaz de:</p>
 <ul>
@@ -1462,7 +1481,7 @@
 <li>Identificar los errores más habituales.</li>
 </ul>
 <hr />
-<h1 id="1-escenario">1. Escenario</h1>
+<p><strong>1. Escenario</strong></p>
 <p>Una empresa dispone de una tabla PostgreSQL denominada <code>clientes</code>. Se necesita extraer periódicamente su contenido y generar un fichero JSON que pueda ser consumido por otro sistema.</p>
 <p>La tabla contiene la siguiente información:</p>
 <table>
@@ -1495,7 +1514,7 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>/datos/salida/clientes.json
 </span></code></pre></div>
 <hr />
-<h1 id="2-arquitectura-del-laboratorio">2. Arquitectura del laboratorio</h1>
+<p><strong>2. Arquitectura del laboratorio</strong></p>
 <p>El flujo seguirá las tres fases propias de un proceso ETL:</p>
 <pre class="mermaid"><code>flowchart LR
     E["Extract&lt;br/&gt;PostgreSQL"]
@@ -1523,7 +1542,7 @@
     DBCP --&gt; DB
     FILE --&gt; OUTPUT</code></pre>
 <hr />
-<h1 id="3-componentes-utilizados">3. Componentes utilizados</h1>
+<p><strong>3. Componentes utilizados</strong></p>
 <table>
 <thead>
 <tr>
@@ -1556,7 +1575,7 @@
 </table>
 <p><code>GenerateFlowFile</code> únicamente actúa como disparador. Su contenido no se utilizará durante la consulta.</p>
 <hr />
-<h1 id="4-preparacion-de-postgresql">4. Preparación de PostgreSQL</h1>
+<p><strong>4. Preparación de PostgreSQL</strong></p>
 <p>El laboratorio utilizará la base de datos:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>clientes_db
 </span></code></pre></div>
@@ -1588,7 +1607,7 @@
 </span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>  3 | Laura Pérez  | laura@empresa.com    | Sevilla
 </span></code></pre></div>
 <hr />
-<h1 id="5-preparacion-del-directorio-de-salida">5. Preparación del directorio de salida</h1>
+<p><strong>5. Preparación del directorio de salida</strong></p>
 <p>Si NiFi se ejecuta mediante Docker, debe existir un volumen que permita acceder a los ficheros desde el host.</p>
 <p>Añadir al servicio NiFi:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">volumes</span><span class="p">:</span>
@@ -1611,7 +1630,7 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>/opt/nifi/datos/salida
 </span></code></pre></div>
 <hr />
-<h1 id="6-crear-dbcpconnectionpool">6. Crear DBCPConnectionPool</h1>
+<p><strong>6. Crear DBCPConnectionPool</strong></p>
 <p>Dentro del Process Group del laboratorio, abrir:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Configure → Controller Services
 </span></code></pre></div>
@@ -1671,7 +1690,7 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>Si PostgreSQL se ejecuta en otro contenedor del mismo Docker Compose, debe utilizarse el nombre del servicio, por ejemplo `postgres`, y no `localhost`.
 </span></code></pre></div>
 <hr />
-<h1 id="7-crear-jsonrecordsetwriter">7. Crear JsonRecordSetWriter</h1>
+<p><strong>7. Crear JsonRecordSetWriter</strong></p>
 <p>Añadir otro Controller Service:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>JsonRecordSetWriter
 </span></code></pre></div>
@@ -1700,7 +1719,7 @@
 <p>Guardar y habilitar.</p>
 <p>Este servicio recibirá las filas obtenidas desde PostgreSQL y generará un documento JSON.</p>
 <hr />
-<h1 id="8-crear-generateflowfile">8. Crear GenerateFlowFile</h1>
+<p><strong>8. Crear GenerateFlowFile</strong></p>
 <p>Añadir un Processor:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>GenerateFlowFile
 </span></code></pre></div>
@@ -1735,7 +1754,7 @@
 </span></code></pre></div>
 <p>De esta forma se evita generar ficheros continuamente.</p>
 <hr />
-<h1 id="9-crear-executesqlrecord">9. Crear ExecuteSQLRecord</h1>
+<p><strong>9. Crear ExecuteSQLRecord</strong></p>
 <p>Añadir:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>ExecuteSQLRecord
 </span></code></pre></div>
@@ -1797,7 +1816,7 @@
     S-&gt;&gt;W: Enviar Records
     W--&gt;&gt;S: Documento JSON</code></pre>
 <hr />
-<h1 id="10-preparar-el-nombre-del-fichero">10. Preparar el nombre del fichero</h1>
+<p><strong>10. Preparar el nombre del fichero</strong></p>
 <p>Añadir un Processor:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>UpdateAttribute
 </span></code></pre></div>
@@ -1824,7 +1843,7 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>clientes_20260731_180500.json
 </span></code></pre></div>
 <hr />
-<h1 id="11-crear-putfile">11. Crear PutFile</h1>
+<p><strong>11. Crear PutFile</strong></p>
 <p>Añadir:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>PutFile
 </span></code></pre></div>
@@ -1879,7 +1898,7 @@
     FILE --&gt;|success| OK
     FILE --&gt;|failure| ERROR</code></pre>
 <hr />
-<h1 id="12-ejecutar-el-flujo">12. Ejecutar el flujo</h1>
+<p><strong>12. Ejecutar el flujo</strong></p>
 <p>El orden recomendado es:</p>
 <ol>
 <li>Iniciar los <code>LogAttribute</code>.</li>
@@ -1890,7 +1909,7 @@
 </ol>
 <p>El FlowFile debe recorrer el flujo hasta la relación <code>success</code>.</p>
 <hr />
-<h1 id="13-comprobar-el-resultado">13. Comprobar el resultado</h1>
+<p><strong>13. Comprobar el resultado</strong></p>
 <p>Desde el host:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>ls<span class="w"> </span>-l<span class="w"> </span>/opt/nifi/datos/salida
 </span></code></pre></div>
@@ -1927,7 +1946,7 @@
 </span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>cat<span class="w"> </span>/datos/salida/clientes.json
 </span></code></pre></div>
 <hr />
-<h1 id="14-comprobar-el-contenido-antes-de-putfile">14. Comprobar el contenido antes de PutFile</h1>
+<p><strong>14. Comprobar el contenido antes de PutFile</strong></p>
 <p>Para observar el FlowFile antes de guardarlo:</p>
 <ol>
 <li>Detener <code>PutFile</code>.</li>
@@ -1939,7 +1958,7 @@
 </ol>
 <p>Esto permite comprobar que <code>ExecuteSQLRecord</code> y <code>JsonRecordSetWriter</code> han generado correctamente el JSON.</p>
 <hr />
-<h1 id="15-data-provenance">15. Data Provenance</h1>
+<p><strong>15. Data Provenance</strong></p>
 <p>Abrir Data Provenance y localizar el FlowFile generado.</p>
 <p>Podrán observarse eventos relacionados con:</p>
 <ul>
@@ -1968,8 +1987,8 @@
     ATTR --&gt; SEND</code></pre>
 <p>Los nombres exactos de los eventos pueden variar según la operación y la versión.</p>
 <hr />
-<h1 id="16-errores-frecuentes">16. Errores frecuentes</h1>
-<h2 id="el-dbcpconnectionpool-no-se-habilita">El DBCPConnectionPool no se habilita</h2>
+<p><strong>16. Errores frecuentes</strong></p>
+<p><strong>El DBCPConnectionPool no se habilita</strong></p>
 <p>Comprobar:</p>
 <ul>
 <li>URL JDBC.</li>
@@ -1980,7 +1999,7 @@
 <li>Estado de PostgreSQL.</li>
 </ul>
 <hr />
-<h2 id="classnotfoundexception">ClassNotFoundException</h2>
+<p><strong>ClassNotFoundException</strong></p>
 <p>Mensaje:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>ClassNotFoundException: org.postgresql.Driver
 </span></code></pre></div>
@@ -1989,7 +2008,7 @@
 </span><span id="__span-38-2"><a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>ls<span class="w"> </span>-l<span class="w"> </span>/opt/nifi/drivers
 </span></code></pre></div>
 <hr />
-<h2 id="connection-refused">Connection refused</h2>
+<p><strong>Connection refused</strong></p>
 <p>Mensaje:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>Connection refused
 </span></code></pre></div>
@@ -2001,14 +2020,14 @@
 </span><span id="__span-41-2"><a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;echo &gt; /dev/tcp/postgres/5432&#39;</span>
 </span></code></pre></div>
 <hr />
-<h2 id="unknownhostexception">UnknownHostException</h2>
+<p><strong>UnknownHostException</strong></p>
 <p>Comprobar la resolución:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-42-1"><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>nifi<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-42-2"><a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a>getent<span class="w"> </span>hosts<span class="w"> </span>postgres
 </span></code></pre></div>
 <p>Ambos contenedores deben pertenecer a la misma red Docker.</p>
 <hr />
-<h2 id="putfile-escribe-dentro-del-contenedor">PutFile escribe dentro del contenedor</h2>
+<p><strong>PutFile escribe dentro del contenedor</strong></p>
 <p>Comprobar el montaje:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-43-1"><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>docker<span class="w"> </span>inspect<span class="w"> </span>nifi<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-43-2"><a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>--format<span class="w"> </span><span class="s1">&#39;{{range .Mounts}}{{println .Source &quot;-&gt;&quot; .Destination}}{{end}}&#39;</span>
@@ -2017,20 +2036,20 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-44-1"><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>/opt/nifi/datos -&gt; /datos
 </span></code></pre></div>
 <hr />
-<h2 id="permission-denied">Permission denied</h2>
+<p><strong>Permission denied</strong></p>
 <p>Asignar permisos al directorio del host:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-45-1"><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">777</span><span class="w"> </span>/opt/nifi/datos
 </span></code></pre></div>
 <p>En un entorno de producción deben utilizarse permisos y propietarios más restrictivos.</p>
 <hr />
-<h2 id="el-fichero-ya-existe">El fichero ya existe</h2>
+<p><strong>El fichero ya existe</strong></p>
 <p>Si la estrategia es <code>fail</code>, <code>PutFile</code> enviará el FlowFile por <code>failure</code>.</p>
 <p>Configurar:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-46-1"><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>Conflict Resolution Strategy = replace
 </span></code></pre></div>
 <p>o utilizar un nombre con fecha y hora.</p>
 <hr />
-<h2 id="el-json-aparece-vacio">El JSON aparece vacío</h2>
+<p><strong>El JSON aparece vacío</strong></p>
 <p>Comprobar directamente la consulta:</p>
 <div class="language-sql highlight"><pre><span></span><code><span id="__span-47-1"><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="k">SELECT</span>
 </span><span id="__span-47-2"><a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a><span class="w">    </span><span class="n">id</span><span class="p">,</span>
@@ -2043,7 +2062,7 @@
 <div class="language-json highlight"><pre><span></span><code><span id="__span-48-1"><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="p">[]</span>
 </span></code></pre></div>
 <hr />
-<h1 id="17-reto-adicional">17. Reto adicional</h1>
+<p><strong>17. Reto adicional</strong></p>
 <p>Modificar la consulta para exportar únicamente los clientes de Valencia:</p>
 <div class="language-sql highlight"><pre><span></span><code><span id="__span-49-1"><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a><span class="k">SELECT</span>
 </span><span id="__span-49-2"><a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a><span class="w">    </span><span class="n">id</span><span class="p">,</span>
@@ -2068,7 +2087,7 @@
 </span><span id="__span-51-8"><a id="__codelineno-51-8" name="__codelineno-51-8" href="#__codelineno-51-8"></a><span class="p">]</span>
 </span></code></pre></div>
 <hr />
-<h1 id="18-reto-avanzado">18. Reto avanzado</h1>
+<p><strong>18. Reto avanzado</strong></p>
 <p>Añadir información calculada directamente en la consulta:</p>
 <div class="language-sql highlight"><pre><span></span><code><span id="__span-52-1"><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a><span class="k">SELECT</span>
 </span><span id="__span-52-2"><a id="__codelineno-52-2" name="__codelineno-52-2" href="#__codelineno-52-2"></a><span class="w">    </span><span class="n">id</span><span class="p">,</span>
@@ -2092,7 +2111,7 @@
 </span></code></pre></div>
 <p>En este caso, parte de la transformación se realiza directamente en PostgreSQL.</p>
 <hr />
-<h1 id="resumen">Resumen</h1>
+<p><strong>Resumen</strong></p>
 <p>En este laboratorio se ha construido un flujo ETL completo:</p>
 <pre class="mermaid"><code>flowchart LR
     EXTRACT["Extract&lt;br/&gt;PostgreSQL"]
@@ -2128,7 +2147,7 @@
 </ul>
 <hr />
 <h2 id="laboratorio-2-consumo-de-api-rest-y-carga-en-postgresql">Laboratorio 2: consumo de API REST y carga en PostgreSQL</h2>
-<h2 id="objetivos_1">Objetivos</h2>
+<p><strong>Objetivos</strong></p>
 <p>En este laboratorio se construirá un flujo ETL para consumir datos JSON desde una API REST, transformarlos al esquema relacional y cargarlos en PostgreSQL.</p>
 <p>Al finalizar serás capaz de:</p>
 <ul>
@@ -2139,7 +2158,7 @@
 <li>Verificar la carga en base de datos.</li>
 </ul>
 <hr />
-<h1 id="1-escenario_1">1. Escenario</h1>
+<p><strong>1. Escenario</strong></p>
 <p>Un servicio externo expone un endpoint con pedidos en formato JSON. Se necesita cargar estos pedidos en la tabla <code>pedidos</code> de PostgreSQL cada cierto tiempo.</p>
 <p>Endpoint de ejemplo:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-55-1"><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>http://api-pedidos:8080/pedidos
@@ -2161,7 +2180,7 @@
 </span><span id="__span-56-14"><a id="__codelineno-56-14" name="__codelineno-56-14" href="#__codelineno-56-14"></a><span class="p">]</span>
 </span></code></pre></div>
 <hr />
-<h1 id="2-arquitectura-del-laboratorio_1">2. Arquitectura del laboratorio</h1>
+<p><strong>2. Arquitectura del laboratorio</strong></p>
 <pre class="mermaid"><code>flowchart LR
     E["Extract&lt;br/&gt;API REST"]
     T["Transform&lt;br/&gt;JSON a Records"]
@@ -2191,7 +2210,7 @@
     DBW --&gt;|success| OK["LogAttribute&lt;br/&gt;db_ok"]
     DBW --&gt;|failure| ERRDB["LogAttribute&lt;br/&gt;db_error"]</code></pre>
 <hr />
-<h1 id="3-preparacion-de-postgresql">3. Preparación de PostgreSQL</h1>
+<p><strong>3. Preparación de PostgreSQL</strong></p>
 <p>Crear tabla destino:</p>
 <div class="language-sql highlight"><pre><span></span><code><span id="__span-57-1"><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">pedidos</span><span class="w"> </span><span class="p">(</span>
 </span><span id="__span-57-2"><a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a><span class="w">    </span><span class="n">id_pedido</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
@@ -2202,8 +2221,8 @@
 </span><span id="__span-57-7"><a id="__codelineno-57-7" name="__codelineno-57-7" href="#__codelineno-57-7"></a><span class="p">);</span>
 </span></code></pre></div>
 <hr />
-<h1 id="4-configurar-controller-services">4. Configurar Controller Services</h1>
-<h2 id="dbcpconnectionpool">DBCPConnectionPool</h2>
+<p><strong>4. Configurar Controller Services</strong></p>
+<p><strong>DBCPConnectionPool</strong></p>
 <p>Nombre recomendado:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-58-1"><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a>DBCP-POSTGRESQL-PEDIDOS
 </span></code></pre></div>
@@ -2238,7 +2257,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="jsontreereader">JsonTreeReader</h2>
+<p><strong>JsonTreeReader</strong></p>
 <p>Nombre recomendado:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-59-1"><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a>JSON-READER-PEDIDOS
 </span></code></pre></div>
@@ -2267,8 +2286,8 @@
 </table>
 <p>Guardar y habilitar ambos servicios.</p>
 <hr />
-<h1 id="5-crear-los-processors">5. Crear los Processors</h1>
-<h2 id="generateflowfile">GenerateFlowFile</h2>
+<p><strong>5. Crear los Processors</strong></p>
+<p><strong>GenerateFlowFile</strong></p>
 <p>Usar como disparador del flujo:</p>
 <table>
 <thead>
@@ -2292,7 +2311,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="invokehttp">InvokeHTTP</h2>
+<p><strong>InvokeHTTP</strong></p>
 <p>Nombre:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-60-1"><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a>Consumir API pedidos
 </span></code></pre></div>
@@ -2331,7 +2350,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="putdatabaserecord">PutDatabaseRecord</h2>
+<p><strong>PutDatabaseRecord</strong></p>
 <p>Nombre:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-61-1"><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a>Insertar pedidos
 </span></code></pre></div>
@@ -2375,7 +2394,7 @@
 </tbody>
 </table>
 <hr />
-<h1 id="6-conexiones-y-relaciones">6. Conexiones y relaciones</h1>
+<p><strong>6. Conexiones y relaciones</strong></p>
 <p>Conectar en este orden:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-62-1"><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>GenerateFlowFile
 </span><span id="__span-62-2"><a id="__codelineno-62-2" name="__codelineno-62-2" href="#__codelineno-62-2"></a>        ↓
@@ -2392,7 +2411,7 @@
 <li><code>PutDatabaseRecord.failure</code> -&gt; <code>LogAttribute db_error</code></li>
 </ul>
 <hr />
-<h1 id="7-ejecucion-y-validacion">7. Ejecución y validación</h1>
+<p><strong>7. Ejecución y validación</strong></p>
 <ol>
 <li>Iniciar <code>LogAttribute</code> de errores y éxito.</li>
 <li>Iniciar <code>PutDatabaseRecord</code>.</li>
@@ -2411,17 +2430,17 @@
 </span></code></pre></div>
 <p>Si el endpoint devuelve dos pedidos como el ejemplo, deberían aparecer dos filas nuevas.</p>
 <hr />
-<h1 id="8-errores-frecuentes">8. Errores frecuentes</h1>
-<h2 id="http-404-o-500">HTTP 404 o 500</h2>
+<p><strong>8. Errores frecuentes</strong></p>
+<p><strong>HTTP 404 o 500</strong></p>
 <p>Revisar:</p>
 <ul>
 <li>URL del endpoint.</li>
 <li>Puerto y red entre contenedores.</li>
 <li>Estado de la API.</li>
 </ul>
-<h2 id="json-mal-formado">JSON mal formado</h2>
+<p><strong>JSON mal formado</strong></p>
 <p><code>PutDatabaseRecord</code> enviará por <code>failure</code> si el payload no es JSON válido o no coincide con el esquema inferido.</p>
-<h2 id="duplicado-de-clave-primaria">Duplicado de clave primaria</h2>
+<p><strong>Duplicado de clave primaria</strong></p>
 <p>Si llega un <code>id_pedido</code> existente, PostgreSQL devolverá error por clave duplicada.</p>
 <p>Opciones:</p>
 <ul>
@@ -2429,13 +2448,13 @@
 <li>Cambiar estrategia a <code>UPDATE</code> o <code>UPSERT</code> con otro patrón.</li>
 </ul>
 <hr />
-<h1 id="9-reto-adicional">9. Reto adicional</h1>
+<p><strong>9. Reto adicional</strong></p>
 <p>Ampliar el flujo para cargar solo pedidos pagados.</p>
 <p>Pista: añadir <code>QueryRecord</code> entre <code>InvokeHTTP</code> y <code>PutDatabaseRecord</code> con una consulta similar a:</p>
 <div class="language-sql highlight"><pre><span></span><code><span id="__span-64-1"><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">FLOWFILE</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">estado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;PAGADO&#39;</span>
 </span></code></pre></div>
 <hr />
-<h1 id="resumen_1">Resumen</h1>
+<p><strong>Resumen</strong></p>
 <p>Este laboratorio muestra el patrón inverso al laboratorio anterior:</p>
 <ul>
 <li>Se extrae desde API REST en lugar de base de datos.</li>
