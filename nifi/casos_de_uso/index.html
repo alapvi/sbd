@@ -1162,961 +1162,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Laboratorio: Ingesta de datos meteorológicos desde Open-Meteo hacia MongoDB">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#objetivos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Objetivos
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#escenario" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Escenario
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#arquitectura-etl" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Arquitectura ETL
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#arquitectura-del-flujo-en-apache-nifi" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Arquitectura del flujo en Apache NiFi
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#documento-que-se-almacenara" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Documento que se almacenará
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tecnologias-utilizadas" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Tecnologías utilizadas
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1-preparacion-del-entorno" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Preparación del entorno
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#11-requisitos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.1 Requisitos
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#12-desplegar-mongodb" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.2 Desplegar MongoDB
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#13-comprobar-la-conectividad" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.3 Comprobar la conectividad
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#15-acceso-entre-nifi-y-mongodb" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.5 Acceso entre NiFi y MongoDB
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-configuracion-de-los-controller-services" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Configuración de los Controller Services
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#22-crear-el-mongodbcontrollerservice" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.2 Crear el MongoDBControllerService
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2.2 Crear el MongoDBControllerService">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#habilitar-el-servicio" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Habilitar el servicio
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#25-que-funcion-tiene-cada-uno" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.5 ¿Qué función tiene cada uno?
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#resultado-esperado" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Resultado esperado
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#31-endpoint-de-open-meteo" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.1 Endpoint de Open-Meteo
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#32-respuesta-esperada" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.2 Respuesta esperada
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#33-crear-generateflowfile" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.3 Crear GenerateFlowFile
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#34-crear-invokehttp" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.4 Crear InvokeHTTP
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3.4 Crear InvokeHTTP">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#url-configurada" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        URL configurada
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#36-conectar-los-processors" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.6 Conectar los Processors
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#37-ejecutar-la-primera-prueba" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.7 Ejecutar la primera prueba
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#38-visualizar-el-json-recibido" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.8 Visualizar el JSON recibido
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#39-atributos-http" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.9 Atributos HTTP
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#310-prueba-desde-la-terminal" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.10 Prueba desde la terminal
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#311-errores-frecuentes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.11 Errores frecuentes
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3.11 Errores frecuentes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#url-dividida-en-varias-lineas" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        URL dividida en varias líneas
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#parametro-current-incorrecto" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Parámetro current incorrecto
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#no-conectar-la-relacion-response" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        No conectar la relación response
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#la-respuesta-esta-vacia" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        La respuesta está vacía
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#error-de-resolucion-dns" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Error de resolución DNS
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#timeout" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Timeout
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-fase-transform-simplificacion-y-enriquecimiento-del-json" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Fase Transform: simplificación y enriquecimiento del JSON
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#41-documento-original" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.1 Documento original
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#42-crear-jolttransformjson" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.2 Crear JoltTransformJSON
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#43-configuracion-de-jolttransformjson" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.3 Configuración de JoltTransformJSON
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#44-especificacion-jolt" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.4 Especificación Jolt
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#45-funcionamiento-de-shift" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.5 Funcionamiento de shift
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#46-funcionamiento-de-default" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.6 Funcionamiento de default
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#47-resultado-de-jolttransformjson" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.7 Resultado de JoltTransformJSON
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#49-probar-la-transformacion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.9 Probar la transformación
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#410-errores-frecuentes-de-jolt" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.10 Errores frecuentes de Jolt
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4.10 Errores frecuentes de Jolt">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#json-de-entrada-no-valido" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        JSON de entrada no válido
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#nombre-de-campo-incorrecto" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Nombre de campo incorrecto
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#variable-no-solicitada-a-la-api" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Variable no solicitada a la API
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#412-crear-updaterecord" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.12 Crear UpdateRecord
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#414-por-que-utilizar-updaterecord" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.14 Por qué utilizar UpdateRecord
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#415-resultado-final-de-la-transformacion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.15 Resultado final de la transformación
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#416-relaciones-de-updaterecord" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.16 Relaciones de UpdateRecord
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#417-probar-updaterecord" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.17 Probar UpdateRecord
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#418-diferencia-entre-ambos-timestamps" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.18 Diferencia entre ambos timestamps
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#419-parametrizar-la-ciudad" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.19 Parametrizar la ciudad
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#420-buenas-practicas" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.20 Buenas prácticas
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#resultado-esperado_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Resultado esperado
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-fase-load-almacenamiento-en-mongodb" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Fase Load: almacenamiento en MongoDB
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#51-base-de-datos-y-coleccion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.1 Base de datos y colección
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#52-crear-putmongorecord" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.2 Crear PutMongoRecord
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#53-configuracion-de-putmongorecord" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.3 Configuración de PutMongoRecord
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#54-modo-de-escritura" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.4 Modo de escritura
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#55-batch-size" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.5 Batch Size
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#56-relaciones" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.6 Relaciones
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#57-crear-logattribute" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.7 Crear LogAttribute
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#58-crear-la-ruta-de-error" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.8 Crear la ruta de error
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#510-ejecutar-el-flujo" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.10 Ejecutar el flujo
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#511-verificar-la-insercion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.11 Verificar la inserción
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#512-realizar-varias-lecturas" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.12 Realizar varias lecturas
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#513-comprobar-los-tipos-almacenados" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.13 Comprobar los tipos almacenados
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#514-consultas-basicas" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.14 Consultas básicas
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5.14 Consultas básicas">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#mediciones-de-xativa" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mediciones de Xàtiva
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#mediciones-con-lluvia" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mediciones con lluvia
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#515-agregacion-sencilla" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.15 Agregación sencilla
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#516-errores-frecuentes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.16 Errores frecuentes
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5.16 Errores frecuentes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#mongodbcontrollerservice-deshabilitado" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        MongoDBControllerService deshabilitado
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#host-incorrecto" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Host incorrecto
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#record-reader-no-seleccionado" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Record Reader no seleccionado
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-verificacion-del-flujo-y-data-provenance" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. Verificación del flujo y Data Provenance
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#61-ejecutar-el-flujo-completo" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.1 Ejecutar el flujo completo
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#62-comprobar-mongodb" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.2 Comprobar MongoDB
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#63-acceder-a-data-provenance" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.3 Acceder a Data Provenance
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#64-eventos-habituales" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.4 Eventos habituales
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#67-comprobar-el-linaje-del-flowfile" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.7 Comprobar el linaje del FlowFile
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#68-verificar-los-atributos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.8 Verificar los atributos
-      
-    </span>
-  </a>
-  
 </li>
       
     </ul>
@@ -2401,961 +1446,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Laboratorio: Ingesta de datos meteorológicos desde Open-Meteo hacia MongoDB">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#objetivos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Objetivos
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#escenario" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Escenario
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#arquitectura-etl" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Arquitectura ETL
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#arquitectura-del-flujo-en-apache-nifi" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Arquitectura del flujo en Apache NiFi
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#documento-que-se-almacenara" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Documento que se almacenará
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tecnologias-utilizadas" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Tecnologías utilizadas
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1-preparacion-del-entorno" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Preparación del entorno
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#11-requisitos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.1 Requisitos
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#12-desplegar-mongodb" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.2 Desplegar MongoDB
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#13-comprobar-la-conectividad" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.3 Comprobar la conectividad
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#15-acceso-entre-nifi-y-mongodb" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.5 Acceso entre NiFi y MongoDB
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-configuracion-de-los-controller-services" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Configuración de los Controller Services
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#22-crear-el-mongodbcontrollerservice" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.2 Crear el MongoDBControllerService
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2.2 Crear el MongoDBControllerService">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#habilitar-el-servicio" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Habilitar el servicio
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#25-que-funcion-tiene-cada-uno" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.5 ¿Qué función tiene cada uno?
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#resultado-esperado" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Resultado esperado
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#31-endpoint-de-open-meteo" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.1 Endpoint de Open-Meteo
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#32-respuesta-esperada" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.2 Respuesta esperada
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#33-crear-generateflowfile" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.3 Crear GenerateFlowFile
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#34-crear-invokehttp" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.4 Crear InvokeHTTP
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3.4 Crear InvokeHTTP">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#url-configurada" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        URL configurada
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#36-conectar-los-processors" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.6 Conectar los Processors
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#37-ejecutar-la-primera-prueba" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.7 Ejecutar la primera prueba
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#38-visualizar-el-json-recibido" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.8 Visualizar el JSON recibido
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#39-atributos-http" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.9 Atributos HTTP
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#310-prueba-desde-la-terminal" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.10 Prueba desde la terminal
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#311-errores-frecuentes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.11 Errores frecuentes
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3.11 Errores frecuentes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#url-dividida-en-varias-lineas" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        URL dividida en varias líneas
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#parametro-current-incorrecto" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Parámetro current incorrecto
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#no-conectar-la-relacion-response" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        No conectar la relación response
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#la-respuesta-esta-vacia" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        La respuesta está vacía
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#error-de-resolucion-dns" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Error de resolución DNS
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#timeout" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Timeout
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-fase-transform-simplificacion-y-enriquecimiento-del-json" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Fase Transform: simplificación y enriquecimiento del JSON
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#41-documento-original" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.1 Documento original
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#42-crear-jolttransformjson" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.2 Crear JoltTransformJSON
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#43-configuracion-de-jolttransformjson" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.3 Configuración de JoltTransformJSON
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#44-especificacion-jolt" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.4 Especificación Jolt
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#45-funcionamiento-de-shift" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.5 Funcionamiento de shift
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#46-funcionamiento-de-default" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.6 Funcionamiento de default
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#47-resultado-de-jolttransformjson" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.7 Resultado de JoltTransformJSON
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#49-probar-la-transformacion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.9 Probar la transformación
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#410-errores-frecuentes-de-jolt" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.10 Errores frecuentes de Jolt
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4.10 Errores frecuentes de Jolt">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#json-de-entrada-no-valido" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        JSON de entrada no válido
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#nombre-de-campo-incorrecto" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Nombre de campo incorrecto
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#variable-no-solicitada-a-la-api" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Variable no solicitada a la API
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#412-crear-updaterecord" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.12 Crear UpdateRecord
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#414-por-que-utilizar-updaterecord" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.14 Por qué utilizar UpdateRecord
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#415-resultado-final-de-la-transformacion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.15 Resultado final de la transformación
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#416-relaciones-de-updaterecord" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.16 Relaciones de UpdateRecord
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#417-probar-updaterecord" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.17 Probar UpdateRecord
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#418-diferencia-entre-ambos-timestamps" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.18 Diferencia entre ambos timestamps
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#419-parametrizar-la-ciudad" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.19 Parametrizar la ciudad
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#420-buenas-practicas" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.20 Buenas prácticas
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#resultado-esperado_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Resultado esperado
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-fase-load-almacenamiento-en-mongodb" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Fase Load: almacenamiento en MongoDB
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#51-base-de-datos-y-coleccion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.1 Base de datos y colección
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#52-crear-putmongorecord" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.2 Crear PutMongoRecord
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#53-configuracion-de-putmongorecord" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.3 Configuración de PutMongoRecord
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#54-modo-de-escritura" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.4 Modo de escritura
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#55-batch-size" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.5 Batch Size
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#56-relaciones" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.6 Relaciones
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#57-crear-logattribute" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.7 Crear LogAttribute
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#58-crear-la-ruta-de-error" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.8 Crear la ruta de error
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#510-ejecutar-el-flujo" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.10 Ejecutar el flujo
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#511-verificar-la-insercion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.11 Verificar la inserción
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#512-realizar-varias-lecturas" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.12 Realizar varias lecturas
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#513-comprobar-los-tipos-almacenados" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.13 Comprobar los tipos almacenados
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#514-consultas-basicas" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.14 Consultas básicas
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5.14 Consultas básicas">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#mediciones-de-xativa" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mediciones de Xàtiva
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#mediciones-con-lluvia" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mediciones con lluvia
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#515-agregacion-sencilla" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.15 Agregación sencilla
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#516-errores-frecuentes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.16 Errores frecuentes
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5.16 Errores frecuentes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#mongodbcontrollerservice-deshabilitado" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        MongoDBControllerService deshabilitado
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#host-incorrecto" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Host incorrecto
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#record-reader-no-seleccionado" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Record Reader no seleccionado
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-verificacion-del-flujo-y-data-provenance" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. Verificación del flujo y Data Provenance
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#61-ejecutar-el-flujo-completo" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.1 Ejecutar el flujo completo
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#62-comprobar-mongodb" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.2 Comprobar MongoDB
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#63-acceder-a-data-provenance" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.3 Acceder a Data Provenance
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#64-eventos-habituales" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.4 Eventos habituales
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#67-comprobar-el-linaje-del-flowfile" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.7 Comprobar el linaje del FlowFile
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#68-verificar-los-atributos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.8 Verificar los atributos
-      
-    </span>
-  </a>
-  
 </li>
       
     </ul>
@@ -3374,6 +1464,8 @@
                   
 
 
+
+  <h1>Casos de uso</h1>
 
 <p>En esta página se recogen dos laboratorios prácticos de NiFi con una estructura mínima en la tabla de contenidos.</p>
 <h2 id="laboratorio-1-extraccion-de-postgresql-y-conversion-a-json">Laboratorio 1: extracción de PostgreSQL y conversión a JSON</h2>
@@ -4213,8 +2305,8 @@ Genera el template del flujo y guarda el <code>.xml</code>.</li>
 <li>Preparar datos para su envío a APIs, Kafka o almacenamiento en la nube.</li>
 </ul>
 <hr />
-<h1 id="laboratorio-ingesta-de-datos-meteorologicos-desde-open-meteo-hacia-mongodb">Laboratorio: Ingesta de datos meteorológicos desde Open-Meteo hacia MongoDB</h1>
-<h2 id="objetivos">Objetivos</h2>
+<h2 id="laboratorio-ingesta-de-datos-meteorologicos-desde-open-meteo-hacia-mongodb">Laboratorio: Ingesta de datos meteorológicos desde Open-Meteo hacia MongoDB</h2>
+<p><strong>Objetivos</strong></p>
 <p>En este laboratorio construiremos un flujo ETL completo utilizando <strong>Apache NiFi 2.10</strong>, capaz de consultar una API REST pública, transformar la información recibida y almacenarla en una base de datos NoSQL.</p>
 <p>El objetivo es reproducir un escenario muy habitual en proyectos de <strong>IoT</strong>, <strong>Smart Cities</strong>, <strong>Big Data</strong> y <strong>Data Engineering</strong>, donde miles de dispositivos generan información que debe ser capturada, procesada y almacenada para su posterior análisis.</p>
 <p>Durante el laboratorio se utilizará la API pública de <strong>Open-Meteo</strong>, que proporciona información meteorológica en tiempo real sin necesidad de registrarse ni obtener una API Key.</p>
@@ -4229,7 +2321,7 @@ Genera el template del flujo y guarda el <code>.xml</code>.</li>
 <li>Comprender cómo implementar un proceso ETL completo con Apache NiFi.</li>
 </ul>
 <hr />
-<h1 id="escenario">Escenario</h1>
+<p><strong>Escenario</strong></p>
 <p>Una empresa dedicada al análisis de datos meteorológicos desea almacenar automáticamente la temperatura y otras variables climáticas de distintas ciudades para realizar estudios históricos y generar cuadros de mando.</p>
 <p>Para ello utilizará <strong>Apache NiFi</strong> como plataforma de integración de datos.</p>
 <p>Cada minuto, NiFi realizará las siguientes operaciones:</p>
@@ -4242,7 +2334,7 @@ Genera el template del flujo y guarda el <code>.xml</code>.</li>
 </ol>
 <p>El proceso puede repetirse periódicamente, permitiendo construir un histórico de mediciones que posteriormente podrá analizarse mediante herramientas de Business Intelligence o plataformas Big Data.</p>
 <hr />
-<h1 id="arquitectura-etl">Arquitectura ETL</h1>
+<p><strong>Arquitectura ETL</strong></p>
 <p>El laboratorio implementará las tres fases clásicas de cualquier proceso ETL:</p>
 <pre class="mermaid"><code>flowchart LR
     E["Extract"]
@@ -4274,7 +2366,7 @@ Genera el template del flujo y guarda el <code>.xml</code>.</li>
 </tbody>
 </table>
 <hr />
-<h1 id="arquitectura-del-flujo-en-apache-nifi">Arquitectura del flujo en Apache NiFi</h1>
+<p><strong>Arquitectura del flujo en Apache NiFi</strong></p>
 <p>La implementación del proceso ETL se realizará mediante el siguiente flujo:</p>
 <pre class="mermaid"><code>flowchart LR
 
@@ -4327,7 +2419,7 @@ E --&gt; F</code></pre>
 </table>
 <p>Los Processors compartirán varios <strong>Controller Services</strong>, evitando duplicar configuraciones y siguiendo las buenas prácticas estudiadas en capítulos anteriores.</p>
 <hr />
-<h1 id="documento-que-se-almacenara">Documento que se almacenará</h1>
+<p><strong>Documento que se almacenará</strong></p>
 <p>Cada ejecución del flujo generará un documento similar al siguiente:</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-51-1"><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="p">{</span>
 </span><span id="__span-51-2"><a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a><span class="w">    </span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Xàtiva&quot;</span><span class="p">,</span>
@@ -4349,7 +2441,7 @@ E --&gt; F</code></pre>
 </ul>
 <p>Esta diferencia resulta muy útil para medir retrasos de procesamiento, detectar incidencias y auditar la calidad de los datos.</p>
 <hr />
-<h1 id="tecnologias-utilizadas">Tecnologías utilizadas</h1>
+<p><strong>Tecnologías utilizadas</strong></p>
 <p>Durante este laboratorio trabajaremos con los siguientes componentes:</p>
 <table>
 <thead>
@@ -4382,7 +2474,7 @@ E --&gt; F</code></pre>
 </tbody>
 </table>
 <p>Este laboratorio reproduce un escenario muy próximo al utilizado en sistemas de monitorización, plataformas IoT y soluciones de integración de datos en tiempo real, donde múltiples fuentes externas suministran información que debe almacenarse y procesarse de forma continua.</p>
-<h1 id="1-preparacion-del-entorno">1. Preparación del entorno</h1>
+<p><strong>1. Preparación del entorno</strong></p>
 <p>Antes de comenzar a construir el flujo ETL es necesario preparar el entorno de trabajo. En este laboratorio utilizaremos <strong>MongoDB</strong> como base de datos documental y <strong>Apache NiFi</strong> como plataforma de integración.</p>
 <p>La arquitectura será la siguiente:</p>
 <p>```mermaid id="lab01-env"
@@ -4406,8 +2498,9 @@ FLOW --&gt; DB
 </code></pre></div>
 <p>```</p>
 <hr />
-<h1 id="11-requisitos">1.1 Requisitos</h1>
-<p>Para realizar el laboratorio será necesario disponer de:
+<p><strong>1.1 Requisitos</strong>
+
+Para realizar el laboratorio será necesario disponer de:
 
 | Software       | Versión recomendada |
 | -------------- | ------------------- |
@@ -4418,8 +2511,9 @@ FLOW --&gt; DB
 
 No es necesario descargar ningún driver adicional, ya que la comunicación con MongoDB se realiza mediante los Processors y Controller Services incluidos en NiFi.</p>
 <hr />
-<h1 id="12-desplegar-mongodb">1.2 Desplegar MongoDB</h1>
-<p>Crearemos un contenedor muy sencillo utilizando Docker Compose.
+<p><strong>1.2 Desplegar MongoDB</strong>
+
+Crearemos un contenedor muy sencillo utilizando Docker Compose.
 
 <code>yaml id="mongo-compose"
 services:
@@ -4455,7 +2549,7 @@ docker ps
 </span><span id="__span-54-5"><a id="__codelineno-54-5" name="__codelineno-54-5" href="#__codelineno-54-5"></a>xxxxxxxxxxxx   mongo:8    mongodb    Up
 </span></code></pre></div></p>
 <hr />
-<h1 id="13-comprobar-la-conectividad">1.3 Comprobar la conectividad</h1>
+<p><strong>1.3 Comprobar la conectividad</strong></p>
 <p>Podemos acceder al cliente de MongoDB mediante:</p>
 <p>```bash id="mongo-shell"
 docker exec -it mongodb mongosh
@@ -4470,7 +2564,7 @@ docker exec -it mongodb mongosh
 exit
 <div class="language-text highlight"><pre><span></span><code><span id="__span-56-1"><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>---
 </span><span id="__span-56-2"><a id="__codelineno-56-2" name="__codelineno-56-2" href="#__codelineno-56-2"></a>
-</span><span id="__span-56-3"><a id="__codelineno-56-3" name="__codelineno-56-3" href="#__codelineno-56-3"></a># 1.4 Preparar Apache NiFi
+</span><span id="__span-56-3"><a id="__codelineno-56-3" name="__codelineno-56-3" href="#__codelineno-56-3"></a>**1.4 Preparar Apache NiFi**
 </span><span id="__span-56-4"><a id="__codelineno-56-4" name="__codelineno-56-4" href="#__codelineno-56-4"></a>
 </span><span id="__span-56-5"><a id="__codelineno-56-5" name="__codelineno-56-5" href="#__codelineno-56-5"></a>En este laboratorio se utilizará la instalación de NiFi desarrollada en los capítulos anteriores.
 </span><span id="__span-56-6"><a id="__codelineno-56-6" name="__codelineno-56-6" href="#__codelineno-56-6"></a>
@@ -4481,7 +2575,7 @@ exit
 </span></code></pre></div></p>
 <p>Aunque el flujo almacenará la información en MongoDB, este directorio podrá utilizarse posteriormente para exportaciones o copias de seguridad.</p>
 <hr />
-<h1 id="15-acceso-entre-nifi-y-mongodb">1.5 Acceso entre NiFi y MongoDB</h1>
+<p><strong>1.5 Acceso entre NiFi y MongoDB</strong></p>
 <p>Si NiFi y MongoDB se ejecutan en contenedores diferentes y no comparten una red Docker, utilizaremos el acceso mediante el host.</p>
 <p>Añadir al servicio de NiFi:</p>
 <p>```yaml id="extra-hosts"
@@ -4497,7 +2591,7 @@ extra_hosts:
 mongodb://mongodb:27017
 <div class="language-text highlight"><pre><span></span><code><span id="__span-58-1"><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a>---
 </span><span id="__span-58-2"><a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a>
-</span><span id="__span-58-3"><a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a># Resultado esperado
+</span><span id="__span-58-3"><a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a>**Resultado esperado**
 </span><span id="__span-58-4"><a id="__codelineno-58-4" name="__codelineno-58-4" href="#__codelineno-58-4"></a>
 </span><span id="__span-58-5"><a id="__codelineno-58-5" name="__codelineno-58-5" href="#__codelineno-58-5"></a>Al finalizar esta primera fase tendremos preparado todo el entorno necesario para comenzar el desarrollo del flujo ETL.
 </span><span id="__span-58-6"><a id="__codelineno-58-6" name="__codelineno-58-6" href="#__codelineno-58-6"></a>
@@ -4511,7 +2605,7 @@ mongodb://mongodb:27017
 </span><span id="__span-58-14"><a id="__codelineno-58-14" name="__codelineno-58-14" href="#__codelineno-58-14"></a>    NIFI --&gt; MONGO
 </span></code></pre></div></p>
 <p>En el siguiente apartado configuraremos los <strong>Controller Services</strong>, que permitirán a Apache NiFi conectarse de forma reutilizable a MongoDB y procesar documentos JSON mediante la API de Records.</p>
-<h1 id="2-configuracion-de-los-controller-services">2. Configuración de los Controller Services</h1>
+<p><strong>2. Configuración de los Controller Services</strong></p>
 <p>En este laboratorio utilizaremos la <strong>API de Records</strong> de Apache NiFi para trabajar con documentos JSON y un <strong>MongoDBControllerService</strong> para centralizar la conexión con la base de datos.</p>
 <p>El objetivo es evitar que cada Processor tenga que configurar su propia conexión, favoreciendo la reutilización y simplificando el mantenimiento del flujo.</p>
 <p>La arquitectura será la siguiente:</p>
@@ -4526,7 +2620,7 @@ PUT --&gt; READER</p>
 <p>MONGO --&gt; DB
 <div class="language-text highlight"><pre><span></span><code><span id="__span-59-1"><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a>---
 </span><span id="__span-59-2"><a id="__codelineno-59-2" name="__codelineno-59-2" href="#__codelineno-59-2"></a>
-</span><span id="__span-59-3"><a id="__codelineno-59-3" name="__codelineno-59-3" href="#__codelineno-59-3"></a># 2.1 Crear el Process Group
+</span><span id="__span-59-3"><a id="__codelineno-59-3" name="__codelineno-59-3" href="#__codelineno-59-3"></a>**2.1 Crear el Process Group**
 </span><span id="__span-59-4"><a id="__codelineno-59-4" name="__codelineno-59-4" href="#__codelineno-59-4"></a>
 </span><span id="__span-59-5"><a id="__codelineno-59-5" name="__codelineno-59-5" href="#__codelineno-59-5"></a>En el Canvas de Apache NiFi:
 </span><span id="__span-59-6"><a id="__codelineno-59-6" name="__codelineno-59-6" href="#__codelineno-59-6"></a>
@@ -4541,7 +2635,7 @@ PUT --&gt; READER</p>
 </ol>
 <p>Todos los Processors y Controller Services del laboratorio se crearán dentro de este grupo.</p>
 <hr />
-<h1 id="22-crear-el-mongodbcontrollerservice">2.2 Crear el MongoDBControllerService</h1>
+<p><strong>2.2 Crear el MongoDBControllerService</strong></p>
 <p>Abrir:</p>
 <p>```text id="configure-services"
 Configure → Controller Services
@@ -4555,7 +2649,7 @@ Configure → Controller Services
 MONGODB-WEATHER
 <div class="language-text highlight"><pre><span></span><code><span id="__span-61-1"><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a>---
 </span><span id="__span-61-2"><a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a>
-</span><span id="__span-61-3"><a id="__codelineno-61-3" name="__codelineno-61-3" href="#__codelineno-61-3"></a>## Configuración
+</span><span id="__span-61-3"><a id="__codelineno-61-3" name="__codelineno-61-3" href="#__codelineno-61-3"></a>**Configuración**
 </span><span id="__span-61-4"><a id="__codelineno-61-4" name="__codelineno-61-4" href="#__codelineno-61-4"></a>
 </span><span id="__span-61-5"><a id="__codelineno-61-5" name="__codelineno-61-5" href="#__codelineno-61-5"></a>Introducir los siguientes valores:
 </span><span id="__span-61-6"><a id="__codelineno-61-6" name="__codelineno-61-6" href="#__codelineno-61-6"></a>
@@ -4570,7 +2664,7 @@ MONGODB-WEATHER
 </span></code></pre></div></p>
 <p>Guardar la configuración.</p>
 <hr />
-<h2 id="habilitar-el-servicio">Habilitar el servicio</h2>
+<p><strong>Habilitar el servicio</strong></p>
 <p>Pulsar <strong>Enable</strong>.</p>
 <p>El estado deberá cambiar a:</p>
 <p>```text id="enabled"
@@ -4579,7 +2673,7 @@ Enabled
 </span><span id="__span-62-2"><a id="__codelineno-62-2" name="__codelineno-62-2" href="#__codelineno-62-2"></a>
 </span><span id="__span-62-3"><a id="__codelineno-62-3" name="__codelineno-62-3" href="#__codelineno-62-3"></a>---
 </span><span id="__span-62-4"><a id="__codelineno-62-4" name="__codelineno-62-4" href="#__codelineno-62-4"></a>
-</span><span id="__span-62-5"><a id="__codelineno-62-5" name="__codelineno-62-5" href="#__codelineno-62-5"></a># 2.3 Crear JsonTreeReader
+</span><span id="__span-62-5"><a id="__codelineno-62-5" name="__codelineno-62-5" href="#__codelineno-62-5"></a>**2.3 Crear JsonTreeReader**
 </span><span id="__span-62-6"><a id="__codelineno-62-6" name="__codelineno-62-6" href="#__codelineno-62-6"></a>
 </span><span id="__span-62-7"><a id="__codelineno-62-7" name="__codelineno-62-7" href="#__codelineno-62-7"></a>Añadir un nuevo Controller Service.
 </span><span id="__span-62-8"><a id="__codelineno-62-8" name="__codelineno-62-8" href="#__codelineno-62-8"></a>
@@ -4603,7 +2697,7 @@ JSON-READER
 </span><span id="__span-63-10"><a id="__codelineno-63-10" name="__codelineno-63-10" href="#__codelineno-63-10"></a>
 </span><span id="__span-63-11"><a id="__codelineno-63-11" name="__codelineno-63-11" href="#__codelineno-63-11"></a>---
 </span><span id="__span-63-12"><a id="__codelineno-63-12" name="__codelineno-63-12" href="#__codelineno-63-12"></a>
-</span><span id="__span-63-13"><a id="__codelineno-63-13" name="__codelineno-63-13" href="#__codelineno-63-13"></a># 2.4 Arquitectura de los Controller Services
+</span><span id="__span-63-13"><a id="__codelineno-63-13" name="__codelineno-63-13" href="#__codelineno-63-13"></a>**2.4 Arquitectura de los Controller Services**
 </span><span id="__span-63-14"><a id="__codelineno-63-14" name="__codelineno-63-14" href="#__codelineno-63-14"></a>
 </span><span id="__span-63-15"><a id="__codelineno-63-15" name="__codelineno-63-15" href="#__codelineno-63-15"></a>Al finalizar este apartado deberán existir dos servicios habilitados.
 </span><span id="__span-63-16"><a id="__codelineno-63-16" name="__codelineno-63-16" href="#__codelineno-63-16"></a>
@@ -4619,7 +2713,7 @@ JSON-READER
 </span><span id="__span-63-26"><a id="__codelineno-63-26" name="__codelineno-63-26" href="#__codelineno-63-26"></a>PG --&gt; READER
 </span></code></pre></div></p>
 <hr />
-<h1 id="25-que-funcion-tiene-cada-uno">2.5 ¿Qué función tiene cada uno?</h1>
+<p><strong>2.5 ¿Qué función tiene cada uno?</strong></p>
 <table>
 <thead>
 <tr>
@@ -4640,7 +2734,7 @@ JSON-READER
 </table>
 <p>En este laboratorio no será necesario crear un <strong>Record Writer</strong>, ya que el documento recibido desde la API será almacenado directamente en MongoDB tras ser transformado.</p>
 <hr />
-<h1 id="resultado-esperado">Resultado esperado</h1>
+<p><strong>Resultado esperado</strong></p>
 <p>Al finalizar este apartado tendremos preparada toda la infraestructura necesaria para construir el flujo ETL.</p>
 <p>Los siguientes Processors reutilizarán estos servicios sin necesidad de volver a configurar la conexión con MongoDB ni el tratamiento del formato JSON.</p>
 <p>```mermaid id="services-ready"
@@ -4658,7 +2752,7 @@ UPDATE --&gt; PUT</p>
 PUT --&gt; MONGO
 <div class="language-text highlight"><pre><span></span><code><span id="__span-64-1"><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a>En el siguiente apartado comenzaremos la construcción del flujo implementando la fase **Extract**, en la que Apache NiFi consultará periódicamente la API REST de Open-Meteo mediante el Processor `InvokeHTTP`.
 </span><span id="__span-64-2"><a id="__codelineno-64-2" name="__codelineno-64-2" href="#__codelineno-64-2"></a>
-</span><span id="__span-64-3"><a id="__codelineno-64-3" name="__codelineno-64-3" href="#__codelineno-64-3"></a># 3. Fase Extract: consulta de Open-Meteo
+</span><span id="__span-64-3"><a id="__codelineno-64-3" name="__codelineno-64-3" href="#__codelineno-64-3"></a>**3. Fase Extract: consulta de Open-Meteo**
 </span><span id="__span-64-4"><a id="__codelineno-64-4" name="__codelineno-64-4" href="#__codelineno-64-4"></a>
 </span><span id="__span-64-5"><a id="__codelineno-64-5" name="__codelineno-64-5" href="#__codelineno-64-5"></a>La primera fase del proceso ETL consiste en obtener las condiciones meteorológicas actuales desde la API REST de **Open-Meteo**.
 </span><span id="__span-64-6"><a id="__codelineno-64-6" name="__codelineno-64-6" href="#__codelineno-64-6"></a>
@@ -4680,7 +2774,7 @@ PUT --&gt; MONGO
 </span></code></pre></div></p>
 <p><code>InvokeHTTP</code> es el Processor estándar de Apache NiFi para interactuar con endpoints HTTP y HTTPS. Permite configurar el método, la URL remota, cabeceras, autenticación, timeouts y tratamiento de la respuesta.</p>
 <hr />
-<h1 id="31-endpoint-de-open-meteo">3.1 Endpoint de Open-Meteo</h1>
+<p><strong>3.1 Endpoint de Open-Meteo</strong></p>
 <p>El laboratorio consultará las condiciones meteorológicas actuales de Xàtiva.</p>
 <p>Coordenadas utilizadas:</p>
 <table>
@@ -4728,7 +2822,7 @@ https://api.open-meteo.com/v1/forecast?latitude=38.9878&amp;longitude=-0.5186&am
 </span></code></pre></div></p>
 <p>En la configuración de NiFi debe introducirse como una única línea.</p>
 <hr />
-<h1 id="32-respuesta-esperada">3.2 Respuesta esperada</h1>
+<p><strong>3.2 Respuesta esperada</strong></p>
 <p>La API devolverá un documento JSON con información general de la localización, unidades de medida y condiciones actuales.</p>
 <p>Ejemplo simplificado:</p>
 <p>```json id="openmeteo-response"
@@ -4774,7 +2868,7 @@ https://api.open-meteo.com/v1/forecast?latitude=38.9878&amp;longitude=-0.5186&am
 </span><span id="__span-66-13"><a id="__codelineno-66-13" name="__codelineno-66-13" href="#__codelineno-66-13"></a>current.cloud_cover
 </span></code></pre></div></p>
 <hr />
-<h1 id="33-crear-generateflowfile">3.3 Crear GenerateFlowFile</h1>
+<p><strong>3.3 Crear GenerateFlowFile</strong></p>
 <p>Añadir un Processor:</p>
 <p>```text id="generate-flowfile-name"
 GenerateFlowFile
@@ -4818,7 +2912,7 @@ Run Once
 </span><span id="__span-68-2"><a id="__codelineno-68-2" name="__codelineno-68-2" href="#__codelineno-68-2"></a>
 </span><span id="__span-68-3"><a id="__codelineno-68-3" name="__codelineno-68-3" href="#__codelineno-68-3"></a>---
 </span><span id="__span-68-4"><a id="__codelineno-68-4" name="__codelineno-68-4" href="#__codelineno-68-4"></a>
-</span><span id="__span-68-5"><a id="__codelineno-68-5" name="__codelineno-68-5" href="#__codelineno-68-5"></a>## Planificación
+</span><span id="__span-68-5"><a id="__codelineno-68-5" name="__codelineno-68-5" href="#__codelineno-68-5"></a>**Planificación**
 </span><span id="__span-68-6"><a id="__codelineno-68-6" name="__codelineno-68-6" href="#__codelineno-68-6"></a>
 </span><span id="__span-68-7"><a id="__codelineno-68-7" name="__codelineno-68-7" href="#__codelineno-68-7"></a>Cuando el flujo esté completamente validado, puede configurarse para ejecutarse cada minuto:
 </span><span id="__span-68-8"><a id="__codelineno-68-8" name="__codelineno-68-8" href="#__codelineno-68-8"></a>
@@ -4841,7 +2935,7 @@ end
 ```</p>
 <p>Esto reduce el número de solicitudes durante las pruebas.</p>
 <hr />
-<h1 id="34-crear-invokehttp">3.4 Crear InvokeHTTP</h1>
+<p><strong>3.4 Crear InvokeHTTP</strong></p>
 <p>Añadir un Processor:</p>
 <p>```text id="invoke-http-name"
 InvokeHTTP
@@ -4891,14 +2985,14 @@ InvokeHTTP
 </table>
 <p>El nombre exacto de algunas propiedades puede variar ligeramente según la revisión de NiFi, pero los elementos esenciales son el método <code>GET</code>, la URL y la generación del cuerpo de respuesta.</p>
 <hr />
-<h2 id="url-configurada">URL configurada</h2>
+<p><strong>URL configurada</strong></p>
 <p>```text id="invoke-http-url"
 https://api.open-meteo.com/v1/forecast?latitude=38.9878&amp;longitude=-0.5186&amp;current=temperature_2m,relative_humidity_2m,wind_speed_10m,precipitation,cloud_cover&amp;timezone=Europe%2FMadrid
 <div class="language-text highlight"><pre><span></span><code><span id="__span-71-1"><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a>No es necesario configurar autenticación ni API Key para este ejercicio.
 </span><span id="__span-71-2"><a id="__codelineno-71-2" name="__codelineno-71-2" href="#__codelineno-71-2"></a>
 </span><span id="__span-71-3"><a id="__codelineno-71-3" name="__codelineno-71-3" href="#__codelineno-71-3"></a>---
 </span><span id="__span-71-4"><a id="__codelineno-71-4" name="__codelineno-71-4" href="#__codelineno-71-4"></a>
-</span><span id="__span-71-5"><a id="__codelineno-71-5" name="__codelineno-71-5" href="#__codelineno-71-5"></a># 3.5 Relaciones de InvokeHTTP
+</span><span id="__span-71-5"><a id="__codelineno-71-5" name="__codelineno-71-5" href="#__codelineno-71-5"></a>**3.5 Relaciones de InvokeHTTP**
 </span><span id="__span-71-6"><a id="__codelineno-71-6" name="__codelineno-71-6" href="#__codelineno-71-6"></a>
 </span><span id="__span-71-7"><a id="__codelineno-71-7" name="__codelineno-71-7" href="#__codelineno-71-7"></a>`InvokeHTTP` puede generar varias relaciones según el resultado de la solicitud.
 </span><span id="__span-71-8"><a id="__codelineno-71-8" name="__codelineno-71-8" href="#__codelineno-71-8"></a>
@@ -4937,7 +3031,7 @@ https://api.open-meteo.com/v1/forecast?latitude=38.9878&amp;longitude=-0.5186&am
 <li><code>retry</code>, <code>no retry</code> y <code>failure</code> pueden conectarse a un <code>LogAttribute</code> o <code>LogMessage</code>.</li>
 </ul>
 <hr />
-<h1 id="36-conectar-los-processors">3.6 Conectar los Processors</h1>
+<p><strong>3.6 Conectar los Processors</strong></p>
 <p>Crear la conexión:</p>
 <p>```text id="extract-flow"
 GenerateFlowFile
@@ -4968,8 +3062,9 @@ HTTP --&gt;|failure| ERROR
 </code></pre></div>
 <p>```</p>
 <hr />
-<h1 id="37-ejecutar-la-primera-prueba">3.7 Ejecutar la primera prueba</h1>
-<p>El orden recomendado es:
+<p><strong>3.7 Ejecutar la primera prueba</strong>
+
+El orden recomendado es:
 
 1. Iniciar el <code>LogAttribute</code> conectado a <code>response</code>.
 2. Iniciar <code>InvokeHTTP</code>.
@@ -4982,7 +3077,7 @@ Si la petición se realiza correctamente, el FlowFile viajará por:
 <code>text id="response-success"
 response</code></p>
 <hr />
-<h1 id="38-visualizar-el-json-recibido">3.8 Visualizar el JSON recibido</h1>
+<p><strong>3.8 Visualizar el JSON recibido</strong></p>
 <p>Para inspeccionar el cuerpo de la respuesta:</p>
 <ol>
 <li>Detener el Processor situado después de <code>InvokeHTTP</code>.</li>
@@ -4994,7 +3089,7 @@ response</code></p>
 </ol>
 <p>Debe aparecer un documento JSON con la estructura mostrada anteriormente.</p>
 <hr />
-<h1 id="39-atributos-http">3.9 Atributos HTTP</h1>
+<p><strong>3.9 Atributos HTTP</strong></p>
 <p><code>InvokeHTTP</code> añade atributos relacionados con la respuesta HTTP.</p>
 <p>Pueden aparecer atributos similares a:</p>
 <p>```text id="http-attributes"
@@ -5044,7 +3139,7 @@ mime.type = application/json
 </tbody>
 </table>
 <hr />
-<h1 id="310-prueba-desde-la-terminal">3.10 Prueba desde la terminal</h1>
+<p><strong>3.10 Prueba desde la terminal</strong></p>
 <p>Antes de atribuir un fallo a NiFi, puede comprobarse el endpoint desde el host:</p>
 <p>```bash id="curl-openmeteo"
 curl -s \
@@ -5058,11 +3153,11 @@ curl -s \
 </span></code></pre></div></p>
 <p>También puede comprobarse desde el contenedor NiFi cuando disponga de una herramienta HTTP compatible.</p>
 <hr />
-<h1 id="311-errores-frecuentes">3.11 Errores frecuentes</h1>
-<h2 id="url-dividida-en-varias-lineas">URL dividida en varias líneas</h2>
+<p><strong>3.11 Errores frecuentes</strong></p>
+<p><strong>URL dividida en varias líneas</strong></p>
 <p>La URL debe introducirse como una única línea dentro de la propiedad de <code>InvokeHTTP</code>.</p>
 <hr />
-<h2 id="parametro-current-incorrecto">Parámetro current incorrecto</h2>
+<p><strong>Parámetro current incorrecto</strong></p>
 <p>Las variables deben separarse mediante comas:</p>
 <p>```text id="current-correct"
 current=temperature_2m,relative_humidity_2m,wind_speed_10m
@@ -5070,7 +3165,7 @@ current=temperature_2m,relative_humidity_2m,wind_speed_10m
 </span><span id="__span-76-2"><a id="__codelineno-76-2" name="__codelineno-76-2" href="#__codelineno-76-2"></a>
 </span><span id="__span-76-3"><a id="__codelineno-76-3" name="__codelineno-76-3" href="#__codelineno-76-3"></a>---
 </span><span id="__span-76-4"><a id="__codelineno-76-4" name="__codelineno-76-4" href="#__codelineno-76-4"></a>
-</span><span id="__span-76-5"><a id="__codelineno-76-5" name="__codelineno-76-5" href="#__codelineno-76-5"></a>## Espacios sin codificar
+</span><span id="__span-76-5"><a id="__codelineno-76-5" name="__codelineno-76-5" href="#__codelineno-76-5"></a>**Espacios sin codificar**
 </span><span id="__span-76-6"><a id="__codelineno-76-6" name="__codelineno-76-6" href="#__codelineno-76-6"></a>
 </span><span id="__span-76-7"><a id="__codelineno-76-7" name="__codelineno-76-7" href="#__codelineno-76-7"></a>La zona horaria debe utilizar:
 </span><span id="__span-76-8"><a id="__codelineno-76-8" name="__codelineno-76-8" href="#__codelineno-76-8"></a>
@@ -5079,11 +3174,11 @@ current=temperature_2m,relative_humidity_2m,wind_speed_10m
 </span></code></pre></div></p>
 <p>o una representación que el Processor codifique correctamente.</p>
 <hr />
-<h2 id="no-conectar-la-relacion-response">No conectar la relación response</h2>
+<p><strong>No conectar la relación response</strong></p>
 <p>El contenido devuelto por la API se encuentra en la relación <code>response</code>.</p>
 <p>La relación <code>original</code> contiene el FlowFile utilizado para iniciar la petición.</p>
 <hr />
-<h2 id="la-respuesta-esta-vacia">La respuesta está vacía</h2>
+<p><strong>La respuesta está vacía</strong></p>
 <p>Comprobar:</p>
 <ul>
 <li><code>Response Body Ignored</code>.</li>
@@ -5093,7 +3188,7 @@ current=temperature_2m,relative_humidity_2m,wind_speed_10m
 <li>Conectividad a Internet desde el contenedor.</li>
 </ul>
 <hr />
-<h2 id="error-de-resolucion-dns">Error de resolución DNS</h2>
+<p><strong>Error de resolución DNS</strong></p>
 <p>Comprobar desde el host:</p>
 <p>```bash id="dns-openmeteo"
 getent hosts api.open-meteo.com
@@ -5104,7 +3199,7 @@ getent hosts api.open-meteo.com
 </span><span id="__span-77-5"><a id="__codelineno-77-5" name="__codelineno-77-5" href="#__codelineno-77-5"></a>getent hosts api.open-meteo.com
 </span></code></pre></div></p>
 <hr />
-<h2 id="timeout">Timeout</h2>
+<p><strong>Timeout</strong></p>
 <p>Aumentar temporalmente:</p>
 <p>```text id="timeout-values"
 Connection Timeout = 10 sec
@@ -5113,7 +3208,7 @@ Read Timeout = 30 sec
 </span><span id="__span-78-2"><a id="__codelineno-78-2" name="__codelineno-78-2" href="#__codelineno-78-2"></a>
 </span><span id="__span-78-3"><a id="__codelineno-78-3" name="__codelineno-78-3" href="#__codelineno-78-3"></a>---
 </span><span id="__span-78-4"><a id="__codelineno-78-4" name="__codelineno-78-4" href="#__codelineno-78-4"></a>
-</span><span id="__span-78-5"><a id="__codelineno-78-5" name="__codelineno-78-5" href="#__codelineno-78-5"></a>## Error TLS
+</span><span id="__span-78-5"><a id="__codelineno-78-5" name="__codelineno-78-5" href="#__codelineno-78-5"></a>**Error TLS**
 </span><span id="__span-78-6"><a id="__codelineno-78-6" name="__codelineno-78-6" href="#__codelineno-78-6"></a>
 </span><span id="__span-78-7"><a id="__codelineno-78-7" name="__codelineno-78-7" href="#__codelineno-78-7"></a>Open-Meteo utiliza HTTPS.
 </span><span id="__span-78-8"><a id="__codelineno-78-8" name="__codelineno-78-8" href="#__codelineno-78-8"></a>
@@ -5129,7 +3224,7 @@ Read Timeout = 30 sec
 </span><span id="__span-78-18"><a id="__codelineno-78-18" name="__codelineno-78-18" href="#__codelineno-78-18"></a>
 </span><span id="__span-78-19"><a id="__codelineno-78-19" name="__codelineno-78-19" href="#__codelineno-78-19"></a>---
 </span><span id="__span-78-20"><a id="__codelineno-78-20" name="__codelineno-78-20" href="#__codelineno-78-20"></a>
-</span><span id="__span-78-21"><a id="__codelineno-78-21" name="__codelineno-78-21" href="#__codelineno-78-21"></a># 3.12 Buenas prácticas
+</span><span id="__span-78-21"><a id="__codelineno-78-21" name="__codelineno-78-21" href="#__codelineno-78-21"></a>**3.12 Buenas prácticas**
 </span><span id="__span-78-22"><a id="__codelineno-78-22" name="__codelineno-78-22" href="#__codelineno-78-22"></a>
 </span><span id="__span-78-23"><a id="__codelineno-78-23" name="__codelineno-78-23" href="#__codelineno-78-23"></a>* Utilizar un intervalo de ejecución razonable.
 </span><span id="__span-78-24"><a id="__codelineno-78-24" name="__codelineno-78-24" href="#__codelineno-78-24"></a>* Definir timeouts.
@@ -5143,7 +3238,7 @@ Read Timeout = 30 sec
 </span><span id="__span-78-32"><a id="__codelineno-78-32" name="__codelineno-78-32" href="#__codelineno-78-32"></a>
 </span><span id="__span-78-33"><a id="__codelineno-78-33" name="__codelineno-78-33" href="#__codelineno-78-33"></a>---
 </span><span id="__span-78-34"><a id="__codelineno-78-34" name="__codelineno-78-34" href="#__codelineno-78-34"></a>
-</span><span id="__span-78-35"><a id="__codelineno-78-35" name="__codelineno-78-35" href="#__codelineno-78-35"></a># Resultado esperado
+</span><span id="__span-78-35"><a id="__codelineno-78-35" name="__codelineno-78-35" href="#__codelineno-78-35"></a>**Resultado esperado**
 </span><span id="__span-78-36"><a id="__codelineno-78-36" name="__codelineno-78-36" href="#__codelineno-78-36"></a>
 </span><span id="__span-78-37"><a id="__codelineno-78-37" name="__codelineno-78-37" href="#__codelineno-78-37"></a>Al finalizar esta fase, NiFi será capaz de consultar Open-Meteo y generar un FlowFile con la respuesta meteorológica completa en formato JSON.
 </span><span id="__span-78-38"><a id="__codelineno-78-38" name="__codelineno-78-38" href="#__codelineno-78-38"></a>
@@ -5159,7 +3254,7 @@ Read Timeout = 30 sec
 </span><span id="__span-78-48"><a id="__codelineno-78-48" name="__codelineno-78-48" href="#__codelineno-78-48"></a>    API --&gt; JSON
 </span></code></pre></div></p>
 <p>El siguiente apartado implementará la fase <strong>Transform</strong>, donde se utilizará <code>JoltTransformJSON</code> para simplificar la respuesta y conservar únicamente los campos necesarios para MongoDB.</p>
-<h1 id="4-fase-transform-simplificacion-y-enriquecimiento-del-json">4. Fase Transform: simplificación y enriquecimiento del JSON</h1>
+<p><strong>4. Fase Transform: simplificación y enriquecimiento del JSON</strong></p>
 <p>La respuesta de Open-Meteo contiene más información de la que necesitamos almacenar. Además de las variables meteorológicas actuales, incluye metadatos, unidades, elevación, zona horaria y tiempo de generación de la respuesta.</p>
 <p>En esta fase transformaremos el documento para:</p>
 <ul>
@@ -5181,8 +3276,9 @@ UPDATE --&gt; OUTPUT
 </code></pre></div>
 <p><code>``</code>JoltTransformJSON<code>reformatea contenido JSON aplicando una especificación Jolt, mientras que</code>UpdateRecord` utiliza RecordPath para actualizar o añadir campos en datos orientados a Records.</p>
 <hr />
-<h1 id="41-documento-original">4.1 Documento original</h1>
-<p>La entrada recibida desde Open-Meteo tendrá una estructura similar a:
+<p><strong>4.1 Documento original</strong>
+
+La entrada recibida desde Open-Meteo tendrá una estructura similar a:
 
 <code>json id="weather-original-json"
 {
@@ -5223,7 +3319,7 @@ UPDATE --&gt; OUTPUT
 </ul>
 <p>El documento final será más pequeño y sencillo de consultar.</p>
 <hr />
-<h1 id="42-crear-jolttransformjson">4.2 Crear JoltTransformJSON</h1>
+<p><strong>4.2 Crear JoltTransformJSON</strong></p>
 <p>Añadir un Processor:</p>
 <p>```text id="jolt-processor-name"
 JoltTransformJSON
@@ -5241,8 +3337,9 @@ flowchart LR
 </code></pre></div>
 <p>```</p>
 <hr />
-<h1 id="43-configuracion-de-jolttransformjson">4.3 Configuración de JoltTransformJSON</h1>
-<p>Configurar las propiedades principales:
+<p><strong>4.3 Configuración de JoltTransformJSON</strong>
+
+Configurar las propiedades principales:
 
 | Propiedad               | Valor                                  |
 | ----------------------- | -------------------------------------- |
@@ -5256,8 +3353,9 @@ La propiedad de transformación debe utilizar una cadena de operaciones porque s
 1. Una operación <code>shift</code>.
 2. Una operación <code>default</code>.</p>
 <hr />
-<h1 id="44-especificacion-jolt">4.4 Especificación Jolt</h1>
-<p>Introducir la siguiente especificación:
+<p><strong>4.4 Especificación Jolt</strong>
+
+Introducir la siguiente especificación:
 
 <code>json id="weather-jolt-specification"
 [
@@ -5284,7 +3382,7 @@ La propiedad de transformación debe utilizar una cadena de operaciones porque s
   }
 ]</code></p>
 <hr />
-<h1 id="45-funcionamiento-de-shift">4.5 Funcionamiento de shift</h1>
+<p><strong>4.5 Funcionamiento de shift</strong></p>
 <p>La operación <code>shift</code> permite seleccionar campos y moverlos a una nueva posición.</p>
 <p>Ejemplo:</p>
 <p>```json id="jolt-shift-example"
@@ -5346,8 +3444,9 @@ flowchart LR
 </code></pre></div>
 <p>```</p>
 <hr />
-<h1 id="46-funcionamiento-de-default">4.6 Funcionamiento de default</h1>
-<p>La segunda operación añade un valor que no existe en la respuesta original:
+<p><strong>4.6 Funcionamiento de default</strong>
+
+La segunda operación añade un valor que no existe en la respuesta original:
 
 <code>json id="weather-jolt-default"
 {
@@ -5366,7 +3465,7 @@ city
 </span></code></pre></div></p>
 <p>La operación <code>default</code> solo incorpora el valor si el campo no existe previamente.</p>
 <hr />
-<h1 id="47-resultado-de-jolttransformjson">4.7 Resultado de JoltTransformJSON</h1>
+<p><strong>4.7 Resultado de JoltTransformJSON</strong></p>
 <p>Después de aplicar la transformación, el FlowFile tendrá un contenido similar a:</p>
 <p>```json id="weather-jolt-result"
 {
@@ -5384,7 +3483,7 @@ city
 </span><span id="__span-85-2"><a id="__codelineno-85-2" name="__codelineno-85-2" href="#__codelineno-85-2"></a>
 </span><span id="__span-85-3"><a id="__codelineno-85-3" name="__codelineno-85-3" href="#__codelineno-85-3"></a>---
 </span><span id="__span-85-4"><a id="__codelineno-85-4" name="__codelineno-85-4" href="#__codelineno-85-4"></a>
-</span><span id="__span-85-5"><a id="__codelineno-85-5" name="__codelineno-85-5" href="#__codelineno-85-5"></a># 4.8 Relaciones de JoltTransformJSON
+</span><span id="__span-85-5"><a id="__codelineno-85-5" name="__codelineno-85-5" href="#__codelineno-85-5"></a>**4.8 Relaciones de JoltTransformJSON**
 </span><span id="__span-85-6"><a id="__codelineno-85-6" name="__codelineno-85-6" href="#__codelineno-85-6"></a>
 </span><span id="__span-85-7"><a id="__codelineno-85-7" name="__codelineno-85-7" href="#__codelineno-85-7"></a>El Processor dispone principalmente de dos relaciones:
 </span><span id="__span-85-8"><a id="__codelineno-85-8" name="__codelineno-85-8" href="#__codelineno-85-8"></a>
@@ -5407,7 +3506,7 @@ city
 <p>La relación <code>success</code> continuará hacia <code>UpdateRecord</code>.</p>
 <p>La relación <code>failure</code> debe conectarse a un Processor de registro de errores.</p>
 <hr />
-<h1 id="49-probar-la-transformacion">4.9 Probar la transformación</h1>
+<p><strong>4.9 Probar la transformación</strong></p>
 <p>Antes de añadir <code>UpdateRecord</code>, puede conectarse temporalmente la relación <code>success</code> a un <code>LogAttribute</code>.</p>
 <p>Procedimiento:</p>
 <ol>
@@ -5421,15 +3520,15 @@ city
 </ol>
 <p>El contenido debe coincidir con la estructura transformada.</p>
 <hr />
-<h1 id="410-errores-frecuentes-de-jolt">4.10 Errores frecuentes de Jolt</h1>
-<h2 id="json-de-entrada-no-valido">JSON de entrada no válido</h2>
+<p><strong>4.10 Errores frecuentes de Jolt</strong></p>
+<p><strong>JSON de entrada no válido</strong></p>
 <p>Si <code>InvokeHTTP</code> devuelve HTML, texto de error o un cuerpo vacío, Jolt no podrá interpretar el contenido.</p>
 <p>Debe comprobarse:</p>
 <p>```text id="weather-http-status-check"
 invokehttp.status.code = 200
 <div class="language-text highlight"><pre><span></span><code><span id="__span-86-1"><a id="__codelineno-86-1" name="__codelineno-86-1" href="#__codelineno-86-1"></a>---
 </span><span id="__span-86-2"><a id="__codelineno-86-2" name="__codelineno-86-2" href="#__codelineno-86-2"></a>
-</span><span id="__span-86-3"><a id="__codelineno-86-3" name="__codelineno-86-3" href="#__codelineno-86-3"></a>## Especificación Jolt incorrecta
+</span><span id="__span-86-3"><a id="__codelineno-86-3" name="__codelineno-86-3" href="#__codelineno-86-3"></a>**Especificación Jolt incorrecta**
 </span><span id="__span-86-4"><a id="__codelineno-86-4" name="__codelineno-86-4" href="#__codelineno-86-4"></a>
 </span><span id="__span-86-5"><a id="__codelineno-86-5" name="__codelineno-86-5" href="#__codelineno-86-5"></a>Un error de sintaxis en la especificación enviará el FlowFile por `failure`.
 </span><span id="__span-86-6"><a id="__codelineno-86-6" name="__codelineno-86-6" href="#__codelineno-86-6"></a>
@@ -5445,7 +3544,7 @@ invokehttp.status.code = 200
 </span></code></pre></div></p>
 <p>Falta una coma después de <code>shift</code>.</p>
 <hr />
-<h2 id="nombre-de-campo-incorrecto">Nombre de campo incorrecto</h2>
+<p><strong>Nombre de campo incorrecto</strong></p>
 <p>Si se utiliza:</p>
 <p>```text id="weather-invalid-field"
 relative_humidity
@@ -5456,7 +3555,7 @@ relative_humidity
 </span></code></pre></div></p>
 <p>el campo no aparecerá en la salida.</p>
 <hr />
-<h2 id="variable-no-solicitada-a-la-api">Variable no solicitada a la API</h2>
+<p><strong>Variable no solicitada a la API</strong></p>
 <p>Jolt no puede transformar un campo que no existe.</p>
 <p>Si el endpoint no incluye:</p>
 <p>```text id="weather-cloud-request"
@@ -5465,13 +3564,13 @@ cloud_cover
 </span><span id="__span-88-2"><a id="__codelineno-88-2" name="__codelineno-88-2" href="#__codelineno-88-2"></a>
 </span><span id="__span-88-3"><a id="__codelineno-88-3" name="__codelineno-88-3" href="#__codelineno-88-3"></a>---
 </span><span id="__span-88-4"><a id="__codelineno-88-4" name="__codelineno-88-4" href="#__codelineno-88-4"></a>
-</span><span id="__span-88-5"><a id="__codelineno-88-5" name="__codelineno-88-5" href="#__codelineno-88-5"></a>## City no aparece
+</span><span id="__span-88-5"><a id="__codelineno-88-5" name="__codelineno-88-5" href="#__codelineno-88-5"></a>**City no aparece**
 </span><span id="__span-88-6"><a id="__codelineno-88-6" name="__codelineno-88-6" href="#__codelineno-88-6"></a>
 </span><span id="__span-88-7"><a id="__codelineno-88-7" name="__codelineno-88-7" href="#__codelineno-88-7"></a>Comprobar que se utiliza una transformación `Chain` y que la operación `default` aparece después de `shift`.
 </span><span id="__span-88-8"><a id="__codelineno-88-8" name="__codelineno-88-8" href="#__codelineno-88-8"></a>
 </span><span id="__span-88-9"><a id="__codelineno-88-9" name="__codelineno-88-9" href="#__codelineno-88-9"></a>---
 </span><span id="__span-88-10"><a id="__codelineno-88-10" name="__codelineno-88-10" href="#__codelineno-88-10"></a>
-</span><span id="__span-88-11"><a id="__codelineno-88-11" name="__codelineno-88-11" href="#__codelineno-88-11"></a># 4.11 Crear JsonRecordSetWriter
+</span><span id="__span-88-11"><a id="__codelineno-88-11" name="__codelineno-88-11" href="#__codelineno-88-11"></a>**4.11 Crear JsonRecordSetWriter**
 </span><span id="__span-88-12"><a id="__codelineno-88-12" name="__codelineno-88-12" href="#__codelineno-88-12"></a>
 </span><span id="__span-88-13"><a id="__codelineno-88-13" name="__codelineno-88-13" href="#__codelineno-88-13"></a>Para utilizar `UpdateRecord` será necesario un Record Writer.
 </span><span id="__span-88-14"><a id="__codelineno-88-14" name="__codelineno-88-14" href="#__codelineno-88-14"></a>
@@ -5522,8 +3621,9 @@ PG --&gt; WRITER
 </code></pre></div>
 <p>```</p>
 <hr />
-<h1 id="412-crear-updaterecord">4.12 Crear UpdateRecord</h1>
-<p>Añadir un Processor:
+<p><strong>4.12 Crear UpdateRecord</strong>
+
+Añadir un Processor:
 
 <code>text id="weather-update-record-type"
 UpdateRecord</code></p>
@@ -5542,7 +3642,7 @@ Añadir fecha de captura
 </span><span id="__span-91-10"><a id="__codelineno-91-10" name="__codelineno-91-10" href="#__codelineno-91-10"></a>
 </span><span id="__span-91-11"><a id="__codelineno-91-11" name="__codelineno-91-11" href="#__codelineno-91-11"></a>---
 </span><span id="__span-91-12"><a id="__codelineno-91-12" name="__codelineno-91-12" href="#__codelineno-91-12"></a>
-</span><span id="__span-91-13"><a id="__codelineno-91-13" name="__codelineno-91-13" href="#__codelineno-91-13"></a># 4.13 Añadir timestamp_nifi
+</span><span id="__span-91-13"><a id="__codelineno-91-13" name="__codelineno-91-13" href="#__codelineno-91-13"></a>**4.13 Añadir timestamp_nifi**
 </span><span id="__span-91-14"><a id="__codelineno-91-14" name="__codelineno-91-14" href="#__codelineno-91-14"></a>
 </span><span id="__span-91-15"><a id="__codelineno-91-15" name="__codelineno-91-15" href="#__codelineno-91-15"></a>Crear una propiedad dinámica:
 </span><span id="__span-91-16"><a id="__codelineno-91-16" name="__codelineno-91-16" href="#__codelineno-91-16"></a>
@@ -5566,7 +3666,7 @@ ${now():format("yyyy-MM-dd'T'HH:mm:ssXXX")}
 </span><span id="__span-92-12"><a id="__codelineno-92-12" name="__codelineno-92-12" href="#__codelineno-92-12"></a>2026-08-05T18:51:26+02:00
 </span></code></pre></div></p>
 <hr />
-<h1 id="414-por-que-utilizar-updaterecord">4.14 Por qué utilizar UpdateRecord</h1>
+<p><strong>4.14 Por qué utilizar UpdateRecord</strong></p>
 <p>Podría añadirse la fecha mediante <code>ReplaceText</code>, pero <code>UpdateRecord</code> ofrece varias ventajas:</p>
 <ul>
 <li>Trabaja con datos estructurados.</li>
@@ -5588,8 +3688,9 @@ UPDATE --&gt; RESULT
 </code></pre></div>
 <p>```</p>
 <hr />
-<h1 id="415-resultado-final-de-la-transformacion">4.15 Resultado final de la transformación</h1>
-<p>Después de <code>UpdateRecord</code>, el documento debería ser similar a:
+<p><strong>4.15 Resultado final de la transformación</strong>
+
+Después de <code>UpdateRecord</code>, el documento debería ser similar a:
 
 <code>json id="weather-final-transformed-json"
 {
@@ -5605,7 +3706,7 @@ UPDATE --&gt; RESULT
   "timestamp_nifi": "2026-08-05T18:51:26+02:00"
 }</code></p>
 <hr />
-<h1 id="416-relaciones-de-updaterecord">4.16 Relaciones de UpdateRecord</h1>
+<p><strong>4.16 Relaciones de UpdateRecord</strong></p>
 <p>Conectar:</p>
 <p>```mermaid id="weather-update-record-relations"
 flowchart TD
@@ -5621,8 +3722,9 @@ La relación</code>success<code>continuará hacia MongoDB.
 
 La relación</code>failure` permitirá capturar errores de lectura, escritura o RecordPath.</p>
 <hr />
-<h1 id="417-probar-updaterecord">4.17 Probar UpdateRecord</h1>
-<p>Antes de añadir MongoDB:
+<p><strong>4.17 Probar UpdateRecord</strong>
+
+Antes de añadir MongoDB:
 
 1. Conectar <code>success</code> a un <code>LogAttribute</code>.
 2. Detener el <code>LogAttribute</code>.
@@ -5644,7 +3746,7 @@ cloud_cover
 timestamp_api
 timestamp_nifi</code></p>
 <hr />
-<h1 id="418-diferencia-entre-ambos-timestamps">4.18 Diferencia entre ambos timestamps</h1>
+<p><strong>4.18 Diferencia entre ambos timestamps</strong></p>
 <table>
 <thead>
 <tr>
@@ -5675,7 +3777,7 @@ timestamp_nifi</code></p>
 <li>Calidad temporal de los datos.</li>
 </ul>
 <hr />
-<h1 id="419-parametrizar-la-ciudad">4.19 Parametrizar la ciudad</h1>
+<p><strong>4.19 Parametrizar la ciudad</strong></p>
 <p>En lugar de escribir directamente:</p>
 <p>```json id="weather-fixed-city"
 "city": "Xàtiva"
@@ -5707,22 +3809,22 @@ UPDATE --&gt; RECORD
 
 En ese caso podría eliminarse la operación</code>default` de Jolt.</p>
 <hr />
-<h1 id="420-buenas-practicas">4.20 Buenas prácticas</h1>
-<ul>
-<li>Conservar solo los campos necesarios.</li>
-<li>Utilizar nombres de salida claros.</li>
-<li>Mantener los tipos numéricos.</li>
-<li>Separar selección y enriquecimiento.</li>
-<li>Probar Jolt antes de añadir más Processors.</li>
-<li>Enrutar siempre <code>failure</code>.</li>
-<li>Utilizar Records para añadir campos.</li>
-<li>Incluir zona horaria en los timestamps.</li>
-<li>Parametrizar ciudad y coordenadas cuando se reutilice el flujo.</li>
-<li>Documentar la especificación Jolt.</li>
-</ul>
+<p><strong>4.20 Buenas prácticas</strong>
+
+* Conservar solo los campos necesarios.
+* Utilizar nombres de salida claros.
+* Mantener los tipos numéricos.
+* Separar selección y enriquecimiento.
+* Probar Jolt antes de añadir más Processors.
+* Enrutar siempre <code>failure</code>.
+* Utilizar Records para añadir campos.
+* Incluir zona horaria en los timestamps.
+* Parametrizar ciudad y coordenadas cuando se reutilice el flujo.
+* Documentar la especificación Jolt.</p>
 <hr />
-<h1 id="resultado-esperado_1">Resultado esperado</h1>
-<p>Al finalizar esta fase, la respuesta original de Open-Meteo se habrá convertido en un documento compacto y preparado para MongoDB.
+<p><strong>Resultado esperado</strong>
+
+Al finalizar esta fase, la respuesta original de Open-Meteo se habrá convertido en un documento compacto y preparado para MongoDB.
 
 <code>mermaid id="weather-transform-result"
 flowchart LR
@@ -5737,7 +3839,7 @@ flowchart LR
     SIMPLE --&gt; UPDATE
     UPDATE --&gt; FINAL</code></p>
 <p>El siguiente apartado implementará la fase <strong>Load</strong>, configurando <code>PutMongoRecord</code> para insertar cada medición como un documento independiente dentro de MongoDB.</p>
-<h1 id="5-fase-load-almacenamiento-en-mongodb">5. Fase Load: almacenamiento en MongoDB</h1>
+<p><strong>5. Fase Load: almacenamiento en MongoDB</strong></p>
 <p>La última fase del proceso ETL consiste en almacenar el documento meteorológico transformado dentro de MongoDB.</p>
 <p>Para ello utilizaremos:</p>
 <ul>
@@ -5760,8 +3862,9 @@ SERVICE --&gt; DB
 </code></pre></div>
 <p>```</p>
 <hr />
-<h1 id="51-base-de-datos-y-coleccion">5.1 Base de datos y colección</h1>
-<p>MongoDB almacenará las mediciones dentro de:
+<p><strong>5.1 Base de datos y colección</strong>
+
+MongoDB almacenará las mediciones dentro de:
 
 <code>text id="weather-mongodb-target"
 Base de datos: weather
@@ -5784,8 +3887,9 @@ COLLECTION --&gt; DOC3
 
 De esta forma se construirá un histórico meteorológico.</p>
 <hr />
-<h1 id="52-crear-putmongorecord">5.2 Crear PutMongoRecord</h1>
-<p>Añadir un Processor:
+<p><strong>5.2 Crear PutMongoRecord</strong>
+
+Añadir un Processor:
 
 <code>text id="weather-putmongo-type"
 PutMongoRecord</code></p>
@@ -5802,7 +3906,7 @@ Guardar medición en MongoDB
 </span><span id="__span-100-8"><a id="__codelineno-100-8" name="__codelineno-100-8" href="#__codelineno-100-8"></a>    UPDATE --&gt;|success| MONGO
 </span></code></pre></div></p>
 <hr />
-<h1 id="53-configuracion-de-putmongorecord">5.3 Configuración de PutMongoRecord</h1>
+<p><strong>5.3 Configuración de PutMongoRecord</strong></p>
 <p>Configurar las propiedades principales:</p>
 <table>
 <thead>
@@ -5848,7 +3952,7 @@ Guardar medición en MongoDB
 </ul>
 <p><code>PutMongoRecord</code> utiliza la conexión proporcionada por <code>MongoDBControllerService</code>, cuya finalidad es centralizar la configuración y ofrecer acceso a MongoDB a otros componentes relacionados.</p>
 <hr />
-<h1 id="54-modo-de-escritura">5.4 Modo de escritura</h1>
+<p><strong>5.4 Modo de escritura</strong></p>
 <p>Para este laboratorio utilizaremos:</p>
 <p>```text id="weather-mongo-mode"
 Insert
@@ -5870,7 +3974,7 @@ Insert
 <p>Este modo es apropiado porque cada lectura meteorológica representa una observación independiente.</p>
 <p>No se desea sobrescribir el documento anterior.</p>
 <hr />
-<h1 id="55-batch-size">5.5 Batch Size</h1>
+<p><strong>5.5 Batch Size</strong></p>
 <p>La propiedad <code>Batch Size</code> controla cuántos documentos se insertan en cada operación.</p>
 <p>En este laboratorio cada FlowFile contiene un único registro, por lo que el valor no tendrá un efecto apreciable.</p>
 <p>Puede mantenerse:</p>
@@ -5890,7 +3994,7 @@ Insert
 </span><span id="__span-102-12"><a id="__codelineno-102-12" name="__codelineno-102-12" href="#__codelineno-102-12"></a>    BATCH --&gt; MONGO
 </span></code></pre></div></p>
 <hr />
-<h1 id="56-relaciones">5.6 Relaciones</h1>
+<p><strong>5.6 Relaciones</strong></p>
 <p>Las relaciones principales serán:</p>
 <table>
 <thead>
@@ -5934,8 +4038,9 @@ Para un primer laboratorio:
 *</code>failure<code>se conectará a</code>LogMessage<code>.
 *</code>retry` puede conectarse a una ruta de espera y reintento.</p>
 <hr />
-<h1 id="57-crear-logattribute">5.7 Crear LogAttribute</h1>
-<p>Añadir:
+<p><strong>5.7 Crear LogAttribute</strong>
+
+Añadir:
 
 <code>text id="weather-logattribute-type"
 LogAttribute</code></p>
@@ -5960,7 +4065,7 @@ Registrar medición almacenada
 </ul>
 <p>La relación de salida de <code>LogAttribute</code> puede marcarse como <strong>Auto-Terminate</strong>.</p>
 <hr />
-<h1 id="58-crear-la-ruta-de-error">5.8 Crear la ruta de error</h1>
+<p><strong>5.8 Crear la ruta de error</strong></p>
 <p>Añadir un <code>LogMessage</code> o un segundo <code>LogAttribute</code>.</p>
 <p>Nombre recomendado:</p>
 <p>```text id="weather-error-processor"
@@ -5982,7 +4087,7 @@ FlowFile Expiration = 10 min
 </span><span id="__span-106-2"><a id="__codelineno-106-2" name="__codelineno-106-2" href="#__codelineno-106-2"></a>
 </span><span id="__span-106-3"><a id="__codelineno-106-3" name="__codelineno-106-3" href="#__codelineno-106-3"></a>---
 </span><span id="__span-106-4"><a id="__codelineno-106-4" name="__codelineno-106-4" href="#__codelineno-106-4"></a>
-</span><span id="__span-106-5"><a id="__codelineno-106-5" name="__codelineno-106-5" href="#__codelineno-106-5"></a># 5.9 Flujo completo
+</span><span id="__span-106-5"><a id="__codelineno-106-5" name="__codelineno-106-5" href="#__codelineno-106-5"></a>**5.9 Flujo completo**
 </span><span id="__span-106-6"><a id="__codelineno-106-6" name="__codelineno-106-6" href="#__codelineno-106-6"></a>
 </span><span id="__span-106-7"><a id="__codelineno-106-7" name="__codelineno-106-7" href="#__codelineno-106-7"></a>El flujo final será:
 </span><span id="__span-106-8"><a id="__codelineno-106-8" name="__codelineno-106-8" href="#__codelineno-106-8"></a>
@@ -6026,8 +4131,9 @@ UPDATE -.-&gt; WRITER
 </code></pre></div>
 <p>```</p>
 <hr />
-<h1 id="510-ejecutar-el-flujo">5.10 Ejecutar el flujo</h1>
-<p>Antes de iniciar la ejecución, comprobar que están habilitados:
+<p><strong>5.10 Ejecutar el flujo</strong>
+
+Antes de iniciar la ejecución, comprobar que están habilitados:
 
 * <code>MONGODB-WEATHER</code>.
 * <code>JSON-READER</code>.
@@ -6045,8 +4151,9 @@ El orden recomendado es:
 
 Durante las primeras pruebas no se recomienda activar todavía la ejecución periódica.</p>
 <hr />
-<h1 id="511-verificar-la-insercion">5.11 Verificar la inserción</h1>
-<p>Acceder a MongoDB:
+<p><strong>5.11 Verificar la inserción</strong>
+
+Acceder a MongoDB:
 
 <code>bash id="weather-mongosh-access"
 docker exec -it mongodb mongosh</code></p>
@@ -6088,7 +4195,7 @@ measurements
 </span></code></pre></div></p>
 <p>Este campo actúa como identificador único del documento.</p>
 <hr />
-<h1 id="512-realizar-varias-lecturas">5.12 Realizar varias lecturas</h1>
+<p><strong>5.12 Realizar varias lecturas</strong></p>
 <p>Ejecutar <code>GenerateFlowFile</code> varias veces mediante <strong>Run Once</strong>.</p>
 <p>Después consultar:</p>
 <p>```javascript id="weather-count-documents"
@@ -6112,7 +4219,7 @@ db.measurements
 </span></code></pre></div></p>
 <p>Dependiendo de la frecuencia de actualización de Open-Meteo, varias ejecuciones cercanas pueden compartir el mismo <code>timestamp_api</code>.</p>
 <hr />
-<h1 id="513-comprobar-los-tipos-almacenados">5.13 Comprobar los tipos almacenados</h1>
+<p><strong>5.13 Comprobar los tipos almacenados</strong></p>
 <p>MongoDB distingue entre:</p>
 <ul>
 <li>Texto.</li>
@@ -6148,25 +4255,25 @@ temperature: 31.4
 </span></code></pre></div></p>
 <p>Trabajar con tipos numéricos permitirá realizar cálculos y agregaciones posteriormente.</p>
 <hr />
-<h1 id="514-consultas-basicas">5.14 Consultas básicas</h1>
-<h2 id="mediciones-de-xativa">Mediciones de Xàtiva</h2>
+<p><strong>5.14 Consultas básicas</strong></p>
+<p><strong>Mediciones de Xàtiva</strong></p>
 <p>```javascript id="weather-query-city"
 db.measurements.find({
   city: "Xàtiva"
 })
-<div class="language-text highlight"><pre><span></span><code><span id="__span-115-1"><a id="__codelineno-115-1" name="__codelineno-115-1" href="#__codelineno-115-1"></a>## Temperaturas superiores a 30 grados
+<div class="language-text highlight"><pre><span></span><code><span id="__span-115-1"><a id="__codelineno-115-1" name="__codelineno-115-1" href="#__codelineno-115-1"></a>**Temperaturas superiores a 30 grados**
 </span><span id="__span-115-2"><a id="__codelineno-115-2" name="__codelineno-115-2" href="#__codelineno-115-2"></a>
 </span><span id="__span-115-3"><a id="__codelineno-115-3" name="__codelineno-115-3" href="#__codelineno-115-3"></a>```javascript id=&quot;weather-query-temperature&quot;
 </span><span id="__span-115-4"><a id="__codelineno-115-4" name="__codelineno-115-4" href="#__codelineno-115-4"></a>db.measurements.find({
 </span><span id="__span-115-5"><a id="__codelineno-115-5" name="__codelineno-115-5" href="#__codelineno-115-5"></a>  temperature: { $gt: 30 }
 </span><span id="__span-115-6"><a id="__codelineno-115-6" name="__codelineno-115-6" href="#__codelineno-115-6"></a>})
 </span></code></pre></div></p>
-<h2 id="mediciones-con-lluvia">Mediciones con lluvia</h2>
+<p><strong>Mediciones con lluvia</strong></p>
 <p>```javascript id="weather-query-rain"
 db.measurements.find({
   precipitation: { $gt: 0 }
 })
-<div class="language-text highlight"><pre><span></span><code><span id="__span-116-1"><a id="__codelineno-116-1" name="__codelineno-116-1" href="#__codelineno-116-1"></a>## Última medición
+<div class="language-text highlight"><pre><span></span><code><span id="__span-116-1"><a id="__codelineno-116-1" name="__codelineno-116-1" href="#__codelineno-116-1"></a>**Última medición**
 </span><span id="__span-116-2"><a id="__codelineno-116-2" name="__codelineno-116-2" href="#__codelineno-116-2"></a>
 </span><span id="__span-116-3"><a id="__codelineno-116-3" name="__codelineno-116-3" href="#__codelineno-116-3"></a>```javascript id=&quot;weather-query-last&quot;
 </span><span id="__span-116-4"><a id="__codelineno-116-4" name="__codelineno-116-4" href="#__codelineno-116-4"></a>db.measurements
@@ -6175,7 +4282,7 @@ db.measurements.find({
 </span><span id="__span-116-7"><a id="__codelineno-116-7" name="__codelineno-116-7" href="#__codelineno-116-7"></a>  .limit(1)
 </span></code></pre></div></p>
 <hr />
-<h1 id="515-agregacion-sencilla">5.15 Agregación sencilla</h1>
+<p><strong>5.15 Agregación sencilla</strong></p>
 <p>Calcular la temperatura media:</p>
 <p>```javascript id="weather-average-temperature"
 db.measurements.aggregate([
@@ -6198,15 +4305,15 @@ db.measurements.aggregate([
 </span></code></pre></div></p>
 <p>Esta consulta demuestra la importancia de almacenar la temperatura como número y no como texto.</p>
 <hr />
-<h1 id="516-errores-frecuentes">5.16 Errores frecuentes</h1>
-<h2 id="mongodbcontrollerservice-deshabilitado">MongoDBControllerService deshabilitado</h2>
+<p><strong>5.16 Errores frecuentes</strong></p>
+<p><strong>MongoDBControllerService deshabilitado</strong></p>
 <p><code>PutMongoRecord</code> permanecerá inválido o no podrá ejecutarse.</p>
 <p>Comprobar que:</p>
 <p>```text id="weather-mongo-service-enabled"
 MONGODB-WEATHER = Enabled
 <div class="language-text highlight"><pre><span></span><code><span id="__span-118-1"><a id="__codelineno-118-1" name="__codelineno-118-1" href="#__codelineno-118-1"></a>---
 </span><span id="__span-118-2"><a id="__codelineno-118-2" name="__codelineno-118-2" href="#__codelineno-118-2"></a>
-</span><span id="__span-118-3"><a id="__codelineno-118-3" name="__codelineno-118-3" href="#__codelineno-118-3"></a>## Error de conexión
+</span><span id="__span-118-3"><a id="__codelineno-118-3" name="__codelineno-118-3" href="#__codelineno-118-3"></a>**Error de conexión**
 </span><span id="__span-118-4"><a id="__codelineno-118-4" name="__codelineno-118-4" href="#__codelineno-118-4"></a>
 </span><span id="__span-118-5"><a id="__codelineno-118-5" name="__codelineno-118-5" href="#__codelineno-118-5"></a>Mensaje habitual:
 </span><span id="__span-118-6"><a id="__codelineno-118-6" name="__codelineno-118-6" href="#__codelineno-118-6"></a>
@@ -6222,7 +4329,7 @@ docker ps
 </span><span id="__span-119-4"><a id="__codelineno-119-4" name="__codelineno-119-4" href="#__codelineno-119-4"></a>ss -lntp | grep 27017
 </span></code></pre></div></p>
 <hr />
-<h2 id="host-incorrecto">Host incorrecto</h2>
+<p><strong>Host incorrecto</strong></p>
 <p>Si NiFi está en Docker y MongoDB se encuentra en otro Compose sin red compartida, no debe utilizarse:</p>
 <p>```text id="weather-mongo-localhost-wrong"
 mongodb://localhost:27017
@@ -6237,7 +4344,7 @@ extra_hosts:
   - "host.docker.internal:host-gateway"
 <div class="language-text highlight"><pre><span></span><code><span id="__span-121-1"><a id="__codelineno-121-1" name="__codelineno-121-1" href="#__codelineno-121-1"></a>---
 </span><span id="__span-121-2"><a id="__codelineno-121-2" name="__codelineno-121-2" href="#__codelineno-121-2"></a>
-</span><span id="__span-121-3"><a id="__codelineno-121-3" name="__codelineno-121-3" href="#__codelineno-121-3"></a>## Base de datos o colección vacías
+</span><span id="__span-121-3"><a id="__codelineno-121-3" name="__codelineno-121-3" href="#__codelineno-121-3"></a>**Base de datos o colección vacías**
 </span><span id="__span-121-4"><a id="__codelineno-121-4" name="__codelineno-121-4" href="#__codelineno-121-4"></a>
 </span><span id="__span-121-5"><a id="__codelineno-121-5" name="__codelineno-121-5" href="#__codelineno-121-5"></a>Comprobar que se han configurado:
 </span><span id="__span-121-6"><a id="__codelineno-121-6" name="__codelineno-121-6" href="#__codelineno-121-6"></a>
@@ -6246,7 +4353,7 @@ extra_hosts:
 </span><span id="__span-121-9"><a id="__codelineno-121-9" name="__codelineno-121-9" href="#__codelineno-121-9"></a>Collection Name = measurements
 </span></code></pre></div></p>
 <hr />
-<h2 id="record-reader-no-seleccionado">Record Reader no seleccionado</h2>
+<p><strong>Record Reader no seleccionado</strong></p>
 <p><code>PutMongoRecord</code> necesita:</p>
 <p>```text id="weather-reader-selected"
 JSON-READER
@@ -6254,7 +4361,7 @@ JSON-READER
 </span><span id="__span-122-2"><a id="__codelineno-122-2" name="__codelineno-122-2" href="#__codelineno-122-2"></a>
 </span><span id="__span-122-3"><a id="__codelineno-122-3" name="__codelineno-122-3" href="#__codelineno-122-3"></a>---
 </span><span id="__span-122-4"><a id="__codelineno-122-4" name="__codelineno-122-4" href="#__codelineno-122-4"></a>
-</span><span id="__span-122-5"><a id="__codelineno-122-5" name="__codelineno-122-5" href="#__codelineno-122-5"></a>## JSON inválido
+</span><span id="__span-122-5"><a id="__codelineno-122-5" name="__codelineno-122-5" href="#__codelineno-122-5"></a>**JSON inválido**
 </span><span id="__span-122-6"><a id="__codelineno-122-6" name="__codelineno-122-6" href="#__codelineno-122-6"></a>
 </span><span id="__span-122-7"><a id="__codelineno-122-7" name="__codelineno-122-7" href="#__codelineno-122-7"></a>Si el FlowFile recibido no contiene JSON válido, se enviará por `failure`.
 </span><span id="__span-122-8"><a id="__codelineno-122-8" name="__codelineno-122-8" href="#__codelineno-122-8"></a>
@@ -6262,7 +4369,7 @@ JSON-READER
 </span><span id="__span-122-10"><a id="__codelineno-122-10" name="__codelineno-122-10" href="#__codelineno-122-10"></a>
 </span><span id="__span-122-11"><a id="__codelineno-122-11" name="__codelineno-122-11" href="#__codelineno-122-11"></a>---
 </span><span id="__span-122-12"><a id="__codelineno-122-12" name="__codelineno-122-12" href="#__codelineno-122-12"></a>
-</span><span id="__span-122-13"><a id="__codelineno-122-13" name="__codelineno-122-13" href="#__codelineno-122-13"></a>## El documento aparece como un array
+</span><span id="__span-122-13"><a id="__codelineno-122-13" name="__codelineno-122-13" href="#__codelineno-122-13"></a>**El documento aparece como un array**
 </span><span id="__span-122-14"><a id="__codelineno-122-14" name="__codelineno-122-14" href="#__codelineno-122-14"></a>
 </span><span id="__span-122-15"><a id="__codelineno-122-15" name="__codelineno-122-15" href="#__codelineno-122-15"></a>Si el JSON de entrada contiene:
 </span><span id="__span-122-16"><a id="__codelineno-122-16" name="__codelineno-122-16" href="#__codelineno-122-16"></a>
@@ -6281,7 +4388,7 @@ JSON-READER
 }
 <div class="language-text highlight"><pre><span></span><code><span id="__span-123-1"><a id="__codelineno-123-1" name="__codelineno-123-1" href="#__codelineno-123-1"></a>---
 </span><span id="__span-123-2"><a id="__codelineno-123-2" name="__codelineno-123-2" href="#__codelineno-123-2"></a>
-</span><span id="__span-123-3"><a id="__codelineno-123-3" name="__codelineno-123-3" href="#__codelineno-123-3"></a>## Campos numéricos almacenados como texto
+</span><span id="__span-123-3"><a id="__codelineno-123-3" name="__codelineno-123-3" href="#__codelineno-123-3"></a>**Campos numéricos almacenados como texto**
 </span><span id="__span-123-4"><a id="__codelineno-123-4" name="__codelineno-123-4" href="#__codelineno-123-4"></a>
 </span><span id="__span-123-5"><a id="__codelineno-123-5" name="__codelineno-123-5" href="#__codelineno-123-5"></a>Revisar:
 </span><span id="__span-123-6"><a id="__codelineno-123-6" name="__codelineno-123-6" href="#__codelineno-123-6"></a>
@@ -6293,7 +4400,7 @@ JSON-READER
 </span><span id="__span-123-12"><a id="__codelineno-123-12" name="__codelineno-123-12" href="#__codelineno-123-12"></a>
 </span><span id="__span-123-13"><a id="__codelineno-123-13" name="__codelineno-123-13" href="#__codelineno-123-13"></a>---
 </span><span id="__span-123-14"><a id="__codelineno-123-14" name="__codelineno-123-14" href="#__codelineno-123-14"></a>
-</span><span id="__span-123-15"><a id="__codelineno-123-15" name="__codelineno-123-15" href="#__codelineno-123-15"></a># 5.17 Buenas prácticas
+</span><span id="__span-123-15"><a id="__codelineno-123-15" name="__codelineno-123-15" href="#__codelineno-123-15"></a>**5.17 Buenas prácticas**
 </span><span id="__span-123-16"><a id="__codelineno-123-16" name="__codelineno-123-16" href="#__codelineno-123-16"></a>
 </span><span id="__span-123-17"><a id="__codelineno-123-17" name="__codelineno-123-17" href="#__codelineno-123-17"></a>* Utilizar `MongoDBControllerService`.
 </span><span id="__span-123-18"><a id="__codelineno-123-18" name="__codelineno-123-18" href="#__codelineno-123-18"></a>* Trabajar con `PutMongoRecord` en flujos orientados a Records.
@@ -6310,7 +4417,7 @@ JSON-READER
 </span><span id="__span-123-29"><a id="__codelineno-123-29" name="__codelineno-123-29" href="#__codelineno-123-29"></a>
 </span><span id="__span-123-30"><a id="__codelineno-123-30" name="__codelineno-123-30" href="#__codelineno-123-30"></a>---
 </span><span id="__span-123-31"><a id="__codelineno-123-31" name="__codelineno-123-31" href="#__codelineno-123-31"></a>
-</span><span id="__span-123-32"><a id="__codelineno-123-32" name="__codelineno-123-32" href="#__codelineno-123-32"></a># 5.18 Índice recomendado
+</span><span id="__span-123-32"><a id="__codelineno-123-32" name="__codelineno-123-32" href="#__codelineno-123-32"></a>**5.18 Índice recomendado**
 </span><span id="__span-123-33"><a id="__codelineno-123-33" name="__codelineno-123-33" href="#__codelineno-123-33"></a>
 </span><span id="__span-123-34"><a id="__codelineno-123-34" name="__codelineno-123-34" href="#__codelineno-123-34"></a>Para acelerar consultas por ciudad y fecha puede crearse:
 </span><span id="__span-123-35"><a id="__codelineno-123-35" name="__codelineno-123-35" href="#__codelineno-123-35"></a>
@@ -6327,7 +4434,7 @@ db.measurements
   .sort({ timestamp_nifi: -1 })
 <div class="language-text highlight"><pre><span></span><code><span id="__span-124-1"><a id="__codelineno-124-1" name="__codelineno-124-1" href="#__codelineno-124-1"></a>---
 </span><span id="__span-124-2"><a id="__codelineno-124-2" name="__codelineno-124-2" href="#__codelineno-124-2"></a>
-</span><span id="__span-124-3"><a id="__codelineno-124-3" name="__codelineno-124-3" href="#__codelineno-124-3"></a># Resultado esperado
+</span><span id="__span-124-3"><a id="__codelineno-124-3" name="__codelineno-124-3" href="#__codelineno-124-3"></a>**Resultado esperado**
 </span><span id="__span-124-4"><a id="__codelineno-124-4" name="__codelineno-124-4" href="#__codelineno-124-4"></a>
 </span><span id="__span-124-5"><a id="__codelineno-124-5" name="__codelineno-124-5" href="#__codelineno-124-5"></a>Al finalizar esta fase, el flujo completo será capaz de:
 </span><span id="__span-124-6"><a id="__codelineno-124-6" name="__codelineno-124-6" href="#__codelineno-124-6"></a>
@@ -6348,7 +4455,7 @@ db.measurements
 </span><span id="__span-124-21"><a id="__codelineno-124-21" name="__codelineno-124-21" href="#__codelineno-124-21"></a>    TRANSFORM --&gt; LOAD
 </span></code></pre></div></p>
 <p>La colección <code>weather.measurements</code> contendrá un documento independiente por cada ejecución del flujo, permitiendo construir progresivamente un histórico meteorológico.</p>
-<h1 id="6-verificacion-del-flujo-y-data-provenance">6. Verificación del flujo y Data Provenance</h1>
+<p><strong>6. Verificación del flujo y Data Provenance</strong></p>
 <p>Una vez construido el flujo ETL, es importante comprobar que todas las fases se ejecutan correctamente y que la información almacenada en MongoDB coincide con los datos obtenidos desde la API.</p>
 <p>Apache NiFi proporciona para ello una de sus herramientas más potentes: <strong>Data Provenance</strong>.</p>
 <p>Gracias a ella es posible conocer:</p>
@@ -6361,7 +4468,7 @@ db.measurements
 </ul>
 <p>Esta funcionalidad resulta especialmente útil para depurar errores, auditar procesos y comprender el comportamiento interno de un flujo ETL.</p>
 <hr />
-<h1 id="61-ejecutar-el-flujo-completo">6.1 Ejecutar el flujo completo</h1>
+<p><strong>6.1 Ejecutar el flujo completo</strong></p>
 <p>Antes de iniciar la ejecución comprobar que todos los Processors están iniciados.</p>
 <p>El orden recomendado será:</p>
 <ol>
@@ -6394,7 +4501,7 @@ GenerateFlowFile → Run Once
 </span></code></pre></div></p>
 <p>Si todo funciona correctamente no deberán quedar FlowFiles pendientes en ninguna Queue.</p>
 <hr />
-<h1 id="62-comprobar-mongodb">6.2 Comprobar MongoDB</h1>
+<p><strong>6.2 Comprobar MongoDB</strong></p>
 <p>Acceder al contenedor:</p>
 <p>```bash id="mongosh-access"
 docker exec -it mongodb mongosh
@@ -6433,7 +4540,7 @@ db.measurements.find().pretty()
 </span><span id="__span-128-16"><a id="__codelineno-128-16" name="__codelineno-128-16" href="#__codelineno-128-16"></a>}
 </span></code></pre></div></p>
 <hr />
-<h1 id="63-acceder-a-data-provenance">6.3 Acceder a Data Provenance</h1>
+<p><strong>6.3 Acceder a Data Provenance</strong></p>
 <p>En el Canvas de NiFi:</p>
 <p>```text id="provenance-menu"
 Menú → Data Provenance
@@ -6444,7 +4551,7 @@ Menú → Data Provenance
 </span></code></pre></div></p>
 <p>Aparecerá una lista con todos los eventos registrados.</p>
 <hr />
-<h1 id="64-eventos-habituales">6.4 Eventos habituales</h1>
+<p><strong>6.4 Eventos habituales</strong></p>
 <p>Durante este laboratorio aparecerán eventos similares a:</p>
 <table>
 <thead>
@@ -6490,7 +4597,7 @@ CONTENT --&gt; ATTR
 ATTR --&gt; SEND
 <div class="language-text highlight"><pre><span></span><code><span id="__span-130-1"><a id="__codelineno-130-1" name="__codelineno-130-1" href="#__codelineno-130-1"></a>---
 </span><span id="__span-130-2"><a id="__codelineno-130-2" name="__codelineno-130-2" href="#__codelineno-130-2"></a>
-</span><span id="__span-130-3"><a id="__codelineno-130-3" name="__codelineno-130-3" href="#__codelineno-130-3"></a># 6.5 Analizar un evento
+</span><span id="__span-130-3"><a id="__codelineno-130-3" name="__codelineno-130-3" href="#__codelineno-130-3"></a>**6.5 Analizar un evento**
 </span><span id="__span-130-4"><a id="__codelineno-130-4" name="__codelineno-130-4" href="#__codelineno-130-4"></a>
 </span><span id="__span-130-5"><a id="__codelineno-130-5" name="__codelineno-130-5" href="#__codelineno-130-5"></a>Seleccionar cualquier evento.
 </span><span id="__span-130-6"><a id="__codelineno-130-6" name="__codelineno-130-6" href="#__codelineno-130-6"></a>
@@ -6508,7 +4615,7 @@ ATTR --&gt; SEND
 </span><span id="__span-130-18"><a id="__codelineno-130-18" name="__codelineno-130-18" href="#__codelineno-130-18"></a>
 </span><span id="__span-130-19"><a id="__codelineno-130-19" name="__codelineno-130-19" href="#__codelineno-130-19"></a>---
 </span><span id="__span-130-20"><a id="__codelineno-130-20" name="__codelineno-130-20" href="#__codelineno-130-20"></a>
-</span><span id="__span-130-21"><a id="__codelineno-130-21" name="__codelineno-130-21" href="#__codelineno-130-21"></a># 6.6 Consultar el contenido
+</span><span id="__span-130-21"><a id="__codelineno-130-21" name="__codelineno-130-21" href="#__codelineno-130-21"></a>**6.6 Consultar el contenido**
 </span><span id="__span-130-22"><a id="__codelineno-130-22" name="__codelineno-130-22" href="#__codelineno-130-22"></a>
 </span><span id="__span-130-23"><a id="__codelineno-130-23" name="__codelineno-130-23" href="#__codelineno-130-23"></a>Uno de los aspectos más interesantes de Data Provenance es poder visualizar el contenido.
 </span><span id="__span-130-24"><a id="__codelineno-130-24" name="__codelineno-130-24" href="#__codelineno-130-24"></a>
@@ -6523,7 +4630,7 @@ ATTR --&gt; SEND
 </span></code></pre></div></p>
 <p>Esta posibilidad resulta muy útil para localizar errores en transformaciones complejas.</p>
 <hr />
-<h1 id="67-comprobar-el-linaje-del-flowfile">6.7 Comprobar el linaje del FlowFile</h1>
+<p><strong>6.7 Comprobar el linaje del FlowFile</strong></p>
 <p>Seleccionando un evento puede abrirse la opción:</p>
 <p>```text id="lineage"
 Show Lineage
@@ -6545,7 +4652,7 @@ Show Lineage
 </span></code></pre></div></p>
 <p>Este diagrama facilita comprender el camino seguido por la información dentro del flujo.</p>
 <hr />
-<h1 id="68-verificar-los-atributos">6.8 Verificar los atributos</h1>
+<p><strong>6.8 Verificar los atributos</strong></p>
 <p>Además del contenido, cada FlowFile incorpora numerosos atributos.</p>
 <p>Entre ellos pueden encontrarse:</p>
 <p>```text id="attributes-example"
@@ -6564,7 +4671,7 @@ entryDate
 </span><span id="__span-132-7"><a id="__codelineno-132-7" name="__codelineno-132-7" href="#__codelineno-132-7"></a>
 </span><span id="__span-132-8"><a id="__codelineno-132-8" name="__codelineno-132-8" href="#__codelineno-132-8"></a>---
 </span><span id="__span-132-9"><a id="__codelineno-132-9" name="__codelineno-132-9" href="#__codelineno-132-9"></a>
-</span><span id="__span-132-10"><a id="__codelineno-132-10" name="__codelineno-132-10" href="#__codelineno-132-10"></a># 6.9 Prueba de funcionamiento
+</span><span id="__span-132-10"><a id="__codelineno-132-10" name="__codelineno-132-10" href="#__codelineno-132-10"></a>**6.9 Prueba de funcionamiento**
 </span><span id="__span-132-11"><a id="__codelineno-132-11" name="__codelineno-132-11" href="#__codelineno-132-11"></a>
 </span><span id="__span-132-12"><a id="__codelineno-132-12" name="__codelineno-132-12" href="#__codelineno-132-12"></a>Como ejercicio final:
 </span><span id="__span-132-13"><a id="__codelineno-132-13" name="__codelineno-132-13" href="#__codelineno-132-13"></a>
@@ -6579,7 +4686,7 @@ entryDate
 </span><span id="__span-132-22"><a id="__codelineno-132-22" name="__codelineno-132-22" href="#__codelineno-132-22"></a>
 </span><span id="__span-132-23"><a id="__codelineno-132-23" name="__codelineno-132-23" href="#__codelineno-132-23"></a>---
 </span><span id="__span-132-24"><a id="__codelineno-132-24" name="__codelineno-132-24" href="#__codelineno-132-24"></a>
-</span><span id="__span-132-25"><a id="__codelineno-132-25" name="__codelineno-132-25" href="#__codelineno-132-25"></a># Buenas prácticas
+</span><span id="__span-132-25"><a id="__codelineno-132-25" name="__codelineno-132-25" href="#__codelineno-132-25"></a>**Buenas prácticas**
 </span><span id="__span-132-26"><a id="__codelineno-132-26" name="__codelineno-132-26" href="#__codelineno-132-26"></a>
 </span><span id="__span-132-27"><a id="__codelineno-132-27" name="__codelineno-132-27" href="#__codelineno-132-27"></a>* Consultar Data Provenance siempre que un FlowFile no llegue al destino esperado.
 </span><span id="__span-132-28"><a id="__codelineno-132-28" name="__codelineno-132-28" href="#__codelineno-132-28"></a>* Revisar el contenido después de cada transformación importante.
@@ -6589,7 +4696,7 @@ entryDate
 </span><span id="__span-132-32"><a id="__codelineno-132-32" name="__codelineno-132-32" href="#__codelineno-132-32"></a>
 </span><span id="__span-132-33"><a id="__codelineno-132-33" name="__codelineno-132-33" href="#__codelineno-132-33"></a>---
 </span><span id="__span-132-34"><a id="__codelineno-132-34" name="__codelineno-132-34" href="#__codelineno-132-34"></a>
-</span><span id="__span-132-35"><a id="__codelineno-132-35" name="__codelineno-132-35" href="#__codelineno-132-35"></a># Resultado esperado
+</span><span id="__span-132-35"><a id="__codelineno-132-35" name="__codelineno-132-35" href="#__codelineno-132-35"></a>**Resultado esperado**
 </span><span id="__span-132-36"><a id="__codelineno-132-36" name="__codelineno-132-36" href="#__codelineno-132-36"></a>
 </span><span id="__span-132-37"><a id="__codelineno-132-37" name="__codelineno-132-37" href="#__codelineno-132-37"></a>Al finalizar este laboratorio se habrá construido un flujo ETL completo capaz de:
 </span><span id="__span-132-38"><a id="__codelineno-132-38" name="__codelineno-132-38" href="#__codelineno-132-38"></a>
