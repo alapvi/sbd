@@ -1,0 +1,2018 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://alapvi.github.io/ingenieria-datos/ingenieria-datos/">
+      
+      
+        <link rel="prev" href="../bigdata/">
+      
+      
+        <link rel="next" href="../../nosql/nosql/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/logo_peq.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Ingeniería de Datos - Sistemas de BigData</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ingenieria-de-datos" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Sistemas de BigData" class="md-header__button md-logo" aria-label="Sistemas de BigData" data-md-component="logo">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sistemas de BigData
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Ingeniería de Datos
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sistemas de BigData" class="md-nav__button md-logo" aria-label="Sistemas de BigData" data-md-component="logo">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    Sistemas de BigData
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ingeniería de Datos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ingeniería de Datos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bigdata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Big Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ingeniería de Datos
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ingeniería de Datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Roles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ciclo-de-vida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ciclo de vida
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ciclo de vida">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#almacenamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Almacenamiento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Almacenamiento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ingesta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ingesta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transformacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transformación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serving" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Serving
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#areas-transversales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Áreas transversales
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#herramientas-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Herramientas base
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actividades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Actividades
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Almacenamiento de datos. NoSQL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Almacenamiento de datos. NoSQL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nosql/nosql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NoSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nosql/moddatos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelos de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nosql/consistencia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consistencia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MongoDB
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MongoDB
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/intromongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción a MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/mongodb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/modelado/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Diseño de modelado de BD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/instalacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/basicsmongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primeros pasos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/mongodbcrud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operaciones con datos CRUD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/mongodbdatos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consulta de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nifi
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Nifi
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nifi/introduccion_nifi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nifi/arquitectura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitectura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nifi/interfaz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interfaz gráfica de NiFi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nifi/instalacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalación y despliegue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nifi/primerflujo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primer flujo de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nifi/flowfiles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowfiles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nifi/processors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Processors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nifi/connections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Connections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_9" id="__nav_5_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Controllers
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Controllers
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nifi/controllers/01-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nifi/controllers/02-configuracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración de controladores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nifi/controllers/03-principales-controller-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Servicios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nifi/controllers/04-arquitecturas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitecturas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nifi/casos_de_uso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Casos de uso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elastic Stack
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Elastic Stack
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../elastic/elastic_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../elastic/elastic_ops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../elastic/kibana/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kibana
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../elastic/caso_uso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso de uso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../elastic/dashboards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboards Covid
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../elastic/ampliacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ampliación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Roles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ciclo-de-vida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ciclo de vida
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ciclo de vida">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#almacenamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Almacenamiento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Almacenamiento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ingesta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ingesta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transformacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transformación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serving" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Serving
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#areas-transversales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Áreas transversales
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#herramientas-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Herramientas base
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actividades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Actividades
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ingenieria-de-datos">Ingeniería de datos</h1>
+<p>La ingeniería de datos construye la base para la ciencia de datos y la analítica de datos en producción.</p>
+<p>Antes del <em>Big Data</em> ya había ingeniería de datos, entendida como las operaciones necesarias para permitir el acceso a los flujos de información, mediante procesos ETL, pero con el auge del <em>Big Data</em> y la ingente cantidad de herramientas disponibles su importancia se ha multiplicado.</p>
+<p>La ingeniería de datos trata del movimiento, manipulación y gestión de los datos. Si buscamos una definición más completa podemos decir que se centra en el desarrollo, implementación y mantenimiento de los sistemas y procesos que recuperan los datos en crudo y produce información consistente y de alta calidad que da soporte a los diferentes casos de uso, como pueden ser la analítica de datos o el <em>machine learning</em>.</p>
+<p>El encargado de gestionar su ciclo de vida es el ingeniero de datos, recuperando los datos desde los sistemas origen y sirviendo los datos a los futuros consumidores, ya sean científicos de datos, herramientas de visualización o modelos de IA.</p>
+<p>Podríamos aventurarnos a decir que la época del <em>Big Data</em> ya ha pasado, ya que el avance de las tecnologías ha simplificado el uso de grandes volúmenes de datos, con lo que ya no necesitamos distinguir entre <em>small</em> y <em>big data</em>. Al fin y al cabo son datos, y toda empresa se centra en resolver sus problemas con los datos y obtener el mayor valor, independientemente del tamaño de éstos. Los antiguos ingenieros de <em>Big Data</em> ahora son ingenieros de datos.</p>
+<blockquote>
+<p><strong>Científico de datos</strong></p>
+<p>La relación existente entre un ingeniero de datos y un científico, es que el primero le deja los datos preparados al segundo, obteniendo los datos y dándoles valor para que el científico realice la analítica y la ciencia de datos.</p>
+</blockquote>
+<p>Si nos centramos en el término de analítica de datos, se refiere al análisis de grandes volúmenes de datos (<em>big data</em>) para encontrar patrones y tendencias que permita tomar decisiones.</p>
+<h2 id="roles">Roles</h2>
+<p>Los ingenieros de datos trabajan con plataformas de <em>Big Data</em> como <em>Spark</em>/<em>Databricks</em> o <em>Snowflake</em> (antiguamente todo se basada en el ecosistema Hadoop) y bases de datos relacionales, NoSQL y sistemas OLAP.</p>
+<p>Además, ser ingeniero de datos implica tener destrezas en el modelado de datos, integración de datos, transformación de datos, calidad y gobernanza del dato. El objetivo es ofrece una infraestructura de datos eficiente y confiable que dé soporte a los procesos empresariales para la toma de decisiones.</p>
+<p>Además del ingeniero de datos en general, podemos tener roles más específicos como pueden ser:</p>
+<ul>
+<li><em>Product data engineer</em>: encargado de instalar, configurar y mantener los productos del equipo de ingeniería de datos, como pueden ser <em>Airflow</em>, <em>Kafka</em> o <em>Spark</em></li>
+<li><em>Pipeline data engineer</em>: encargado de trabajar con el flujo de datos, con conocimiento de Python, SQL, Spark así como trabajar con lagos de datos o <em>data lakehouse</em>.</li>
+<li><em>BI Data engineer</em>: SQL y herramientas de visualización como <em>Power BI</em> o <em>Tableau</em>, para mostrar analíticas.</li>
+</ul>
+<p>Además, un ingeniero de datos interacciona con otros tipos de roles a lo largo del desarrollo de un proyecto, dependiendo de si son roles asociados a la producción de los datos (ingenieros de software, ingenieros de datos o DevOps, etc...) o a su consumición (por ejemplo, ingenieros ML, analistas de datos o científicos de datos).</p>
+<h2 id="ciclo-de-vida">Ciclo de vida</h2>
+<p>El ciclo de vida del dato se centra en los objetivos que debe cumplir, dejando de lado las tecnologías necesarias.</p>
+<p>Las fases del ciclo de vida se pueden resumir a muy alto nivel en tres:</p>
+<ol>
+<li><strong>Generación</strong>: quién, dónde, cómo y cuándo se crean los datos, ya sean datos analógicos o digitales, <a href="https://aitor-medrano.github.io/iabd/de/formatos.html">ficheros en diferentes formatos</a>, APIs, bases de datos OLTP, sistemas OLAP, logs, etc...</li>
+<li><strong>Almacenamiento</strong> (ver siguiente apartado).</li>
+<li><strong>Consumo</strong> (en amarillo).</li>
+</ol>
+<p><img alt="Ciclo de vida de la Ingeniería de datos" src="../images/05de-ciclo-vida.png" />
+<em>Ciclo de vida de la Ingeniería de datos</em></p>
+<h3 id="almacenamiento">Almacenamiento</h3>
+<p>Antes de desgranar la fase de almacenamiento, es necesario conocer:</p>
+<ul>
+<li>las características básicas de las tecnologías de almacenamiento físico (discos magnéticos / <strong><em>HDD</em></strong>, discos sólidos / <strong><em>SSD</em></strong>) como son la velocidad de transferencia (200-300MB/s en HDD a varios GB/s en SSD) o la cantidad de operaciones de E/S por segundo (de 50 a 500 IOPS en un HDD a decenas de miles en un SSD) así como la memoria <strong><em>RAM</em></strong>, 1000 veces más rápida que un disco SSD, con velocidades de transferencia cercanas a 100GB/s y millones de IOPS. Otros conceptos que debemos conocer son la serialización de los datos en <a href="https://aitor-medrano.github.io/iabd/de/formatos.html">formatos de archivo</a> basados en filas o columnas (como pueda ser <em>Apache Parquet</em>) y la compresión de datos.</li>
+<li>los sistemas de almacenamiento, ya sean locales o distribuidos en un NAS o en el cloud (recuerda el acrónimo <a href="https://aitor-medrano.github.io/iabd/sa/nosql.html#base">BASE</a>), el <a href="https://aitor-medrano.github.io/iabd/cloud/s3.html">almacenamiento de bloques o de objetos</a>, las bases de datos relaciones, los sistemas basados en cachés/memoria (por ejemplo, <a href="https://redis.io/">Redis</a>) o el sistema de archivos distribuidos de Hadoop (<a href="https://aitor-medrano.github.io/iabd/hadoop/hdfs.html">HDFS</a>).</li>
+<li>las abstracciones de almacenamiento, entendida como la organización de los datos y los patrones de consulta que se construyen sobre los sistemas de almacenamiento, como son el <em>data warehouse</em> como solución OLAP para datos estructurados (por ejemplo, mediante <em>AWS Redshift</em>), el lago de datos que permite almacenar en crudo cualquier tipo de dato (mediante un ecosistema <a href="https://aitor-medrano.github.io/iabd/hadoop/hadoop.html"><em>Hadoop</em></a> o el uso de <a href="https://aitor-medrano.github.io/iabd/cloud/s3.html"><em>S3</em></a> y diversos servicios de AWS como <a href="https://aitor-medrano.github.io/iabd/cloud/athena.html"><em>Athena</em></a>) y la evolución en el <em>data lakehouse</em> que aglutine las ventajas de ambos sistemas, tanto la posibilidad de trabajar con datos no estructurados y almacenar los datos en crudo y agregados, como soporte robusto de esquemas y tablas y características tan necesarias como las modificaciones incrementales y el borrado de datos, por ejemplo, mediante productos como <a href="https://aitor-medrano.github.io/iabd/spark/spark.html#databricks"><em>Databricks</em></a> mediante <a href="https://aitor-medrano.github.io/iabd/spark/deltalake.html"><em>DeltaLake</em></a> o <em>Snowflake</em>.</li>
+</ul>
+<p><img alt="Almacenamiento de datos" src="../images/05storage.png" />
+<em>Almacenamiento de datos</em></p>
+<blockquote>
+<p><strong>Separación de computación y almacenamiento</strong></p>
+<p>En los inicios del <em>Big Data</em> y a partir del ecosistema <em>Hadoop</em>, el objetivo era colocar los datos lo más cercano del procesamiento.
+Sin embargo, actualmente, si utilizamos un lago de datos, los datos residen en un lugar muy diferentes de donde se procesan.
+Uno de los motivos principales es la escalabilidad de los datos, así como su durabilidad y disponibilidad (vía la replicación de los mismos), tal como hace S3.</p>
+<p>Para reducir la latencia de no tener los datos cerca pero aprovechar las ventajas de la escalabilidad de los datos, se tiende a crear una separación híbrida mediante el uso de cachés de datos, por ejemplo, en AWS EMR copiando los datos de S3 al sistema de archivos de HDFS, realizando el procesamiento y volviendo a colocarlos en S3.</p>
+</blockquote>
+<p>Sobre el almacenamiento, se realizan las fases de Ingesta, Transformación y <em>Serving</em>.</p>
+<h4 id="ingesta">Ingesta</h4>
+<p>La ingesta implica mover datos desde una fuente u origen al almacenamiento.</p>
+<p>Aunque esta fase la estudiaremos en detalle en la sesión <a href="https://aitor-medrano.github.io/iabd/de/etl.html">Ingesta de datos</a>, conviene citar los conceptos de:</p>
+<ul>
+<li><em>pipeline</em> de datos.</li>
+<li>las estrategias de ingesta como <strong><em>push</em></strong> (de la fuente al destino), <strong><em>pull</em></strong> (el destino llama a la fuente), o <strong><em>poll</em></strong> (comprobaciones periódicas de la fuente).</li>
+<li>si la ingesta se basa en ventanas temporales o por cantidad (ya sean elementos o tamaño de los datos).</li>
+<li>si la ingesta se realiza mediante <em>snapshots</em> (una foto de toda la fuente de origen) o de forma incremental.</li>
+<li>si utilizamos ficheros para exportar e ingestar los datos.</li>
+<li>las diferencias entre ETL y ELT.</li>
+</ul>
+<h4 id="transformacion">Transformación</h4>
+<p>Fase que podemos desglosar en:</p>
+<ul>
+<li><strong>Consultas</strong>, siendo muy importante saber analizar el plan de ejecución de las consultas y cómo funciona el optimizador de consultas de cada motor. Algunas recomendaciones relacionadas con las consultas son:</li>
+<li>Evitar el uso de <em>joins</em>, por ejemplo, persistiendo una consulta que realiza uno o varios <em>joins</em> en una nueva tabla para realizar las consultas sobre esta nueva tabla.</li>
+<li>A la hora de codificar las consultas, evitar el uso de subconsultas o tablas intermedias y utilizar <a href="https://learnsql.es/blog/cuando-debo-utilizar-una-expresion-de-tabla-comun-cte/">CTE</a> (expresiones de tabla común) para simplificar su mantenimiento.</li>
+<li>Evitar las consultas que escanean todos los datos, tanto todas las filas (<em>full scan</em>) como las columnas, filtrando o limitando los datos a recuperar y utilizando índices en el caso de utilizar un sistema que permita su uso.</li>
+<li>En el caso de consultas sobre datos en streaming, dominar los diferentes tipos de <a href="https://aitor-medrano.github.io/iabd/spark/join-window.html#ventanas-deslizantes">ventanas deslizantes</a> y las <a href="https://aitor-medrano.github.io/iabd/spark/join-window.html#watermarking">marcas de agua</a>.</li>
+<li><strong>Modelado de datos</strong> para introducir la lógica de negocio en los datos, mediante la definición de los modelos conceptuales, lógicos y físicos, ya sean relacionales o no, así como la normalización o denormalización de las tablas resultantes. Además, conviene conocer el modelado multidimensional, ya sea la técnica de <em>Kimball</em> (mediante modelos en estrella con una tabla central de hechos y varias tablas para las dimensiones) o <em>Data Vault</em> (mediante Hubs, enlaces y satélites) para diseñar la estructura de nuestro <em>data warehouse</em> o <em>data lakehouse</em>.</li>
+<li>
+<p><strong>Transformaciones</strong>, que unen el resultado de las consultas y los modelos de datos para generar valor y que podamos ver los datos transformados como una única entidad. En muchas ocasiones las consultas que necesitamos son muy costosas, accediendo a varios sistemas y tablas mediante múltiples <em>joins</em> y que tras la limpieza y agregación de los datos provocan que su rendimiento sea muy bajo (imaginad una consulta que tarde más de 20 minutos en ejecutarse). Estas consultas podemos persistirlas de forma temporal o permanente. Para ello:</p>
+</li>
+<li>
+<p>Es necesario tener un sistema de orquestación bien definido que ejecute las consultas y realice las transformaciones.</p>
+</li>
+<li>Podemos emplear tanto herramientas basadas en SQL (como Hive o Spark SQL) o en código (Pandas, PySpark, etc...)</li>
+<li>
+<p>Debemos conocer si las transformaciones se almacenarán en sistemas <em>insert-only</em>, donde no podemos modificar los datos existentes. Si se modifica o elimina un registro, el fichero completo debe reescribirse con los nuevos cambios. Así pues, si necesitamos modificar datos, podemos truncar y volver a cargar, añadir un nuevo registro con un campo que almacene la fecha de la modificación y el nuevo valor, etc...</p>
+<blockquote>
+<p><strong>Investiga</strong></p>
+<p>¿Y si necesitamos eliminar un registro? ¿Vaciamos la tabla y la cargamos con ese registro menos?
+Investiga el concepto de <em>soft delete</em> y sus variantes.
+  - Podemos persistir las transformaciones mediante tablas y luego crear vistas o vistas materializadas (las cuales se recrean tras cada cambio en las tablas originales).
+  - Algunas herramientas permiten el uso de consultas federadas, de manera que utilizan uno o varios sistemas externos para combinar los datos y devolver el resultado, por ejemplo, mediante <a href="https://aitor-medrano.github.io/iabd/hadoop/hive1.html#caso-5-tabla-externa">tablas externas en Hive</a>. Algunos sistemas OLAP permite convertir las consultas federadas en vistas materializadas.</p>
+</blockquote>
+<p><img alt="Consulta federada" src="../images/05federated-query.png" />
+<em>Consulta federada</em></p>
+</li>
+</ul>
+<h4 id="serving"><strong><em>Serving</em></strong></h4>
+<p>Finalmente, una vez tenemos los datos, se <em>presentarán/entregarán</em> para analítica, ML, ... es decir, para cumplir los objetivos para los que se creó el sistema. Es muy importante que cuando los datos lleguen a esta fase, se realice una validación de los mismos para dotar de confianza a los consumidores de los datos. ¿Quienes serán estos consumidores y cómo van a utilizar los datos? Estas preguntas nos las tendríamos que haber hecho en las fases iniciales.</p>
+<p>Los casos de uso más empleados son:</p>
+<ul>
+<li><strong>Analítica de datos</strong>: entendida como el descubrimiento, exploración, identificación y visibilidad de las principales características y patrones de los datos. Para ello, se utilizan métodos estadísticos, informes, cuadros de mandos, herramientas de <em>Business Intelligence</em>, etc... tanto para:</li>
+<li>la <strong>analítica de negocio</strong> (<em>business analytics</em>) que utiliza datos históricos y actuales para la toma de decisiones, por ejemplo, mediante un cuadro de mandos (<em>dashboard</em>) que utiliza gráficos y KPIs (<em>key performance indicator</em>). Se obtiene en gran medida de una ingesta <em>batch</em> de un <em>data warehouse</em> o lago de datos.</li>
+<li>la <strong>analítica operacional</strong>, que utiliza los datos para tomar medidas inmediatas. Mientras que la analítica de negocio se centra en tomar medidas a medio plazo y utilizando datos a más largo plazo, en la analítica operacional, nos interesan los datos más recientes que pueden alertar de un problema.</li>
+<li>la <strong>analítica embebida</strong>, entendida como la que se ofrece en las aplicaciones de datos para que usuarios externos obtengan mayor valor de la aplicación. Por ejemplo, la monitorización de las instancias de EC2 nos permite tomar decisiones a los usuarios sobre si debemos incrementar o reducir el tipo de instancia necesaria.</li>
+<li><strong><em>Machine Learning</em></strong>: Si los datos que alimentan un entrenamiento ML son malos, el modelo será malo. Por ende, la elección de las características de entrada a los modelos ML debe seguir todas las fases del ciclo de vida del dato.</li>
+</ul>
+<blockquote>
+<p><strong>¿Cuánto de ML debe saber un ingeniero de datos?</strong></p>
+<ul>
+<li>Diferencia entre aprendizaje supervisado, no supervisado y semisupervisado.</li>
+<li>Diferencia entre técnicas de clasificación y de regresión.</li>
+<li>Las distintas técnicas de tratamiento de datos de series temporales, tanto su análisis como su predicción.</li>
+<li>Cuándo utilizar las técnicas "clásicas" (regresión logística, aprendizaje basado en árboles, máquinas de vectores soporte) frente al aprendizaje profundo.</li>
+<li>¿Cuándo utilizaría el aprendizaje automático de máquinas (AutoML) frente a la creación manual de un modelo de ML? ¿Cuáles son las ventajas y desventajas de cada enfoque en relación con los datos que se utilizan?</li>
+<li>Todos los datos que se utilizan para ML se deben convertir en numéricos. Si utilizamos datos estructurados o semiestructurados, nos aseguraremos que los datos se pueden convertir mediante ingeniería de características (<em>feature engineering</em>).</li>
+<li>Cómo codificar datos categóricos y los <em>embeddings</em>.</li>
+<li>¿Cuándo es apropiado entrenar en local o en el cloud? ¿Cuándo utilizaría una GPU en lugar de una CPU? El tipo de hardware depende en gran medida del tipo de problema de ML que estemos resolviendo, de la técnica y del tamaño del <em>dataset</em>.</li>
+</ul>
+</blockquote>
+<p>Para entregar los datos a los procesos ML se emplean:</p>
+<ul>
+<li>Ficheros, ya que no todos los usuarios tienen acceso a los sistemas donde se almacenan los datos y es común generar un fichero con los datos que necesitan. La forma de entregar los ficheros dependerá del caso de uso, los procesos de consumo de los ficheros, la cantidad y tamaño de los ficheros que se generen, quien accede al fichero y el tipo de datos (estructurado, semi o sin estructurar).</li>
+<li>Bases de datos, como <em>data warehouses</em> o lagos de datos, desde donde extraer los datos, realizar ingeniería de características y alimentar el modelo ML con el dataset obtenido.</li>
+<li>Sistemas de <em>streaming</em>.</li>
+<li>Federación de consultas, obteniendo los datos desde diversas fuentes, normalmente en modo de sólo lectura. Debemos tener en cuenta que como los datos están repartidos, el rendimiento es peor que si estuviera todo centralizado en una base de datos.</li>
+<li>Cuadernos Jupyter, que cargan los datos y entrenan los modelos directamente en el cuaderno, ya sea en local o en el cloud, donde evitamos los problemas de falta de memoria. Una vez probado el modelo, para el paso a producción, se suelen migrar los cuadernos a scripts que se integran dentro de un orquestador.</li>
+<li><strong><em>Reverse ETL</em></strong>: en pocas palabras, consiste en volver a cargar los datos transformados en una fuente de origen. Por ejemplo, en el proyecto Lara, si con el audio generado a partir de una nueva muestra, el usuario nos dice que la predicción ha sido correcta, podemos insertar el nuevo audio etiquetado en la fuente de origen.</li>
+</ul>
+<p><img alt="Reverse ETL" src="../images/05reverse-etl.png" />
+  <em>Reverse ETL</em></p>
+<h3 id="areas-transversales">Áreas transversales</h3>
+<p>Además de las fases, hay una serie de destrezas y ámbitos en los que se apoya (<em>undercurrents</em>), como son:</p>
+<ul>
+<li>La <strong>seguridad</strong>, destacando el principio de <a href="https://www.cyberark.com/es/what-is/least-privilege/">menor privilegio</a> (PoLP) para personas y sistemas, controlando los tiempos, de manera que los usuarios sólo puedan acceder a los datos durante el tiempo necesario, o protegiendo su visibilidad mediante la encriptación, enmascaramiento, ofuscación o sistemas robustos de acceso. Destacar que la seguridad en sí misma da para un curso entero, de ahí la rama de la ciberseguridad y su aplicación a todos los ámbitos informáticos.</li>
+<li>La <strong>gestión del dato</strong>, entendida como un conjunto de facetas, como pueden ser:</li>
+<li>La <strong>gobernanza del dato</strong>, para asegurar la calidad, integridad, seguridad y usabilidad de los datos dentro de una organización. Para ello, hay que facilitar la <em>descubribilidad</em> (<em>discoverability</em>) de los datos permitiendo a los usuarios acceder a ellos y conocer de dónde provienen, cómo se relacionan unos datos con otros y el significado de cada uno de ellos, mediante la gestión de los metadatos.</li>
+<li>El <strong>modelado de los datos</strong>, ya sea de bases de datos relacionales, NoSQL, respuestas JSON a una llamada a un API REST o consulta a GraphQL.</li>
+<li>El <strong>linaje de los datos</strong>, permitiendo trazar el ciclo de vida del dato</li>
+<li>La <strong>integración e interoperabilidad</strong>, mediante la orquestación de procesos.</li>
+<li>La <strong>ética y privacidad de los datos</strong>, enmascarando los datos sensibles y cumpliendo las diferentes legislaciones vigentes.</li>
+<li>etc...</li>
+<li><strong><em>DataOps</em></strong>, entendido como una colección de técnicas, flujos de trabajo y patrones de arquitectura que facilitan entregar valor a los clientes lo más rápido posible, con datos de alta calidad y bajo ratio de error, así como métricas claras para monitorizar y ofrecer transparencia en los resultados. Los tres elementos principales asociados a <em>DataOps</em> son:</li>
+<li><strong>Automatización</strong>, por ejemplo, automatizando el despliegue de DAGs en Airflow o de dependencias Python hasta que se han probado en un entorno previo siguiente práctica de CI/CD.</li>
+<li><strong>Monitorización y observabilidad</strong>, ya que los datos terminan por ensuciarse y debemos detectar los problemas lo más pronto posible.</li>
+<li><strong>Gestión de incidentes</strong>, de manera que al detectar un fallo, automáticamente podamos resolverlo o volver a una versión funcional del aplicativo.</li>
+<li><strong>Arquitectura de los datos</strong>, ya sean arquitecturas de micro-servicios, de <em>big data</em>, para IoT, etc...</li>
+<li><strong>Orquestación</strong>, pudiendo ser uno de los elementos más importantes dentro de la ingeniería de datos, al coordinar los procesos que ingestan, transforman y almacenan los datos. A día de hoy, uno de las herramientas que todo ingeniero de datos debe dominar es <a href="https://aitor-medrano.github.io/iabd/dataflow/airflow.html">Apache Airflow</a>.</li>
+<li><strong>Ingeniería del software</strong>, con técnicas como pueden ser el <em>testing</em>, el uso de funciones ventana para trabajar con datos en <em>streaming</em>, nociones de <em>DevOps</em> para desplegar infraestructura como código, herramientas de control de versiones, etc...</li>
+</ul>
+<p>Un ingeniero de datos tiene varios objetivos a conseguir a través del ciclo de vida de los datos, producir el retorno en la inversión óptimo (ROI) y reducir costes (financieros y de oportunidad) y riesgos (relativos a seguridad y calidad de los datos), maximizando el valor de los datos y su utilidad.</p>
+<h2 id="herramientas-base">Herramientas base</h2>
+<p>Además de las habilidades centradas en las <em>soft skills</em> que un desarrollador debe adquirir, todo buen ingeniero de datos debería tener destreza en, al menos, las siguientes tecnologías:</p>
+<ul>
+<li>Linux, y en concreto, <em>bash</em> para la realización de operaciones en el sistema operativo.</li>
+<li>SSH y conceptos de redes para acceder a máquinas remotas.</li>
+<li>Uso de APIs REST para ingestar datos de fuentes externas.</li>
+<li>Git, <a href="https://github.com/">GitHub</a> y <a href="https://github.com/features/actions">GitHub Actions</a>, para conocer todo el ciclo de CI/CD.</li>
+<li><a href="https://www.docker.com/">Docker</a>, como herramienta de gestión de contenedores para lanzar las diferentes herramientas.</li>
+<li>Cuadernos <em>Jupyter</em> sobre el que desarrollar procesos de extracción, transformación y carga de datos</li>
+<li>SQL, como <em>lingua franca</em> para la transformación de datos y posterior analítica.</li>
+</ul>
+<p>También es recomendable tener soltura en algún lenguaje de programación, por ejemplo, <em>Python</em>. Un ingeniero de datos no es un desarrollador de software, pero sí que debe codificar <em>scripts</em> o pequeños programas que faciliten su día a día. Otro lenguaje que tiene cierta importancia dentro de la ingeniería de datos es <em>Scala</em>.</p>
+<h2 id="referencias">Referencias</h2>
+<ul>
+<li>Libro <a href="https://learning.oreilly.com/library/view/fundamentals-of-data/9781098108298/">Fundamentals of Data Engineering</a> de <em>Joe Reis</em> y <em>Matt Housley</em>.</li>
+<li><a href="https://www.oreilly.com/library/view/fundamentals-of-data/9781098108298/ch01.html">Capítulo 1 - Data Engineering Described</a> en abierto.</li>
+<li><a href="https://hackr.io/blog/what-is-data-engineering">What is Data Engineering?</a></li>
+<li><em>The MAD (Machine Learning, Artificial Intelligence &amp; Data) Landscape</em> <a href="https://mattturck.com/mad2025/">2025</a>, <a href="https://mattturck.com/mad2024/">2024</a>, <a href="https://mattturck.com/mad2023/">2023</a></li>
+</ul>
+<h2 id="actividades">Actividades</h2>
+<ol>
+<li>(RABDA.1 / CEBDA.1a / 1p) Contesta a las siguientes preguntas justificando tus respuestas:</li>
+<li>¿Qué relación hay entre un ingeniero de datos y un científico de datos?</li>
+<li>Enumera las fases del ciclo de vida del dato y define con un par de líneas cada una de ellas, desgranando también la fase de <em>Almacenamiento</em>.</li>
+<li>Indica en qué fase/s utilizarías la siguientes herramientas/tecnologías:<ul>
+<li><em>PowerBI</em></li>
+<li><em>SQL</em></li>
+<li><em>MongoDB</em></li>
+<li><em>Airflow</em></li>
+<li><em>AWS S3</em></li>
+</ul>
+</li>
+</ol>
+<p>2.- (RAPIA.3 / CEPIA.3b y CEPIA.3c / opcional) Realiza los módulos 2 (<em>Data-Driven Organizations</em>) y 3 (<em>The Elements of Data</em>) del curso <a href="https://awsacademy.instructure.com/courses/64345">AWS Academy Data Engineering</a>.</p>
+<hr />
+<p>Contenido e imágenes de <a href="https://aitor-medrano.github.io/iabd/de/de.html">Ingeniería de datos</a>, por Aitor Medrano, reproducidos bajo licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es">CC BY-NC-SA 4.0</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "content.code.select", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
