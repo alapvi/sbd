@@ -1309,7 +1309,7 @@
   <span class="md-ellipsis">
     
   
-    Elastic Stack
+    Ingeniería de Datos
   
 
     
@@ -1322,6 +1322,88 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ingeniería de Datos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ingenieria-datos/bigdata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Big Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elastic Stack
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1693,9 +1775,9 @@
 <li>Creamos el usuario a través de la consola de MongoDB:
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">use</span> <span class="n">admin</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">db</span><span class="o">.</span><span class="n">createUser</span><span class="p">({</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  <span class="n">user</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  <span class="n">pwd</span><span class="p">:</span> <span class="s2">&quot;password_fuerte&quot;</span><span class="p">,</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  <span class="n">roles</span><span class="p">:</span> <span class="p">[</span> <span class="p">{</span> <span class="n">role</span><span class="p">:</span> <span class="s2">&quot;root&quot;</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span> <span class="p">}</span> <span class="p">]</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  <span class="n">user</span><span class="p">:</span> <span class="s2">"admin"</span><span class="p">,</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  <span class="n">pwd</span><span class="p">:</span> <span class="s2">"password_fuerte"</span><span class="p">,</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  <span class="n">roles</span><span class="p">:</span> <span class="p">[</span> <span class="p">{</span> <span class="n">role</span><span class="p">:</span> <span class="s2">"root"</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="s2">"admin"</span> <span class="p">}</span> <span class="p">]</span>
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">})</span>
 </span></code></pre></div></li>
 <li>Editamos el archivo de configuración <code>/etc/mongod.conf</code> y agregamos:
@@ -1715,7 +1797,7 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>vm.max_map_count<span class="o">=</span><span class="m">1048575</span>
 </span></code></pre></div></li>
 <li>Para hacerlo permanentemente:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;vm.max_map_count=1048575&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/sysctl.conf
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"vm.max_map_count=1048575"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/sysctl.conf
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>-p
 </span></code></pre></div></li>
 </ol>
@@ -1728,13 +1810,13 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>vm.swappiness<span class="o">=</span><span class="m">1</span>
 </span></code></pre></div></li>
 <li>Para hacerlo temporalmente:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;vm.swappiness=1&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/sysctl.conf
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"vm.swappiness=1"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/sysctl.conf
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>sudo<span class="w"> </span>sysctl<span class="w"> </span>-p
 </span></code></pre></div></li>
 </ol>
 <h3 id="operaciones-basicas">Operaciones básicas</h3>
 <p>Conectamos desde la consola con un usuario:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>mongosh<span class="w"> </span>-u<span class="w"> </span>admin<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;PasswordSegura&#39;</span><span class="w"> </span>--authenticationDatabase<span class="w"> </span>admin
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>mongosh<span class="w"> </span>-u<span class="w"> </span>admin<span class="w"> </span>-p<span class="w"> </span><span class="s1">'PasswordSegura'</span><span class="w"> </span>--authenticationDatabase<span class="w"> </span>admin
 </span></code></pre></div></p>
 <p>Algunas de las operaciones básicas que podemos realizar son :</p>
 <ul>
@@ -1761,7 +1843,7 @@
 <p>Así pues si intentamos entrar/acceder en una base de datos que no existe, hasta que no se inserte al menos un documento en una de sus colecciones, no estará disponible. Esto lo podemos hacer en el siguiente ejemplo:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">use</span> <span class="n">prueba</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">show</span> <span class="n">dbs</span>
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">db</span><span class="o">.</span><span class="n">primeraColeccion</span><span class="o">.</span><span class="n">insertOne</span><span class="p">({</span> <span class="nb">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nombre</span><span class="p">:</span> <span class="s1">&#39;Alberto&#39;</span><span class="p">})</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">db</span><span class="o">.</span><span class="n">primeraColeccion</span><span class="o">.</span><span class="n">insertOne</span><span class="p">({</span> <span class="nb">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nombre</span><span class="p">:</span> <span class="s1">'Alberto'</span><span class="p">})</span>
 </span></code></pre></div>
 <figure>
     <img alt="&quot;mongosh&quot;" src="../images/MongoDBInst13.png" width="80%" />
@@ -1769,7 +1851,7 @@
 <p>Todo esto es debido a que <em>MongoDB</em> planifica la existencia de una base de datos, pero hasta que no tenga su primer dato, no va a designar ningún tipo de recursos a la misma. En la captura anterior, se ve que ya le ha asignado 8 KiB a nuestra primera base de datos porque ya tiene algún dato.</p>
 <p>Por otra parte, para la creación de una colección e inclusión de un documento en concreto, observar que simplemente al insertar el documento, si la colección no existe, la crea directamente, de la misma forma que ha hecho con la base de datos.</p>
 <p>Más adelante ya veremos con más detenimiento las diferentes forma de insertar registro en un tabla (colección), de momento hemos usando el comando:
-<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">db</span><span class="o">.</span><span class="n">primeraColeccion</span><span class="o">.</span><span class="n">insertOne</span><span class="p">({</span> <span class="nb">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nombre</span><span class="p">:</span> <span class="s1">&#39;Alberto&#39;</span><span class="p">})</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">db</span><span class="o">.</span><span class="n">primeraColeccion</span><span class="o">.</span><span class="n">insertOne</span><span class="p">({</span> <span class="nb">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nombre</span><span class="p">:</span> <span class="s1">'Alberto'</span><span class="p">})</span>
 </span></code></pre></div></p>
 <h3 id="eliminacion-dbdropdatabase">Eliminación: <code>db.dropDatabase()</code></h3>
 <p>Para eliminar una base de datos, en primer lugar debemos estar ubicados dentro de la propia base de datos a eliminar y ahí ejecutamos el comando:</p>
@@ -1791,7 +1873,7 @@
 <p>Estos comandos se ejecutan desde la shell donde tenemos instalados MongoDB, no desde la propia shell de MongoDB</p>
 </div>
 <p>Un caso particular y muy común es importar datos que se encuentran en formato CSV/TSV. Para ello, emplearemos el parámetro <code>--type csv</code>. Por ejemplo, podemos descargar el fichero <a href="../files/personas.csv">personas.csv</a> e importarlo en la bd test:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>mongoimport<span class="w"> </span>--username<span class="w"> </span>admin<span class="w"> </span>--password<span class="w"> </span><span class="s2">&quot;simarro2025.&quot;</span><span class="w"> </span>--authenticationDatabase<span class="w"> </span>admin<span class="w"> </span>--type<span class="w"> </span>csv<span class="w"> </span>--db<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--collection<span class="w"> </span>personas<span class="w"> </span>--headerline<span class="w"> </span>--file<span class="w"> </span>personas.csv
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>mongoimport<span class="w"> </span>--username<span class="w"> </span>admin<span class="w"> </span>--password<span class="w"> </span><span class="s2">"simarro2025."</span><span class="w"> </span>--authenticationDatabase<span class="w"> </span>admin<span class="w"> </span>--type<span class="w"> </span>csv<span class="w"> </span>--db<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--collection<span class="w"> </span>personas<span class="w"> </span>--headerline<span class="w"> </span>--file<span class="w"> </span>personas.csv
 </span></code></pre></div>
 <p>Donde
 - <code>--type</code> : indica el tipo de fichero; csv o tsv
@@ -1893,24 +1975,24 @@ Más información sobre copias de seguridad en la documentación oficial de <a h
 </div>
 <p>Aquí tienes un ejemplo de cómo se podría representar un documento en <em>MongoDB</em> utilizando algunos de estos tipos de datos:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="p">{</span>
-</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>  <span class="s2">&quot;_id&quot;</span><span class="p">:</span> <span class="n">ObjectId</span><span class="p">(</span><span class="s2">&quot;61e4c3055b17967d02a9c3d7&quot;</span><span class="p">),</span>
-</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>  <span class="s2">&quot;nombre&quot;</span><span class="p">:</span> <span class="s2">&quot;Juan&quot;</span><span class="p">,</span>
-</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>  <span class="s2">&quot;edad&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
-</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>  <span class="s2">&quot;activo&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>  <span class="s2">&quot;intereses&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;programación&quot;</span><span class="p">,</span> <span class="s2">&quot;música&quot;</span><span class="p">,</span> <span class="s2">&quot;viajes&quot;</span><span class="p">],</span>
-</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>  <span class="s2">&quot;ubicacion&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>    <span class="s2">&quot;ciudad&quot;</span><span class="p">:</span> <span class="s2">&quot;Barcelona&quot;</span><span class="p">,</span>
-</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>    <span class="s2">&quot;pais&quot;</span><span class="p">:</span> <span class="s2">&quot;España&quot;</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>  <span class="s2">"_id"</span><span class="p">:</span> <span class="n">ObjectId</span><span class="p">(</span><span class="s2">"61e4c3055b17967d02a9c3d7"</span><span class="p">),</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>  <span class="s2">"nombre"</span><span class="p">:</span> <span class="s2">"Juan"</span><span class="p">,</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>  <span class="s2">"edad"</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>  <span class="s2">"activo"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>  <span class="s2">"intereses"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"programación"</span><span class="p">,</span> <span class="s2">"música"</span><span class="p">,</span> <span class="s2">"viajes"</span><span class="p">],</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>  <span class="s2">"ubicacion"</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>    <span class="s2">"ciudad"</span><span class="p">:</span> <span class="s2">"Barcelona"</span><span class="p">,</span>
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>    <span class="s2">"pais"</span><span class="p">:</span> <span class="s2">"España"</span>
 </span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>  <span class="p">},</span>
-</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>  <span class="s2">&quot;fechaRegistro&quot;</span><span class="p">:</span> <span class="n">ISODate</span><span class="p">(</span><span class="s2">&quot;2025-03-01T12:00:00.000Z&quot;</span><span class="p">),</span>
-</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>  <span class="s2">&quot;comentarios&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>  <span class="s2">"fechaRegistro"</span><span class="p">:</span> <span class="n">ISODate</span><span class="p">(</span><span class="s2">"2025-03-01T12:00:00.000Z"</span><span class="p">),</span>
+</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>  <span class="s2">"comentarios"</span><span class="p">:</span> <span class="p">[</span>
 </span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>    <span class="p">{</span>
-</span><span id="__span-18-14"><a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>      <span class="s2">&quot;usuario&quot;</span><span class="p">:</span> <span class="s2">&quot;Ana&quot;</span><span class="p">,</span>
-</span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>      <span class="s2">&quot;texto&quot;</span><span class="p">:</span> <span class="s2">&quot;¡Hola Juan!&quot;</span>
+</span><span id="__span-18-14"><a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>      <span class="s2">"usuario"</span><span class="p">:</span> <span class="s2">"Ana"</span><span class="p">,</span>
+</span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>      <span class="s2">"texto"</span><span class="p">:</span> <span class="s2">"¡Hola Juan!"</span>
 </span><span id="__span-18-16"><a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a>    <span class="p">},</span>
 </span><span id="__span-18-17"><a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a>    <span class="p">{</span>
-</span><span id="__span-18-18"><a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>      <span class="s2">&quot;usuario&quot;</span><span class="p">:</span> <span class="s2">&quot;Carlos&quot;</span><span class="p">,</span>
-</span><span id="__span-18-19"><a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a>      <span class="s2">&quot;texto&quot;</span><span class="p">:</span> <span class="s2">&quot;Saludos desde Xàtiva.&quot;</span>
+</span><span id="__span-18-18"><a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>      <span class="s2">"usuario"</span><span class="p">:</span> <span class="s2">"Carlos"</span><span class="p">,</span>
+</span><span id="__span-18-19"><a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a>      <span class="s2">"texto"</span><span class="p">:</span> <span class="s2">"Saludos desde Xàtiva."</span>
 </span><span id="__span-18-20"><a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a>    <span class="p">}</span>
 </span><span id="__span-18-21"><a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a>  <span class="p">]</span>
 </span><span id="__span-18-22"><a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a><span class="p">}</span>

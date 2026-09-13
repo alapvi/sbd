@@ -1343,7 +1343,7 @@
   <span class="md-ellipsis">
     
   
-    Elastic Stack
+    Ingeniería de Datos
   
 
     
@@ -1356,6 +1356,88 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ingeniería de Datos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ingenieria-datos/bigdata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Big Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elastic Stack
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1756,17 +1838,17 @@
 <ul>
 <li>Insertar un solo documento en la colección <code>usuarios</code>:
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">db</span><span class="o">.</span><span class="n">usuarios</span><span class="o">.</span><span class="n">insertOne</span><span class="p">({</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">nombre</span><span class="p">:</span> <span class="s2">&quot;Juan&quot;</span><span class="p">,</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">nombre</span><span class="p">:</span> <span class="s2">"Juan"</span><span class="p">,</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">edad</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">ciudad</span><span class="p">:</span> <span class="s2">&quot;Barcelona&quot;</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">ciudad</span><span class="p">:</span> <span class="s2">"Barcelona"</span>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">});</span>
 </span></code></pre></div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">db</span><span class="o">.</span><span class="n">usuarios</span><span class="o">.</span><span class="n">insertOne</span><span class="p">({</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">nombre</span><span class="p">:</span> <span class="s2">&quot;Pepe&quot;</span><span class="p">,</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">nombre</span><span class="p">:</span> <span class="s2">"Pepe"</span><span class="p">,</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">edad</span><span class="p">:</span> <span class="mi">34</span><span class="p">,</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">ciudad</span><span class="p">:</span> <span class="s2">&quot;Valencia&quot;</span><span class="p">,</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">intereses</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;fútbol&quot;</span><span class="p">,</span> <span class="s2">&quot;música&quot;</span><span class="p">],</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">direccion</span><span class="p">:</span> <span class="p">{</span> <span class="n">calle</span><span class="p">:</span> <span class="s2">&quot;Calle Mayor&quot;</span><span class="p">,</span> <span class="n">numero</span><span class="p">:</span> <span class="mi">123</span> <span class="p">},</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">ciudad</span><span class="p">:</span> <span class="s2">"Valencia"</span><span class="p">,</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">intereses</span><span class="p">:</span> <span class="p">[</span><span class="s2">"fútbol"</span><span class="p">,</span> <span class="s2">"música"</span><span class="p">],</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">direccion</span><span class="p">:</span> <span class="p">{</span> <span class="n">calle</span><span class="p">:</span> <span class="s2">"Calle Mayor"</span><span class="p">,</span> <span class="n">numero</span><span class="p">:</span> <span class="mi">123</span> <span class="p">},</span>
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="n">fechaRegistro</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(),</span>
 </span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="n">activo</span><span class="p">:</span> <span class="n">true</span>
 </span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="p">});</span>
@@ -1774,10 +1856,10 @@
 <li>Insertar un documento con una fecha específica:<ul>
 <li>Los campos antes no estaban entre comillas y en este ejemplo si lo estan; es totalmente indiferente. Pero si debemos tener en cuenta que es <strong>case-sensitive</strong> (Mayúsculas/Minúsculas) es importante y adcemás también cambia si ponemos los datos númericos entre comillas o no, ya que se convierten en texto:
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">db</span><span class="o">.</span><span class="n">usuarios</span><span class="o">.</span><span class="n">insertOne</span><span class="p">({</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="s2">&quot;nombre&quot;</span><span class="p">:</span> <span class="s2">&quot;Filiberto&quot;</span><span class="p">,</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="s2">&quot;edad&quot;</span> <span class="p">:</span> <span class="s2">&quot;33&quot;</span><span class="p">,</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="s2">&quot;fechaNacimiento&quot;</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&quot;2004-03-15&quot;</span><span class="p">),</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="s2">&quot;ciudad&quot;</span><span class="p">:</span> <span class="s2">&quot;Alacant&quot;</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="s2">"nombre"</span><span class="p">:</span> <span class="s2">"Filiberto"</span><span class="p">,</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="s2">"edad"</span> <span class="p">:</span> <span class="s2">"33"</span><span class="p">,</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="s2">"fechaNacimiento"</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">"2004-03-15"</span><span class="p">),</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="s2">"ciudad"</span><span class="p">:</span> <span class="s2">"Alacant"</span>
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">});</span>
 </span></code></pre></div></li>
 </ul>
@@ -1786,7 +1868,7 @@
 <p>Cada vez que hacemos una inserción, si es correcta, nos devuelve el resultado del con el siguiente formato:
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  <span class="n">acknowledged</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  <span class="n">insertedId</span><span class="p">:</span> <span class="n">ObjectId</span><span class="p">(</span><span class="s1">&#39;6888d00e75fc26a2b289b03d&#39;</span><span class="p">)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  <span class="n">insertedId</span><span class="p">:</span> <span class="n">ObjectId</span><span class="p">(</span><span class="s1">'6888d00e75fc26a2b289b03d'</span><span class="p">)</span>
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">}</span>
 </span></code></pre></div></p>
 <h3 id="insertmany"><strong>InsertMany()</strong></h3>
@@ -1798,15 +1880,15 @@
 <ul>
 <li>Insertar varios documentos en la colección 'usuarios':
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">db</span><span class="o">.</span><span class="n">usuarios</span><span class="o">.</span><span class="n">insertMany</span><span class="p">([</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="p">{</span> <span class="n">nombre</span><span class="p">:</span> <span class="s2">&quot;Ana&quot;</span><span class="p">,</span> <span class="n">edad</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="n">ciudad</span><span class="p">:</span> <span class="s2">&quot;Madrid&quot;</span> <span class="p">},</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="p">{</span> <span class="n">nombre</span><span class="p">:</span> <span class="s2">&quot;Carlos&quot;</span><span class="p">,</span> <span class="n">edad</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span> <span class="n">ciudad</span><span class="p">:</span> <span class="s2">&quot;Valencia&quot;</span> <span class="p">}</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="p">{</span> <span class="n">nombre</span><span class="p">:</span> <span class="s2">"Ana"</span><span class="p">,</span> <span class="n">edad</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="n">ciudad</span><span class="p">:</span> <span class="s2">"Madrid"</span> <span class="p">},</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="p">{</span> <span class="n">nombre</span><span class="p">:</span> <span class="s2">"Carlos"</span><span class="p">,</span> <span class="n">edad</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span> <span class="n">ciudad</span><span class="p">:</span> <span class="s2">"Valencia"</span> <span class="p">}</span>
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">]);</span>
 </span></code></pre></div></li>
 <li>Insertar varios documentos en la colección 'usuarios':</li>
 </ul>
 <p><div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">db</span><span class="o">.</span><span class="n">usuarios</span><span class="o">.</span><span class="n">insertMany</span><span class="p">([</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="p">{</span> <span class="n">nombre</span><span class="p">:</span> <span class="s2">&quot;Ana&quot;</span><span class="p">,</span> <span class="n">edad</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="n">ciudad</span><span class="p">:</span> <span class="s2">&quot;Madrid&quot;</span><span class="p">,</span> <span class="n">intereses</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;viajes&quot;</span><span class="p">],</span> <span class="n">fechaRegistro</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(),</span> <span class="n">activo</span><span class="p">:</span> <span class="n">false</span> <span class="p">},</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="p">{</span> <span class="n">nombre</span><span class="p">:</span> <span class="s2">&quot;Carlos&quot;</span><span class="p">,</span> <span class="n">edad</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span> <span class="n">ciudad</span><span class="p">:</span> <span class="s2">&quot;Valencia&quot;</span><span class="p">,</span> <span class="n">intereses</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;lectura&quot;</span><span class="p">],</span> <span class="n">fechaRegistro</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(),</span> <span class="n">activo</span><span class="p">:</span> <span class="n">true</span> <span class="p">}</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="p">{</span> <span class="n">nombre</span><span class="p">:</span> <span class="s2">"Ana"</span><span class="p">,</span> <span class="n">edad</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="n">ciudad</span><span class="p">:</span> <span class="s2">"Madrid"</span><span class="p">,</span> <span class="n">intereses</span><span class="p">:</span> <span class="p">[</span><span class="s2">"viajes"</span><span class="p">],</span> <span class="n">fechaRegistro</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(),</span> <span class="n">activo</span><span class="p">:</span> <span class="n">false</span> <span class="p">},</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="p">{</span> <span class="n">nombre</span><span class="p">:</span> <span class="s2">"Carlos"</span><span class="p">,</span> <span class="n">edad</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span> <span class="n">ciudad</span><span class="p">:</span> <span class="s2">"Valencia"</span><span class="p">,</span> <span class="n">intereses</span><span class="p">:</span> <span class="p">[</span><span class="s2">"lectura"</span><span class="p">],</span> <span class="n">fechaRegistro</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(),</span> <span class="n">activo</span><span class="p">:</span> <span class="n">true</span> <span class="p">}</span>
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">]);</span>
 </span></code></pre></div>
 Observar cómo se trabaja con las fechas</p>
@@ -1828,11 +1910,11 @@ Observar cómo se trabaja con las fechas</p>
 </div>
 <ul>
 <li>Leer documentos que coincidan con un criterio específico
-<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">db</span><span class="o">.</span><span class="n">usuarios</span><span class="o">.</span><span class="n">find</span><span class="p">({</span> <span class="n">ciudad</span><span class="p">:</span> <span class="s2">&quot;Barcelona&quot;</span> <span class="p">});</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">db</span><span class="o">.</span><span class="n">usuarios</span><span class="o">.</span><span class="n">find</span><span class="p">({</span> <span class="n">ciudad</span><span class="p">:</span> <span class="s2">"Barcelona"</span> <span class="p">});</span>
 </span></code></pre></div></li>
 <li>
 <p>Leer documentos que coincidan con un criterio específico (por ejemplo, ciudad igual a 'Madrid' y activo igual a false)
-<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">db</span><span class="o">.</span><span class="n">usuarios</span><span class="o">.</span><span class="n">find</span><span class="p">({</span> <span class="n">ciudad</span><span class="p">:</span> <span class="s2">&quot;Madrid&quot;</span><span class="p">,</span> <span class="n">activo</span><span class="p">:</span> <span class="n">false</span> <span class="p">});</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">db</span><span class="o">.</span><span class="n">usuarios</span><span class="o">.</span><span class="n">find</span><span class="p">({</span> <span class="n">ciudad</span><span class="p">:</span> <span class="s2">"Madrid"</span><span class="p">,</span> <span class="n">activo</span><span class="p">:</span> <span class="n">false</span> <span class="p">});</span>
 </span></code></pre></div>
 Podemos especificar los campos que queremos recuperar en la consulta:</p>
 </li>
@@ -1865,10 +1947,10 @@ Podemos especificar los campos que queremos recuperar en la consulta:</p>
 </div>
 <ul>
 <li>Leer usuarios cuya fecha de registro fue después de una fecha específica:
-<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">db</span><span class="o">.</span><span class="n">usuarios</span><span class="o">.</span><span class="n">find</span><span class="p">({</span> <span class="n">fechaRegistro</span><span class="p">:</span> <span class="p">{</span> <span class="err">$</span><span class="n">gt</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&quot;2024-01-01&quot;</span><span class="p">)</span> <span class="p">}</span> <span class="p">});</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">db</span><span class="o">.</span><span class="n">usuarios</span><span class="o">.</span><span class="n">find</span><span class="p">({</span> <span class="n">fechaRegistro</span><span class="p">:</span> <span class="p">{</span> <span class="err">$</span><span class="n">gt</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">"2024-01-01"</span><span class="p">)</span> <span class="p">}</span> <span class="p">});</span>
 </span></code></pre></div></li>
 <li>Leer usuarios cuya fecha de registro está entre un rango de fechas:
-<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">db</span><span class="o">.</span><span class="n">usuarios</span><span class="o">.</span><span class="n">find</span><span class="p">({</span> <span class="n">fechaRegistro</span><span class="p">:</span> <span class="p">{</span> <span class="err">$</span><span class="n">gt</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&quot;2024-01-01&quot;</span><span class="p">),</span> <span class="err">$</span><span class="n">lt</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&quot;2025-01-01&quot;</span><span class="p">)</span> <span class="p">}</span> <span class="p">});</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">db</span><span class="o">.</span><span class="n">usuarios</span><span class="o">.</span><span class="n">find</span><span class="p">({</span> <span class="n">fechaRegistro</span><span class="p">:</span> <span class="p">{</span> <span class="err">$</span><span class="n">gt</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">"2024-01-01"</span><span class="p">),</span> <span class="err">$</span><span class="n">lt</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">"2025-01-01"</span><span class="p">)</span> <span class="p">}</span> <span class="p">});</span>
 </span></code></pre></div></li>
 </ul>
 <div class="admonition note">
@@ -1890,7 +1972,7 @@ Podemos especificar los campos que queremos recuperar en la consulta:</p>
 <li>Ejemplo de <code>updateOne()</code></li>
 </ul>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">db</span><span class="o">.</span><span class="n">usuarios</span><span class="o">.</span><span class="n">updateOne</span><span class="p">(</span>
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>    <span class="p">{</span> <span class="n">nombre</span><span class="p">:</span> <span class="s2">&quot;Juan&quot;</span> <span class="p">},</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>    <span class="p">{</span> <span class="n">nombre</span><span class="p">:</span> <span class="s2">"Juan"</span> <span class="p">},</span>
 </span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>    <span class="p">{</span> <span class="err">$</span><span class="nb">set</span><span class="p">:</span> <span class="p">{</span> <span class="n">edad</span><span class="p">:</span> <span class="mi">31</span> <span class="p">}</span> <span class="p">}</span>
 </span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="p">);</span>
 </span></code></pre></div>
@@ -1898,16 +1980,16 @@ Podemos especificar los campos que queremos recuperar en la consulta:</p>
 <li>Cambiamos más de un valor</li>
 </ul>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">db</span><span class="o">.</span><span class="n">usuarios</span><span class="o">.</span><span class="n">updateOne</span><span class="p">(</span>
-</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>    <span class="p">{</span> <span class="n">nombre</span><span class="p">:</span> <span class="s2">&quot;Juan&quot;</span> <span class="p">},</span>
-</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>    <span class="p">{</span> <span class="err">$</span><span class="nb">set</span><span class="p">:</span> <span class="p">{</span> <span class="n">edad</span><span class="p">:</span> <span class="mi">31</span><span class="p">,</span> <span class="n">ciudad</span><span class="p">:</span> <span class="s1">&#39;Albacete&#39;</span> <span class="p">}</span> <span class="p">}</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>    <span class="p">{</span> <span class="n">nombre</span><span class="p">:</span> <span class="s2">"Juan"</span> <span class="p">},</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>    <span class="p">{</span> <span class="err">$</span><span class="nb">set</span><span class="p">:</span> <span class="p">{</span> <span class="n">edad</span><span class="p">:</span> <span class="mi">31</span><span class="p">,</span> <span class="n">ciudad</span><span class="p">:</span> <span class="s1">'Albacete'</span> <span class="p">}</span> <span class="p">}</span>
 </span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="p">);</span>
 </span></code></pre></div>
 <ul>
 <li>Actualizar la fecha de un evento específico</li>
 </ul>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">db</span><span class="o">.</span><span class="n">usuarios</span><span class="o">.</span><span class="n">updateOne</span><span class="p">(</span>
-</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>    <span class="p">{</span> <span class="n">nombre</span><span class="p">:</span> <span class="s2">&quot;Alberto&quot;</span> <span class="p">},</span>
-</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>    <span class="p">{</span> <span class="err">$</span><span class="nb">set</span><span class="p">:</span> <span class="p">{</span> <span class="n">fechaRegistro</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&quot;2024-03-20&quot;</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>    <span class="p">{</span> <span class="n">nombre</span><span class="p">:</span> <span class="s2">"Alberto"</span> <span class="p">},</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>    <span class="p">{</span> <span class="err">$</span><span class="nb">set</span><span class="p">:</span> <span class="p">{</span> <span class="n">fechaRegistro</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">"2024-03-20"</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
 </span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="p">);</span>
 </span></code></pre></div>
 <p>En el primer ejemplo, se actualizará el primer documento de la colección <code>"usuarios"</code> que tenga el campo nombre igual a <code>"Juan"</code>. Si hay varios documentos con ese nombre, <em>solo se actualizará uno</em>.</p>
@@ -1929,8 +2011,8 @@ Podemos especificar los campos que queremos recuperar en la consulta:</p>
 <li>Ejemplo de <code>updateMany()</code></li>
 </ul>
 <p><div class="language-python highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">db</span><span class="o">.</span><span class="n">usuarios</span><span class="o">.</span><span class="n">updateMany</span><span class="p">(</span>
-</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>    <span class="p">{</span> <span class="n">ciudad</span><span class="p">:</span> <span class="s2">&quot;Játiva&quot;</span> <span class="p">},</span>
-</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>    <span class="p">{</span> <span class="err">$</span><span class="nb">set</span><span class="p">:</span> <span class="p">{</span> <span class="n">ciudad</span><span class="p">:</span> <span class="s2">&quot;Xàtiva&quot;</span> <span class="p">}</span> <span class="p">}</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>    <span class="p">{</span> <span class="n">ciudad</span><span class="p">:</span> <span class="s2">"Játiva"</span> <span class="p">},</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>    <span class="p">{</span> <span class="err">$</span><span class="nb">set</span><span class="p">:</span> <span class="p">{</span> <span class="n">ciudad</span><span class="p">:</span> <span class="s2">"Xàtiva"</span> <span class="p">}</span> <span class="p">}</span>
 </span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="p">);</span>
 </span></code></pre></div>
 En este ejemplo, se actualizarán todos los documentos de la colección <code>"usuarios"</code> que tengan el campo ciudad igual a <em>"Játiva"</em>, estableciendo su valor a <em>"Xàtiva"</em>.</p>
@@ -1944,7 +2026,7 @@ En este ejemplo, se actualizarán todos los documentos de la colección <code>"u
 </ul>
 <p>En el siguiente ejemplo, incrementamos un año la edad de los usuarios con un determinado nombre;</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">db</span><span class="o">.</span><span class="n">usuarios</span><span class="o">.</span><span class="n">updateMany</span><span class="p">(</span>
-</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>    <span class="p">{</span> <span class="n">nombre</span> <span class="p">:</span> <span class="s2">&quot;Juan&quot;</span> <span class="p">},</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>    <span class="p">{</span> <span class="n">nombre</span> <span class="p">:</span> <span class="s2">"Juan"</span> <span class="p">},</span>
 </span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>    <span class="p">{</span> <span class="err">$</span><span class="n">inc</span><span class="p">:</span> <span class="p">{</span> <span class="n">edad</span><span class="p">:</span> <span class="mi">1</span> <span class="p">}</span> <span class="p">}</span>
 </span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="p">);</span>
 </span></code></pre></div>
@@ -1957,12 +2039,12 @@ En este ejemplo, se actualizarán todos los documentos de la colección <code>"u
 <li>Ejemplo donde reemplaza el primer registro qe encuentra con el filtro aplicado</li>
 </ul>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">db</span><span class="o">.</span><span class="n">usuarios</span><span class="o">.</span><span class="n">replaceOne</span><span class="p">(</span>
-</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>    <span class="p">{</span> <span class="n">nombre</span><span class="p">:</span> <span class="s2">&quot;Alberto&quot;</span> <span class="p">},</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>    <span class="p">{</span> <span class="n">nombre</span><span class="p">:</span> <span class="s2">"Alberto"</span> <span class="p">},</span>
 </span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>    <span class="p">{</span>     
-</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>        <span class="n">nombre</span><span class="p">:</span> <span class="s2">&quot;Alberto A.&quot;</span><span class="p">,</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>        <span class="n">nombre</span><span class="p">:</span> <span class="s2">"Alberto A."</span><span class="p">,</span>
 </span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>        <span class="n">edad</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
-</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>        <span class="n">ciudad</span><span class="p">:</span> <span class="s2">&quot;Xàtiva&quot;</span><span class="p">,</span>
-</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>        <span class="n">intereses</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Baloncesto&quot;</span><span class="p">,</span> <span class="s2">&quot;Informática&quot;</span><span class="p">],</span>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>        <span class="n">ciudad</span><span class="p">:</span> <span class="s2">"Xàtiva"</span><span class="p">,</span>
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>        <span class="n">intereses</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Baloncesto"</span><span class="p">,</span> <span class="s2">"Informática"</span><span class="p">],</span>
 </span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>        <span class="n">fechaRegistro</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(),</span>
 </span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>        <span class="n">activo</span><span class="p">:</span> <span class="n">true</span> 
 </span><span id="__span-21-10"><a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>    <span class="p">}</span>
@@ -1982,7 +2064,7 @@ En <em>MongoDB</em>, tanto <code>deleteOne()</code> como <code>deleteMany()</cod
 <ul>
 <li>Ejemplo de <code>deleteOne()</code></li>
 </ul>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">db</span><span class="o">.</span><span class="n">usuarios</span><span class="o">.</span><span class="n">deleteOne</span><span class="p">({</span> <span class="n">nombre</span><span class="p">:</span> <span class="s2">&quot;Juan&quot;</span> <span class="p">});</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">db</span><span class="o">.</span><span class="n">usuarios</span><span class="o">.</span><span class="n">deleteOne</span><span class="p">({</span> <span class="n">nombre</span><span class="p">:</span> <span class="s2">"Juan"</span> <span class="p">});</span>
 </span></code></pre></div>
 <p>En este ejemplo, se eliminará el primer documento de la colección <code>"usuarios"</code> que tenga el campo nombre igual a <code>"Juan"</code>. Si hay varios documentos con ese nombre, <strong>solo se eliminará uno</strong>.</p>
 <h3 id="deletemany"><strong><code>deleteMany()</code></strong></h3>
@@ -1997,12 +2079,12 @@ En <em>MongoDB</em>, tanto <code>deleteOne()</code> como <code>deleteMany()</cod
 <ul>
 <li>Eliminar varios documentos que cumplan el criterio especificado</li>
 </ul>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="n">db</span><span class="o">.</span><span class="n">usuarios</span><span class="o">.</span><span class="n">deleteMany</span><span class="p">({</span> <span class="n">ciudad</span><span class="p">:</span> <span class="s2">&quot;Xàtiva&quot;</span> <span class="p">});</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="n">db</span><span class="o">.</span><span class="n">usuarios</span><span class="o">.</span><span class="n">deleteMany</span><span class="p">({</span> <span class="n">ciudad</span><span class="p">:</span> <span class="s2">"Xàtiva"</span> <span class="p">});</span>
 </span></code></pre></div>
 <ul>
 <li>Eliminar usuarios con una fecha de registro específica</li>
 </ul>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">db</span><span class="o">.</span><span class="n">usuarios</span><span class="o">.</span><span class="n">deleteMany</span><span class="p">({</span> <span class="n">fecha</span><span class="p">:</span> <span class="p">{</span> <span class="err">$</span><span class="n">lt</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">&quot;2025-01-01&quot;</span><span class="p">)</span> <span class="p">}</span> <span class="p">});</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">db</span><span class="o">.</span><span class="n">usuarios</span><span class="o">.</span><span class="n">deleteMany</span><span class="p">({</span> <span class="n">fecha</span><span class="p">:</span> <span class="p">{</span> <span class="err">$</span><span class="n">lt</span><span class="p">:</span> <span class="n">new</span> <span class="n">Date</span><span class="p">(</span><span class="s2">"2025-01-01"</span><span class="p">)</span> <span class="p">}</span> <span class="p">});</span>
 </span></code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Cuidado!</p>
