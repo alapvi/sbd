@@ -1,0 +1,2669 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://alapvi.github.io/programacion/">
+      
+      
+      
+        <link rel="next" href="..">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../images/logo_peq.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Programación del módulo - Sistemas de BigData</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#programacion-didactica-sistemas-de-big-data" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="Sistemas de BigData" class="md-header__button md-logo" aria-label="Sistemas de BigData" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sistemas de BigData
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Programación del módulo
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Sistemas de BigData" class="md-nav__button md-logo" aria-label="Sistemas de BigData" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    Sistemas de BigData
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programación del módulo
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programación del módulo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-identificacion-y-alcance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Identificación y alcance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-referencias-normativas-y-documentales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Referencias normativas y documentales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-contextualizacion-y-finalidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Contextualización y finalidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-objetivos-didacticos-y-contribucion-profesional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Objetivos didácticos y contribución profesional
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-resultados-de-aprendizaje" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Resultados de aprendizaje
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-unidades-y-temporalizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Unidades y temporalización
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Unidades y temporalización">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ud1-ingenieria-de-datos-y-diseno-de-soluciones-6-h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UD1. Ingeniería de datos y diseño de soluciones — 6 h
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ud2-almacenamiento-nosql-y-sistemas-distribuidos-6-h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UD2. Almacenamiento NoSQL y sistemas distribuidos — 6 h
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ud3-gestion-de-datos-con-mongodb-15-h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UD3. Gestión de datos con MongoDB — 15 h
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ud4-integracion-y-procesamiento-con-nifi-21-h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UD4. Integración y procesamiento con NiFi — 21 h
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ud5-elastic-stack-18-h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UD5. Elastic Stack — 18 h
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ud6-automatizacion-con-n8n-6-h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UD6. Automatización con n8n — 6 h
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ud7-power-bi-12-h-cuatro-semanas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UD7. Power BI — 12 h, cuatro semanas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-proyecto-transversal-y-coordinacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Proyecto transversal y coordinación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-matriz-de-cobertura-de-criterios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Matriz de cobertura de criterios
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-metodologia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Metodología
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-evaluacion-y-calificacion-propuestas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Evaluación y calificación propuestas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Evaluación y calificación propuestas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-evaluacion-inicial-y-seguimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Evaluación inicial y seguimiento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-ponderacion-por-ra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Ponderación por RA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-descriptores-comunes-de-rubrica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Descriptores comunes de rúbrica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104-recuperacion-y-ausencia-de-evidencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4 Recuperación y ausencia de evidencias
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-inclusion-refuerzo-y-ampliacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Inclusión, refuerzo y ampliación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-recursos-y-organizacion-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Recursos y organización técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-seguridad-proteccion-de-datos-y-uso-de-ia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Seguridad, protección de datos y uso de IA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-coordinacion-seguimiento-y-revision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Coordinación, seguimiento y revisión
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-datos-pendientes-antes-de-aprobar-la-programacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Datos pendientes antes de aprobar la programación
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ingeniería de Datos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ingeniería de Datos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ingenieria-datos/bigdata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Big Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ingenieria-datos/ingenieria-datos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ingeniería de Datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Almacenamiento de datos. NoSQL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Almacenamiento de datos. NoSQL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nosql/nosql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NoSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nosql/moddatos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelos de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nosql/consistencia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consistencia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MongoDB
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MongoDB
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mongodb/intromongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción a MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mongodb/mongodb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mongodb/modelado/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Diseño de modelado de BD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mongodb/instalacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mongodb/basicsmongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primeros pasos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mongodb/mongodbcrud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operaciones con datos CRUD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mongodb/mongodbdatos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consulta de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nifi
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Nifi
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nifi/introduccion_nifi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nifi/arquitectura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitectura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nifi/interfaz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interfaz gráfica de NiFi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nifi/instalacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalación y despliegue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nifi/primerflujo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primer flujo de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nifi/flowfiles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowfiles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nifi/processors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Processors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nifi/connections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Connections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_9" id="__nav_6_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Controllers
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Controllers
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nifi/controllers/01-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nifi/controllers/02-configuracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración de controladores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nifi/controllers/03-principales-controller-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Servicios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nifi/controllers/04-arquitecturas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitecturas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nifi/casos_de_uso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Casos de uso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elastic Stack
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Elastic Stack
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../elastic/elastic_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../elastic/elastic_ops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../elastic/kibana/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kibana
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../elastic/caso_uso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso de uso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../elastic/dashboards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboards Covid
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../elastic/ampliacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ampliación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-identificacion-y-alcance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Identificación y alcance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-referencias-normativas-y-documentales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Referencias normativas y documentales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-contextualizacion-y-finalidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Contextualización y finalidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-objetivos-didacticos-y-contribucion-profesional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Objetivos didácticos y contribución profesional
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-resultados-de-aprendizaje" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Resultados de aprendizaje
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-unidades-y-temporalizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Unidades y temporalización
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Unidades y temporalización">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ud1-ingenieria-de-datos-y-diseno-de-soluciones-6-h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UD1. Ingeniería de datos y diseño de soluciones — 6 h
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ud2-almacenamiento-nosql-y-sistemas-distribuidos-6-h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UD2. Almacenamiento NoSQL y sistemas distribuidos — 6 h
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ud3-gestion-de-datos-con-mongodb-15-h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UD3. Gestión de datos con MongoDB — 15 h
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ud4-integracion-y-procesamiento-con-nifi-21-h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UD4. Integración y procesamiento con NiFi — 21 h
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ud5-elastic-stack-18-h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UD5. Elastic Stack — 18 h
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ud6-automatizacion-con-n8n-6-h" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UD6. Automatización con n8n — 6 h
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ud7-power-bi-12-h-cuatro-semanas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UD7. Power BI — 12 h, cuatro semanas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-proyecto-transversal-y-coordinacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Proyecto transversal y coordinación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-matriz-de-cobertura-de-criterios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Matriz de cobertura de criterios
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-metodologia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Metodología
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-evaluacion-y-calificacion-propuestas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Evaluación y calificación propuestas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Evaluación y calificación propuestas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-evaluacion-inicial-y-seguimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Evaluación inicial y seguimiento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-ponderacion-por-ra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Ponderación por RA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-descriptores-comunes-de-rubrica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Descriptores comunes de rúbrica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104-recuperacion-y-ausencia-de-evidencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4 Recuperación y ausencia de evidencias
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-inclusion-refuerzo-y-ampliacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Inclusión, refuerzo y ampliación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-recursos-y-organizacion-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Recursos y organización técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-seguridad-proteccion-de-datos-y-uso-de-ia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Seguridad, protección de datos y uso de IA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-coordinacion-seguimiento-y-revision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Coordinación, seguimiento y revisión
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-datos-pendientes-antes-de-aprobar-la-programacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Datos pendientes antes de aprobar la programación
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="programacion-didactica-sistemas-de-big-data">Programación didáctica — Sistemas de Big Data</h1>
+<p><strong>Módulo 5074 · Curso de especialización en Inteligencia Artificial y Big Data</strong><br />
+<strong>Curso previsto: 2026–2027</strong></p>
+<h2 id="1-identificacion-y-alcance">1. Identificación y alcance</h2>
+<table>
+<thead>
+<tr>
+<th>Dato</th>
+<th>Previsión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Familia profesional</td>
+<td>Informática y Comunicaciones</td>
+</tr>
+<tr>
+<td>Módulo</td>
+<td>Sistemas de Big Data, código 5074</td>
+</tr>
+<tr>
+<td>Centro y profesorado</td>
+<td>Pendientes de completar</td>
+</tr>
+<tr>
+<td>Periodo</td>
+<td>Octubre a mayo</td>
+</tr>
+<tr>
+<td>Horario</td>
+<td>3 horas semanales</td>
+</tr>
+<tr>
+<td>Planificación de aula</td>
+<td>90 horas provisionales, equivalentes a 30 semanas efectivas</td>
+</tr>
+<tr>
+<td>Modalidad de trabajo propuesta</td>
+<td>Presencial, con aula virtual de apoyo</td>
+</tr>
+<tr>
+<td>Tecnologías principales</td>
+<td>MongoDB, Apache NiFi, Elasticsearch, Kibana, n8n y Power BI</td>
+</tr>
+<tr>
+<td>Coordinación</td>
+<td>Spark y Kafka se desarrollan en otro módulo</td>
+</tr>
+</tbody>
+</table>
+<p>Las 90 horas constituyen una hipótesis de temporalización acordada para este documento, no una atribución normativa de duración. Antes de aprobarlo se contrastarán con el horario autorizado, calendario del centro y posibles periodos de formación en empresa. El documento desarrolla la propuesta pedagógica y deja identificados los extremos administrativos sin confirmar.</p>
+<h2 id="2-referencias-normativas-y-documentales">2. Referencias normativas y documentales</h2>
+<p>La referencia curricular específica es el <a href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2021-7686&amp;lang=es">Real Decreto 279/2021, de 20 de abril, anexo I, módulo 5074</a>. Debe leerse junto con las modificaciones del <a href="https://www.boe.es/buscar/doc.php?id=BOE-A-2024-10682">Real Decreto 497/2024, de 21 de mayo</a>. La duración de enseñanzas mínimas de estas normas no se utiliza como equivalente automático de las horas del centro.</p>
+<p><strong>Pendiente de cierre normativo autonómico:</strong> incorporar la disposición curricular o de implantación aplicable en la Comunitat Valenciana y las instrucciones de organización y evaluación del curso 2026–2027. No se ha podido verificar una referencia autonómica específica durante esta revisión; no se atribuyen carácter oficial a las ponderaciones ni a las reglas de recuperación propuestas aquí.</p>
+<p>Material de partida: archivo aportado <code>sbd-source-master.zip</code>, con materiales de ingeniería de datos, NoSQL, MongoDB, NiFi y Elastic Stack. Power BI se incorpora por indicación del docente y n8n como nueva unidad acordada. Las versiones de software se fijarán después de validar los laboratorios.</p>
+<h2 id="3-contextualizacion-y-finalidad">3. Contextualización y finalidad</h2>
+<p>El módulo desarrolla la capacidad de convertir fuentes heterogéneas en información útil mediante almacenamiento, integración, consulta, automatización y visualización. La secuencia combina fundamentos con la construcción gradual de un sistema verificable.</p>
+<p>Se prevé diversidad de conocimientos previos en bases de datos, programación y administración. La evaluación inicial identificará el dominio de SQL, JSON, HTTP, comandos básicos, contenedores e interpretación de gráficos. Se facilitarán actividades de refuerzo sin convertirlas en nuevas unidades extensas.</p>
+<p>La infraestructura se concretará al comienzo del curso: equipos para Power BI Desktop, entorno Linux con Docker para los servicios, almacenamiento persistente y conectividad entre máquinas. Los materiales anteriores mencionan Proxmox, pero su disponibilidad para este grupo debe confirmarse. Se preparará una alternativa de laboratorio compartido si los equipos individuales no permiten desplegar todos los servicios.</p>
+<h2 id="4-objetivos-didacticos-y-contribucion-profesional">4. Objetivos didácticos y contribución profesional</h2>
+<p>Al finalizar, el alumnado deberá ser capaz de:</p>
+<ol>
+<li>Definir un problema de datos, sus fuentes, indicadores y restricciones.</li>
+<li>Seleccionar una arquitectura justificando calidad, coste y complejidad.</li>
+<li>Modelar y consultar datos documentales y valorar el efecto de los índices.</li>
+<li>Integrar fuentes con flujos reproducibles que detecten errores y duplicados.</li>
+<li>Gestionar acceso, persistencia y recuperación de los datos de laboratorio.</li>
+<li>Construir índices de búsqueda y cuadros de mando útiles.</li>
+<li>Experimentar con distribución, redundancia y rendimiento.</li>
+<li>Automatizar procesos asociados al sistema de datos.</li>
+<li>Aplicar e interpretar resultados predictivos en un informe analítico.</li>
+<li>Documentar decisiones y comunicar conclusiones apoyadas en evidencias.</li>
+</ol>
+<p>Estos objetivos son una concreción didáctica propia. Contribuyen a la integración de sistemas de explotación de datos, la toma de decisiones y la automatización de procesos; no sustituyen las competencias ni los objetivos generales oficiales del curso.</p>
+<h2 id="5-resultados-de-aprendizaje">5. Resultados de aprendizaje</h2>
+<p>Síntesis orientativa; los enunciados oficiales y sus criterios se consultan en el anexo I del RD 279/2021 enlazado en el apartado 2.</p>
+<table>
+<thead>
+<tr>
+<th>RA</th>
+<th>Síntesis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RA1</td>
+<td>Integración, procesamiento y análisis de información.</td>
+</tr>
+<tr>
+<td>RA2</td>
+<td>Configuración de cuadros de mando con técnicas analíticas.</td>
+</tr>
+<tr>
+<td>RA3</td>
+<td>Gestión y almacenamiento de grandes conjuntos de datos.</td>
+</tr>
+<tr>
+<td>RA4</td>
+<td>Herramientas de visualización, análisis y presentación.</td>
+</tr>
+</tbody>
+</table>
+<p>Las letras de criterios utilizadas en las tablas siguientes mantienen la identificación oficial. Las actividades, evidencias y ponderaciones son propuestas del departamento para esta programación.</p>
+<h2 id="6-unidades-y-temporalizacion">6. Unidades y temporalización</h2>
+<table>
+<thead>
+<tr>
+<th>Unidad</th>
+<th style="text-align: right;">Horas</th>
+<th style="text-align: right;">Semanas efectivas</th>
+<th>Periodo secuencial</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UD1. Ingeniería de datos y diseño de soluciones</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">2</td>
+<td>1–2</td>
+</tr>
+<tr>
+<td>UD2. Almacenamiento NoSQL y sistemas distribuidos</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">2</td>
+<td>3–4</td>
+</tr>
+<tr>
+<td>UD3. Gestión de datos con MongoDB</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">5</td>
+<td>5–9</td>
+</tr>
+<tr>
+<td>UD4. Integración y procesamiento con NiFi</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">7</td>
+<td>10–16</td>
+</tr>
+<tr>
+<td>UD5. Búsqueda, análisis y visualización con Elastic Stack</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">6</td>
+<td>17–22</td>
+</tr>
+<tr>
+<td>UD6. Automatización de procesos con n8n</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">2</td>
+<td>23–24</td>
+</tr>
+<tr>
+<td>UD7. Inteligencia de negocio con Power BI</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">4</td>
+<td>25–28</td>
+</tr>
+<tr>
+<td>Integración, recuperación y defensa del proyecto</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">2</td>
+<td>29–30</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align: right;"><strong>90</strong></td>
+<td style="text-align: right;"><strong>30</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Se asignarán fechas reales al disponer del calendario. Las semanas son de docencia efectiva, excluidas vacaciones. Las comprobaciones y pruebas de cada unidad están incluidas en sus horas. Las seis horas finales no son el único tiempo de trabajo del proyecto: sus componentes se construyen durante todo el módulo. El turno de defensas se ajustará al tamaño del grupo combinando comprobación individual durante las prácticas y presentación final breve.</p>
+<h3 id="ud1-ingenieria-de-datos-y-diseno-de-soluciones-6-h">UD1. Ingeniería de datos y diseño de soluciones — 6 h</h3>
+<p><strong>Contenidos:</strong> ciclo de vida; OLTP y OLAP; lake y warehouse; lotes y eventos; fuentes y formatos; conjuntos y operaciones lógicas; introducción a complejidad; planificación, coste y calidad. Presentación de CRISP-DM y SEMMA, utilizando el primero como guía del proyecto.</p>
+<p><strong>Secuencia:</strong> 3 h de fundamentos y diagnóstico; 3 h de diseño de un caso y planificación.</p>
+<p><strong>Actividad E1:</strong> elaborar el documento inicial del proyecto con preguntas analíticas, fuentes, diagrama, prioridades y presupuesto de recursos. Resolver ejercicios de conjuntos, filtros booleanos y comparación razonada del crecimiento del trabajo de búsqueda.</p>
+<p><strong>Evaluación:</strong> rúbrica del diseño y prueba individual breve. Criterios de referencia: RA1.a/e/f/g y RA3.b/c.</p>
+<h3 id="ud2-almacenamiento-nosql-y-sistemas-distribuidos-6-h">UD2. Almacenamiento NoSQL y sistemas distribuidos — 6 h</h3>
+<p><strong>Contenidos:</strong> modelos documental, clave-valor, familias de columnas y grafos; replicación y particionado; consistencia y disponibilidad; fallos de comunicación; elección de arquitectura. Distinguir datos estructurados, semiestructurados y no estructurados: JSON no se clasificará automáticamente como no estructurado.</p>
+<p><strong>Secuencia:</strong> 3 h de modelos y clasificación; 3 h de casos distribuidos y selección de solución.</p>
+<p><strong>Actividad E2:</strong> analizar un catálogo con tablas, documentos JSON, textos libres e imágenes; justificar cómo almacenar y consultar cada tipo. Resolver un escenario de fallo de nodo y otro de partición de red.</p>
+<p><strong>Evaluación:</strong> informe comparativo y resolución individual de escenarios. Referencias: RA3.b/c y RA4.a/c/d.</p>
+<h3 id="ud3-gestion-de-datos-con-mongodb-15-h">UD3. Gestión de datos con MongoDB — 15 h</h3>
+<p><strong>Contenidos:</strong> despliegue persistente; usuarios; BSON y documentos; embebido y referencias; CRUD; agregaciones; validación; índices; análisis de ejecución; exportación y restauración.</p>
+<p><strong>Secuencia:</strong> 3 h de entorno y modelado; 3 h de operaciones; 3 h de agregaciones; 3 h de validación e índices; 3 h de recuperación y comprobación individual.</p>
+<p><strong>Actividad E3:</strong> crear una base documental, cargar datos, responder preguntas con agregaciones, rechazar entradas inválidas y comparar consultas antes y después de indexar. Formular una hipótesis, repetir mediciones y explicar límites. Restaurar una copia en una instancia o base separada de laboratorio.</p>
+<p><strong>Evaluación:</strong> laboratorio reproducible, informe experimental y tarea individual. Referencias: RA1.b/d y RA3.a/d/e.</p>
+<h3 id="ud4-integracion-y-procesamiento-con-nifi-21-h">UD4. Integración y procesamiento con NiFi — 21 h</h3>
+<p><strong>Contenidos:</strong> FlowFiles, atributos, contenido, procesadores, relaciones, colas, back pressure, Controller Services y parámetros; JDBC; APIs y ficheros; Records; normalización; calidad; duplicados; errores y trazabilidad.</p>
+<p><strong>Secuencia en siete bloques de 3 h:</strong> entorno y primer flujo; atributos y enrutamiento; Records y esquemas; extracción SQL; API y MongoDB; errores y calidad; integración y prueba individual.</p>
+<p><strong>Actividad E4:</strong> integrar una fuente SQL, un fichero de referencia y una API. Conservar datos de entrada, normalizar fechas y tipos, separar rechazos, definir una clave de deduplicación y verificar un reintento tras un fallo. Medir registros recibidos, aceptados, rechazados y duplicados.</p>
+<p><strong>Evaluación:</strong> flujo exportado, parámetros documentados sin secretos, evidencias de prueba y explicación individual. Referencias: RA1.b/c/d/f/g, RA3.a/d y RA4.e.</p>
+<p>Los apartados extensos de Controller Services del material anterior funcionarán como consulta. Se priorizará el itinerario práctico común sobre la lectura exhaustiva de todos los ejemplos.</p>
+<h3 id="ud5-elastic-stack-18-h">UD5. Elastic Stack — 18 h</h3>
+<p><strong>Contenidos:</strong> índices, mappings, analizadores, consultas, agregaciones, carga masiva, enriquecimiento, Kibana, shards y réplicas; disponibilidad y rendimiento.</p>
+<p><strong>Secuencia:</strong> 3 h de despliegue e índices; 3 h de consultas; 3 h de carga y enriquecimiento; 3 h de dashboard; 3 h de clúster; 3 h de benchmark y validación.</p>
+<p><strong>Actividad E5:</strong> construir un índice y un dashboard con preguntas explícitas; desplegar un clúster de tres nodos con configuración base proporcionada; observar una caída controlada y comparar configuraciones de shards o réplicas con un dataset histórico. Registrar condiciones de prueba y evitar atribuir diferencias pequeñas a una única causa sin evidencia.</p>
+<p><strong>Evaluación:</strong> dashboard, pruebas del clúster e informe de resultados. Referencias: RA1.g, RA2.b/c/e, RA3.d/e y RA4.a/c/d/f. Para RA4.a se incorporará texto libre, además de los documentos semiestructurados.</p>
+<h3 id="ud6-automatizacion-con-n8n-6-h">UD6. Automatización con n8n — 6 h</h3>
+<p><strong>Contenidos:</strong> flujos, JSON, expresiones, credenciales, HTTP, condiciones, webhooks, historial y gestión de fallos.</p>
+<p><strong>Secuencia:</strong> 3 h para consultar y resumir indicadores; 3 h para automatizar el registro y tratamiento de una incidencia.</p>
+<p><strong>Actividad E6:</strong> combinar una consulta de indicadores con un catálogo de localidades, detectar ausencia de datos y registrar una incidencia sin duplicarla en cada ejecución. Incorporar aviso a un destino de pruebas. Verificar ejecución válida, error de servicio y evento repetido.</p>
+<p><strong>Evaluación:</strong> flujo exportado sin secretos, pruebas y explicación. Referencias: RA1.c/f y RA4.e. La unidad automatiza procesos del proyecto; no sustituye su ingesta principal ni desarrolla Kafka.</p>
+<h3 id="ud7-power-bi-12-h-cuatro-semanas">UD7. Power BI — 12 h, cuatro semanas</h3>
+<p><strong>Contenidos:</strong> Power Query, modelo en estrella, relaciones, tabla de fechas, medidas DAX, contexto de filtro, visualizaciones, indicadores y predicciones.</p>
+<p><strong>Secuencia:</strong> 3 h de preparación; 3 h de modelado; 3 h de medidas; 3 h de informe e interpretación predictiva. Se proporcionarán datos ya preparados y un servicio o script predictivo validado para que el alcance sea viable.</p>
+<p><strong>Actividad E7:</strong> construir un informe que responda preguntas del proyecto, comprobar cifras contra el origen y aplicar un modelo predictivo preparado con el profesorado de aprendizaje automático. El alumno aportará nuevas entradas, obtendrá predicciones, comparará con observaciones reservadas y explicará error y utilidad. Importar una columna ajena de predicciones, sin aplicación ni contraste, no será evidencia suficiente.</p>
+<p><strong>Evaluación:</strong> archivo PBIX, ficha de indicadores, prueba de cálculo y explicación individual. Referencias: RA2.a/b/c/d/e y RA4.b/f. Se incluirá una comparación breve de herramientas y librerías de representación. El núcleo se realizará en Desktop; cualquier publicación en servicios externos se condicionará a las cuentas y licencias disponibles.</p>
+<h2 id="7-proyecto-transversal-y-coordinacion">7. Proyecto transversal y coordinación</h2>
+<p><strong>Título propuesto:</strong> Plataforma de datos meteorológicos y análisis territorial.</p>
+<p>Se combinará un histórico suficientemente voluminoso, una fuente API y un catálogo de localidades. NiFi gestionará ingesta y transformación; MongoDB conservará documentos; Elasticsearch facilitará búsqueda y análisis; n8n automatizará incidencias; Power BI presentará indicadores y resultados predictivos.</p>
+<p>Las funciones y copias de datos se justificarán. Para Power BI se preparará una salida tabular mediante ficheros o tablas SQL de laboratorio. No se presupone conexión directa gratuita entre todos los productos. La actualización del conjunto analítico se comprobará con una nueva carga.</p>
+<p><strong>Hitos:</strong> E1 diseño; E2 arquitectura; E3 almacenamiento; E4 integración; E5 búsqueda y disponibilidad; E6 automatización; E7 explotación; E8 integración y defensa.</p>
+<p>El módulo que imparte Spark y Kafka recibirá, si procede, los datos preparados. No se volverá a impartir su despliegue aquí. La práctica predictiva se coordinará con aprendizaje automático. Si esa coordinación no está disponible a tiempo, el docente de este módulo proporcionará un modelo preentrenado y una guía de aplicación y validación. El criterio predictivo seguirá evaluándose en Sistemas de Big Data.</p>
+<p>El caso meteorológico podrá reemplazarse por otro con equivalente cobertura. No se usarán los datos meteorológicos de una API como prueba automática de volumen masivo; para rendimiento habrá un histórico o un dataset de carga documentado.</p>
+<h2 id="8-matriz-de-cobertura-de-criterios">8. Matriz de cobertura de criterios</h2>
+<p>Cada criterio dispone de una evidencia principal para evitar contabilizar la misma tarea varias veces sin distinguir desempeños. Las evidencias de apoyo sirven para refuerzo, contraste o recuperación.</p>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Evidencia principal</th>
+<th>Apoyo / comprobación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RA1.a</td>
+<td>E1: ejercicios de conjuntos, lógica y complejidad</td>
+<td>E3: interpretación de consultas</td>
+</tr>
+<tr>
+<td>RA1.b</td>
+<td>E4: extracción y agregación automatizada</td>
+<td>E3: consultas</td>
+</tr>
+<tr>
+<td>RA1.c</td>
+<td>E4: combinación de fuentes</td>
+<td>E6: combinación de indicadores y catálogo</td>
+</tr>
+<tr>
+<td>RA1.d</td>
+<td>E3: dataset relacionado y consultas</td>
+<td>E4: enriquecimiento</td>
+</tr>
+<tr>
+<td>RA1.e</td>
+<td>E1: plan de trabajo con hitos</td>
+<td>E8: contraste plan/ejecución</td>
+</tr>
+<tr>
+<td>RA1.f</td>
+<td>E4: integración justificada</td>
+<td>E1 y E6</td>
+</tr>
+<tr>
+<td>RA1.g</td>
+<td>E5: coste, calidad y benchmark</td>
+<td>E1 y E4</td>
+</tr>
+<tr>
+<td>RA2.a</td>
+<td>E7: comparación de herramientas y librerías</td>
+<td>E5: comparación con Kibana</td>
+</tr>
+<tr>
+<td>RA2.b</td>
+<td>E7: preguntas, datos e indicadores</td>
+<td>E5</td>
+</tr>
+<tr>
+<td>RA2.c</td>
+<td>E7: cuadro de mando funcional</td>
+<td>E5</td>
+</tr>
+<tr>
+<td>RA2.d</td>
+<td>E7: aplicación y contraste predictivo</td>
+<td>E8: defensa</td>
+</tr>
+<tr>
+<td>RA2.e</td>
+<td>E7: utilidad y límites para decidir</td>
+<td>E8</td>
+</tr>
+<tr>
+<td>RA3.a</td>
+<td>E4: extracción y persistencia</td>
+<td>E3</td>
+</tr>
+<tr>
+<td>RA3.b</td>
+<td>E2: selección vinculada al valor de los datos</td>
+<td>E1</td>
+</tr>
+<tr>
+<td>RA3.c</td>
+<td>E2: necesidades de variedad y escala</td>
+<td>E5</td>
+</tr>
+<tr>
+<td>RA3.d</td>
+<td>E3: permisos, validación y restauración</td>
+<td>E4 y E5: procesamiento y escala</td>
+</tr>
+<tr>
+<td>RA3.e</td>
+<td>E5: experimento con hipótesis y mediciones en equipo</td>
+<td>E3 y defensa individual</td>
+</tr>
+<tr>
+<td>RA4.a</td>
+<td>E2: análisis de escenarios y datos no estructurados</td>
+<td>E5: texto libre</td>
+</tr>
+<tr>
+<td>RA4.b</td>
+<td>E7: solución BI aplicada al caso</td>
+<td>E8</td>
+</tr>
+<tr>
+<td>RA4.c</td>
+<td>E5: prueba de distribución y redundancia</td>
+<td>E2</td>
+</tr>
+<tr>
+<td>RA4.d</td>
+<td>E2: comparación razonada de entornos</td>
+<td>E5: contraste práctico</td>
+</tr>
+<tr>
+<td>RA4.e</td>
+<td>E6: transformación automática comprobada</td>
+<td>E4</td>
+</tr>
+<tr>
+<td>RA4.f</td>
+<td>E7: elección y justificación visual</td>
+<td>E5</td>
+</tr>
+</tbody>
+</table>
+<h2 id="9-metodologia">9. Metodología</h2>
+<p>Se alternarán explicaciones breves, demostración, práctica guiada y reto individual. Cada laboratorio especificará objetivo, arquitectura, requisitos, pasos esenciales, pruebas de aceptación y preguntas de interpretación. El alumnado documentará errores relevantes y la razón de la solución.</p>
+<p>Como distribución orientativa de una sesión de tres horas: 30 minutos de explicación y demostración, 105 minutos de práctica, 30 minutos de comprobación y 15 minutos de registro y cierre. Se adaptará a la distribución real del horario.</p>
+<p>Se trabajará individualmente en consultas, medidas y comprobaciones; por parejas en instalaciones; y en pequeños equipos para el clúster. Los roles rotarán y habrá verificación individual. El proyecto compartido no implica una calificación idéntica para todos.</p>
+<p>Se incluirán fallos intencionados seguros: credencial incorrecta, dato inválido, caída de un servicio de laboratorio, duplicado y cambio de esquema. Se conservarán datos iniciales y procedimientos de recuperación.</p>
+<h2 id="10-evaluacion-y-calificacion-propuestas">10. Evaluación y calificación propuestas</h2>
+<h3 id="101-evaluacion-inicial-y-seguimiento">10.1 Evaluación inicial y seguimiento</h3>
+<p>La prueba inicial será diagnóstica y no calificable. La evaluación continua utilizará prácticas, ejercicios individuales, pruebas breves, rúbricas, listas de comprobación y defensa de decisiones. La asistencia y la actitud no se incorporarán como porcentajes ajenos a los criterios de aprendizaje.</p>
+<h3 id="102-ponderacion-por-ra">10.2 Ponderación por RA</h3>
+<table>
+<thead>
+<tr>
+<th>RA</th>
+<th style="text-align: right;">Peso propuesto</th>
+<th style="text-align: right;">Criterios</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RA1</td>
+<td style="text-align: right;">30 %</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr>
+<td>RA2</td>
+<td style="text-align: right;">25 %</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr>
+<td>RA3</td>
+<td style="text-align: right;">25 %</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr>
+<td>RA4</td>
+<td style="text-align: right;">20 %</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align: right;"><strong>100 %</strong></td>
+<td style="text-align: right;"><strong>23</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Se propone igual peso para los criterios dentro de cada RA. Cada criterio se calificará de 0 a 10 mediante los indicadores publicados antes de la actividad. La evidencia principal indicada en la matriz fija su evaluación ordinaria; los apoyos sirven para comprobar autoría y competencia. Si se necesita combinar varios instrumentos para un criterio, la ficha de actividad explicitará los pesos antes de realizarlo.</p>
+<p><strong>Fórmulas:</strong> nota de RA = media de sus criterios; nota global = 0,30 × RA1 + 0,25 × RA2 + 0,25 × RA3 + 0,20 × RA4.</p>
+<p><strong>Regla de superación propuesta, pendiente de validación departamental y normativa:</strong> obtener al menos 5 en cada RA y en la media global. No se impone un mínimo de 5 en cada criterio individual. No se redondeará una media inferior a 5 para convertirla en superación; el formato de calificación oficial y su redondeo se ajustarán a las instrucciones aplicables.</p>
+<p>Esta propuesta no atribuye a la normativa los porcentajes elegidos. Las evaluaciones parciales informarán de los criterios ya evaluados y de los aún pendientes; lo no impartido no contará como cero. La ponderación provisional se calculará únicamente sobre criterios evaluados y se identificará como información parcial.</p>
+<h3 id="103-descriptores-comunes-de-rubrica">10.3 Descriptores comunes de rúbrica</h3>
+<table>
+<thead>
+<tr>
+<th>Nivel orientativo</th>
+<th>Desempeño</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–4</td>
+<td>No aporta evidencia suficiente o no consigue la operación requerida.</td>
+</tr>
+<tr>
+<td>5–6</td>
+<td>Resuelve lo esencial y explica los pasos básicos con resultados comprobables.</td>
+</tr>
+<tr>
+<td>7–8</td>
+<td>Resuelve con autonomía, valida errores y justifica decisiones.</td>
+</tr>
+<tr>
+<td>9–10</td>
+<td>Contrasta alternativas, documenta límites y obtiene resultados reproducibles.</td>
+</tr>
+</tbody>
+</table>
+<p>Cada actividad concretará estos descriptores para el criterio evaluado. La estética de un informe no compensará cálculos incorrectos; un servicio arrancado no demostrará por sí solo integración, disponibilidad o seguridad.</p>
+<h3 id="104-recuperacion-y-ausencia-de-evidencias">10.4 Recuperación y ausencia de evidencias</h3>
+<p>Se facilitará un plan individual con criterios pendientes, tareas equivalentes y fecha. La nueva evidencia válida sustituirá la calificación anterior del criterio recuperado, sin limitar automáticamente la nota máxima. Se conservarán los logros acreditados.</p>
+<p>Cuando falten evidencias individuales, se solicitará una tarea práctica o defensa adicional. La aplicación de pérdida de evaluación continua, convocatorias, reclamaciones y situaciones de ausencia seguirá las normas del centro y las instrucciones vigentes, que deben incorporarse antes de la aprobación.</p>
+<p>La evaluación final de recuperación podrá combinar laboratorio integrado, consultas, tratamiento de datos e informe. Evaluará los criterios pendientes y no exigirá repetir indiscriminadamente todas las unidades.</p>
+<h2 id="11-inclusion-refuerzo-y-ampliacion">11. Inclusión, refuerzo y ampliación</h2>
+<p>Se facilitarán instrucciones escritas y demostraciones, esquemas de arquitectura, ejemplos de entrada y salida, glosario, plantillas de documentación y listas de comprobación. Se ofrecerán datos locales de respaldo si falla una API externa.</p>
+<p>El refuerzo se centrará en SQL, JSON, lógica de filtros y lectura de errores. Las ampliaciones podrán abordar parámetros avanzados, optimización y automatizaciones adicionales sin alterar los mínimos comunes. Los ajustes de acceso y de tiempos responderán a las necesidades acreditadas y a los procedimientos del centro, manteniendo los resultados profesionales exigidos.</p>
+<h2 id="12-recursos-y-organizacion-tecnica">12. Recursos y organización técnica</h2>
+<ul>
+<li>Materiales existentes en Markdown y aula virtual para entregas y seguimiento.</li>
+<li>Git para versiones de configuraciones, scripts y documentación; exclusión de secretos y datos personales.</li>
+<li>Servicios de laboratorio aislados, volúmenes persistentes y recursos limitados.</li>
+<li>MongoDB y herramientas de consulta; NiFi con driver JDBC; PostgreSQL de apoyo; Elasticsearch y Kibana; n8n; Power BI Desktop.</li>
+<li>Dataset histórico local, catálogo de referencia y respuestas de API guardadas para reproducibilidad.</li>
+<li>Rúbricas, plantillas de benchmark y registro por criterios.</li>
+</ul>
+<p>Antes del inicio se validará una combinación fija de versiones. Se unificarán los ejemplos de Elasticsearch que actualmente mezclan versiones. Las imágenes o paquetes no se actualizarán automáticamente durante una evaluación. Se comprobarán conectividad, permisos y compatibilidad del hardware antes de entregar las instrucciones.</p>
+<h2 id="13-seguridad-proteccion-de-datos-y-uso-de-ia">13. Seguridad, protección de datos y uso de IA</h2>
+<p>Se utilizarán datos abiertos o sintéticos y destinos de notificación de pruebas. No se publicarán servicios de laboratorio sin configurar autenticación y acceso adecuado. Las credenciales estarán separadas de los flujos y repositorios exportados.</p>
+<p>El uso de asistentes de IA podrá apoyar documentación y diagnóstico si se declara. Cada estudiante deberá explicar, modificar y comprobar su solución. No se introducirán credenciales, información personal ni datos de terceros en herramientas externas. Ante dudas de autoría se pedirá una comprobación individual; cualquier consecuencia administrativa seguirá las normas del centro.</p>
+<p>Se promoverá consumo responsable de recursos: detener servicios no utilizados, dimensionar datos de carga y evitar duplicaciones innecesarias.</p>
+<h2 id="14-coordinacion-seguimiento-y-revision">14. Coordinación, seguimiento y revisión</h2>
+<p>Al comienzo se coordinarán fuentes de datos, calendario de Spark/Kafka y disponibilidad del modelo predictivo. Tras cada bloque se revisarán tiempo real empleado, dificultades, criterios sin evidencia y cambios necesarios. Al finalizar se registrarán propuestas para el curso siguiente.</p>
+<p>Indicadores internos: porcentaje de prácticas reproducibles, criterios con evidencia individual, incidencias recurrentes, diferencia entre horas previstas y reales y capacidad de explicar resultados. Se recogerá una encuesta breve del alumnado, sin convertirla en calificación.</p>
+<p>La formación en empresa, si procede para esta oferta, requerirá su plan específico y asignación de RA/criterios; este documento no inventa horas, empresas ni resultados externalizados.</p>
+<h2 id="15-datos-pendientes-antes-de-aprobar-la-programacion">15. Datos pendientes antes de aprobar la programación</h2>
+<ol>
+<li>Centro, profesorado, grupo, número de estudiantes y modalidad autorizada.</li>
+<li>Norma e instrucciones autonómicas aplicables al curso, evaluación y formación en empresa.</li>
+<li>Horas autorizadas y calendario real; ajuste de las 30 semanas previstas.</li>
+<li>Recursos disponibles, cuentas, licencias y versiones validadas.</li>
+<li>Aprobación departamental de ponderaciones, superación y recuperación.</li>
+<li>Coordinación efectiva de la práctica predictiva y calendario de evaluaciones.</li>
+</ol>
+<p>La propuesta mantiene Power BI en cuatro semanas, n8n en dos y Spark/Kafka en el otro módulo. La matriz cubre los 23 criterios mediante actividades previstas; su logro deberá comprobarse con las evidencias del alumnado.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.code.copy", "content.code.select", "content.code.annotate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
