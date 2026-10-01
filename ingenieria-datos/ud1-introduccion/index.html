@@ -1,0 +1,2704 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://alapvi.github.io/ingenieria-datos/ud1-introduccion/">
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="analitica/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../images/logo_peq.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Visión general - Sistemas de BigData</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduccion-bussines-intelligence-bi" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Sistemas de BigData" class="md-header__button md-logo" aria-label="Sistemas de BigData" data-md-component="logo">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sistemas de BigData
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Visión general
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sistemas de BigData" class="md-nav__button md-logo" aria-label="Sistemas de BigData" data-md-component="logo">
+      
+  <img src="../../images/logo.png" alt="logo">
+
+    </a>
+    Sistemas de BigData
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../programacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programación del módulo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción a BI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Introducción a BI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visión general
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visión general
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sistema-operacional-oltp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sistema operacional (OLTP)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sistema-analitico-olap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sistema analítico (OLAP)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sistema-nosql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sistema NoSQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#oltp-vs-olap-vs-nosql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OLTP vs OLAP vs NoSQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#componentes-de-un-sistema-bi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Componentes de un sistema BI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Componentes de un sistema BI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sistema-etl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sistema ETL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#presentacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Presentación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modelo-logico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelo lógico
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modelo-multidimensional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelo multidimensional
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#business-intelligence-bi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Business Intelligence (BI)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caracteristicas-de-un-en-entorno-big-data-frente-entornos-bi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Características de un en entorno Big Data frente entornos BI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#terminologia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Terminología
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#herramientas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Herramientas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Herramientas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#herramientas-de-bi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧠 Herramientas de BI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#herramientas-de-etl-extract-transform-load" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔄 Herramientas de ETL (Extract, Transform, Load)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#herramientas-de-busqueda-y-analitica-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔍 Herramientas de búsqueda y analítica de datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recomendaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📌 Recomendaciones
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="analitica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analítica de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="etl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción a ETL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tipos-de-datos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tipos de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de datos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos de datos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tipos-entornos-arquitecturas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tipos de entornos y arquitectura de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modelos-multidimensionales/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelos multidimensionales
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ingenieria-datos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ingeniería de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bigdata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Big Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Almacenamiento y bases de datos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Almacenamiento y bases de datos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nosql/nosql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NoSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nosql/moddatos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelos de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nosql/consistencia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consistencia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MongoDB
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MongoDB
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/intromongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción a MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/mongodb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/modelado/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Diseño de modelado de BD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/instalacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/basicsmongo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primeros pasos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/mongodbcrud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operaciones con datos CRUD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mongodb/mongodbdatos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consulta de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pipelines e integración
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Pipelines e integración
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NiFi
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    NiFi
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nifi/introduccion_nifi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nifi/arquitectura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitectura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nifi/interfaz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interfaz gráfica de NiFi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nifi/instalacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalación y despliegue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nifi/primerflujo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primer flujo de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nifi/flowfiles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowfiles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nifi/processors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Processors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nifi/connections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Connections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1_9" id="__nav_6_1_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Controllers
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_6_1_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Controllers
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nifi/controllers/01-introduccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nifi/controllers/02-configuracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración de controladores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nifi/controllers/03-principales-controller-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Servicios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nifi/controllers/04-arquitecturas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitecturas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nifi/casos_de_uso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Casos de uso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exploración y dashboards
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Exploración y dashboards
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elastic Stack
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Elastic Stack
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../elastic/elastic_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../elastic/elastic_ops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../elastic/kibana/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kibana
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../elastic/caso_uso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso de uso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../elastic/dashboards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboards Covid
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../elastic/ampliacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ampliación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sistema-operacional-oltp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sistema operacional (OLTP)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sistema-analitico-olap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sistema analítico (OLAP)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sistema-nosql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sistema NoSQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#oltp-vs-olap-vs-nosql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OLTP vs OLAP vs NoSQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#componentes-de-un-sistema-bi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Componentes de un sistema BI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Componentes de un sistema BI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sistema-etl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sistema ETL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#presentacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Presentación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modelo-logico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelo lógico
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modelo-multidimensional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelo multidimensional
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#business-intelligence-bi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Business Intelligence (BI)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caracteristicas-de-un-en-entorno-big-data-frente-entornos-bi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Características de un en entorno Big Data frente entornos BI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#terminologia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Terminología
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#herramientas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Herramientas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Herramientas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#herramientas-de-bi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧠 Herramientas de BI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#herramientas-de-etl-extract-transform-load" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔄 Herramientas de ETL (Extract, Transform, Load)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#herramientas-de-busqueda-y-analitica-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔍 Herramientas de búsqueda y analítica de datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recomendaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📌 Recomendaciones
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="introduccion-bussines-intelligence-bi">Introducción Bussines Intelligence (BI)</h1>
+<p>Para entender el mundo del BI, hay que llegar a conocer cuáles son los sistemas de bases de datos más importantes
+y sus características. Por eso, vamos a revisar los sistemas operacionales, transaccionales y noSQL.</p>
+<h2 id="sistema-operacional-oltp">Sistema operacional (OLTP)</h2>
+<div align="center">
+<img src="images/introbi-11.png"  alt="reporting" 
+width="80%" />
+</div>
+
+<p>Generalmente, la información que se quiere investigar sobre un cierto dominio de la organización se encuentra en bases de datos y otras fuentes muy diversas, tanto internas como externas.</p>
+<ul>
+<li>
+<p>[x] Muchas de estas fuentes son las que se utilizan para el trabajo transaccional diario (conocido como OLTP, On-Line Transactional Processing).</p>
+</li>
+<li>
+<p>[x] Sobre estas mismas bases de datos de trabajo ya se puede extraer conocimiento (visión tradicional).</p>
+</li>
+</ul>
+<p>Problemas para realizar el análisis en este sistema (OLTP):</p>
+<ul>
+<li>
+<p>La información se encuentra en varias y heterogéneas bases de datos y, en consecuencia, <strong>no se puede explotar en conjunto</strong>.</p>
+</li>
+<li>
+<p>Solo es posible el análisis de los datos actuales, <strong>no suele mantener valores históricos</strong> para analizar históricos y evolutivos.</p>
+</li>
+<li>
+<p>Se <strong>dificulta</strong> el trabajo transaccional diario de los sistemas de información originales, no permite el análisis on-line.</p>
+</li>
+<li>
+<p>La base de datos <strong>está diseñada para el trabajo transaccional</strong>, no para el análisis de los datos.</p>
+</li>
+</ul>
+<h2 id="sistema-analitico-olap">Sistema analítico (OLAP)</h2>
+<div align="center">
+<img src="images/introbi-1.png"  alt="reporting" 
+width="70%" />
+</div>
+
+<p>Disponer de una base de datos que permita <strong>extraer conocimiento de la información histórica</strong> almacenada en la organización.</p>
+<p>Objetivos:</p>
+<ul>
+<li>
+<p>[x] Análisis de la organización</p>
+</li>
+<li>
+<p>[x] Análisis históricos</p>
+</li>
+<li>
+<p>[x] Diseño de planes estratégicos</p>
+</li>
+</ul>
+<p>Algunas características:</p>
+<ul>
+<li>
+<p><strong>Almacén de datos para el análisis</strong> y toma de decisiones.</p>
+</li>
+<li>
+<p><strong>Permite realizar análisis on-line</strong>, por lo que aumenta el poder de toma de decisiones por parte de los responsables en cuestión</p>
+</li>
+<li>
+<p><strong>Unifica</strong> información dispersa de diversos sistemas operacionales</p>
+</li>
+<li>
+<p>Contiene la <strong>información relevante</strong> de la organización</p>
+</li>
+<li>
+<p>Diseños <strong>orientados a conceptos de negocio</strong> manejados por el usuario</p>
+</li>
+<li>
+<p>Sistema <strong>OLAP</strong> (On-Line Analitical Procesing)</p>
+</li>
+</ul>
+<h2 id="sistema-nosql">Sistema NoSQL</h2>
+<p>Se refiere a un conjunto de sistemas de gestión de bases de datos que <strong>no siguen estrictamente el modelo relacional</strong> (tablas con filas y columnas). Fueron creadas para manejar grandes volúmenes de datos, de forma rápida, flexible y escalable, algo que a veces las bases de datos SQL tradicionales no logran con la misma eficiencia.</p>
+<p>Algunas características:</p>
+<ul>
+<li>
+<p><strong>No usan tablas fijas</strong> como en SQL (pueden ser documentos, grafos, pares clave-valor, etc.).</p>
+</li>
+<li>
+<p><strong>Escalabilidad horizontal</strong> → se pueden repartir los datos en muchos servidores (clústeres) fácilmente.</p>
+</li>
+<li>
+<p><strong>Alta velocidad de lectura y escritura</strong>, útil para apps en tiempo real (redes sociales, e-commerce, videojuegos online).</p>
+</li>
+<li>
+<p><strong>Estructura flexible</strong> → permiten trabajar con datos semi-estructurados (JSON, XML) o sin esquema definido.</p>
+</li>
+<li>
+<p>Consistencia eventual → en muchos casos <strong>priorizan la disponibilidad y la velocidad sobre la consistencia</strong> estricta (a diferencia de SQL, que es muy rígido con transacciones).</p>
+</li>
+</ul>
+<h2 id="oltp-vs-olap-vs-nosql">OLTP vs OLAP vs NoSQL</h2>
+<div align="center">
+<img src="images/introbi-8.png"  alt="reporting" 
+width="80%" />
+</div>
+
+<table>
+<thead>
+<tr>
+<th><strong>Característica</strong></th>
+<th><strong>Operacional (OLTP)</strong></th>
+<th><strong>Datawarehouse (OLAP)</strong></th>
+<th><strong>NoSQL</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tipo de datos</strong></td>
+<td>Almacén de datos actuales</td>
+<td>Almacén de datos históricos</td>
+<td>Datos flexibles: documentos, clave-valor, grafos, columnas distribuidas</td>
+</tr>
+<tr>
+<td><strong>Nivel de detalle</strong></td>
+<td>Almacena datos al detalle</td>
+<td>Almacena datos al detalle y agregados a distintos niveles</td>
+<td>Puede almacenar datos al detalle o agregados, sin esquema fijo</td>
+</tr>
+<tr>
+<td><strong>Tamaño de la base de datos</strong></td>
+<td>Bases de datos medianas</td>
+<td>Bases de datos grandes</td>
+<td>Bases de datos muy grandes y distribuidas</td>
+</tr>
+<tr>
+<td><strong>Naturaleza de los datos</strong></td>
+<td>Los datos son actuales</td>
+<td>Los datos son estáticos</td>
+<td>Los datos son semi-estructurados, dinámicos o no estructurados</td>
+</tr>
+<tr>
+<td><strong>Tipo de procesos</strong></td>
+<td>Los procesos son repetitivos</td>
+<td>Los procesos no son previsibles</td>
+<td>Procesos distribuidos, consultas flexibles y adaptables</td>
+</tr>
+<tr>
+<td><strong>Tiempo de respuesta</strong></td>
+<td>Tiempo de respuesta pequeño</td>
+<td>Tiempo de respuesta variable</td>
+<td>Alta velocidad de lectura/escritura, escalable horizontalmente</td>
+</tr>
+<tr>
+<td><strong>Tipo de decisiones que soporta</strong></td>
+<td>Soporta decisiones diarias</td>
+<td>Soporta decisiones estratégicas</td>
+<td>Soporta decisiones operativas y en tiempo real (apps web, IoT, Big Data)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="componentes-de-un-sistema-bi">Componentes de un sistema BI</h2>
+<div align="center">
+<img src="images/introbi-2.png" alt="componentesBI" 
+width="80%" />
+</div>
+
+<hr />
+<h3 id="sistema-etl">Sistema ETL</h3>
+<p>En un sistema ETL, las fases esenciales son las siguientes:</p>
+<ul>
+<li>
+<p><strong>Extracción</strong>: elaboración de interfaces entre sistemas operacionales orígenes de datos</p>
+</li>
+<li>
+<p><strong>Transformación</strong>: validación de los datos extraídos, transformándolos al formato deseado</p>
+</li>
+<li>
+<p><strong>Carga</strong>: cargar físicamente los datos extraídos de los sistemas operacionales y ya transformados en el modelo de datos del Datawarehouse</p>
+</li>
+</ul>
+<hr />
+<h3 id="presentacion">Presentación</h3>
+<div align="center">
+<img src="images/introbi-3.png"  alt="reporting" 
+width="80%" />
+</div>
+
+<p>En la capa de presentación de los datos, puede tener diferentes enfoques.</p>
+<p><strong>DSS (Decisión Support System)</strong>:
+Informes dinámicos, normalmente para representar un indicador o un grupo de indicadores relacionados funcionalmente en tablas de datos.
+Además de estos informes predefinidos, <strong>los usuarios con capacidades de análisis</strong> podrán crear sus propios informes y obtener respuestas en demandas de información puntuales.</p>
+<p><strong>EIS (Executive Information System)</strong>:
+Informes estáticos, predefinidos, <strong>fáciles de manejar y orientados a los directores</strong>. Son informes muy visuales (normalmente se utilizan exclusivamente gráficos) y con un nivel alto de agregación de la información. Deben estar orientados a la gestión estratégica.</p>
+<p><strong>BSC (Balance Scored Card)</strong>:
+Informes estáticos para la gestión estratégica de la empresa. <strong>Permite medir el rendimiento de áreas o personas</strong> mediante el análisis de diversos de un conjunto de indicadores con valores objetivo y pesos.</p>
+<h2 id="modelo-logico">Modelo lógico</h2>
+<p>Existe un modelo lógico a definir que representa el análisis de los datos y que no tiene el por qué ser igual que el modelo físico de la base de datos.</p>
+<p><strong>Ejemplo</strong></p>
+<p><strong>Organización</strong>: Cadena de supermercados.</p>
+<p><strong>Actividad objeto de análisis</strong>: ventas de productos.
+Información registrada sobre una venta:
+“del producto“X” se han vendido en el almacén“nro.1” el día 17/2/2008, 5 unidadespor un importede 100 euros.”</p>
+<div align="center">
+<img src="images/introbi-4.png"  alt="reporting" 
+width="80%" />
+</div>
+
+<hr />
+<div align="center">
+<img src="images/introbi-5.png"  alt="reporting" 
+width="80%" />
+</div>
+
+<h2 id="modelo-multidimensional">Modelo multidimensional</h2>
+<p>En un esquema multidimensional se representa una actividad que es objeto de análisis (hecho) y las dimensiones que caracterizan la actividad (dimensiones).</p>
+<ul>
+<li>
+<p>[x] La información relevante sobre el hecho (actividad) se representa por un conjunto de indicadores.</p>
+</li>
+<li>
+<p>[x] La información descriptiva de cada dimensión se representa por un conjunto de atributos (atributos de dimensión).</p>
+</li>
+</ul>
+<div align="center">
+<img src="images/introbi-6.png"  alt="reporting" 
+width="80%" />
+</div>
+
+<h2 id="business-intelligence-bi">Business Intelligence (BI)</h2>
+<div align="center">
+<img src="images/introbi-7.png"  alt="reporting" 
+width="80%" />
+</div>
+
+<p>Business Intelligence suele definirse como <strong>la transformación de los datos de la compañía en conocimiento para obtener una ventaja competitiva</strong>.
+Desde un punto de vista más pragmático, y asociándolo directamente a las tecnologías de la información, podemos definir Business Intelligence como:</p>
+<blockquote>
+<p><strong>El conjunto de metodologías, aplicaciones y tecnologías que permiten reunir, depurar y transformar datos de los sistemas transaccionales e información desestructurada (interna y externa a la compañía) en información estructurada, para su explotación directa (reporting, análisis OLAP...) o para su análisis y conversión en conocimiento soporte a la toma de decisiones sobre el negocio.</strong></p>
+</blockquote>
+<h2 id="caracteristicas-de-un-en-entorno-big-data-frente-entornos-bi">Características de un en entorno Big Data frente entornos BI</h2>
+<p>Aunque el proceso ETL se puede realizar con distintas herramientas, en entornos de <strong>Big Data</strong> se requieren capacidades especiales para manejar la complejidad y volumen de datos:</p>
+<ul>
+<li><strong>Flexibilidad en los formatos</strong>: debe poder procesar datos estructurados, semiestructurados y no estructurados.</li>
+<li><strong>Escalabilidad y tolerancia a fallos</strong>: el sistema debe crecer según la demanda y continuar funcionando, aunque haya errores.</li>
+<li><strong>Conectores para múltiples fuentes de datos</strong>: integración con diferentes sistemas y tecnologías.</li>
+</ul>
+<hr />
+<h2 id="terminologia">Terminología</h2>
+<table>
+<thead>
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>Descripción</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hecho</strong></td>
+<td>Un hecho es un elemento de información del negocio, es decir, algo que se puede medir.</td>
+</tr>
+<tr>
+<td><strong>Indicador</strong></td>
+<td>Fórmula matemática aplicada a un conjunto de hechos.</td>
+</tr>
+<tr>
+<td><strong>Dimensión / Eje de análisis</strong></td>
+<td>Aspecto o perspectiva mediante la cual se puede acceder y analizar los hechos.</td>
+</tr>
+<tr>
+<td><strong>Atributo</strong></td>
+<td>Característica específica de una dimensión.</td>
+</tr>
+<tr>
+<td><strong>Jerarquía</strong></td>
+<td>Relación padre/hijo utilizada para agrupar los atributos de una dimensión.</td>
+</tr>
+<tr>
+<td><strong>Agregación</strong></td>
+<td>Método por el cual los datos son agrupados para crear una tabla de hechos específica.</td>
+</tr>
+<tr>
+<td><strong>Sumarización</strong></td>
+<td>Método por el cual los datos se cambian a un nivel diferente de granularidad.</td>
+</tr>
+<tr>
+<td><strong>Desnormalización</strong></td>
+<td>Proceso de introducir redundancias en la información de las tablas de la base de datos para mejorar el rendimiento de la aplicación.</td>
+</tr>
+<tr>
+<td><strong>Datamart</strong></td>
+<td>Subconjunto departamental de un Datawarehouse corporativo o almacén de datos enfocado en un área específica, utilizado para el análisis y la toma de decisiones.</td>
+</tr>
+<tr>
+<td><strong>Drill Down / Up</strong></td>
+<td>Navegar dentro de la información, desde niveles más altos a niveles más bajos o viceversa.</td>
+</tr>
+<tr>
+<td><strong>DataMining</strong></td>
+<td>Búsqueda de patrones de comportamiento dentro de los datos, ya sea en un Datawarehouse o cualquier otra fuente de información.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="herramientas">Herramientas</h2>
+<h3 id="herramientas-de-bi">🧠 Herramientas de BI</h3>
+<p>Estas herramientas permiten <strong>analizar, visualizar y presentar datos</strong> para apoyar la <strong>toma de decisiones estratégicas y operativas</strong>.</p>
+<ul>
+<li><strong>Tableau</strong> – Visualización de datos interactiva y potente, ideal para análisis avanzados.  </li>
+<li><strong>Power BI</strong> – Plataforma de Microsoft para reportes y dashboards.  </li>
+<li><strong>Qlik Sense / QlikView</strong> – BI asociativo para exploración y análisis de datos.  </li>
+<li><strong>Looker (Google)</strong> – BI en la nube, enfocado en análisis colaborativo.  </li>
+<li><strong>MicroStrategy</strong> – Plataforma empresarial de análisis y visualización.  </li>
+<li><strong>SAP BusinessObjects</strong> – BI empresarial con integración en SAP.  </li>
+<li><strong>IBM Cognos Analytics</strong> – BI con capacidades avanzadas de reportes y analítica.  </li>
+<li><strong>Metabase</strong> – BI open source, sencilla y colaborativa.  </li>
+<li><strong>Redash</strong> – Open source para visualización y consultas SQL.  </li>
+<li><strong>Elasticsearch (con Kibana)</strong> – Motor de búsqueda y analítica en tiempo real, ideal para dashboards y monitoreo.</li>
+</ul>
+<hr />
+<h3 id="herramientas-de-etl-extract-transform-load">🔄 Herramientas de ETL (Extract, Transform, Load)</h3>
+<p>Herramientas enfocadas en <strong>integrar datos</strong> desde diversas fuentes hacia <strong>Data Warehouses</strong> o <strong>Data Lakes</strong>, aplicando procesos de <strong>extracción, transformación y carga</strong>.</p>
+<ul>
+<li><strong>ODI (Oracle Data Integrator)</strong> – Solución empresarial de Oracle para procesos ETL robustos y escalables.  </li>
+<li><strong>Talend</strong> – Plataforma completa para integración y calidad de datos (Open Source y Enterprise).  </li>
+<li><strong>Informatica PowerCenter</strong> – Plataforma empresarial líder en integración de datos.  </li>
+<li><strong>Pentaho Data Integration (PDI)</strong> – Herramienta ETL open source muy popular.  </li>
+<li><strong>Apache NiFi</strong> – ETL para <strong>flujos de datos en tiempo real</strong> y por lotes, con interfaz visual.  </li>
+<li><strong>Microsoft SQL Server Integration Services (SSIS)</strong> – ETL integrado con el ecosistema Microsoft.  </li>
+<li><strong>AWS Glue</strong> – ETL serverless administrado por Amazon Web Services.  </li>
+<li><strong>Azure Data Factory</strong> – ETL en la nube dentro del ecosistema Azure.  </li>
+<li><strong>Google Cloud Dataflow</strong> – ETL basado en Apache Beam para Google Cloud.  </li>
+<li><strong>Apache Kafka (Streaming)</strong> – Procesamiento y transporte de datos en tiempo real.  </li>
+</ul>
+<hr />
+<h3 id="herramientas-de-busqueda-y-analitica-de-datos">🔍 Herramientas de búsqueda y analítica de datos</h3>
+<p>Estas herramientas se enfocan en <strong>indexación</strong>, <strong>búsqueda</strong> y <strong>análisis avanzado de datos</strong>.</p>
+<ul>
+<li><strong>Elasticsearch</strong> – Motor de búsqueda y analítica distribuido, ideal para grandes volúmenes de datos.  </li>
+<li><strong>Kibana</strong> – Interfaz gráfica para visualización y monitoreo de datos indexados en Elasticsearch.  </li>
+<li><strong>Logstash</strong> – Herramienta para ingesta, transformación y envío de datos hacia Elasticsearch.  </li>
+</ul>
+<hr />
+<h3 id="recomendaciones">📌 Recomendaciones</h3>
+<ul>
+<li><strong>BI empresarial:</strong> Tableau, Power BI, Qlik.  </li>
+<li><strong>ETL empresarial:</strong> ODI, Informatica PowerCenter, Talend.  </li>
+<li><strong>ETL Open Source:</strong> Apache NiFi, Pentaho, Airbyte.  </li>
+<li><strong>Nube:</strong> AWS Glue, Azure Data Factory, Google Dataflow.  </li>
+<li><strong>Analítica y búsqueda:</strong> Elasticsearch + Kibana + Logstash (ELK Stack).  </li>
+</ul>
+<hr />
+<p>Material original © Jorge Soro, reproducido con autorización. Fuente: <a href="https://jorsodom.github.io/bigdata-sb/introduccionBI/BIIntroduccion/">Introducción Business Intelligence (BI)</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "content.code.select", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
